@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>业主端小程序V2.0-线上商城 - 原型注解</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background-color: #F5F5F5;
+            overflow: hidden;
+        }
+        
+        .app-container {
+            display: flex;
+            height: 100vh;
+        }
+        
+        .sidebar {
+            width: 220px;
+            background: linear-gradient(180deg, #353B3C 0%, #2C3132 100%);
+            color: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+        
+        .sidebar-header {
+            padding: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .sidebar-header h1 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #FFFFFF;
+        }
+        
+        .sidebar-header p {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 4px;
+        }
+        
+        .menu-section {
+            padding: 4px 0;
+        }
+        
+        .menu-title {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.4);
+            padding: 8px 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .menu-group {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.85);
+            position: relative;
+        }
+        
+        .menu-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .menu-item.active {
+            background: rgba(70, 193, 255, 0.2);
+            color: #46C1FF;
+            border-left: 3px solid #46C1FF;
+        }
+        
+        .menu-item i {
+            width: 18px;
+            margin-right: 10px;
+            font-size: 14px;
+        }
+        
+        .menu-item.expandable {
+            justify-content: space-between;
+        }
+        
+        .menu-item.expandable > span:first-of-type {
+            display: flex;
+            align-items: center;
+        }
+        
+        .menu-item .expand-icon {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+            transition: transform 0.3s ease;
+            margin-left: auto;
+        }
+        
+        .menu-item.expandable.expanded .expand-icon {
+            transform: rotate(90deg);
+        }
+        
+        .sub-menu {
+            background: rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.3s ease;
+        }
+        
+        .sub-menu.expanded {
+            max-height: 500px;
+        }
+        
+        .sub-menu .menu-item {
+            padding-left: 48px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.75);
+            border-left: none;
+        }
+        
+        .sub-menu .menu-item.active {
+            background: rgba(70, 193, 255, 0.15);
+            color: #46C1FF;
+            border-left: 2px solid #46C1FF;
+        }
+        
+        .main-content {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+        }
+        
+        .prototype-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 24px;
+            overflow-y: auto;
+            background: #E8E8E0;
+        }
+        
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #666;
+        }
+        
+        .breadcrumb span {
+            margin: 0 4px;
+            color: #999;
+        }
+        
+        .breadcrumb a {
+            color: #46C1FF;
+            text-decoration: none;
+        }
+        
+        .page-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .page-tab {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+        
+        .page-tab.active {
+            background: #353B3C;
+            color: #FFFFFF;
+        }
+        
+        .page-tab:not(.active) {
+            background: #FFFFFF;
+            color: #666;
+            border-color: #E5E5E5;
+        }
+        
+        .page-tab:not(.active):hover {
+            border-color: #46C1FF;
+            color: #46C1FF;
+        }
+        
+        .mobile-frame {
+            width: 390px;
+            height: 844px;
+            background: #FFFFFF;
+            border-radius: 24px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .mobile-status-bar {
+            height: 44px;
+            background: #FFFFFF;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .mobile-status-bar .time {
+            font-size: 15px;
+        }
+        
+        .mobile-status-bar .icons {
+            display: flex;
+            gap: 8px;
+            font-size: 14px;
+        }
+        
+        .mobile-header {
+            height: 44px;
+            background: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            border-bottom: 1px solid #F5F5F5;
+            flex-shrink: 0;
+        }
+        
+        .mobile-header-title {
+            font-size: 17px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .mobile-content {
+            flex: 1;
+            overflow-y: auto;
+            background: #F7F7F7;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .page-placeholder {
+            text-align: center;
+            color: #999;
+        }
+        
+        .page-placeholder i {
+            font-size: 48px;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+        
+        .page-placeholder h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #666;
+        }
+        
+        .page-placeholder p {
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        
+        .mobile-bottom-nav {
+            height: 49px;
+            background: #FFFFFF;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-top: 1px solid #F5F5F5;
+            padding-bottom: env(safe-area-inset-bottom);
+            flex-shrink: 0;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            font-size: 10px;
+            color: #999;
+            cursor: pointer;
+            padding: 6px 16px;
+        }
+        
+        .nav-item.active {
+            color: #46C1FF;
+        }
+        
+        .nav-item i {
+            font-size: 20px;
+        }
+        
+        .description-panel {
+            width: 420px;
+            background: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .panel-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid #F5F5F5;
+            background: #F7F8FA;
+        }
+        
+        .panel-header h2 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .panel-tabs {
+            display: flex;
+            border-bottom: 1px solid #E5E5E5;
+        }
+        
+        .panel-tab {
+            padding: 12px 20px;
+            font-size: 13px;
+            cursor: pointer;
+            color: #666;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        
+        .panel-tab.active {
+            color: #46C1FF;
+            border-bottom-color: #46C1FF;
+            font-weight: 500;
+        }
+        
+        .panel-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        
+        .doc-section {
+            margin-bottom: 24px;
+        }
+        
+        .doc-section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 12px;
+            padding-left: 8px;
+            border-left: 3px solid #46C1FF;
+        }
+        
+        .doc-section p {
+            font-size: 13px;
+            line-height: 1.8;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        
+        .doc-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .doc-section li {
+            font-size: 13px;
+            line-height: 1.8;
+            color: #666;
+            padding-left: 20px;
+            position: relative;
+            margin-bottom: 6px;
+        }
+        
+        .doc-section li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #46C1FF;
+        }
+        
+        /* ====== 交互注释：编号卡片 ====== */
+        .interaction-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .interaction-card {
+            background: #F9FAFB;
+            border-radius: 8px;
+            padding: 14px 16px;
+            border-left: 3px solid #46C1FF;
+            transition: all 0.2s;
+        }
+        
+        .interaction-card:hover {
+            background: #F0F7FF;
+            transform: translateX(2px);
+        }
+        
+        .interaction-card-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .interaction-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #46C1FF;
+            color: #FFFFFF;
+            font-size: 11px;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        
+        .interaction-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #333;
+            flex: 1;
+        }
+        
+        .interaction-tag {
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+        
+        .interaction-tag.interaction {
+            background: #E3F2FD;
+            color: #1976D2;
+        }
+        
+        .interaction-tag.state {
+            background: #FFF3E0;
+            color: #F57C00;
+        }
+        
+        .interaction-content {
+            font-size: 12px;
+            line-height: 1.7;
+            color: #666;
+            padding-left: 28px;
+        }
+        
+        .interaction-content p {
+            margin-bottom: 4px;
+        }
+        
+        /* ====== 需求文档：PRD 结构 ====== */
+        .prd-header {
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #E5E5E5;
+        }
+        
+        .prd-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        
+        .prd-meta {
+            font-size: 11px;
+            color: #999;
+        }
+        
+        .prd-section {
+            margin-bottom: 20px;
+        }
+        
+        .prd-section-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+            padding-left: 8px;
+            border-left: 3px solid #353B3C;
+        }
+        
+        .prd-section p {
+            font-size: 12px;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 6px;
+        }
+        
+        .prd-flow {
+            background: #F9F9F9;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            color: #555;
+            line-height: 1.8;
+            text-align: center;
+        }
+        
+        .prd-flow .arrow {
+            color: #46C1FF;
+            margin: 0 6px;
+            font-weight: 600;
+        }
+        
+        .prd-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+        
+        .prd-table th {
+            background: #F5F5F5;
+            color: #333;
+            font-weight: 600;
+            padding: 8px 10px;
+            text-align: left;
+            border: 1px solid #E5E5E5;
+        }
+        
+        .prd-table td {
+            padding: 8px 10px;
+            color: #555;
+            border: 1px solid #E5E5E5;
+            line-height: 1.6;
+            vertical-align: top;
+        }
+        
+        .prd-table td code {
+            background: #F0F7FF;
+            color: #1976D2;
+            padding: 1px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 11px;
+        }
+        
+        .prd-code {
+            background: #2C3132;
+            color: #E5E5E5;
+            padding: 12px;
+            border-radius: 6px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 11px;
+            line-height: 1.7;
+            overflow-x: auto;
+            white-space: pre;
+        }
+        
+        .prd-warn {
+            background: #FFF8E1;
+            border-left: 3px solid #FFB300;
+            padding: 10px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #7B5E00;
+            line-height: 1.7;
+        }
+        
+        /* ====== 状态清单：表格 ====== */
+        .status-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+        
+        .status-table th {
+            background: #353B3C;
+            color: #FFFFFF;
+            font-weight: 600;
+            padding: 10px 8px;
+            text-align: left;
+            border: 1px solid #2C3132;
+            font-size: 11px;
+        }
+        
+        .status-table td {
+            padding: 8px;
+            color: #555;
+            border: 1px solid #E5E5E5;
+            line-height: 1.6;
+            vertical-align: top;
+        }
+        
+        .status-table tr:nth-child(even) td {
+            background: #F9FAFB;
+        }
+        
+        .status-table .block-name {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .status-table .ui-cell code {
+            background: #F0F7FF;
+            color: #1976D2;
+            padding: 1px 4px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 11px;
+        }
+        
+        @media (max-width: 1200px) {
+            .description-panel {
+                width: 360px;
+            }
+        }
+        
+        @media (max-width: 1000px) {
+            .sidebar {
+                width: 180px;
+            }
+            
+            .description-panel {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h1>业主端小程序V2.0</h1>
+                <p>线上商城 · 原型注解</p>
+            </div>
+            
+            <div class="menu-section">
+                <div class="menu-title">主导航</div>
+                
+                <div class="menu-group">
+                    <div class="menu-item expandable expanded" data-page="shop">
+                        <span>
+                            <i class="fa fa-shopping-bag"></i>
+                            <span>商城</span>
+                        </span>
+                        <i class="fa fa-chevron-right expand-icon"></i>
+                    </div>
+                    <div class="sub-menu expanded">
+                        <div class="menu-item active" data-subpage="shop-home">
+                            <i class="fa fa-home"></i>
+                            <span>商城首页</span>
+                        </div>
+                        <div class="menu-item" data-subpage="shop-search">
+                            <i class="fa fa-search"></i>
+                            <span>搜索商品页</span>
+                        </div>
+                        <div class="menu-item" data-subpage="shop-category">
+                            <i class="fa fa-th-large"></i>
+                            <span>分类页</span>
+                        </div>
+                        <div class="menu-item" data-subpage="shop-detail">
+                            <i class="fa fa-info-circle"></i>
+                            <span>商品详情页</span>
+                        </div>
+                        <div class="menu-item" data-subpage="shop-cart">
+                            <i class="fa fa-shopping-cart"></i>
+                            <span>购物车页</span>
+                        </div>
+                        <div class="menu-item" data-subpage="shop-checkout">
+                            <i class="fa fa-file-text"></i>
+                            <span>确认订单页</span>
+                        </div>
+                        <div class="menu-item" data-subpage="shop-orders">
+                            <i class="fa fa-list-alt"></i>
+                            <span>我的订单页</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-group">
+                    <div class="menu-item expandable" data-page="access">
+                        <span>
+                            <i class="fa fa-sign-in"></i>
+                            <span>通行页</span>
+                        </span>
+                        <i class="fa fa-chevron-right expand-icon"></i>
+                    </div>
+                    <div class="sub-menu">
+                        <div class="menu-item" data-subpage="access-home">
+                            <i class="fa fa-key"></i>
+                            <span>通行首页</span>
+                        </div>
+                        <div class="menu-item" data-subpage="access-face">
+                            <i class="fa fa-user-circle"></i>
+                            <span>人脸录入</span>
+                        </div>
+                        <div class="menu-item" data-subpage="access-nfc">
+                            <i class="fa fa-credit-card"></i>
+                            <span>NFC钥匙</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-group">
+                    <div class="menu-item expandable" data-page="profile">
+                        <span>
+                            <i class="fa fa-user"></i>
+                            <span>我的页</span>
+                        </span>
+                        <i class="fa fa-chevron-right expand-icon"></i>
+                    </div>
+                    <div class="sub-menu">
+                        <div class="menu-item" data-subpage="profile-home">
+                            <i class="fa fa-user-circle"></i>
+                            <span>个人中心</span>
+                        </div>
+                        <div class="menu-item" data-subpage="profile-settings">
+                            <i class="fa fa-cog"></i>
+                            <span>设置页</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="prototype-area">
+                <div class="breadcrumb">
+                    <a href="#">原型注解</a>
+                    <span>&gt;</span>
+                    <a href="#" id="breadcrumb-main">商城</a>
+                    <span>&gt;</span>
+                    <span id="breadcrumb-sub">商城首页</span>
+                </div>
+                
+                <div class="page-tabs" id="page-tabs">
+                    <div class="page-tab active" data-tab="shop-home">商城首页</div>
+                    <div class="page-tab" data-tab="shop-search">搜索商品页</div>
+                    <div class="page-tab" data-tab="shop-category">分类页</div>
+                    <div class="page-tab" data-tab="shop-detail">商品详情页</div>
+                    <div class="page-tab" data-tab="shop-cart">购物车页</div>
+                    <div class="page-tab" data-tab="shop-checkout">确认订单页</div>
+                    <div class="page-tab" data-tab="shop-orders">我的订单页</div>
+                </div>
+                
+                <div class="mobile-frame">
+                    <div class="mobile-status-bar">
+                        <span class="time">9:41</span>
+                        <div class="icons">
+                            <i class="fa fa-signal"></i>
+                            <i class="fa fa-wifi"></i>
+                            <i class="fa fa-battery-three-quarters"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="mobile-header">
+                        <i class="fa fa-chevron-left" style="font-size: 18px; color: #333;"></i>
+                        <span class="mobile-header-title" id="mobile-title">商城首页</span>
+                        <i class="fa fa-ellipsis-h" style="font-size: 18px; color: #333;"></i>
+                    </div>
+                    
+                    <div class="mobile-content" id="mobile-content">
+                        <div class="page-placeholder">
+                            <i class="fa fa-shopping-bag"></i>
+                            <h3>商城首页</h3>
+                            <p>展示商城首页的商品列表、促销活动、轮播图等内容</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mobile-bottom-nav">
+                        <div class="nav-item active" data-nav="shop">
+                            <i class="fa fa-shopping-bag"></i>
+                            <span>商城</span>
+                        </div>
+                        <div class="nav-item" data-nav="access">
+                            <i class="fa fa-sign-in"></i>
+                            <span>通行</span>
+                        </div>
+                        <div class="nav-item" data-nav="profile">
+                            <i class="fa fa-user"></i>
+                            <span>我的</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="description-panel">
+                <div class="panel-header">
+                    <h2 id="panel-title">商城首页</h2>
+                </div>
+                
+                <div class="panel-tabs">
+                    <div class="panel-tab active" data-panel="interaction">交互注释</div>
+                    <div class="panel-tab" data-panel="requirement">需求文档</div>
+                    <div class="panel-tab" data-panel="status">状态清单</div>
+                </div>
+                
+                <div class="panel-content" id="panel-content">
+                    <div id="panel-interaction" class="panel-section"></div>
+                    <div id="panel-requirement" class="panel-section" style="display: none;"></div>
+                    <div id="panel-status" class="panel-section" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // ====== 页面数据：交互注释 + 需求文档 + 状态清单 ======
+        const pages = {
+            'shop-home': {
+                title: '商城首页',
+                mainNav: 'shop',
+                placeholder: { icon: 'fa fa-shopping-bag', title: '商城首页', desc: '展示商城首页的商品列表、促销活动、轮播图等内容' },
+                interactionNotes: [
+                    { id: 1, title: '顶部搜索框', type: 'interaction', content: '点击搜索框 → 跳转至「搜索商品页」\n支持输入关键词、历史记录、热门搜索' },
+                    { id: 2, title: '轮播图', type: 'interaction', content: '自动轮播，3秒切换；点击图片跳转活动详情页\n左右滑动可手动切换' },
+                    { id: 3, title: '金刚位分类入口', type: 'interaction', content: '一屏展示 5 个分类图标\n点击图标 → 跳转至「分类页」对应分类' },
+                    { id: 4, title: '商品卡片', type: 'interaction', content: '点击商品卡片 → 跳转至「商品详情页」\n支持左右滑动浏览推荐商品' },
+                    { id: 5, title: '底部 Tab 导航', type: 'state', content: '当前 Tab 高亮显示主色 #46C1FF\n点击切换到对应 Tab 页面（商城/通行/我的）' }
+                ],
+                requirementDoc: {
+                    title: '商城首页 · 产品需求文档',
+                    meta: 'v1.0 · 业主端小程序 · 2026-07',
+                    sections: [
+                        { title: '1. 功能概述', paragraphs: ['商城首页是业主端小程序商城 Tab 的入口页面，展示商城的核心商品、活动、分类，引导用户进入搜索、分类浏览、商品详情等流程。'] },
+                        { title: '2. 用户流程', flow: '商城首页 <span class="arrow">→</span> 搜索商品页 <span class="arrow">→</span> 商品详情页 <span class="arrow">→</span> 购物车页 <span class="arrow">→</span> 确认订单页 <span class="arrow">→</span> 我的订单页' },
+                        { title: '3. 商品推荐规则', table: { headers: ['规则', '说明'], rows: [['排序', '后端返回 recommend.list，按销量降序'], ['数量', '默认展示 10 条，下拉加载更多'], ['字段', '商品ID、名称、主图、价格、原价、销量']] } },
+                        { title: '4. 接口定义', code: 'GET /api/shop/home\nResponse: {\n  banner: [],\n  categories: [],\n  recommends: []\n}' },
+                        { title: '5. 异常处理', table: { headers: ['场景', '处理方式'], rows: [['接口超时', '展示重试按钮，点击重新请求'], ['网络断开', 'Toast 提示「网络异常，请检查连接」'], ['商品下架', '卡片灰显，标签「已下架」，不可点击']] } }
+                    ]
+                },
+                statusList: [
+                    { block: '搜索框', state: '默认', trigger: '页面加载', ui: '占位文字"搜索商品"' },
+                    { block: '轮播图', state: '加载中', trigger: '图片未加载完成', ui: '灰色占位 + loading 图标' },
+                    { block: '商品卡片', state: '已下架', trigger: '商品 status="off_shelf"', ui: '卡片灰显，"已下架"标签' }
+                ]
+            },
+            'shop-search': {
+                title: '搜索商品页',
+                mainNav: 'shop',
+                placeholder: { icon: 'fa fa-search', title: '搜索商品页', desc: '支持关键词搜索、历史记录、热门搜索等功能' },
+                interactionNotes: [
+                    { id: 1, title: '搜索输入框', type: 'interaction', content: '输入关键词后点击「搜索」或键盘回车触发搜索\n输入框支持清空按钮' },
+                    { id: 2, title: '历史搜索', type: 'state', content: '未输入时展示历史搜索记录\n点击记录可直接搜索\n支持「清空历史」操作' },
+                    { id: 3, title: '热门搜索', type: 'state', content: '展示后台配置的热门关键词\n点击直接搜索' },
+                    { id: 4, title: '搜索结果', type: 'interaction', content: '展示商品列表\n支持按价格/销量排序\n点击商品卡片 → 跳转「商品详情页」' }
+                ],
+                requirementDoc: {
+                    title: '搜索商品页 · 产品需求文档',
+                    meta: 'v1.0 · 业主端小程序 · 2026-07',
+                    sections: [
+                        { title: '1. 功能概述', paragraphs: ['提供商品搜索能力，支持关键词、历史记录、热门搜索三种入口，搜索结果支持排序与筛选。'] },
+                        { title: '2. 用户流程', flow: '输入关键词 <span class="arrow">→</span> 点击搜索 <span class="arrow">→</span> 查看结果 <span class="arrow">→</span> 商品详情' },
+                        { title: '3. 搜索规则', table: { headers: ['规则', '说明'], rows: [['匹配', '商品名称、品牌、分类'], ['排序', '综合 / 销量 / 价格升序 / 价格降序'], ['分页', '每页 20 条，下拉加载更多']] } },
+                        { title: '4. 接口定义', code: 'GET /api/shop/search\nParams: keyword, sort, page\nResponse: { list: [], total: 0 }' },
+                        { title: '5. 异常处理', table: { headers: ['场景', '处理方式'], rows: [['无结果', '展示空状态插图 + "未找到相关商品"'], ['关键词为空', '搜索按钮置灰，不可点击'], ['接口失败', 'Toast 提示后端错误信息']] } }
+                    ]
+                },
+                statusList: [
+                    { block: '搜索框', state: '空', trigger: '未输入', ui: '占位文字 + 搜索按钮置灰' },
+                    { block: '搜索框', state: '已输入', trigger: '输入文字', ui: '清空按钮显示，搜索按钮可点击' },
+                    { block: '历史记录', state: '空', trigger: '无历史', ui: '不展示历史区块' }
+                ]
+            },
+            'shop-category': {
+                title: '分类页',
+                mainNav: 'shop',
+                placeholder: { icon: 'fa fa-th-large', title: '分类页', desc: '展示商品分类列表，支持分类筛选和浏览' },
+                interactionNotes: [
+                    { id: 1, title: '左侧分类导航', type: 'interaction', content: '点击分类项 → 右侧商品列表切换到对应分类\n当前选中项高亮显示' },
+                    { id: 2, title: '右侧商品列表', type: 'interaction', content: '展示当前分类下的商品\n支持上下滚动浏览\n点击商品卡片 → 跳转「商品详情页」' }
+                ],
+                requirementDoc: {
+                    title: '分类页 · 产品需求文档',
+                    meta: 'v1.0 · 业主端小程序 · 2026-07',
+                    sections: [
+                        { title: '1. 功能概述', paragraphs: ['按分类组织商品，左右分栏布局，左侧为分类树，右侧为商品列表。'] },
+                        { title: '2. 用户流程', flow: '点击分类 <span class="arrow">→</span> 查看商品列表 <span class="arrow">→</span> 商品详情' },
+                        { title: '3. 分类数据结构', table: { headers: ['字段', '说明'], rows: [['id', '分类ID'], ['name', '分类名称'], ['icon', '分类图标URL'], ['parentId', '父级ID，0 为一级']] } },
+                        { title: '4. 接口定义', code: 'GET /api/shop/categories\nGET /api/shop/products?categoryId=X' }
+                    ]
+                },
+                statusList: [
+                    { block: '左侧导航', state: '默认', trigger: '页面加载', ui: '第一项默认选中' },
+                    { block: '右侧列表', state: '加载中', trigger: '切换分类', ui: '骨架屏 + loading' },
+                    { block: '右侧列表', state: '空', trigger: '分类下无商品', ui: '空状态插图' }
+                ]
+            },
+            'shop-detail': {
+                title: '商品详情页',
+                mainNav: 'shop',
+                placeholder: { icon: 'fa fa-info-circle', title: '商品详情页', desc: '展示商品详细信息、图片、价格、评价等内容' },
+                interactionNotes: [
+                    { id: 1, title: '商品主图', type: 'interaction', content: '支持左右滑动查看多张图片\n点击图片可全屏预览' },
+                    { id: 2, title: '规格选择', type: 'interaction', content: '点击「选择规格」弹出规格选择面板\n选择完成后底部按钮显示对应规格' },
+                    { id: 3, title: '加入购物车', type: 'interaction', content: '点击「加入购物车」→ Toast 提示「已加入」\n如未选规格则先弹出规格选择' },
+                    { id: 4, title: '立即购买', type: 'interaction', content: '点击「立即购买」→ 跳转「确认订单页」\n如未选规格则先弹出规格选择' },
+                    { id: 5, title: '收藏按钮', type: 'state', content: '点击切换收藏/取消收藏\n收藏状态实时同步到「我的页」' }
+                ],
+                requirementDoc: {
+                    title: '商品详情页 · 产品需求文档',
+                    meta: 'v1.0 · 业主端小程序 · 2026-07',
+                    sections: [
+                        { title: '1. 功能概述', paragraphs: ['展示单个商品的完整信息，包含图片、价格、规格、评价，支持加入购物车或直接下单。'] },
+                        { title: '2. 用户流程', flow: '查看详情 <span class="arrow">→</span> 选择规格 <span class="arrow">→</span> 加入购物车/立即购买' },
+                        { title: '3. 商品字段', table: { headers: ['字段', '说明'], rows: [['id', '商品ID'], ['price', '现价（分）'], ['originPrice', '原价（分）'], ['stock', '库存数量'], ['specs', '规格列表']] } },
+                        { title: '4. 接口定义', code: 'GET /api/shop/product/:id\nResponse: { ...product }' },
+                        { title: '5. 异常处理', table: { headers: ['场景', '处理方式'], rows: [['商品下架', '页面提示「商品已下架」，隐藏购买按钮'], ['库存为 0', '按钮显示「已售罄」，置灰不可点击'], ['接口失败', '展示重试按钮']] } }
+                    ]
+                },
+                statusList: [
+                    { block: '主图', state: '加载中', trigger: '进入页面', ui: '占位灰底 + loading' },
+                    { block: '规格面板', state: '隐藏', trigger: '默认', ui: '不展示' },
+                    { block: '规格面板', state: '显示', trigger: '点击规格/购买', ui: '底部弹出，遮罩 50% 黑' },
+                    { block: '购买按钮', state: '已售罄', trigger: 'stock=0', ui: '灰色"已售罄"，不可点击' }
+                ]
+            },
+            'shop-cart': {
+                title: '购物车页',
+                mainNav: 'shop',
+                placeholder: { icon: 'fa fa-shopping-cart', title: '购物车页', desc: '展示已加入购物车的商品列表，支持管理和结算' },
+                interactionNotes: [
+                    { id: 1, title: '商品勾选', type: 'interaction', content: '点击勾选框切换选中状态\n选中状态实时计算总价' },
+                    { id: 2, title: '全选按钮', type: 'state', content: '点击切换全选/全不选\n所有商品勾选时自动变为选中状态' },
+                    { id: 3, title: '数量调整', type: 'interaction', content: '点击 +/- 调整商品数量\n数量为 1 时「-」置灰\n超过库存时「+」置灰' },
+                    { id: 4, title: '删除商品', type: 'interaction', content: '左滑商品卡片显示删除按钮\n点击删除 → 二次确认弹窗' },
+                    { id: 5, title: '结算按钮', type: 'interaction', content: '展示已选商品数量和总价\n点击 → 跳转「确认订单页」' }
+                ],
+                requirementDoc: {
+                    title: '购物车页 · 产品需求文档',
+                    meta: 'v1.0 · 业主端小程序 · 2026-07',
+                    sections: [
+                        { title: '1. 功能概述', paragraphs: ['管理购物车中的商品，支持勾选、数量调整、删除、结算等操作。'] },
+                        { title: '2. 用户流程', flow: '勾选商品 <span class="arrow">→</span> 调整数量 <span class="arrow">→</span> 点击结算 <span class="arrow">→</span> 确认订单' },
+                        { title: '3. 数据结构', table: { headers: ['字段', '说明'], rows: [['productId', '商品ID'], ['specId', '规格ID'], ['quantity', '数量'], ['selected', '是否选中']] } },
+                        { title: '4. 接口定义', code: 'GET /api/cart/list\nPOST /api/cart/update\nPOST /api/cart/delete' },
+                        { title: '5. 异常处理', table: { headers: ['场景', '处理方式'], rows: [['商品下架', '卡片灰显，标签"已下架"，不可勾选'], ['库存不足', '数量自动调整为库存值，Toast 提示'], ['购物车为空', '展示空状态插图 + "去逛逛"按钮']] } }
+                    ]
+                },
+                statusList: [
+                    { block: '商品卡片', state: '正常', trigger: '默认', ui: '可勾选、可调整数量' },
+                    { block: '商品卡片', state: '已下架', trigger: '商品 status=off', ui: '灰显，不可勾选' },
+                    { block: '数量按钮', state: '最小值', trigger: 'quantity=1', ui: '「-」置灰' },
+                    { block: '数量按钮', state: '最大值', trigger: 'quantity=stock', ui: '「+」置灰' },
+                    { block: '结算按钮', state: '禁用', trigger: '未勾选任何商品', ui: '灰色，不可点击' }
+                ]
+            },
+            'shop-checkout': {
+                title: '确认订单页',
+                mainNav: 'shop',
+                placeholder: { icon: 'fa fa-file-text', title: '确认订单页', desc: '确认订单信息、收货地址、支付方式等' },
+                interactionNotes: [
+                    { id: 1, title: '收货地址', type: 'interaction', content: '点击地址卡片 → 跳转「地址管理页」选择地址\n无地址时显示「请添加收货地址」' },
+                    { id: 2, title: '商品列表', type: 'state', content: '展示订单中的商品\n不可修改数量（已在购物车调整）' },
+                    { id: 3, title: '优惠券', type: 'interaction', content: '点击优惠券入口 → 弹出可用优惠券列表\n选择后实时更新订单总价' },
+                    { id: 4, title: '提交订单', type: 'interaction', content: '点击「提交订单」→ 调用接口创建订单\n成功后跳转到支付页' }
+                ],
+                requirementDoc: {
+                    title: '确认订单页 · 产品需求文档',
+                    meta: 'v1.0 · 业主端小程序 · 2026-07',
+                    sections: [
+                        { title: '1. 功能概述', paragraphs: ['订单确认页面，用户核对地址、商品、优惠券后提交订单并跳转支付。'] },
+                        { title: '2. 用户流程', flow: '核对信息 <span class="arrow">→</span> 选择优惠券 <span class="arrow">→</span> 提交订单 <span class="arrow">→</span> 支付' },
+                        { title: '3. 价格计算', table: { headers: ['项目', '计算方式'], rows: [['商品总价', 'Σ(price × quantity)'], ['优惠金额', '优惠券面额'], ['实付金额', '商品总价 - 优惠金额']] } },
+                        { title: '4. 接口定义', code: 'POST /api/order/create\nBody: { addressId, items, couponId }\nResponse: { orderId, payAmount }' },
+                        { title: '5. 异常处理', table: { headers: ['场景', '处理方式'], rows: [['库存不足', 'Toast 提示并返回购物车'], ['优惠券不可用', '自动取消选择，Toast 提示'], ['提交失败', 'Toast 提示错误，按钮恢复可点击']] } }
+                    ]
+                },
+                statusList: [
+                    { block: '地址卡片', state: '有地址', trigger: '默认有收货地址', ui: '展示姓名、电话、地址' },
+                    { block: '地址卡片', state: '无地址', trigger: '未添加地址', ui: '"请添加收货地址" + 跳转箭头' },
+                    { block: '提交按钮', state: '可点击', trigger: '信息完整', ui: '主色 #353B3C' },
+                    { block: '提交按钮', state: '请求中', trigger: '点击提交', ui: 'loading 态，防重复点击' }
+                ]
+            },
+            'shop-orders': {
+                title: '我的订单页',
+                mainNav: 'shop',
+                placeholder: { icon: 'fa fa-list-alt', title: '我的订单页', desc: '展示用户订单列表，支持订单状态筛选和管理' },
+                interactionNotes: [
+                    { id: 1, title: '状态筛选 Tab', type: 'interaction', content: '点击 Tab 切换订单状态：全部/待付款/待发货/待收货/已完成\n当前 Tab 高亮显示' },
+                    { id: 2, title: '订单卡片', type: 'interaction', content: '点击订单卡片 → 跳转「订单详情页」\n展示订单号、商品、金额、状态' },
+                    { id: 3, title: '取消订单', type: 'interaction', content: '待付款订单显示「取消订单」按钮\n点击 → 二次确认弹窗' },
+                    { id: 4, title: '确认收货', type: 'interaction', content: '待收货订单显示「确认收货」按钮\n点击 → 二次确认弹窗' }
+                ],
+                requirementDoc: {
+                    title: '我的订单页 · 产品需求文档',
+                    meta: 'v1.0 · 业主端小程序 · 2026-07',
+                    sections: [
+                        { title: '1. 功能概述', paragraphs: ['展示用户所有订单，支持按状态筛选，提供订单管理操作（取消、确认收货、再次购买）。'] },
+                        { title: '2. 订单状态机', table: { headers: ['状态值', '含义', '可执行操作'], rows: [['pending', '待付款', '取消订单 / 去支付'], ['paid', '待发货', '无'], ['shipped', '待收货', '确认收货'], ['completed', '已完成', '再次购买 / 评价']] } },
+                        { title: '3. 接口定义', code: 'GET /api/order/list?status=X\nResponse: { list: [], total: 0 }' },
+                        { title: '4. 异常处理', table: { headers: ['场景', '处理方式'], rows: [['无订单', '展示空状态插图 + "去逛逛"按钮'], ['取消失败', 'Toast 提示错误信息'], ['确认收货失败', 'Toast 提示错误信息']] } }
+                    ]
+                },
+                statusList: [
+                    { block: '订单卡片', state: '待付款', trigger: 'status=pending', ui: '红色"待付款"标签 + 取消/支付按钮' },
+                    { block: '订单卡片', state: '待收货', trigger: 'status=shipped', ui: '蓝色"待收货"标签 + 确认收货按钮' },
+                    { block: '订单卡片', state: '已完成', trigger: 'status=completed', ui: '灰色"已完成"标签 + 再次购买按钮' }
+                ]
+            },
+            'access-home': {
+                title: '通行首页',
+                mainNav: 'access',
+                placeholder: { icon: 'fa fa-key', title: '通行首页', desc: '展示门禁、电梯、访客等通行功能入口' },
+                interactionNotes: [
+                    { id: 1, title: '门禁列表', type: 'interaction', content: '展示用户有权限的门禁设备\n点击「开门」按钮 → 调用开门接口' },
+                    { id: 2, title: '电梯控制', type: 'interaction', content: '选择楼层并呼叫电梯\n点击楼层按钮 → 呼叫对应楼层' },
+                    { id: 3, title: '访客登记', type: 'interaction', content: '点击入口 → 跳转「访客登记页」' }
+                ],
+                requirementDoc: {
+                    title: '通行首页 · 产品需求文档',
+                    meta: 'v1.0 · 业主端小程序 · 2026-07',
+                    sections: [
+                        { title: '1. 功能概述', paragraphs: ['物业通行功能入口，包含门禁开门、电梯控制、访客登记、通行记录等。'] },
+                        { title: '2. 接口定义', code: 'GET /api/access/devices\nPOST /api/access/open\ngroupId, deviceId' }
+                    ]
+                },
+                statusList: [
+                    { block: '门禁设备', state: '在线', trigger: 'status=online', ui: '绿色圆点 + "开门"按钮可点击' },
+                    { block: '门禁设备', state: '离线', trigger: 'status=offline', ui: '灰色圆点 + "开门"按钮置灰' }
+                ]
+            },
+            'access-face': {
+                title: '人脸录入',
+                mainNav: 'access',
+                placeholder: { icon: 'fa fa-user-circle', title: '人脸录入', desc: '人脸信息录入和管理功能' },
+                interactionNotes: [
+                    { id: 1, title: '照片上传', type: 'interaction', content: '点击上传按钮 → 调用 wx.chooseMedia\n支持相册/拍照两种来源' },
+                    { id: 2, title: '照片预览', type: 'state', content: '上传后进入预览页\n支持重新上传或确认提交' },
+                    { id: 3, title: '审核状态', type: 'state', content: '提交后进入「审核中」状态\n审核结果通过站内信通知' }
+                ],
+                requirementDoc: {
+                    title: '人脸录入 · 产品需求文档',
+                    meta: 'v1.0 · 业主端小程序 · 2026-07',
+                    sections: [
+                        { title: '1. 功能概述', paragraphs: ['业主上传本人正脸照片，经审核后用于刷脸通行。'] },
+                        { title: '2. 人脸状态机', table: { headers: ['状态值', '含义', '入口展示'], rows: [['none', '未录入', '无角标'], ['reviewing', '审核中', '橙色角标'], ['active', '已生效', '绿色角标'], ['rejected', '审核未通过', '红色角标']] } },
+                        { title: '3. 上传规则', table: { headers: ['规则', '说明'], rows: [['格式', 'JPG / PNG'], ['大小', '≤ 5MB'], ['来源', '相册 + 拍照']] } },
+                        { title: '4. 接口定义', code: 'POST /api/face/upload\nPOST /api/face/submit\nGET /api/face/status' }
+                    ]
+                },
+                statusList: [
+                    { block: '上传区', state: '空态', trigger: '未上传', ui: '占位插图 + 虚线边框' },
+                    { block: '上传区', state: '已选图', trigger: '选图成功', ui: '160px 圆形预览 + 重新上传' },
+                    { block: '提交按钮', state: '禁用', trigger: '未上传', ui: '灰色 #BDBDBD' },
+                    { block: '提交按钮', state: '可点击', trigger: '上传成功', ui: '主色 #353B3C' }
+                ]
+            },
+            'access-nfc': {
+                title: 'NFC钥匙',
+                mainNav: 'access',
+                placeholder: { icon: 'fa fa-credit-card', title: 'NFC钥匙', desc: 'NFC钥匙开通和管理功能' },
+                interactionNotes: [
+                    { id: 1, title: '开通钥匙', type: 'interaction', content: '点击「开通」按钮 → 进入开通流程\n需要手机支持 NFC 功能' },
+                    { id: 2, title: '钥匙列表', type: 'state', content: '展示已开通的 NFC 钥匙\n支持删除操作' }
+                ],
+                requirementDoc: {
+                    title: 'NFC钥匙 · 产品需求文档',
+                    meta: 'v1.0 · 业主端小程序 · 2026-07',
+                    sections: [
+                        { title: '1. 功能概述', paragraphs: ['将业主的手机作为 NFC 钥匙，支持刷手机开门禁。'] },
+                        { title: '2. 接口定义', code: 'POST /api/nfc/activate\nDELETE /api/nfc/:id' }
+                    ]
+                },
+                statusList: [
+                    { block: '开通按钮', state: '可点击', trigger: '手机支持 NFC', ui: '主色按钮' },
+                    { block: '开通按钮', state: '禁用', trigger: '手机不支持 NFC', ui: '灰色按钮 + 提示' }
+                ]
+            },
+            'profile-home': {
+                title: '个人中心',
+                mainNav: 'profile',
+                placeholder: { icon: 'fa fa-user-circle', title: '个人中心', desc: '展示用户信息、订单入口、设置等功能' },
+                interactionNotes: [
+                    { id: 1, title: '用户信息', type: 'interaction', content: '展示头像、昵称、手机号\n点击 → 跳转「个人信息编辑页」' },
+                    { id: 2, title: '订单快捷入口', type: 'interaction', content: '展示订单各状态快捷入口\n点击 → 跳转「我的订单页」对应状态' },
+                    { id: 3, title: '功能列表', type: 'interaction', content: '优惠券、地址管理、设置等入口\n点击 → 跳转对应页面' }
+                ],
+                requirementDoc: {
+                    title: '个人中心 · 产品需求文档',
+                    meta: 'v1.0 · 业主端小程序 · 2026-07',
+                    sections: [
+                        { title: '1. 功能概述', paragraphs: ['展示用户基本信息及各功能入口，是「我的」Tab 的主页。'] },
+                        { title: '2. 接口定义', code: 'GET /api/user/profile\nResponse: { nickname, avatar, phone }' }
+                    ]
+                },
+                statusList: [
+                    { block: '头像', state: '默认', trigger: '未设置头像', ui: '展示默认占位头像' },
+                    { block: '头像', state: '已设置', trigger: '已上传头像', ui: '展示用户头像' }
+                ]
+            },
+            'profile-settings': {
+                title: '设置页',
+                mainNav: 'profile',
+                placeholder: { icon: 'fa fa-cog', title: '设置页', desc: '账号设置、通知设置、关于等功能' },
+                interactionNotes: [
+                    { id: 1, title: '设置项列表', type: 'interaction', content: '点击各设置项 → 跳转对应二级页面\n包含：账号、通知、隐私、关于' },
+                    { id: 2, title: '退出登录', type: 'interaction', content: '点击「退出登录」→ 二次确认弹窗\n确认后清除登录态，返回登录页' }
+                ],
+                requirementDoc: {
+                    title: '设置页 · 产品需求文档',
+                    meta: 'v1.0 · 业主端小程序 · 2026-07',
+                    sections: [
+                        { title: '1. 功能概述', paragraphs: ['账号、通知、隐私、缓存清理、退出登录等系统设置入口。'] }
+                    ]
+                },
+                statusList: [
+                    { block: '退出按钮', state: '默认', trigger: '页面加载', ui: '红色文字按钮' },
+                    { block: '退出弹窗', state: '显示', trigger: '点击退出', ui: '遮罩 + 二次确认' }
+                ]
+            }
+        };
+        
+        // ====== 渲染：交互注释 ======
+        function renderInteractionNotes(notes) {
+            if (!notes || notes.length === 0) return '<p style="color:#999;font-size:12px;">暂无交互注释</p>';
+            return `
+                <div class="interaction-list">
+                    ${notes.map(note => `
+                        <div class="interaction-card">
+                            <div class="interaction-card-header">
+                                <span class="interaction-num">${note.id}</span>
+                                <span class="interaction-title">${note.title}</span>
+                                <span class="interaction-tag ${note.type}">${note.type === 'interaction' ? '交互' : '状态'}</span>
+                            </div>
+                            <div class="interaction-content">
+                                ${note.content.split('\n').map(line => `<p>${line}</p>`).join('')}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+        
+        // ====== 渲染：需求文档 ======
+        function renderRequirementDoc(doc) {
+            if (!doc) return '<p style="color:#999;font-size:12px;">暂无需求文档</p>';
+            return `
+                <div class="prd-header">
+                    <div class="prd-title">${doc.title}</div>
+                    <div class="prd-meta">${doc.meta}</div>
+                </div>
+                ${doc.sections.map(section => `
+                    <div class="prd-section">
+                        <div class="prd-section-title">${section.title}</div>
+                        ${section.paragraphs ? section.paragraphs.map(p => `<p>${p}</p>`).join('') : ''}
+                        ${section.flow ? `<div class="prd-flow">${section.flow}</div>` : ''}
+                        ${section.table ? renderTable(section.table) : ''}
+                        ${section.code ? `<pre class="prd-code">${section.code}</pre>` : ''}
+                        ${section.warn ? `<div class="prd-warn">${section.warn}</div>` : ''}
+                    </div>
+                `).join('')}
+            `;
+        }
+        
+        function renderTable(table) {
+            return `
+                <table class="prd-table">
+                    <thead>
+                        <tr>${table.headers.map(h => `<th>${h}</th>`).join('')}</tr>
+                    </thead>
+                    <tbody>
+                        ${table.rows.map(row => `
+                            <tr>${row.map(cell => `<td>${cell}</td>`).join('')}</tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+        
+        // ====== 渲染：状态清单 ======
+        function renderStatusList(list) {
+            if (!list || list.length === 0) return '<p style="color:#999;font-size:12px;">暂无状态清单</p>';
+            return `
+                <table class="status-table">
+                    <thead>
+                        <tr>
+                            <th>区块</th>
+                            <th>状态</th>
+                            <th>触发条件</th>
+                            <th>UI 表现</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${list.map(item => `
+                            <tr>
+                                <td class="block-name">${item.block}</td>
+                                <td>${item.state}</td>
+                                <td>${item.trigger}</td>
+                                <td class="ui-cell">${item.ui}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+        
+        // ====== 切换页面 ======
+        function switchPage(pageId) {
+            const page = pages[pageId];
+            if (!page) return;
+            
+            document.querySelectorAll('.menu-item[data-subpage]').forEach(item => item.classList.remove('active'));
+            document.querySelectorAll(`[data-subpage="${pageId}"]`).forEach(item => item.classList.add('active'));
+            
+            document.querySelectorAll('.page-tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll(`[data-tab="${pageId}"]`).forEach(tab => tab.classList.add('active'));
+            
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            document.querySelectorAll(`[data-nav="${page.mainNav}"]`).forEach(item => item.classList.add('active'));
+            
+            document.getElementById('breadcrumb-main').textContent = 
+                page.mainNav === 'shop' ? '商城' : 
+                page.mainNav === 'access' ? '通行页' : '我的页';
+            document.getElementById('breadcrumb-sub').textContent = page.title;
+            
+            document.getElementById('mobile-title').textContent = page.title;
+            document.getElementById('panel-title').textContent = page.title;
+            
+            const placeholder = page.placeholder;
+            document.getElementById('mobile-content').innerHTML = `
+                <div class="page-placeholder">
+                    <i class="${placeholder.icon}"></i>
+                    <h3>${placeholder.title}</h3>
+                    <p>${placeholder.desc}</p>
+                </div>
+            `;
+            
+            document.getElementById('panel-interaction').innerHTML = renderInteractionNotes(page.interactionNotes);
+            document.getElementById('panel-requirement').innerHTML = renderRequirementDoc(page.requirementDoc);
+            document.getElementById('panel-status').innerHTML = renderStatusList(page.statusList);
+        }
+        
+        function switchPanel(panelName) {
+            document.querySelectorAll('.panel-tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll(`[data-panel="${panelName}"]`).forEach(tab => tab.classList.add('active'));
+            
+            document.querySelectorAll('.panel-section').forEach(section => section.style.display = 'none');
+            document.getElementById(`panel-${panelName}`).style.display = 'block';
+        }
+        
+        // ====== 事件绑定 ======
+        document.querySelectorAll('.menu-item[data-subpage]').forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.stopPropagation();
+                switchPage(item.dataset.subpage);
+            });
+        });
+        
+        document.querySelectorAll('.page-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                switchPage(tab.dataset.tab);
+            });
+        });
+        
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const pageMap = { 'shop': 'shop-home', 'access': 'access-home', 'profile': 'profile-home' };
+                switchPage(pageMap[item.dataset.nav]);
+            });
+        });
+        
+        document.querySelectorAll('.panel-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                switchPanel(tab.dataset.panel);
+            });
+        });
+        
+        document.querySelectorAll('.menu-item.expandable').forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const subMenu = item.nextElementSibling;
+                const isExpanded = item.classList.contains('expanded');
+                
+                if (isExpanded) {
+                    item.classList.remove('expanded');
+                    if (subMenu && subMenu.classList.contains('sub-menu')) {
+                        subMenu.classList.remove('expanded');
+                    }
+                } else {
+                    item.classList.add('expanded');
+                    if (subMenu && subMenu.classList.contains('sub-menu')) {
+                        subMenu.classList.add('expanded');
+                    }
+                    const page = item.dataset.page;
+                    if (page) {
+                        const pageMap = { 'shop': 'shop-home', 'access': 'access-home', 'profile': 'profile-home' };
+                        switchPage(pageMap[page]);
+                    }
+                }
+            });
+        });
+        
+        function expandParentMenu(pageId) {
+            const subMenuItem = document.querySelector(`[data-subpage="${pageId}"]`);
+            if (subMenuItem) {
+                const subMenu = subMenuItem.closest('.sub-menu');
+                if (subMenu) {
+                    subMenu.classList.add('expanded');
+                    const expandableItem = subMenu.previousElementSibling;
+                    if (expandableItem && expandableItem.classList.contains('expandable')) {
+                        expandableItem.classList.add('expanded');
+                    }
+                }
+            }
+        }
+        
+        const _originalSwitchPage = switchPage;
+        switchPage = function(pageId) {
+            expandParentMenu(pageId);
+            _originalSwitchPage(pageId);
+        };
+        
+        // ====== 初始化：渲染默认页面 ======
+        switchPage('shop-home');
+    </script>
+</body>
+</html>
