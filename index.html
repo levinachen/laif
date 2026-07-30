@@ -6,16 +6,44 @@
     <title>业主端小程序V2.0-线上商城 - 原型注解</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <style>
+        /* ====== Design Tokens（参考 laif-face-access 风格）====== */
+        :root {
+            --primary:   #353B3C;             /* 主色 - 深灰近黑（参考页 primary）*/
+            --accent:    #7F77DD;             /* 紫色 accent（参考页）*/
+            --accent-soft: #EEEEFF;           /* 浅紫底 */
+            --accent-soft-2: #F8F8FB;         /* 更浅紫底（卡片头部/表头）*/
+            --nav-active: rgb(183, 168, 240); /* 导航栏按钮选中色 - 浅紫 */
+            --danger:    #D63E39;
+            --success:   #07C160;
+            --warning:   #FA8C16;
+            --gray1: #333333;
+            --gray2: #4F4F4F;
+            --gray3: #828282;
+            --gray4: #BDBDBD;
+            --gray5: #E0E0E0;
+            --gray6: #F5F5F5;
+            --gray7: #F9F9F9;
+            --white:  #FFFFFF;
+            --canvas-bg: #EFEFEF;             /* 画布背景 */
+            --border: #EBEBEB;
+            --panel-bg: #FAFAFA;
+            --font: 'PingFang SC', -apple-system, 'Helvetica Neue', 'Microsoft YaHei', sans-serif;
+            --font-mono: 'SF Mono', 'Fira Code', Menlo, monospace;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
-            background-color: #F5F5F5;
+            font-family: var(--font);
+            background: var(--canvas-bg);
             overflow: hidden;
+            color: var(--gray1);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
         
         .app-container {
@@ -25,116 +53,144 @@
         
         .sidebar {
             width: 220px;
-            background: linear-gradient(180deg, #353B3C 0%, #2C3132 100%);
+            background: #1C1C1E;
             color: #FFFFFF;
             display: flex;
             flex-direction: column;
             overflow-y: auto;
+            flex-shrink: 0;
         }
-        
+
+        .sidebar::-webkit-scrollbar { width: 4px; }
+        .sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 2px; }
+        .sidebar::-webkit-scrollbar-track { background: transparent; }
+
         .sidebar-header {
-            padding: 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px 20px 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
         }
-        
+
         .sidebar-header h1 {
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 600;
             color: #FFFFFF;
+            letter-spacing: 0.2px;
         }
-        
+
         .sidebar-header p {
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.6);
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.4);
             margin-top: 4px;
+            font-family: var(--font-mono);
+            letter-spacing: 0.3px;
         }
-        
+
         .menu-section {
             padding: 4px 0;
         }
-        
+
         .menu-title {
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.4);
-            padding: 8px 20px;
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.3);
+            padding: 14px 20px 6px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.1em;
+            font-weight: 600;
         }
-        
+
         .menu-group {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
         }
-        
+        .menu-group:last-child { border-bottom: none; }
+
         .menu-item {
             display: flex;
             align-items: center;
-            padding: 10px 20px;
+            padding: 9px 20px;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: background 0.15s, color 0.15s;
             font-size: 13px;
-            color: rgba(255, 255, 255, 0.85);
+            color: rgba(255, 255, 255, 0.7);
             position: relative;
+            border-left: 2px solid transparent;
         }
-        
+
         .menu-item:hover {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.04);
+            color: #FFFFFF;
         }
-        
+
         .menu-item.active {
-            background: rgba(70, 193, 255, 0.2);
-            color: #46C1FF;
-            border-left: 3px solid #46C1FF;
+            background: rgba(124, 92, 252, 0.12);
+            color: var(--nav-active);
+            border-left: 2px solid var(--nav-active);
         }
-        
+
+        .menu-item.active i { color: var(--nav-active); }
+
         .menu-item i {
-            width: 18px;
+            width: 16px;
             margin-right: 10px;
-            font-size: 14px;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+            transition: color 0.15s;
         }
-        
+
+        .menu-item:hover i { color: rgba(255, 255, 255, 0.85); }
+
         .menu-item.expandable {
             justify-content: space-between;
         }
-        
+
         .menu-item.expandable > span:first-of-type {
             display: flex;
             align-items: center;
         }
-        
+
         .menu-item .expand-icon {
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.5);
-            transition: transform 0.3s ease;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.35);
+            transition: transform 0.25s, color 0.15s;
             margin-left: auto;
         }
-        
-        .menu-item.expandable.expanded .expand-icon {
-            transform: rotate(90deg);
-        }
-        
+
+        .menu-item.expandable:hover .expand-icon { color: rgba(255, 255, 255, 0.85); }
+        .menu-item.expandable.expanded .expand-icon { transform: rotate(90deg); color: var(--accent); }
+
         .sub-menu {
-            background: rgba(0, 0, 0, 0.25);
+            background: rgba(0, 0, 0, 0.22);
             overflow: hidden;
             max-height: 0;
-            transition: max-height 0.3s ease;
+            transition: max-height 0.28s ease;
         }
-        
+
         .sub-menu.expanded {
             max-height: 500px;
         }
-        
+
         .sub-menu .menu-item {
-            padding-left: 48px;
+            padding-left: 36px;
             font-size: 12px;
-            color: rgba(255, 255, 255, 0.75);
+            color: rgba(255, 255, 255, 0.55);
             border-left: none;
         }
-        
-        .sub-menu .menu-item.active {
-            background: rgba(70, 193, 255, 0.15);
-            color: #46C1FF;
-            border-left: 2px solid #46C1FF;
+
+        .sub-menu .menu-item::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            width: 6px;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.15);
         }
+
+        .sub-menu .menu-item.active {
+            background: rgba(124, 92, 252, 0.12);
+            color: var(--nav-active);
+            border-left: 2px solid var(--nav-active);
+        }
+        .sub-menu .menu-item.active::before { background: var(--nav-active); }
         
         .main-content {
             flex: 1;
@@ -146,90 +202,152 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            padding: 24px;
+            padding: 36px 24px;
             overflow-y: auto;
-            background: #E8E8E0;
+            background: var(--canvas-bg);
+            align-items: center;
         }
-        
+
+        .prototype-area::-webkit-scrollbar { width: 6px; height: 6px; }
+        .prototype-area::-webkit-scrollbar-thumb { background: var(--gray5); border-radius: 3px; }
+
         .breadcrumb {
             display: flex;
             align-items: center;
-            margin-bottom: 20px;
-            font-size: 13px;
-            color: #666;
+            margin-bottom: 14px;
+            font-size: 12px;
+            color: var(--gray3);
+            align-self: flex-start;
+            font-family: var(--font-mono);
         }
-        
+
         .breadcrumb span {
-            margin: 0 4px;
-            color: #999;
+            margin: 0 6px;
+            color: var(--gray4);
         }
-        
+
         .breadcrumb a {
-            color: #46C1FF;
+            color: var(--accent);
             text-decoration: none;
+            font-weight: 500;
         }
-        
+
         .page-tabs {
             display: flex;
+            gap: 6px;
+            margin-bottom: 88px;
+            flex-wrap: wrap;
+            align-self: flex-start;
+        }
+
+        .page-tab {
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.15s;
+            border: 1px solid #D0D0D0;
+            background: rgba(255,255,255,0.7);
+            color: var(--gray2);
+            white-space: nowrap;
+            backdrop-filter: blur(4px);
+            font-weight: 500;
+        }
+
+        .page-tab.active {
+            background: var(--primary);
+            color: #FFFFFF;
+            border-color: var(--primary);
+        }
+
+        .page-tab:not(.active):hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* ── 状态控制器（手机外）── */
+        .state-controller {
+            display: flex;
+            align-items: center;
             gap: 8px;
-            margin-bottom: 20px;
+            margin-bottom: 88px;
             flex-wrap: wrap;
         }
-        
-        .page-tab {
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 13px;
+        .state-controller-label {
+            font-size: 12px;
+            color: var(--gray3);
+            font-family: var(--font-mono);
+            margin-right: 4px;
+        }
+        .state-tab {
+            padding: 5px 14px;
+            border-radius: 16px;
+            font-size: 12px;
             cursor: pointer;
             transition: all 0.2s;
-            border: 1px solid transparent;
+            border: 1px solid var(--gray5);
+            background: rgba(255,255,255,0.6);
+            backdrop-filter: blur(4px);
+            color: var(--gray2);
         }
-        
-        .page-tab.active {
-            background: #353B3C;
+        .state-tab.active {
+            background: var(--primary);
             color: #FFFFFF;
+            border-color: var(--primary);
         }
-        
-        .page-tab:not(.active) {
-            background: #FFFFFF;
-            color: #666;
-            border-color: #E5E5E5;
+        .state-tab:not(.active):hover {
+            border-color: var(--accent);
+            color: var(--accent);
         }
-        
-        .page-tab:not(.active):hover {
-            border-color: #46C1FF;
-            color: #46C1FF;
-        }
-        
+
+        /* ── iPhone 真实手机壳 ── */
         .mobile-frame {
-            width: 390px;
-            height: 844px;
-            background: #FFFFFF;
-            border-radius: 24px;
-            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
+            width: 375px;
+            height: 812px;
+            background: #fff;
+            border-radius: 50px;
+            box-shadow: 0 0 0 10px #1a1a1a, 0 0 0 11px #2a2a2a, 0 24px 56px rgba(0,0,0,0.4);
             margin: 0 auto;
             position: relative;
             overflow: hidden;
             display: flex;
             flex-direction: column;
+            flex-shrink: 0;
         }
-        
+
         .mobile-status-bar {
-            height: 44px;
+            height: 47px;
             background: #FFFFFF;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 20px;
-            font-size: 14px;
+            padding: 14px 20px 0;
+            font-size: 17px;
             font-weight: 600;
-            color: #333;
+            color: #000;
+            flex-shrink: 0;
+            font-family: -apple-system, 'Helvetica Neue', sans-serif;
+            transition: background 0.2s, color 0.2s;
         }
-        
+
+        /* 个人中心：状态栏叠加在背景图上 */
+        .mobile-status-bar.profile {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 10;
+            background: transparent;
+            color: #FFFFFF;
+        }
+        .mobile-frame:has(.mobile-status-bar.profile) .mobile-content {
+            padding-top: 0;
+        }
+
         .mobile-status-bar .time {
             font-size: 15px;
         }
-        
+
         .mobile-status-bar .icons {
             display: flex;
             gap: 8px;
@@ -237,32 +355,34 @@
         }
         
         .mobile-header {
-            height: 44px;
+            height: 41px;
             background: #FFFFFF;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
             padding: 0 16px;
-            border-bottom: 1px solid #F5F5F5;
+            position: relative;
             flex-shrink: 0;
         }
-        
+
         .mobile-header-title {
-            font-size: 17px;
-            font-weight: 600;
-            color: #333;
+            font-size: 16px;
+            font-weight: 500;
+            color: #1D1D1D;
         }
-        
+
         .mobile-content {
             flex: 1;
             overflow-y: auto;
-            background: #F7F7F7;
+            background: var(--gray7);
             padding: 16px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
         }
+
+        .mobile-content::-webkit-scrollbar { display: none; }
         
         .page-placeholder {
             text-align: center;
@@ -286,351 +406,878 @@
             font-size: 13px;
             line-height: 1.6;
         }
-        
-        .mobile-bottom-nav {
-            height: 49px;
-            background: #FFFFFF;
+
+        /* ====== 商城首页专用样式（v2）====== */
+        .mobile-content.custom-render {
+            padding: 0;
+            display: block;
+        }
+        .mh-page {
+            background: #F2F3F5;
+            min-height: 100%;
+            position: relative;
+            width: 100%;
+        }
+        .mh-search-row {
             display: flex;
-            justify-content: space-around;
             align-items: center;
-            border-top: 1px solid #F5F5F5;
-            padding-bottom: env(safe-area-inset-bottom);
+            gap: 16px;
+            padding: 8px 12px;
+        }
+        .mh-search-bar {
+            flex: 1;
+            height: 40px;
+            background: #FFFFFF;
+            border: 1px solid #F5F5F5;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            gap: 4px;
+            position: relative;
+            box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.04);
+        }
+        .mh-search-bar .mh-search-icon {
+            width: 16px;
+            height: 16px;
+            color: #828282;
+            font-size: 14px;
+        }
+        .mh-search-bar .mh-search-placeholder {
+            color: #828282;
+            font-size: 14px;
+            flex: 1;
+        }
+        .mh-search-bar .mh-search-btn {
+            position: absolute;
+            right: 4px;
+            top: 4px;
+            width: 64px;
+            height: 32px;
+            background: #353B3C;
+            color: #FFFFFF;
+            font-size: 13px;
+            border: 1px solid #FFFFFF;
+            border-radius: 24px;
+            cursor: pointer;
+        }
+        .mh-cs-icon {
+            width: 24px;
+            height: 24px;
+            color: #353B3C;
+            font-size: 20px;
+            text-align: center;
+            line-height: 24px;
+            cursor: pointer;
+        }
+        .mh-banner {
+            margin: 0 12px;
+            height: 201px;
+            background: #BDBDBD;
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+        .mh-banner .mh-banner-overlay {
+            position: absolute;
+            left: 24px;
+            top: 24px;
+            color: #FFFFFF;
+            font-size: 24px;
+            line-height: 36px;
+            font-family: "jiangxizhuokai", "PingFang SC", serif;
+            letter-spacing: -0.06em;
+            white-space: pre-line;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        .mh-banner .mh-pagination {
+            position: absolute;
+            bottom: 18px;
+            right: 18px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #FFFFFF;
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 24px;
+            letter-spacing: 0.0182em;
+        }
+        .mh-section {
+            padding: 8px 12px;
+        }
+        .mh-category-grid {
+            background: #FFFFFF;
+            border-radius: 12px;
+            padding: 12px 4px;
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            grid-template-rows: 68px 68px;
+            gap: 16px 0;
+            box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.02);
+        }
+        .mh-cat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+        }
+        .mh-cat-icon {
+            width: 48px;
+            height: 48px;
+            background: #DBEAFE;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #353B3C;
+            font-size: 18px;
+        }
+        .mh-cat-label {
+            margin-top: 4px;
+            font-size: 11px;
+            color: #333;
+            line-height: 1.2;
+        }
+        .mh-ranking-row {
+            display: flex;
+            gap: 8px;
+        }
+        .mh-ranking-row + .mh-ranking-row {
+            margin-top: 8px;
+        }
+        .mh-ranking-card {
+            flex: 1;
+            background: #FFFFFF;
+            border-radius: 12px;
+            box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.02);
+            padding: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .mh-ranking-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1D1D1D;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .mh-ranking-title .mh-more {
+            font-size: 11px;
+            color: #828282;
+            font-weight: 400;
+        }
+        .mh-ranking-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 8px;
+        }
+        .mh-ranking-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .mh-ranking-img {
+            height: 72.5px;
+            background: #E0E0E0;
+            border-radius: 6px;
+        }
+        .mh-ranking-name {
+            font-size: 11px;
+            color: #333;
+            line-height: 1.3;
+        }
+        .mh-ranking-price {
+            font-size: 11px;
+            color: #D42222;
+            font-weight: 600;
+        }
+        .mh-waterfall {
+            padding: 8px 12px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, fit-content(100%));
+            gap: 8px;
+        }
+        .mh-product-card {
+            background: #FFFFFF;
+            border-radius: 12px;
+            box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.04);
+            overflow: hidden;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+        }
+        .mh-product-img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background: #E0E0E0;
+            border-radius: 8px 8px 0 0;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+        }
+        .mh-product-img .mh-product-badge {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.4);
+            color: #FFFFFF;
+            font-size: 10px;
+            padding: 2px 4px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+        .mh-product-body {
+            padding: 8px 12px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .mh-product-title {
+            font-size: 13px;
+            color: #1D1D1D;
+            line-height: 1.4;
+            font-weight: 500;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .mh-product-tags {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 4px;
+        }
+        .mh-product-tag {
+            font-size: 10px;
+            padding: 1px 4px;
+            border-radius: 2px;
+            background: #F0BCBC;
+            color: #D42222;
+        }
+        .mh-product-tag.gray {
+            background: #F3F4F6;
+            color: #828282;
+        }
+        .mh-product-price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: 16px;
+        }
+        .mh-product-price {
+            color: #D42222;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        .mh-product-price .mh-original {
+            color: #BDBDBD;
+            font-size: 11px;
+            text-decoration: line-through;
+            margin-left: 4px;
+            font-weight: 400;
+        }
+        .mh-product-cart {
+            width: 24px;
+            height: 24px;
+            background: #353B3C;
+            color: #FFFFFF;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+        .mh-fab {
+            position: absolute;
+            right: 24px;
+            bottom: 96px;
+            width: 48px;
+            height: 48px;
+            background: #353B3C;
+            color: #FFFFFF;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 0 8px 0 rgba(22, 22, 22, 0.08);
+            cursor: pointer;
+            z-index: 10;
+        }
+        .mh-fab .mh-fab-badge {
+            position: absolute;
+            top: -3px;
+            right: -16px;
+            width: 16px;
+            height: 17px;
+            background: #F24333;
+            color: #FFFFFF;
+            font-size: 10px;
+            border: 1px solid #FFFFFF;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+
+        .mobile-bottom-nav {
+            background: #FFFFFF;
+            border-top: 0.5px solid #E5E5E5;
             flex-shrink: 0;
         }
-        
+
+        .nav-tabs {
+            height: 56px;
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            padding-top: 8px;
+        }
+
+        .nav-home-indicator {
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ios-home-indicator {
+            width: 134px;
+            height: 5px;
+            background: #1C1C1E;
+            border-radius: 3px;
+            opacity: 0.8;
+        }
+
         .nav-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 4px;
-            font-size: 10px;
-            color: #999;
+            gap: 2px;
+            font-size: 11px;
+            font-weight: 500;
+            font-family: 'PingFang SC', -apple-system, sans-serif;
+            line-height: 16px;
+            text-align: center;
+            color: var(--gray4);
             cursor: pointer;
-            padding: 6px 16px;
+            flex: 1;
         }
-        
+
         .nav-item.active {
-            color: #46C1FF;
+            color: var(--primary);
         }
-        
-        .nav-item i {
-            font-size: 20px;
+
+        .nav-item img {
+            width: 28px;
+            height: 28px;
         }
         
         .description-panel {
-            width: 420px;
-            background: #FFFFFF;
+            width: 460px;
+            min-width: 460px;
+            background: var(--white);
             display: flex;
             flex-direction: column;
             overflow: hidden;
-            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.05);
+            height: 100vh;
+            flex-shrink: 0;
+            border-left: 1px solid var(--border);
         }
-        
+
         .panel-header {
-            padding: 16px 20px;
-            border-bottom: 1px solid #F5F5F5;
-            background: #F7F8FA;
+            padding: 20px 24px 14px;
+            border-bottom: 1px solid var(--border);
+            flex-shrink: 0;
         }
-        
+
+        .panel-header .anno-file {
+            font-size: 11px;
+            color: var(--gray4);
+            font-family: var(--font-mono);
+            margin-bottom: 4px;
+        }
+
         .panel-header h2 {
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 600;
-            color: #333;
+            color: #111;
+            letter-spacing: 0.2px;
         }
-        
+
+        .panel-header .anno-page-desc {
+            font-size: 12px;
+            color: var(--gray3);
+            margin-top: 3px;
+            line-height: 1.5;
+        }
+
         .panel-tabs {
             display: flex;
-            border-bottom: 1px solid #E5E5E5;
+            border-bottom: 1px solid var(--border);
+            background: var(--white);
+            padding: 0 24px;
+            flex-shrink: 0;
         }
-        
+
         .panel-tab {
-            padding: 12px 20px;
+            padding: 11px 0;
+            margin-right: 24px;
             font-size: 13px;
             cursor: pointer;
-            color: #666;
+            color: var(--gray3);
             border-bottom: 2px solid transparent;
-            transition: all 0.2s;
-        }
-        
-        .panel-tab.active {
-            color: #46C1FF;
-            border-bottom-color: #46C1FF;
+            transition: all 0.15s;
+            white-space: nowrap;
             font-weight: 500;
         }
-        
+
+        .panel-tab:hover:not(.active) {
+            color: var(--gray1);
+        }
+
+        .panel-tab.active {
+            color: var(--gray1);
+            border-bottom-color: var(--gray1);
+            font-weight: 600;
+        }
+
         .panel-content {
             flex: 1;
             overflow-y: auto;
-            padding: 20px;
+            padding: 20px 24px 32px;
         }
-        
+
+        .panel-content::-webkit-scrollbar { width: 4px; }
+        .panel-content::-webkit-scrollbar-thumb { background: var(--gray5); border-radius: 2px; }
+        .panel-content::-webkit-scrollbar-track { background: transparent; }
+
         .doc-section {
             margin-bottom: 24px;
         }
-        
+
         .doc-section-title {
-            font-size: 14px;
+            font-size: 11px;
             font-weight: 600;
-            color: #333;
-            margin-bottom: 12px;
-            padding-left: 8px;
-            border-left: 3px solid #46C1FF;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--gray4);
+            margin-bottom: 10px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid var(--border);
         }
-        
+
         .doc-section p {
             font-size: 13px;
             line-height: 1.8;
-            color: #666;
+            color: var(--gray2);
             margin-bottom: 8px;
         }
-        
+
         .doc-section ul {
             list-style: none;
             padding-left: 0;
         }
-        
+
         .doc-section li {
             font-size: 13px;
             line-height: 1.8;
-            color: #666;
-            padding-left: 20px;
+            color: var(--gray2);
+            padding-left: 18px;
             position: relative;
             margin-bottom: 6px;
         }
-        
+
         .doc-section li::before {
-            content: '•';
+            content: '';
             position: absolute;
             left: 0;
-            color: #46C1FF;
+            top: 11px;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--gray4);
         }
-        
-        /* ====== 交互注释：编号卡片 ====== */
+
+        /* ====== 个人中心专用样式（基于 Figma 节点 182:602 还原）====== */
+        .ph-page { background: #F9F9F9; min-height: 100%; position: relative; width: 100%; }
+        /* 顶部背景区（Figma 真实背景图）*/
+        .ph-header-bg { height: 218px; background-image: url('figma-images/bg-profile.png'); background-size: cover; background-position: center; position: relative; }
+        /* 徕芙社区卡（深色实体卡，基于 Figma 节点 128:3366 还原）*/
+        .ph-living-card { margin: 8px 16px 0; height: 180px; background: #000000; border-radius: 16px; position: relative; overflow: hidden; border: 2px solid transparent; background-image: linear-gradient(#000000, #000000), linear-gradient(94deg, rgba(255,255,255,0.13) 0%, rgba(255,255,255,0.04) 100%); background-origin: border-box; background-clip: padding-box, border-box; box-shadow: 0 0 6px rgba(0,0,0,0.04); }
+        .ph-living-card::before { content: ''; position: absolute; right: -10px; top: -50px; width: 192px; height: 196px; background: rgba(119, 90, 25, 0.2); filter: blur(32px); border-radius: 16px; }
+        .ph-living-card-title { position: absolute; left: 24px; top: 20px; width: 91px; height: 19px; }
+        .ph-living-card-title img { width: 91px; height: 19px; }
+        .ph-living-card-expiry { position: absolute; left: 24px; top: 46px; font-size: 12px; color: #FFFFFF; line-height: 20px; font-weight: 400; }
+        .ph-living-card-subtitle { position: absolute; left: 24px; top: 48px; font-size: 11px; color: #FFFFFF; line-height: 16px; font-weight: 400; }
+        .ph-living-card-cta { position: absolute; right: 16px; top: 20px; padding: 4px 16px; background: linear-gradient(90deg, rgba(253, 251, 237, 0.95) 0%, rgba(249, 221, 181, 0.95) 100%); border-radius: 16px; font-size: 12px; color: #333333; font-weight: 500; line-height: 20px; cursor: pointer; box-shadow: 0px 2px 4px -2px rgba(0, 0, 0, 0.1), 0px 4px 6px -1px rgba(0, 0, 0, 0.1); display: flex; align-items: center; justify-content: center; }
+        .ph-living-card-features { position: absolute; left: 17px; top: 106px; display: flex; align-items: center; gap: 8px; }
+        .ph-lc-feature { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 0 4px; }
+        .ph-lc-feature-icon { width: 32px; height: 32px; background: rgba(255, 255, 255, 0.08); border-radius: 99px; display: flex; align-items: center; justify-content: center; }
+        .ph-lc-feature-icon img { width: 20px; height: 20px; }
+        .ph-lc-feature-label { font-size: 11px; color: #F3EBDB; line-height: 16px; text-align: center; }
+        /* 到期提醒条（临期态）*/
+        .ph-expire-notice { position: absolute; left: 16px; right: 16px; top: 114px; padding: 8px 12px; background: #FFF8ED; border-radius: 8px; display: flex; align-items: center; gap: 6px; font-size: 12px; color: #83582D; z-index: 2; }
+        .ph-expire-notice i { color: #FA8C16; }
+        .ph-expire-notice .ph-renew { margin-left: auto; color: #83582D; font-weight: 600; cursor: pointer; }
+        /* 用户信息（基于 Figma 节点 134:529 还原）*/
+        .ph-user-row { position: absolute; left: 24px; top: 55px; display: flex; align-items: center; gap: 12px; }
+        .ph-user-row .ph-user-left { display: flex; align-items: center; gap: 12px; }
+        .ph-avatar { width: 48px; height: 48px; border-radius: 9999px; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #F5F5F5; border: 1px solid rgba(37,78,219,0.08); }
+        .ph-avatar img { width: 28px; height: 28px; }
+        .ph-user-info { display: flex; flex-direction: column; gap: 0; }
+        .ph-username { font-size: 16px; font-weight: 500; color: #333333; line-height: 28px; }
+        .ph-settings-link { display: flex; align-items: center; gap: 2px; font-size: 12px; color: #4F4F4F; cursor: pointer; line-height: 20px; }
+        .ph-settings-link img { width: 16px; height: 16px; }
+        /* 通知铃铛（基于 Figma 节点 134:689，SVG已含白色圆形背景+边框）*/
+        .ph-nav-accessory { width: 32px; height: 32px; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+        .ph-nav-accessory img { width: 32px; height: 32px; }
+        /* 会员信息卡片 */
+        .ph-member-card { margin: -95px 16px 0; background: #FFFFFF; border-radius: 8px; box-shadow: 0 0 6px rgba(0,0,0,0.04); position: relative; padding: 16px; z-index: 2; }
+        .ph-member-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+        .ph-member-level { display: flex; align-items: center; gap: 6px; }
+        .ph-level-name { font-size: 16px; font-weight: 500; color: #333333; line-height: 28px; }
+        .ph-level-name.is-gray { font-size: 14px; color: #828282; line-height: 24px; }
+        .ph-level-tag { padding: 1px 6px; background: linear-gradient(135deg, #F7E8D6 0%, #F9E4CC 100%); border-radius: 4px; font-size: 12px; color: #83582D; display: flex; align-items: center; gap: 2px; line-height: 20px; }
+        .ph-level-tag img { width: 17.56px; height: 10px; }
+        .ph-member-link { display: flex; align-items: center; gap: 2px; font-size: 14px; color: #828282; cursor: pointer; line-height: 24px; }
+        .ph-member-link img { width: 16px; height: 16px; }
+        .ph-member-stats { display: flex; }
+        .ph-stat-item { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 0 20px; }
+        .ph-stat-value { display: flex; align-items: baseline; gap: 1px; }
+        .ph-stat-num { font-size: 16px; font-weight: 500; color: #333333; line-height: 28px; }
+        .ph-stat-unit { font-size: 11px; color: #333333; line-height: 16px; }
+        .ph-stat-label { font-size: 12px; color: #828282; line-height: 20px; }
+        /* 功能卡片 */
+        .ph-card { margin: 8px 16px 0; background: #FFFFFF; border-radius: 8px; box-shadow: 0 0 6px rgba(0,0,0,0.04); padding: 12px; }
+        .ph-card-title-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .ph-card-title { font-size: 14px; font-weight: 500; color: #333333; line-height: 24px; }
+        .ph-card-more { display: flex; align-items: center; gap: 2px; font-size: 12px; color: #828282; cursor: pointer; line-height: 20px; }
+        .ph-card-more img { width: 16px; height: 16px; }
+        .ph-grid-row { display: flex; align-items: flex-start; }
+        .ph-grid-row + .ph-grid-row { margin-top: 12px; }
+        .ph-grid-item { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; cursor: pointer; position: relative; padding: 4px 0; }
+        .ph-grid-icon { width: 40px; height: 40px; background: #F9F9F9; border: 1px solid #F5F5F5; border-radius: 9999px; display: flex; align-items: center; justify-content: center; }
+        .ph-grid-icon img { width: 20px; height: 20px; }
+        .ph-grid-label { font-size: 12px; color: #4F4F4F; text-align: center; line-height: 20px; }
+        .ph-grid-badge { position: absolute; top: 0; right: calc(50% - 26px); min-width: 16px; height: 16px; background: #F24333; color: #FFFFFF; font-size: 10px; border: 1px solid #FFFFFF; border-radius: 9999px; display: flex; align-items: center; justify-content: center; padding: 0 4px; line-height: 1; }
+        /* 面板切换 */
+        .ph-state-panel { display: none; }
+        .ph-state-panel.active { display: block; }
+
+        /* ====== 交互注释：编号卡片（参考 anno-card）====== */
         .interaction-list {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 8px;
         }
-        
+
         .interaction-card {
-            background: #F9FAFB;
-            border-radius: 8px;
-            padding: 14px 16px;
-            border-left: 3px solid #46C1FF;
-            transition: all 0.2s;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: border-color 0.15s, box-shadow 0.15s;
+            background: var(--white);
         }
-        
+
         .interaction-card:hover {
-            background: #F0F7FF;
-            transform: translateX(2px);
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(127, 119, 221, 0.12);
         }
-        
+
+        .interaction-card.has-target {
+            cursor: pointer;
+        }
+
+        .interaction-card.selected {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(127, 119, 221, 0.35);
+        }
+
+        .interaction-card.selected .interaction-card-header {
+            background: var(--accent-soft);
+        }
+
+        /* 原型区块高亮 */
+        .ph-highlight {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+            border-radius: 8px;
+            position: relative;
+            z-index: 3;
+            animation: phHighlightPulse 1.8s ease-in-out infinite;
+        }
+
+        @keyframes phHighlightPulse {
+            0%, 100% { outline-color: rgba(127, 119, 221, 0.55); }
+            50% { outline-color: rgba(127, 119, 221, 1); }
+        }
+
         .interaction-card-header {
             display: flex;
             align-items: center;
-            gap: 8px;
-            margin-bottom: 8px;
+            gap: 9px;
+            padding: 9px 12px;
+            background: var(--accent-soft-2);
         }
-        
+
         .interaction-num {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             border-radius: 50%;
-            background: #46C1FF;
+            background: var(--accent);
             color: #FFFFFF;
-            font-size: 11px;
-            font-weight: 600;
+            font-size: 10px;
+            font-weight: 700;
             flex-shrink: 0;
         }
-        
+
         .interaction-title {
-            font-size: 13px;
-            font-weight: 600;
-            color: #333;
+            font-size: 12px;
+            font-weight: 500;
+            color: #222;
             flex: 1;
         }
-        
+
         .interaction-tag {
             font-size: 10px;
             padding: 2px 8px;
-            border-radius: 4px;
+            border-radius: 20px;
             font-weight: 500;
         }
-        
+
         .interaction-tag.interaction {
-            background: #E3F2FD;
-            color: #1976D2;
+            background: var(--accent-soft);
+            color: #4B45C4;
         }
-        
+
         .interaction-tag.state {
             background: #FFF3E0;
-            color: #F57C00;
+            color: #E65100;
         }
-        
+
         .interaction-content {
             font-size: 12px;
-            line-height: 1.7;
-            color: #666;
-            padding-left: 28px;
+            line-height: 1.65;
+            color: #444;
+            padding: 10px 12px 12px;
         }
-        
+
         .interaction-content p {
             margin-bottom: 4px;
+        }
+
+        /* 交互注释：逐行带灰色小点 */
+        .interaction-content .note-line {
+            position: relative;
+            padding-left: 14px;
+            margin-bottom: 6px;
+            line-height: 1.7;
+        }
+        .interaction-content .note-line::before {
+            content: '';
+            position: absolute;
+            left: 2px;
+            top: 9px;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: #BDBDBD;
+        }
+        .interaction-content .note-line.sub {
+            padding-left: 26px;
+            color: #888;
+        }
+        .interaction-content .note-line.sub::before {
+            left: 14px;
+            top: 9px;
+            width: 4px;
+            height: 4px;
+            background: #E0E0E0;
+        }
+        .interaction-content .note-line.label {
+            padding-left: 0;
+            color: #353B3C;
+            font-weight: 600;
+            margin-top: 8px;
+            margin-bottom: 4px;
+        }
+        .interaction-content .note-line.label::before {
+            display: none;
         }
         
         /* ====== 需求文档：PRD 结构 ====== */
         .prd-header {
             margin-bottom: 20px;
             padding-bottom: 12px;
-            border-bottom: 1px solid #E5E5E5;
+            border-bottom: 1px solid var(--border);
         }
-        
+
         .prd-title {
             font-size: 16px;
-            font-weight: 600;
-            color: #333;
+            font-weight: 700;
+            color: #111;
             margin-bottom: 4px;
         }
-        
+
         .prd-meta {
             font-size: 11px;
-            color: #999;
+            color: var(--gray3);
+            font-family: var(--font-mono);
         }
-        
+
         .prd-section {
             margin-bottom: 20px;
         }
-        
+
         .prd-section-title {
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 600;
-            color: #333;
-            margin-bottom: 10px;
+            color: #222;
+            margin: 16px 0 6px;
             padding-left: 8px;
-            border-left: 3px solid #353B3C;
+            border-left: 3px solid var(--accent);
         }
-        
+
         .prd-section p {
-            font-size: 12px;
+            font-size: 13px;
             line-height: 1.8;
-            color: #555;
-            margin-bottom: 6px;
+            color: #444;
+            margin-bottom: 8px;
         }
-        
+
         .prd-flow {
-            background: #F9F9F9;
-            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin: 8px 0;
+        }
+
+        .prd-flow-step {
+            background: var(--gray7);
+            border: 1px solid var(--gray5);
             border-radius: 6px;
+            padding: 4px 10px;
             font-size: 12px;
-            color: #555;
-            line-height: 1.8;
-            text-align: center;
+            color: #333;
         }
-        
+
         .prd-flow .arrow {
-            color: #46C1FF;
-            margin: 0 6px;
-            font-weight: 600;
+            color: var(--gray4);
+            font-size: 12px;
+            margin: 0 2px;
         }
-        
+
         .prd-table {
             width: 100%;
             border-collapse: collapse;
+            margin: 8px 0 12px;
             font-size: 12px;
-            margin-top: 4px;
         }
-        
+
         .prd-table th {
-            background: #F5F5F5;
-            color: #333;
-            font-weight: 600;
-            padding: 8px 10px;
+            background: var(--accent-soft-2);
+            padding: 6px 10px;
             text-align: left;
-            border: 1px solid #E5E5E5;
-        }
-        
-        .prd-table td {
-            padding: 8px 10px;
+            font-weight: 600;
             color: #555;
-            border: 1px solid #E5E5E5;
-            line-height: 1.6;
-            vertical-align: top;
+            border: 1px solid var(--border);
         }
-        
+
+        .prd-table td {
+            padding: 6px 10px;
+            border: 1px solid var(--border);
+            color: #444;
+            vertical-align: top;
+            line-height: 1.6;
+        }
+
+        .prd-table td:first-child {
+            color: #222;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
         .prd-table td code {
-            background: #F0F7FF;
-            color: #1976D2;
+            background: #F5F5F5;
+            color: #C7254E;
             padding: 1px 4px;
             border-radius: 3px;
-            font-family: 'Monaco', 'Menlo', monospace;
+            font-family: var(--font-mono);
             font-size: 11px;
         }
-        
+
         .prd-code {
-            background: #2C3132;
-            color: #E5E5E5;
-            padding: 12px;
+            background: var(--accent-soft-2);
+            border: 1px solid var(--border);
             border-radius: 6px;
-            font-family: 'Monaco', 'Menlo', monospace;
+            padding: 10px 12px;
+            font-family: var(--font-mono);
             font-size: 11px;
+            color: #333;
             line-height: 1.7;
+            margin: 6px 0;
             overflow-x: auto;
             white-space: pre;
         }
-        
+
         .prd-warn {
-            background: #FFF8E1;
-            border-left: 3px solid #FFB300;
-            padding: 10px 12px;
-            border-radius: 4px;
+            background: #FFF8ED;
+            border-left: 3px solid var(--warning);
+            border-radius: 0 6px 6px 0;
+            padding: 8px 12px;
+            margin: 8px 0;
             font-size: 12px;
-            color: #7B5E00;
+            color: #664400;
             line-height: 1.7;
         }
-        
-        /* ====== 状态清单：表格 ====== */
+
+        /* ====== 状态清单：表格（参考 state-table）====== */
         .status-table {
             width: 100%;
             border-collapse: collapse;
             font-size: 12px;
         }
-        
+
         .status-table th {
-            background: #353B3C;
-            color: #FFFFFF;
+            padding: 6px 8px;
+            background: var(--accent-soft-2);
+            color: #666;
             font-weight: 600;
-            padding: 10px 8px;
             text-align: left;
-            border: 1px solid #2C3132;
-            font-size: 11px;
+            border-bottom: 1px solid var(--border);
         }
-        
+
         .status-table td {
-            padding: 8px;
-            color: #555;
-            border: 1px solid #E5E5E5;
-            line-height: 1.6;
+            padding: 7px 8px;
+            border-bottom: 1px solid var(--border);
             vertical-align: top;
+            color: #444;
+            line-height: 1.6;
         }
-        
-        .status-table tr:nth-child(even) td {
-            background: #F9FAFB;
-        }
-        
+
+        .status-table tr:last-child td { border-bottom: none; }
+
         .status-table .block-name {
             font-weight: 600;
-            color: #333;
+            color: #222;
         }
-        
+
         .status-table .ui-cell code {
-            background: #F0F7FF;
-            color: #1976D2;
+            background: #F5F5F5;
+            color: #C7254E;
             padding: 1px 4px;
             border-radius: 3px;
-            font-family: 'Monaco', 'Menlo', monospace;
+            font-family: var(--font-mono);
             font-size: 11px;
         }
         
@@ -672,31 +1319,24 @@
                     </div>
                     <div class="sub-menu expanded">
                         <div class="menu-item active" data-subpage="shop-home">
-                            <i class="fa fa-home"></i>
                             <span>商城首页</span>
                         </div>
                         <div class="menu-item" data-subpage="shop-search">
-                            <i class="fa fa-search"></i>
                             <span>搜索商品页</span>
                         </div>
                         <div class="menu-item" data-subpage="shop-category">
-                            <i class="fa fa-th-large"></i>
                             <span>分类页</span>
                         </div>
                         <div class="menu-item" data-subpage="shop-detail">
-                            <i class="fa fa-info-circle"></i>
                             <span>商品详情页</span>
                         </div>
                         <div class="menu-item" data-subpage="shop-cart">
-                            <i class="fa fa-shopping-cart"></i>
                             <span>购物车页</span>
                         </div>
                         <div class="menu-item" data-subpage="shop-checkout">
-                            <i class="fa fa-file-text"></i>
                             <span>确认订单页</span>
                         </div>
                         <div class="menu-item" data-subpage="shop-orders">
-                            <i class="fa fa-list-alt"></i>
                             <span>我的订单页</span>
                         </div>
                     </div>
@@ -712,15 +1352,12 @@
                     </div>
                     <div class="sub-menu">
                         <div class="menu-item" data-subpage="access-home">
-                            <i class="fa fa-key"></i>
                             <span>通行首页</span>
                         </div>
                         <div class="menu-item" data-subpage="access-face">
-                            <i class="fa fa-user-circle"></i>
                             <span>人脸录入</span>
                         </div>
                         <div class="menu-item" data-subpage="access-nfc">
-                            <i class="fa fa-credit-card"></i>
                             <span>NFC钥匙</span>
                         </div>
                     </div>
@@ -736,11 +1373,9 @@
                     </div>
                     <div class="sub-menu">
                         <div class="menu-item" data-subpage="profile-home">
-                            <i class="fa fa-user-circle"></i>
                             <span>个人中心</span>
                         </div>
                         <div class="menu-item" data-subpage="profile-settings">
-                            <i class="fa fa-cog"></i>
                             <span>设置页</span>
                         </div>
                     </div>
@@ -767,6 +1402,15 @@
                     <div class="page-tab" data-tab="shop-checkout">确认订单页</div>
                     <div class="page-tab" data-tab="shop-orders">我的订单页</div>
                 </div>
+
+                <div class="state-controller" id="state-controller" style="display:none;">
+                    <span class="state-controller-label">状态：</span>
+                    <div class="state-tab active" data-state="guest">未登录</div>
+                    <div class="state-tab" data-state="unactivated">已登录/未开通</div>
+                    <div class="state-tab" data-state="activated">已登录/已开通</div>
+                    <div class="state-tab" data-state="expiring">已登录/临期</div>
+                    <div class="state-tab" data-state="expired">已登录/过期</div>
+                </div>
                 
                 <div class="mobile-frame">
                     <div class="mobile-status-bar">
@@ -792,18 +1436,23 @@
                         </div>
                     </div>
                     
-                    <div class="mobile-bottom-nav">
-                        <div class="nav-item active" data-nav="shop">
-                            <i class="fa fa-shopping-bag"></i>
-                            <span>商城</span>
+                    <div class="mobile-bottom-nav" data-block="bottom-nav">
+                        <div class="nav-tabs">
+                            <div class="nav-item active" data-nav="shop" data-icon="tab-shop">
+                                <img src="figma-images/tab-shop-active.svg" alt="">
+                                <span>商城</span>
+                            </div>
+                            <div class="nav-item" data-nav="access" data-icon="tab-access">
+                                <img src="figma-images/tab-access.svg" alt="">
+                                <span>通行</span>
+                            </div>
+                            <div class="nav-item" data-nav="profile" data-icon="tab-profile">
+                                <img src="figma-images/tab-profile.svg" alt="">
+                                <span>我的</span>
+                            </div>
                         </div>
-                        <div class="nav-item" data-nav="access">
-                            <i class="fa fa-sign-in"></i>
-                            <span>通行</span>
-                        </div>
-                        <div class="nav-item" data-nav="profile">
-                            <i class="fa fa-user"></i>
-                            <span>我的</span>
+                        <div class="nav-home-indicator">
+                            <div class="ios-home-indicator"></div>
                         </div>
                     </div>
                 </div>
@@ -811,7 +1460,9 @@
             
             <div class="description-panel">
                 <div class="panel-header">
+                    <div class="anno-file" id="panel-file">业主端小程序V2.0-线上商城</div>
                     <h2 id="panel-title">商城首页</h2>
+                    <div class="anno-page-desc" id="panel-desc">点击标注卡片高亮对应区块</div>
                 </div>
                 
                 <div class="panel-tabs">
@@ -836,283 +1487,135 @@
                 title: '商城首页',
                 mainNav: 'shop',
                 placeholder: { icon: 'fa fa-shopping-bag', title: '商城首页', desc: '展示商城首页的商品列表、促销活动、轮播图等内容' },
-                interactionNotes: [
-                    { id: 1, title: '顶部搜索框', type: 'interaction', content: '点击搜索框 → 跳转至「搜索商品页」\n支持输入关键词、历史记录、热门搜索' },
-                    { id: 2, title: '轮播图', type: 'interaction', content: '自动轮播，3秒切换；点击图片跳转活动详情页\n左右滑动可手动切换' },
-                    { id: 3, title: '金刚位分类入口', type: 'interaction', content: '一屏展示 5 个分类图标\n点击图标 → 跳转至「分类页」对应分类' },
-                    { id: 4, title: '商品卡片', type: 'interaction', content: '点击商品卡片 → 跳转至「商品详情页」\n支持左右滑动浏览推荐商品' },
-                    { id: 5, title: '底部 Tab 导航', type: 'state', content: '当前 Tab 高亮显示主色 #46C1FF\n点击切换到对应 Tab 页面（商城/通行/我的）' }
-                ],
-                requirementDoc: {
-                    title: '商城首页 · 产品需求文档',
-                    meta: 'v1.0 · 业主端小程序 · 2026-07',
-                    sections: [
-                        { title: '1. 功能概述', paragraphs: ['商城首页是业主端小程序商城 Tab 的入口页面，展示商城的核心商品、活动、分类，引导用户进入搜索、分类浏览、商品详情等流程。'] },
-                        { title: '2. 用户流程', flow: '商城首页 <span class="arrow">→</span> 搜索商品页 <span class="arrow">→</span> 商品详情页 <span class="arrow">→</span> 购物车页 <span class="arrow">→</span> 确认订单页 <span class="arrow">→</span> 我的订单页' },
-                        { title: '3. 商品推荐规则', table: { headers: ['规则', '说明'], rows: [['排序', '后端返回 recommend.list，按销量降序'], ['数量', '默认展示 10 条，下拉加载更多'], ['字段', '商品ID、名称、主图、价格、原价、销量']] } },
-                        { title: '4. 接口定义', code: 'GET /api/shop/home\nResponse: {\n  banner: [],\n  categories: [],\n  recommends: []\n}' },
-                        { title: '5. 异常处理', table: { headers: ['场景', '处理方式'], rows: [['接口超时', '展示重试按钮，点击重新请求'], ['网络断开', 'Toast 提示「网络异常，请检查连接」'], ['商品下架', '卡片灰显，标签「已下架」，不可点击']] } }
-                    ]
-                },
-                statusList: [
-                    { block: '搜索框', state: '默认', trigger: '页面加载', ui: '占位文字"搜索商品"' },
-                    { block: '轮播图', state: '加载中', trigger: '图片未加载完成', ui: '灰色占位 + loading 图标' },
-                    { block: '商品卡片', state: '已下架', trigger: '商品 status="off_shelf"', ui: '卡片灰显，"已下架"标签' }
-                ]
+                interactionNotes: [],
+                requirementDoc: null,
+                statusList: []
             },
             'shop-search': {
                 title: '搜索商品页',
                 mainNav: 'shop',
                 placeholder: { icon: 'fa fa-search', title: '搜索商品页', desc: '支持关键词搜索、历史记录、热门搜索等功能' },
-                interactionNotes: [
-                    { id: 1, title: '搜索输入框', type: 'interaction', content: '输入关键词后点击「搜索」或键盘回车触发搜索\n输入框支持清空按钮' },
-                    { id: 2, title: '历史搜索', type: 'state', content: '未输入时展示历史搜索记录\n点击记录可直接搜索\n支持「清空历史」操作' },
-                    { id: 3, title: '热门搜索', type: 'state', content: '展示后台配置的热门关键词\n点击直接搜索' },
-                    { id: 4, title: '搜索结果', type: 'interaction', content: '展示商品列表\n支持按价格/销量排序\n点击商品卡片 → 跳转「商品详情页」' }
-                ],
-                requirementDoc: {
-                    title: '搜索商品页 · 产品需求文档',
-                    meta: 'v1.0 · 业主端小程序 · 2026-07',
-                    sections: [
-                        { title: '1. 功能概述', paragraphs: ['提供商品搜索能力，支持关键词、历史记录、热门搜索三种入口，搜索结果支持排序与筛选。'] },
-                        { title: '2. 用户流程', flow: '输入关键词 <span class="arrow">→</span> 点击搜索 <span class="arrow">→</span> 查看结果 <span class="arrow">→</span> 商品详情' },
-                        { title: '3. 搜索规则', table: { headers: ['规则', '说明'], rows: [['匹配', '商品名称、品牌、分类'], ['排序', '综合 / 销量 / 价格升序 / 价格降序'], ['分页', '每页 20 条，下拉加载更多']] } },
-                        { title: '4. 接口定义', code: 'GET /api/shop/search\nParams: keyword, sort, page\nResponse: { list: [], total: 0 }' },
-                        { title: '5. 异常处理', table: { headers: ['场景', '处理方式'], rows: [['无结果', '展示空状态插图 + "未找到相关商品"'], ['关键词为空', '搜索按钮置灰，不可点击'], ['接口失败', 'Toast 提示后端错误信息']] } }
-                    ]
-                },
-                statusList: [
-                    { block: '搜索框', state: '空', trigger: '未输入', ui: '占位文字 + 搜索按钮置灰' },
-                    { block: '搜索框', state: '已输入', trigger: '输入文字', ui: '清空按钮显示，搜索按钮可点击' },
-                    { block: '历史记录', state: '空', trigger: '无历史', ui: '不展示历史区块' }
-                ]
+                interactionNotes: [],
+                requirementDoc: null,
+                statusList: []
             },
             'shop-category': {
                 title: '分类页',
                 mainNav: 'shop',
                 placeholder: { icon: 'fa fa-th-large', title: '分类页', desc: '展示商品分类列表，支持分类筛选和浏览' },
-                interactionNotes: [
-                    { id: 1, title: '左侧分类导航', type: 'interaction', content: '点击分类项 → 右侧商品列表切换到对应分类\n当前选中项高亮显示' },
-                    { id: 2, title: '右侧商品列表', type: 'interaction', content: '展示当前分类下的商品\n支持上下滚动浏览\n点击商品卡片 → 跳转「商品详情页」' }
-                ],
-                requirementDoc: {
-                    title: '分类页 · 产品需求文档',
-                    meta: 'v1.0 · 业主端小程序 · 2026-07',
-                    sections: [
-                        { title: '1. 功能概述', paragraphs: ['按分类组织商品，左右分栏布局，左侧为分类树，右侧为商品列表。'] },
-                        { title: '2. 用户流程', flow: '点击分类 <span class="arrow">→</span> 查看商品列表 <span class="arrow">→</span> 商品详情' },
-                        { title: '3. 分类数据结构', table: { headers: ['字段', '说明'], rows: [['id', '分类ID'], ['name', '分类名称'], ['icon', '分类图标URL'], ['parentId', '父级ID，0 为一级']] } },
-                        { title: '4. 接口定义', code: 'GET /api/shop/categories\nGET /api/shop/products?categoryId=X' }
-                    ]
-                },
-                statusList: [
-                    { block: '左侧导航', state: '默认', trigger: '页面加载', ui: '第一项默认选中' },
-                    { block: '右侧列表', state: '加载中', trigger: '切换分类', ui: '骨架屏 + loading' },
-                    { block: '右侧列表', state: '空', trigger: '分类下无商品', ui: '空状态插图' }
-                ]
+                interactionNotes: [],
+                requirementDoc: null,
+                statusList: []
             },
             'shop-detail': {
                 title: '商品详情页',
                 mainNav: 'shop',
                 placeholder: { icon: 'fa fa-info-circle', title: '商品详情页', desc: '展示商品详细信息、图片、价格、评价等内容' },
-                interactionNotes: [
-                    { id: 1, title: '商品主图', type: 'interaction', content: '支持左右滑动查看多张图片\n点击图片可全屏预览' },
-                    { id: 2, title: '规格选择', type: 'interaction', content: '点击「选择规格」弹出规格选择面板\n选择完成后底部按钮显示对应规格' },
-                    { id: 3, title: '加入购物车', type: 'interaction', content: '点击「加入购物车」→ Toast 提示「已加入」\n如未选规格则先弹出规格选择' },
-                    { id: 4, title: '立即购买', type: 'interaction', content: '点击「立即购买」→ 跳转「确认订单页」\n如未选规格则先弹出规格选择' },
-                    { id: 5, title: '收藏按钮', type: 'state', content: '点击切换收藏/取消收藏\n收藏状态实时同步到「我的页」' }
-                ],
-                requirementDoc: {
-                    title: '商品详情页 · 产品需求文档',
-                    meta: 'v1.0 · 业主端小程序 · 2026-07',
-                    sections: [
-                        { title: '1. 功能概述', paragraphs: ['展示单个商品的完整信息，包含图片、价格、规格、评价，支持加入购物车或直接下单。'] },
-                        { title: '2. 用户流程', flow: '查看详情 <span class="arrow">→</span> 选择规格 <span class="arrow">→</span> 加入购物车/立即购买' },
-                        { title: '3. 商品字段', table: { headers: ['字段', '说明'], rows: [['id', '商品ID'], ['price', '现价（分）'], ['originPrice', '原价（分）'], ['stock', '库存数量'], ['specs', '规格列表']] } },
-                        { title: '4. 接口定义', code: 'GET /api/shop/product/:id\nResponse: { ...product }' },
-                        { title: '5. 异常处理', table: { headers: ['场景', '处理方式'], rows: [['商品下架', '页面提示「商品已下架」，隐藏购买按钮'], ['库存为 0', '按钮显示「已售罄」，置灰不可点击'], ['接口失败', '展示重试按钮']] } }
-                    ]
-                },
-                statusList: [
-                    { block: '主图', state: '加载中', trigger: '进入页面', ui: '占位灰底 + loading' },
-                    { block: '规格面板', state: '隐藏', trigger: '默认', ui: '不展示' },
-                    { block: '规格面板', state: '显示', trigger: '点击规格/购买', ui: '底部弹出，遮罩 50% 黑' },
-                    { block: '购买按钮', state: '已售罄', trigger: 'stock=0', ui: '灰色"已售罄"，不可点击' }
-                ]
+                interactionNotes: [],
+                requirementDoc: null,
+                statusList: []
             },
             'shop-cart': {
                 title: '购物车页',
                 mainNav: 'shop',
                 placeholder: { icon: 'fa fa-shopping-cart', title: '购物车页', desc: '展示已加入购物车的商品列表，支持管理和结算' },
-                interactionNotes: [
-                    { id: 1, title: '商品勾选', type: 'interaction', content: '点击勾选框切换选中状态\n选中状态实时计算总价' },
-                    { id: 2, title: '全选按钮', type: 'state', content: '点击切换全选/全不选\n所有商品勾选时自动变为选中状态' },
-                    { id: 3, title: '数量调整', type: 'interaction', content: '点击 +/- 调整商品数量\n数量为 1 时「-」置灰\n超过库存时「+」置灰' },
-                    { id: 4, title: '删除商品', type: 'interaction', content: '左滑商品卡片显示删除按钮\n点击删除 → 二次确认弹窗' },
-                    { id: 5, title: '结算按钮', type: 'interaction', content: '展示已选商品数量和总价\n点击 → 跳转「确认订单页」' }
-                ],
-                requirementDoc: {
-                    title: '购物车页 · 产品需求文档',
-                    meta: 'v1.0 · 业主端小程序 · 2026-07',
-                    sections: [
-                        { title: '1. 功能概述', paragraphs: ['管理购物车中的商品，支持勾选、数量调整、删除、结算等操作。'] },
-                        { title: '2. 用户流程', flow: '勾选商品 <span class="arrow">→</span> 调整数量 <span class="arrow">→</span> 点击结算 <span class="arrow">→</span> 确认订单' },
-                        { title: '3. 数据结构', table: { headers: ['字段', '说明'], rows: [['productId', '商品ID'], ['specId', '规格ID'], ['quantity', '数量'], ['selected', '是否选中']] } },
-                        { title: '4. 接口定义', code: 'GET /api/cart/list\nPOST /api/cart/update\nPOST /api/cart/delete' },
-                        { title: '5. 异常处理', table: { headers: ['场景', '处理方式'], rows: [['商品下架', '卡片灰显，标签"已下架"，不可勾选'], ['库存不足', '数量自动调整为库存值，Toast 提示'], ['购物车为空', '展示空状态插图 + "去逛逛"按钮']] } }
-                    ]
-                },
-                statusList: [
-                    { block: '商品卡片', state: '正常', trigger: '默认', ui: '可勾选、可调整数量' },
-                    { block: '商品卡片', state: '已下架', trigger: '商品 status=off', ui: '灰显，不可勾选' },
-                    { block: '数量按钮', state: '最小值', trigger: 'quantity=1', ui: '「-」置灰' },
-                    { block: '数量按钮', state: '最大值', trigger: 'quantity=stock', ui: '「+」置灰' },
-                    { block: '结算按钮', state: '禁用', trigger: '未勾选任何商品', ui: '灰色，不可点击' }
-                ]
+                interactionNotes: [],
+                requirementDoc: null,
+                statusList: []
             },
             'shop-checkout': {
                 title: '确认订单页',
                 mainNav: 'shop',
                 placeholder: { icon: 'fa fa-file-text', title: '确认订单页', desc: '确认订单信息、收货地址、支付方式等' },
-                interactionNotes: [
-                    { id: 1, title: '收货地址', type: 'interaction', content: '点击地址卡片 → 跳转「地址管理页」选择地址\n无地址时显示「请添加收货地址」' },
-                    { id: 2, title: '商品列表', type: 'state', content: '展示订单中的商品\n不可修改数量（已在购物车调整）' },
-                    { id: 3, title: '优惠券', type: 'interaction', content: '点击优惠券入口 → 弹出可用优惠券列表\n选择后实时更新订单总价' },
-                    { id: 4, title: '提交订单', type: 'interaction', content: '点击「提交订单」→ 调用接口创建订单\n成功后跳转到支付页' }
-                ],
-                requirementDoc: {
-                    title: '确认订单页 · 产品需求文档',
-                    meta: 'v1.0 · 业主端小程序 · 2026-07',
-                    sections: [
-                        { title: '1. 功能概述', paragraphs: ['订单确认页面，用户核对地址、商品、优惠券后提交订单并跳转支付。'] },
-                        { title: '2. 用户流程', flow: '核对信息 <span class="arrow">→</span> 选择优惠券 <span class="arrow">→</span> 提交订单 <span class="arrow">→</span> 支付' },
-                        { title: '3. 价格计算', table: { headers: ['项目', '计算方式'], rows: [['商品总价', 'Σ(price × quantity)'], ['优惠金额', '优惠券面额'], ['实付金额', '商品总价 - 优惠金额']] } },
-                        { title: '4. 接口定义', code: 'POST /api/order/create\nBody: { addressId, items, couponId }\nResponse: { orderId, payAmount }' },
-                        { title: '5. 异常处理', table: { headers: ['场景', '处理方式'], rows: [['库存不足', 'Toast 提示并返回购物车'], ['优惠券不可用', '自动取消选择，Toast 提示'], ['提交失败', 'Toast 提示错误，按钮恢复可点击']] } }
-                    ]
-                },
-                statusList: [
-                    { block: '地址卡片', state: '有地址', trigger: '默认有收货地址', ui: '展示姓名、电话、地址' },
-                    { block: '地址卡片', state: '无地址', trigger: '未添加地址', ui: '"请添加收货地址" + 跳转箭头' },
-                    { block: '提交按钮', state: '可点击', trigger: '信息完整', ui: '主色 #353B3C' },
-                    { block: '提交按钮', state: '请求中', trigger: '点击提交', ui: 'loading 态，防重复点击' }
-                ]
+                interactionNotes: [],
+                requirementDoc: null,
+                statusList: []
             },
             'shop-orders': {
                 title: '我的订单页',
                 mainNav: 'shop',
                 placeholder: { icon: 'fa fa-list-alt', title: '我的订单页', desc: '展示用户订单列表，支持订单状态筛选和管理' },
-                interactionNotes: [
-                    { id: 1, title: '状态筛选 Tab', type: 'interaction', content: '点击 Tab 切换订单状态：全部/待付款/待发货/待收货/已完成\n当前 Tab 高亮显示' },
-                    { id: 2, title: '订单卡片', type: 'interaction', content: '点击订单卡片 → 跳转「订单详情页」\n展示订单号、商品、金额、状态' },
-                    { id: 3, title: '取消订单', type: 'interaction', content: '待付款订单显示「取消订单」按钮\n点击 → 二次确认弹窗' },
-                    { id: 4, title: '确认收货', type: 'interaction', content: '待收货订单显示「确认收货」按钮\n点击 → 二次确认弹窗' }
-                ],
-                requirementDoc: {
-                    title: '我的订单页 · 产品需求文档',
-                    meta: 'v1.0 · 业主端小程序 · 2026-07',
-                    sections: [
-                        { title: '1. 功能概述', paragraphs: ['展示用户所有订单，支持按状态筛选，提供订单管理操作（取消、确认收货、再次购买）。'] },
-                        { title: '2. 订单状态机', table: { headers: ['状态值', '含义', '可执行操作'], rows: [['pending', '待付款', '取消订单 / 去支付'], ['paid', '待发货', '无'], ['shipped', '待收货', '确认收货'], ['completed', '已完成', '再次购买 / 评价']] } },
-                        { title: '3. 接口定义', code: 'GET /api/order/list?status=X\nResponse: { list: [], total: 0 }' },
-                        { title: '4. 异常处理', table: { headers: ['场景', '处理方式'], rows: [['无订单', '展示空状态插图 + "去逛逛"按钮'], ['取消失败', 'Toast 提示错误信息'], ['确认收货失败', 'Toast 提示错误信息']] } }
-                    ]
-                },
-                statusList: [
-                    { block: '订单卡片', state: '待付款', trigger: 'status=pending', ui: '红色"待付款"标签 + 取消/支付按钮' },
-                    { block: '订单卡片', state: '待收货', trigger: 'status=shipped', ui: '蓝色"待收货"标签 + 确认收货按钮' },
-                    { block: '订单卡片', state: '已完成', trigger: 'status=completed', ui: '灰色"已完成"标签 + 再次购买按钮' }
-                ]
+                interactionNotes: [],
+                requirementDoc: null,
+                statusList: []
             },
             'access-home': {
                 title: '通行首页',
                 mainNav: 'access',
                 placeholder: { icon: 'fa fa-key', title: '通行首页', desc: '展示门禁、电梯、访客等通行功能入口' },
-                interactionNotes: [
-                    { id: 1, title: '门禁列表', type: 'interaction', content: '展示用户有权限的门禁设备\n点击「开门」按钮 → 调用开门接口' },
-                    { id: 2, title: '电梯控制', type: 'interaction', content: '选择楼层并呼叫电梯\n点击楼层按钮 → 呼叫对应楼层' },
-                    { id: 3, title: '访客登记', type: 'interaction', content: '点击入口 → 跳转「访客登记页」' }
-                ],
-                requirementDoc: {
-                    title: '通行首页 · 产品需求文档',
-                    meta: 'v1.0 · 业主端小程序 · 2026-07',
-                    sections: [
-                        { title: '1. 功能概述', paragraphs: ['物业通行功能入口，包含门禁开门、电梯控制、访客登记、通行记录等。'] },
-                        { title: '2. 接口定义', code: 'GET /api/access/devices\nPOST /api/access/open\ngroupId, deviceId' }
-                    ]
-                },
-                statusList: [
-                    { block: '门禁设备', state: '在线', trigger: 'status=online', ui: '绿色圆点 + "开门"按钮可点击' },
-                    { block: '门禁设备', state: '离线', trigger: 'status=offline', ui: '灰色圆点 + "开门"按钮置灰' }
-                ]
+                interactionNotes: [],
+                requirementDoc: null,
+                statusList: []
             },
             'access-face': {
                 title: '人脸录入',
                 mainNav: 'access',
                 placeholder: { icon: 'fa fa-user-circle', title: '人脸录入', desc: '人脸信息录入和管理功能' },
-                interactionNotes: [
-                    { id: 1, title: '照片上传', type: 'interaction', content: '点击上传按钮 → 调用 wx.chooseMedia\n支持相册/拍照两种来源' },
-                    { id: 2, title: '照片预览', type: 'state', content: '上传后进入预览页\n支持重新上传或确认提交' },
-                    { id: 3, title: '审核状态', type: 'state', content: '提交后进入「审核中」状态\n审核结果通过站内信通知' }
-                ],
-                requirementDoc: {
-                    title: '人脸录入 · 产品需求文档',
-                    meta: 'v1.0 · 业主端小程序 · 2026-07',
-                    sections: [
-                        { title: '1. 功能概述', paragraphs: ['业主上传本人正脸照片，经审核后用于刷脸通行。'] },
-                        { title: '2. 人脸状态机', table: { headers: ['状态值', '含义', '入口展示'], rows: [['none', '未录入', '无角标'], ['reviewing', '审核中', '橙色角标'], ['active', '已生效', '绿色角标'], ['rejected', '审核未通过', '红色角标']] } },
-                        { title: '3. 上传规则', table: { headers: ['规则', '说明'], rows: [['格式', 'JPG / PNG'], ['大小', '≤ 5MB'], ['来源', '相册 + 拍照']] } },
-                        { title: '4. 接口定义', code: 'POST /api/face/upload\nPOST /api/face/submit\nGET /api/face/status' }
-                    ]
-                },
-                statusList: [
-                    { block: '上传区', state: '空态', trigger: '未上传', ui: '占位插图 + 虚线边框' },
-                    { block: '上传区', state: '已选图', trigger: '选图成功', ui: '160px 圆形预览 + 重新上传' },
-                    { block: '提交按钮', state: '禁用', trigger: '未上传', ui: '灰色 #BDBDBD' },
-                    { block: '提交按钮', state: '可点击', trigger: '上传成功', ui: '主色 #353B3C' }
-                ]
+                interactionNotes: [],
+                requirementDoc: null,
+                statusList: []
             },
             'access-nfc': {
                 title: 'NFC钥匙',
                 mainNav: 'access',
                 placeholder: { icon: 'fa fa-credit-card', title: 'NFC钥匙', desc: 'NFC钥匙开通和管理功能' },
-                interactionNotes: [
-                    { id: 1, title: '开通钥匙', type: 'interaction', content: '点击「开通」按钮 → 进入开通流程\n需要手机支持 NFC 功能' },
-                    { id: 2, title: '钥匙列表', type: 'state', content: '展示已开通的 NFC 钥匙\n支持删除操作' }
-                ],
-                requirementDoc: {
-                    title: 'NFC钥匙 · 产品需求文档',
-                    meta: 'v1.0 · 业主端小程序 · 2026-07',
-                    sections: [
-                        { title: '1. 功能概述', paragraphs: ['将业主的手机作为 NFC 钥匙，支持刷手机开门禁。'] },
-                        { title: '2. 接口定义', code: 'POST /api/nfc/activate\nDELETE /api/nfc/:id' }
-                    ]
-                },
-                statusList: [
-                    { block: '开通按钮', state: '可点击', trigger: '手机支持 NFC', ui: '主色按钮' },
-                    { block: '开通按钮', state: '禁用', trigger: '手机不支持 NFC', ui: '灰色按钮 + 提示' }
-                ]
+                interactionNotes: [],
+                requirementDoc: null,
+                statusList: []
             },
             'profile-home': {
                 title: '个人中心',
                 mainNav: 'profile',
                 placeholder: { icon: 'fa fa-user-circle', title: '个人中心', desc: '展示用户信息、订单入口、设置等功能' },
+                render: 'profileHome',
                 interactionNotes: [
-                    { id: 1, title: '用户信息', type: 'interaction', content: '展示头像、昵称、手机号\n点击 → 跳转「个人信息编辑页」' },
-                    { id: 2, title: '订单快捷入口', type: 'interaction', content: '展示订单各状态快捷入口\n点击 → 跳转「我的订单页」对应状态' },
-                    { id: 3, title: '功能列表', type: 'interaction', content: '优惠券、地址管理、设置等入口\n点击 → 跳转对应页面' }
+                    { id: 1, title: '用户信息区', type: 'state', target: '[data-block="user-info"]', content: '未登录：展示「立即登录」按钮，点击触发登录流程\n已登录：展示手机号（脱敏）+「设置」入口\n点击头像/用户名 → 跳转个人信息编辑页\n点击「设置」→ 跳转设置页' },
+                    { id: 2, title: '会员信息卡片', type: 'state', target: '[data-block="member-card"]', content: '未登录：显示「登录查看会员等级」，积分/回馈金/优惠券均为 0\n未开通：显示「V2白银会员」等级名称\n已开通/临期：显示「徕芙社区卡」+ 会员等级标签\n点击「会员中心」→ 跳转会员中心页' },
+                    { id: 3, title: '到期提醒', type: 'state', target: '[data-block="living-card"]', content: '仅临期态展示\n显示到期倒计时天数\n点击「立即续费」→ 跳转续费/会员开通页' },
+                    { id: 4, title: '物业服务入口', type: 'interaction', target: '[data-block="services"]', content: '9 个功能入口：我的房屋 / 物业缴费 / 我的车位 / 物业报修 / 我的押金 / 住户审核 / 实名认证 / 反馈建议 / 紧急呼救\n点击各入口 → 跳转对应功能页' },
+                    { id: 5, title: '我的订单入口', type: 'interaction', target: '[data-block="orders"]', content: '5 个订单状态入口：待付款 / 待发货 / 待收货 / 待评价 / 售后\n待付款显示数量徽标\n点击入口 → 跳转「我的订单页」对应状态\n点击「全部订单」→ 跳转订单全列表' },
+                    { id: 6, title: '底部 Tab 导航', type: 'state', target: '[data-block="bottom-nav"]', content: '3 个 Tab：商城 / 通行 / 我的\n当前处于「我的」Tab' }
                 ],
                 requirementDoc: {
                     title: '个人中心 · 产品需求文档',
-                    meta: 'v1.0 · 业主端小程序 · 2026-07',
+                    meta: 'v2.0 · 业主端小程序 · 2026-07',
                     sections: [
-                        { title: '1. 功能概述', paragraphs: ['展示用户基本信息及各功能入口，是「我的」Tab 的主页。'] },
-                        { title: '2. 接口定义', code: 'GET /api/user/profile\nResponse: { nickname, avatar, phone }' }
+                        { title: '1. 功能概述', paragraphs: ['「我的」Tab 主页，展示用户信息、会员权益、物业服务入口和订单快捷入口。', '页面包含 5 种状态：未登录、未开通（已登录未开通会员服务）、已开通（会员服务生效中）、临期（会员即将到期）、过期（会员已过期）。'] },
+                        { title: '2. 状态说明', table: { headers: ['状态', '触发条件', '页面表现'], rows: [
+                            ['未登录', '用户未登录', '用户信息区显示「立即登录」；会员信息显示「登录查看会员等级」，数据为 0'],
+                            ['未开通', '已登录但未开通会员服务', '显示用户手机号 + 设置入口；会员信息显示「V2白银会员」'],
+                            ['已开通', '已开通会员服务且未临期', '会员信息显示「徕芙社区卡」+ 等级标签'],
+                            ['临期', '会员服务距到期 ≤ 7 天', '与已开通相同，额外显示到期提醒条'],
+                            ['过期', '会员服务已过期', '与未开通相同（显示「V2白银会员」），徕芙社区卡小字文案显示「会员已过期，相关权益已失效」，展示「立即续费」按钮']
+                        ]}},
+                        { title: '3. 用户流程', flow: '未登录 <span class="arrow">→</span> 点击「立即登录」 <span class="arrow">→</span> 登录页 <span class="arrow">→</span> 登录成功 <span class="arrow">→</span> 个人中心（未开通/已开通态）' },
+                        { title: '4. 模块清单', table: { headers: ['模块', '包含内容'], rows: [
+                            ['用户信息区', '头像、用户名/登录入口、设置入口'],
+                            ['会员信息卡片', '会员等级名称、等级标签、积分/回馈金/优惠券、会员中心入口'],
+                            ['物业服务', '我的房屋、物业缴费、我的车位、物业报修、我的押金、住户审核、实名认证、反馈建议、紧急呼救'],
+                            ['我的订单', '待付款、待发货、待收货、待评价、售后']
+                        ]}},
+                        { title: '5. 更新记录', paragraphs: [
+                            '<span style="color:#828282;">更新时间：</span>2026年7月30日',
+                            '<span style="color:#828282;">需求方：</span>市场部',
+                            '<span style="color:#D63E39;">问题：</span>已开通徕芙社区卡的部分用户容易误点徕芙社区卡上的"立即续费"按钮。'
+                        ], table: { headers: ['序号', '更新点'], rows: [
+                            ['1', '已开通徕芙社区卡且还未临期的，去掉深色卡片上"立即续费"按钮。文案修改为"已开通 2027-09-01到期"，日期需根据后端接口返回的实际到期时间动态渲染。'],
+                            ['2', '"立即续费"按钮只在临期及过期的时候展示。'],
+                            ['3', '修改所有状态卡片上的小字文案的字号，字号从11px改为12px。']
+                        ]}}
                     ]
                 },
                 statusList: [
-                    { block: '头像', state: '默认', trigger: '未设置头像', ui: '展示默认占位头像' },
-                    { block: '头像', state: '已设置', trigger: '已上传头像', ui: '展示用户头像' }
+                    { block: '用户信息区', state: '未登录', trigger: '用户未登录', ui: '显示「立即登录」入口，无设置入口' },
+                    { block: '用户信息区', state: '已登录', trigger: '用户已登录', ui: '显示手机号 + 设置入口' },
+                    { block: '会员信息', state: '未登录', trigger: '用户未登录', ui: '显示「登录查看会员等级」，数据为 0' },
+                    { block: '会员信息', state: '未开通', trigger: '已登录未开通', ui: '显示「V2白银会员」，数据有值' },
+                    { block: '会员信息', state: '已开通', trigger: '会员服务生效', ui: '显示「徕芙社区卡」+ 等级标签' },
+                    { block: '到期提醒', state: '隐藏', trigger: '非临期态', ui: '不展示提醒条' },
+                    { block: '到期提醒', state: '显示', trigger: '距到期 ≤ 7 天', ui: '展示到期倒计时 + 续费入口' },
+                    { block: '徕芙社区卡', state: '过期', trigger: '会员服务已过期', ui: '会员信息显示「V2白银会员」；卡片小字文案「会员已过期，相关权益已失效」+ 续费入口' },
+                    { block: '订单徽标', state: '有未付款', trigger: '存在待付款订单', ui: '待付款入口显示数量徽标' }
                 ]
             },
             'profile-settings': {
@@ -1137,23 +1640,357 @@
             }
         };
         
+        // ====== 页面渲染器（具体页面内容）======
+        const pageRenderers = {
+            shopHome: function() {
+                // 金刚位 10 个分类
+                const categories = [
+                    { icon: 'fa fa-star', label: '推荐' },
+                    { icon: 'fa fa-fire', label: '新品' },
+                    { icon: 'fa fa-percent', label: '折扣' },
+                    { icon: 'fa fa-home', label: '家居' },
+                    { icon: 'fa fa-cutlery', label: '食品' },
+                    { icon: 'fa fa-mobile', label: '数码' },
+                    { icon: 'fa fa-plug', label: '家电' },
+                    { icon: 'fa fa-tshirt', label: '服饰' },
+                    { icon: 'fa fa-magic', label: '美妆' },
+                    { icon: 'fa fa-child', label: '母婴' }
+                ];
+                const catHtml = categories.map(c => `
+                    <div class="mh-cat-item">
+                        <div class="mh-cat-icon"><i class="${c.icon}"></i></div>
+                        <div class="mh-cat-label">${c.label}</div>
+                    </div>
+                `).join('');
+
+                // 专题排行榜（2 行 × 2 列 = 4 个卡片）
+                const rankingCard = (title) => `
+                    <div class="mh-ranking-card">
+                        <div class="mh-ranking-title">${title} <span class="mh-more">更多 ›</span></div>
+                        <div class="mh-ranking-grid">
+                            ${[1,2,3,4].map(i => `
+                                <div class="mh-ranking-item">
+                                    <div class="mh-ranking-img"></div>
+                                    <div class="mh-ranking-name">商品${i}</div>
+                                    <div class="mh-ranking-price">¥${(99 + i * 17).toFixed(0)}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+
+                // 商品瀑布流（2×2 = 4 个商品卡）
+                const productCard = (i, withBadge) => {
+                    const price = (49 + i * 23).toFixed(0);
+                    const original = (parseInt(price) + 40).toFixed(0);
+                    return `
+                        <div class="mh-product-card">
+                            <div class="mh-product-img">
+                                ${withBadge ? `<span class="mh-product-badge">已售 ${100 + i * 13}</span>` : ''}
+                            </div>
+                            <div class="mh-product-body">
+                                <div class="mh-product-title">商品标题示例 ${i} 号 - 优质好物限时特惠</div>
+                                <div class="mh-product-tags">
+                                    <span class="mh-product-tag">特惠</span>
+                                    <span class="mh-product-tag gray">包邮</span>
+                                </div>
+                                <div class="mh-product-price-row">
+                                    <span class="mh-product-price">¥${price}<span class="mh-original">¥${original}</span></span>
+                                    <div class="mh-product-cart"><i class="fa fa-plus"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                };
+
+                return `
+                    <div class="mh-page">
+                        <!-- 1. 顶部搜索栏 -->
+                        <div class="mh-search-row">
+                            <div class="mh-search-bar">
+                                <i class="fa fa-search mh-search-icon"></i>
+                                <span class="mh-search-placeholder">输入关键字搜索</span>
+                                <button class="mh-search-btn">搜索</button>
+                            </div>
+                            <i class="fa fa-headphones mh-cs-icon"></i>
+                        </div>
+
+                        <!-- 2. Hero Banner -->
+                        <div class="mh-banner">
+                            <div class="mh-banner-overlay">在家也能吃到
+星级酒店美味</div>
+                            <span class="mh-pagination">1/6</span>
+                        </div>
+
+                        <!-- 3. 金刚位分类 -->
+                        <div class="mh-section">
+                            <div class="mh-category-grid">${catHtml}</div>
+                        </div>
+
+                        <!-- 4. 专题排行榜 -->
+                        <div class="mh-section">
+                            <div class="mh-ranking-row">
+                                ${rankingCard('热销榜')}
+                                ${rankingCard('新品榜')}
+                            </div>
+                            <div class="mh-ranking-row">
+                                ${rankingCard('折扣榜')}
+                                ${rankingCard('好评榜')}
+                            </div>
+                        </div>
+
+                        <!-- 5. 商品瀑布流（2×2） -->
+                        <div class="mh-waterfall">
+                            ${productCard(1, false)}
+                            ${productCard(2, false)}
+                            ${productCard(3, true)}
+                            ${productCard(4, true)}
+                        </div>
+
+                        <!-- 6. 悬浮购物车按钮（带数量徽标） -->
+                        <div class="mh-fab" title="购物车">
+                            <i class="fa fa-shopping-cart"></i>
+                            <span class="mh-fab-badge">3</span>
+                        </div>
+                    </div>
+                `;
+            },
+            profileHome: function() {
+                const arrow = '<img src="figma-images/icon-arrow-right.svg" alt="">';
+                // 物业服务入口（5+4，Figma 真实图标）
+                const serviceIcons = [
+                    { icon: 'icon-home', label: '我的房屋' },
+                    { icon: 'icon-money', label: '物业缴费' },
+                    { icon: 'icon-parking', label: '我的车位' },
+                    { icon: 'icon-repair', label: '物业报修' },
+                    { icon: 'icon-deposit', label: '我的押金' }
+                ];
+                const serviceIcons2 = [
+                    { icon: 'icon-user-follow', label: '住户审核' },
+                    { icon: 'icon-idcard', label: '实名认证' },
+                    { icon: 'icon-mail', label: '反馈建议' },
+                    { icon: 'icon-service', label: '紧急呼救' }
+                ];
+                const orderIcons = [
+                    { icon: 'icon-order-pay', label: '待付款', badge: 4 },
+                    { icon: 'icon-order-ship', label: '待发货', badge: 0 },
+                    { icon: 'icon-order-receive', label: '待收货', badge: 0 },
+                    { icon: 'icon-order-review', label: '待评价', badge: 0 },
+                    { icon: 'icon-order-after', label: '售后', badge: 0 }
+                ];
+                const gridItem = (g) => `
+                    <div class="ph-grid-item">
+                        <div class="ph-grid-icon"><img src="figma-images/${g.icon}.svg" alt=""></div>
+                        <div class="ph-grid-label">${g.label}</div>
+                        ${g.badge > 0 ? `<span class="ph-grid-badge">${g.badge}</span>` : ''}
+                    </div>
+                `;
+
+                // VIP 功能图标（徕芙社区卡专属）
+                const livingCardFeatures = [
+                    { icon: 'vip-door-open-line', label: '远程开门' },
+                    { icon: 'vip-nfc-line', label: 'NFC开门' },
+                    { icon: 'vip-family-member-line', label: '家人共享' },
+                    { icon: 'vip-flash-line', label: '积分加速' },
+                    { icon: 'vip-card-line', label: '抵物业账单' }
+                ];
+
+                // 四个状态的内容
+                const states = {
+                    guest: {
+                        username: '立即登录', showSettings: false, showBell: false, avatarIcon: 'avatar-user-fill',
+                        levelName: '', levelText: '登录查看会员等级', showTag: false,
+                        showLivingCard: true, livingCardExpiry: '', livingCardSubtitle: '门禁权限升级等14项权益', livingCardCta: '立即开通',
+                        points: '0', balance: '0', coupons: '0', showExpire: false
+                    },
+                    unactivated: {
+                        username: '189****0990', showSettings: true, showBell: true, avatarIcon: 'avatar-user-fill',
+                        levelName: 'V2白银会员', levelText: '', showTag: false,
+                        showLivingCard: true, livingCardExpiry: '', livingCardSubtitle: '门禁权限升级等14项权益', livingCardCta: '立即开通',
+                        points: '600', balance: '500', coupons: '6', showExpire: false
+                    },
+                    activated: {
+                        username: '189****0990', showSettings: true, showBell: true, avatarIcon: 'avatar-user-fill',
+                        levelName: '徕芙社区卡', levelText: '', showTag: true, tagText: 'V1青铜会员',
+                        showLivingCard: true, livingCardExpiry: '已开通 2027-09-07到期', livingCardSubtitle: '', livingCardCta: '',
+                        points: '600', balance: '500', coupons: '6', showExpire: false
+                    },
+                    expiring: {
+                        username: '189****0990', showSettings: true, showBell: true, avatarIcon: 'avatar-user-fill',
+                        levelName: '徕芙社区卡', levelText: '', showTag: true, tagText: 'V1青铜会员',
+                        showLivingCard: true, livingCardExpiry: '', livingCardSubtitle: '7天后即将过期，无法使用远程开门', livingCardCta: '立即续费',
+                        points: '600', balance: '500', coupons: '6', showExpire: false
+                    },
+                    expired: {
+                        username: '189****0990', showSettings: true, showBell: true, avatarIcon: 'avatar-user-fill',
+                        levelName: 'V2白银会员', levelText: '', showTag: false,
+                        showLivingCard: true, livingCardExpiry: '', livingCardSubtitle: '会员已过期，相关权益已失效', livingCardCta: '立即续费',
+                        points: '600', balance: '500', coupons: '6', showExpire: false
+                    }
+                };
+
+                const renderState = (key, idx) => {
+                    const s = states[key];
+                    const livingCardFeatureHTML = livingCardFeatures.map(f => `
+                        <div class="ph-lc-feature">
+                            <div class="ph-lc-feature-icon"><img src="figma-images/${f.icon}.svg" alt=""></div>
+                            <div class="ph-lc-feature-label">${f.label}</div>
+                        </div>
+                    `).join('');
+                    return `
+                        <div class="ph-state-panel${idx === 0 ? ' active' : ''}" data-state="${key}">
+                            <div class="ph-header-bg" data-block="user-info">
+                                <div class="ph-user-row">
+                                    <div class="ph-user-left">
+                                        <div class="ph-avatar">${s.avatarIcon ? `<img src="figma-images/${s.avatarIcon}.svg" alt="">` : ''}</div>
+                                        <div class="ph-user-info">
+                                            <div class="ph-username">${s.username}</div>
+                                            ${s.showSettings ? `<div class="ph-settings-link">设置 ${arrow}</div>` : ''}
+                                        </div>
+                                    </div>
+                                    ${s.showBell ? `<div class="ph-nav-accessory"><img src="figma-images/icon-bell.svg" alt=""></div>` : ''}
+                                </div>
+                            </div>
+                            <div class="ph-member-card" data-block="member-card">
+                                <div class="ph-member-top">
+                                    <div class="ph-member-level">
+                                        ${s.levelName ? `<span class="ph-level-name">${s.levelName}</span>` : ''}
+                                        ${s.showTag ? `<span class="ph-level-tag"><img src="figma-images/icon-v1-tag.svg" alt="">${s.tagText}</span>` : ''}
+                                        ${s.levelText ? `<span class="ph-level-name is-gray">${s.levelText}</span>` : ''}
+                                    </div>
+                                    <div class="ph-member-link">会员中心 ${arrow}</div>
+                                </div>
+                                <div class="ph-member-stats">
+                                    <div class="ph-stat-item">
+                                        <div class="ph-stat-value"><span class="ph-stat-num">${s.points}</span><span class="ph-stat-unit">分</span></div>
+                                        <div class="ph-stat-label">积分</div>
+                                    </div>
+                                    <div class="ph-stat-item">
+                                        <div class="ph-stat-value"><span class="ph-stat-num">${s.balance}</span><span class="ph-stat-unit">元</span></div>
+                                        <div class="ph-stat-label">回馈金</div>
+                                    </div>
+                                    <div class="ph-stat-item">
+                                        <div class="ph-stat-value"><span class="ph-stat-num">${s.coupons}</span><span class="ph-stat-unit">张</span></div>
+                                        <div class="ph-stat-label">优惠券</div>
+                                    </div>
+                                </div>
+                            </div>
+                            ${s.showLivingCard ? `
+                            <div class="ph-living-card" data-block="living-card">
+                                <div class="ph-living-card-title"><img src="figma-images/living-card-title.svg" alt="徕芙社区卡"></div>
+                                ${s.livingCardExpiry ? `<div class="ph-living-card-expiry">${s.livingCardExpiry}</div>` : ''}
+                                ${s.livingCardSubtitle ? `<div class="ph-living-card-subtitle">${s.livingCardSubtitle}</div>` : ''}
+                                ${s.livingCardCta ? `<div class="ph-living-card-cta">${s.livingCardCta}</div>` : ''}
+                                <div class="ph-living-card-features">${livingCardFeatureHTML}</div>
+                            </div>
+                            ` : ''}
+                            <div class="ph-card" data-block="orders">
+                                <div class="ph-card-title-row">
+                                    <div class="ph-card-title">我的订单</div>
+                                    <div class="ph-card-more">全部订单 ${arrow}</div>
+                                </div>
+                                <div class="ph-grid-row">${orderIcons.map(gridItem).join('')}</div>
+                            </div>
+                            <div class="ph-card" data-block="services">
+                                <div class="ph-card-title-row">
+                                    <div class="ph-card-title">物业服务</div>
+                                </div>
+                                <div class="ph-grid-row">${serviceIcons.map(gridItem).join('')}</div>
+                                <div class="ph-grid-row">${serviceIcons2.map(gridItem).join('')}</div>
+                            </div>
+                            <div style="height: 16px;"></div>
+                        </div>
+                    `;
+                };
+
+                return `
+                    <div class="ph-page">
+                        ${Object.keys(states).map((k, i) => renderState(k, i)).join('')}
+                    </div>
+                `;
+            }
+        };
+
+        // ====== 渲染后事件绑定 ======
+        function bindPageEvents(pageId) {
+            if (pageId === 'shop-home') {
+                const fab = document.querySelector('#mobile-content .mh-fab');
+                if (fab) {
+                    fab.addEventListener('click', () => switchPage('shop-cart'));
+                }
+                document.querySelectorAll('#mobile-content .mh-cat-item').forEach(el => {
+                    el.addEventListener('click', () => switchPage('shop-category'));
+                });
+                document.querySelectorAll('#mobile-content .mh-product-card').forEach(el => {
+                    el.addEventListener('click', () => switchPage('shop-detail'));
+                });
+                document.querySelectorAll('#mobile-content .mh-search-bar').forEach(el => {
+                    el.addEventListener('click', () => switchPage('shop-search'));
+                });
+            }
+            if (pageId === 'profile-home') {
+                // 外部状态控制器切换
+                document.querySelectorAll('#state-controller .state-tab').forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        const state = tab.dataset.state;
+                        applyProfileState(state);
+                        // 同步状态到 URL hash
+                        const cur = getPageIdFromHash();
+                        if (cur && cur.startsWith('profile-home')) {
+                            history.replaceState(null, '', '#profile-home:' + state);
+                        }
+                    });
+                });
+                // 根据 hash 中的状态初始化
+                const initState = getStateFromHash();
+                if (initState) applyProfileState(initState);
+            }
+        }
+
+        // 应用个人中心会员状态到控制器与原型
+        function applyProfileState(state) {
+            const tab = document.querySelector(`#state-controller .state-tab[data-state="${state}"]`);
+            if (!tab) return;
+            document.querySelectorAll('#state-controller .state-tab').forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            document.querySelectorAll('#mobile-content .ph-state-panel').forEach(p => {
+                p.classList.toggle('active', p.dataset.state === state);
+            });
+            const content = document.getElementById('mobile-content');
+            if (content) content.scrollTop = 0;
+        }
+
         // ====== 渲染：交互注释 ======
         function renderInteractionNotes(notes) {
             if (!notes || notes.length === 0) return '<p style="color:#999;font-size:12px;">暂无交互注释</p>';
             return `
                 <div class="interaction-list">
-                    ${notes.map(note => `
-                        <div class="interaction-card">
-                            <div class="interaction-card-header">
-                                <span class="interaction-num">${note.id}</span>
-                                <span class="interaction-title">${note.title}</span>
-                                <span class="interaction-tag ${note.type}">${note.type === 'interaction' ? '交互' : '状态'}</span>
+                    ${notes.map(note => {
+                        const lines = note.content.split('\n').map(line => {
+                            if (!line.trim()) return '';
+                            // 子项：以 "  · " 开头
+                            if (/^\s*·\s/.test(line)) {
+                                return `<div class="note-line sub">${line.replace(/^\s*·\s/, '')}</div>`;
+                            }
+                            // 标签行：以"："结尾且短（如"结构："）
+                            if (/^[^：]{1,8}：$/.test(line.trim())) {
+                                return `<div class="note-line label">${line.trim()}</div>`;
+                            }
+                            return `<div class="note-line">${line}</div>`;
+                        }).join('');
+                        return `
+                            <div class="interaction-card${note.target ? ' has-target' : ''}"${note.target ? ` data-target="${note.target}"` : ''}>
+                                <div class="interaction-card-header">
+                                    <span class="interaction-num">${note.id}</span>
+                                    <span class="interaction-title">${note.title}</span>
+                                    <span class="interaction-tag ${note.type}">${note.type === 'interaction' ? '交互' : '状态'}</span>
+                                </div>
+                                <div class="interaction-content">
+                                    ${lines}
+                                </div>
                             </div>
-                            <div class="interaction-content">
-                                ${note.content.split('\n').map(line => `<p>${line}</p>`).join('')}
-                            </div>
-                        </div>
-                    `).join('')}
+                        `;
+                    }).join('')}
                 </div>
             `;
         }
@@ -1230,10 +2067,28 @@
             document.querySelectorAll(`[data-subpage="${pageId}"]`).forEach(item => item.classList.add('active'));
             
             document.querySelectorAll('.page-tab').forEach(tab => tab.classList.remove('active'));
-            document.querySelectorAll(`[data-tab="${pageId}"]`).forEach(tab => tab.classList.add('active'));
+            const matchedTabs = document.querySelectorAll(`[data-tab="${pageId}"]`);
+            matchedTabs.forEach(tab => tab.classList.add('active'));
+            // 当前页面无对应 tab 时隐藏整组 page-tabs
+            const pageTabsEl = document.getElementById('page-tabs');
+            pageTabsEl.style.display = matchedTabs.length > 0 ? 'flex' : 'none';
+
+            // 状态控制器：仅 profile-home 显示
+            const stateCtrl = document.getElementById('state-controller');
+            stateCtrl.style.display = pageId === 'profile-home' ? 'flex' : 'none';
             
-            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-            document.querySelectorAll(`[data-nav="${page.mainNav}"]`).forEach(item => item.classList.add('active'));
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+                const icon = item.getAttribute('data-icon');
+                const img = item.querySelector('img');
+                if (img && icon) img.src = `figma-images/${icon}.svg`;
+            });
+            document.querySelectorAll(`[data-nav="${page.mainNav}"]`).forEach(item => {
+                item.classList.add('active');
+                const icon = item.getAttribute('data-icon');
+                const img = item.querySelector('img');
+                if (img && icon) img.src = `figma-images/${icon}-active.svg`;
+            });
             
             document.getElementById('breadcrumb-main').textContent = 
                 page.mainNav === 'shop' ? '商城' : 
@@ -1242,16 +2097,36 @@
             
             document.getElementById('mobile-title').textContent = page.title;
             document.getElementById('panel-title').textContent = page.title;
+
+            // 个人中心无标准导航栏（顶部直接是背景图）
+            document.querySelector('.mobile-header').style.display = (pageId === 'profile-home') ? 'none' : 'flex';
+            // 个人中心：状态栏叠加在背景图上（透明背景、白色文字）
+            document.querySelector('.mobile-status-bar').classList.toggle('profile', pageId === 'profile-home');
             
-            const placeholder = page.placeholder;
-            document.getElementById('mobile-content').innerHTML = `
-                <div class="page-placeholder">
-                    <i class="${placeholder.icon}"></i>
-                    <h3>${placeholder.title}</h3>
-                    <p>${placeholder.desc}</p>
-                </div>
-            `;
+            // 优先使用自定义渲染函数，否则使用 placeholder
+            const renderFn = pageRenderers[page.render];
+            const contentEl = document.getElementById('mobile-content');
+            if (renderFn) {
+                contentEl.classList.add('custom-render');
+                contentEl.innerHTML = renderFn();
+                // 渲染后绑定交互
+                if (typeof bindPageEvents === 'function') bindPageEvents(pageId);
+            } else {
+                contentEl.classList.remove('custom-render');
+                const placeholder = page.placeholder;
+                contentEl.innerHTML = `
+                    <div class="page-placeholder">
+                        <i class="${placeholder.icon}"></i>
+                        <h3>${placeholder.title}</h3>
+                        <p>${placeholder.desc}</p>
+                    </div>
+                `;
+            }
             
+            // 切换页面时清除残留的注释选中态与原型高亮
+            document.querySelectorAll('.interaction-card.selected').forEach(c => c.classList.remove('selected'));
+            document.querySelectorAll('.ph-highlight').forEach(el => el.classList.remove('ph-highlight'));
+
             document.getElementById('panel-interaction').innerHTML = renderInteractionNotes(page.interactionNotes);
             document.getElementById('panel-requirement').innerHTML = renderRequirementDoc(page.requirementDoc);
             document.getElementById('panel-status').innerHTML = renderStatusList(page.statusList);
@@ -1290,6 +2165,22 @@
             tab.addEventListener('click', () => {
                 switchPanel(tab.dataset.panel);
             });
+        });
+
+        // 交互注释卡片：点击高亮原型对应模块，再次点击取消
+        document.getElementById('panel-interaction').addEventListener('click', (e) => {
+            const card = e.target.closest('.interaction-card.has-target');
+            if (!card) return;
+            const targetSel = card.dataset.target;
+            if (!targetSel) return;
+            const wasSelected = card.classList.contains('selected');
+            // 清除所有选中态与高亮
+            document.querySelectorAll('.interaction-card.selected').forEach(c => c.classList.remove('selected'));
+            document.querySelectorAll('.ph-highlight').forEach(el => el.classList.remove('ph-highlight'));
+            if (!wasSelected) {
+                card.classList.add('selected');
+                document.querySelectorAll(targetSel).forEach(el => el.classList.add('ph-highlight'));
+            }
         });
         
         document.querySelectorAll('.menu-item.expandable').forEach(item => {
@@ -1332,13 +2223,39 @@
         }
         
         const _originalSwitchPage = switchPage;
-        switchPage = function(pageId) {
+        switchPage = function(pageId, opts = {}) {
             expandParentMenu(pageId);
             _originalSwitchPage(pageId);
+            // 同步 URL hash（opts.fromHash 表示由 hashchange 触发，避免循环）
+            if (!opts.fromHash && pageId !== getPageIdFromHash()) {
+                history.replaceState(null, '', '#' + pageId);
+            }
         };
-        
-        // ====== 初始化：渲染默认页面 ======
-        switchPage('shop-home');
+
+        // 从 URL hash 解析页面 ID（去掉 :state 状态后缀）
+        function getPageIdFromHash() {
+            const hash = window.location.hash.replace(/^#/, '');
+            if (!hash) return null;
+            return hash.split(':')[0];
+        }
+        // 从 URL hash 解析附加状态（如个人中心会员状态）
+        function getStateFromHash() {
+            const hash = window.location.hash.replace(/^#/, '');
+            const idx = hash.indexOf(':');
+            return idx >= 0 ? hash.slice(idx + 1) : null;
+        }
+
+        // 监听浏览器前进/后退，同步页面
+        window.addEventListener('hashchange', () => {
+            const pageId = getPageIdFromHash();
+            if (pageId && pages[pageId]) {
+                switchPage(pageId, { fromHash: true });
+            }
+        });
+
+        // ====== 初始化：根据 URL hash 渲染对应页面，默认商城首页 ======
+        const initialPage = getPageIdFromHash();
+        switchPage(initialPage && pages[initialPage] ? initialPage : 'shop-home');
     </script>
 </body>
 </html>
