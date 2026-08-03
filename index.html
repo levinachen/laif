@@ -964,6 +964,8 @@
         .ph-grid-item { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; cursor: pointer; position: relative; padding: 4px 0; }
         .ph-grid-icon { width: 40px; height: 40px; background: #F9F9F9; border: 1px solid #F5F5F5; border-radius: 9999px; display: flex; align-items: center; justify-content: center; }
         .ph-grid-icon img { width: 20px; height: 20px; }
+        .ph-grid-icon--sos { border-color: rgba(214, 62, 57, 0.16); }
+        .ph-grid-icon--sos img { width: 24px; height: 10px; }
         .ph-grid-label { font-size: 12px; color: #4F4F4F; text-align: center; line-height: 20px; }
         .ph-grid-badge { position: absolute; top: 0; right: calc(50% - 26px); min-width: 16px; height: 16px; background: #F24333; color: #FFFFFF; font-size: 10px; border: 1px solid #FFFFFF; border-radius: 9999px; display: flex; align-items: center; justify-content: center; padding: 0 4px; line-height: 1; }
         /* 面板切换 */
@@ -1572,7 +1574,7 @@
                     { id: 1, title: '用户信息区', type: 'state', target: '[data-block="user-info"]', content: '未登录：展示「立即登录」按钮，点击触发登录流程\n已登录：展示手机号（脱敏）+「设置」入口\n点击头像/用户名 → 跳转个人信息编辑页\n点击「设置」→ 跳转设置页' },
                     { id: 2, title: '会员信息卡片', type: 'state', target: '[data-block="member-card"]', content: '未登录：显示「登录查看会员等级」，积分/回馈金/优惠券均为 0\n未开通：显示「V2白银会员」等级名称\n已开通/临期：显示「徕芙社区卡」+ 会员等级标签\n点击「会员中心」→ 跳转会员中心页' },
                     { id: 3, title: '到期提醒', type: 'state', target: '[data-block="living-card"]', content: '仅临期态展示\n显示到期倒计时天数\n点击「立即续费」→ 跳转续费/会员开通页' },
-                    { id: 4, title: '物业服务入口', type: 'interaction', target: '[data-block="services"]', content: '9 个功能入口：我的房屋 / 物业缴费 / 我的车位 / 物业报修 / 我的押金 / 住户审核 / 实名认证 / 反馈建议 / 紧急呼救\n点击各入口 → 跳转对应功能页' },
+                    { id: 4, title: '物业服务入口', type: 'interaction', target: '[data-block="services"]', content: '9 个功能入口：我的房屋 / 物业缴费 / 我的车位 / 物业报修 / 我的押金 / 住户审核 / 实名认证 / 反馈建议 / 邻里互助\n点击各入口 → 跳转对应功能页' },
                     { id: 5, title: '我的订单入口', type: 'interaction', target: '[data-block="orders"]', content: '5 个订单状态入口：待付款 / 待发货 / 待收货 / 待评价 / 售后\n待付款显示数量徽标\n点击入口 → 跳转「我的订单页」对应状态\n点击「全部订单」→ 跳转订单全列表' },
                     { id: 6, title: '底部 Tab 导航', type: 'state', target: '[data-block="bottom-nav"]', content: '3 个 Tab：商城 / 通行 / 我的\n当前处于「我的」Tab' }
                 ],
@@ -1592,7 +1594,7 @@
                         { title: '4. 模块清单', table: { headers: ['模块', '包含内容'], rows: [
                             ['用户信息区', '头像、用户名/登录入口、设置入口'],
                             ['会员信息卡片', '会员等级名称、等级标签、积分/回馈金/优惠券、会员中心入口'],
-                            ['物业服务', '我的房屋、物业缴费、我的车位、物业报修、我的押金、住户审核、实名认证、反馈建议、紧急呼救'],
+                            ['物业服务', '我的房屋、物业缴费、我的车位、物业报修、我的押金、住户审核、实名认证、反馈建议、邻里互助'],
                             ['我的订单', '待付款、待发货、待收货、待评价、售后']
                         ]}},
                         { title: '5. 更新记录', paragraphs: [
@@ -1769,7 +1771,7 @@
                     { icon: 'icon-user-follow', label: '住户审核' },
                     { icon: 'icon-idcard', label: '实名认证' },
                     { icon: 'icon-mail', label: '反馈建议' },
-                    { icon: 'icon-service', label: '紧急呼救' }
+                    { icon: 'icon-sos', label: '邻里互助', iconClass: 'ph-grid-icon--sos' }
                 ];
                 const orderIcons = [
                     { icon: 'icon-order-pay', label: '待付款', badge: 4 },
@@ -1780,7 +1782,7 @@
                 ];
                 const gridItem = (g) => `
                     <div class="ph-grid-item">
-                        <div class="ph-grid-icon"><img src="figma-images/${g.icon}.svg" alt=""></div>
+                        <div class="ph-grid-icon${g.iconClass ? ' ' + g.iconClass : ''}"><img src="figma-images/${g.icon}.svg" alt=""></div>
                         <div class="ph-grid-label">${g.label}</div>
                         ${g.badge > 0 ? `<span class="ph-grid-badge">${g.badge}</span>` : ''}
                     </div>
