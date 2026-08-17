@@ -19787,7 +19787,6 @@
         <div class="sidebar">
             <div class="sidebar-header">
                 <h1>业主端小程序V2.0</h1>
-                <p>线上商城 · 原型注解</p>
             </div>
             
             <div class="menu-section">
@@ -20467,8 +20466,7 @@
                         { title: '3. 月份勾选', paragraphs: ['待缴月份（10月~12月）默认全部勾选，可手动取消', '已缴月份（05月~09月）不可选', '勾选状态变化时，底部合计金额实时更新'] },
                         { title: '4. 全选', paragraphs: ['点击「全选」可一键勾选或取消所有待缴月份'] },
                         { title: '5. 查看月详情', paragraphs: ['点击月份右侧箭头 → 跳转到单月账单详情页，查看该月费用明细'] },
-                        { title: '6. 去缴费', paragraphs: ['点击「去缴费」→ 跳转到物业缴费详情页', '缴费金额为当前勾选月份的合计'] },
-                        { title: '7. 更新记录', paragraphs: ['<span style="color:#828282;">更新时间：</span>2026年8月7日', '<span style="color:#828282;">更新内容：</span>Q3迭代改为月份选择列表，支持按月勾选缴费'] }
+                        { title: '6. 去缴费', paragraphs: ['点击「去缴费」→ 跳转到物业缴费详情页', '缴费金额为当前勾选月份的合计'] }
                     ]
                 },
                 statusList: [
@@ -20483,17 +20481,15 @@
                 interactionNotes: [
                     { id: 1, title: '账单标题', type: 'state', target: '.bmd-title', content: '展示月份（12月账单）、日期范围（2026/12/01 - 2026/12/31）' },
                     { id: 2, title: '费用明细列表', type: 'state', target: '[data-block="fee-list"]', content: '展示当月4项费用明细：物业管理费、公摊电费、公摊水费、卫生费' },
-                    { id: 3, title: '费用单项详情', type: 'interaction', target: '[data-action="fee-detail"]', content: '点击任意费用项 → 弹出底部费用单项详情弹窗' },
-                    { id: 4, title: '去缴费', type: 'interaction', target: '[data-block="pay-bar"]', content: '点击「去缴费」按钮 → 跳转到物业缴费详情页（回馈金抵扣流程）' }
+                    { id: 3, title: '费用单项详情', type: 'interaction', target: '[data-action="fee-detail"]', content: '点击任意费用项 → 弹出底部费用单项详情弹窗' }
                 ],
                 requirementDoc: {
                     title: '单月账单详情 · 产品需求文档',
                     meta: 'v1.0 · 业主端小程序 · 2026-08',
                     sections: [
                         { title: '1. 页面入口', paragraphs: ['从「房屋账单」→ 点击账单期间链接进入'] },
-                        { title: '2. 页面结构', paragraphs: ['标题：月份 + 日期范围', '费用明细列表：当月各项费用名称及金额', '底部支付栏：本期应缴金额 + 去缴费按钮'] },
-                        { title: '3. 费用单项详情', paragraphs: ['点击任意费用项 → 弹出底部弹窗展示计算明细'] },
-                        { title: '4. 更新记录', paragraphs: ['<span style="color:#828282;">更新时间：</span>2026年8月7日', '<span style="color:#828282;">更新内容：</span>Q3迭代新增单月账单详情页'] }
+                        { title: '2. 页面结构', paragraphs: ['标题：月份 + 日期范围', '费用明细列表：当月各项费用名称及金额', '底部栏：本期应缴金额'] },
+                        { title: '3. 费用单项详情', paragraphs: ['点击任意费用项 → 弹出底部弹窗展示计算明细'] }
                     ]
                 },
                 statusList: [
@@ -21312,7 +21308,6 @@
                                 <span class="pb-bottom-label">合计</span>
                                 <span class="pb-bottom-value">￥${fmt(total)}</span>
                             </div>
-                            <button class="pb-btn" data-action="pay">去缴费</button>
                         </div>
                         ${feeItemPopupHTML()}
                     </div>
@@ -21803,9 +21798,6 @@
                 const scroll = document.querySelector('#mobile-content .bmd-scroll');
                 if (scroll) scroll.scrollTop = 0;
                 bindFeePopupEvents();
-                document.querySelectorAll('#mobile-content [data-action="pay"]').forEach(btn => {
-                    btn.addEventListener('click', () => switchPage('profile-payment'));
-                });
             }
             if (pageId === 'payment-records') {
                 const page = document.querySelector('#mobile-content .prec-page');
