@@ -1074,6 +1074,9 @@
         .pm-rebate-row.is-zero .pm-rebate-empty { display: block; }
         .pm-rebate-row.is-zero .pm-rebate-status,
         .pm-rebate-row.is-zero .pm-toggle { display: none; }
+        .pm-rebate-row.is-unsupported .pm-rebate-empty { display: block; }
+        .pm-rebate-row.is-unsupported .pm-rebate-status,
+        .pm-rebate-row.is-unsupported .pm-toggle { display: none; }
         /* Toggle Switch */
         .pm-toggle { width: 40px; height: 23px; border-radius: 16px; position: relative; cursor: pointer; transition: background 0.2s; flex-shrink: 0; }
         .pm-toggle.on { background: #353B3C; }
@@ -20007,7 +20010,7 @@
                     </div>
                 </div>
 
-                <div class="state-controller" id="state-controller" style="display: none;"><div class="state-controller-header"><span class="state-controller-demo-tag">DEMO</span><span class="state-controller-title">场景控制（用于演示不同状态）</span></div><span class="state-controller-label">后台配置：</span><div class="state-tab active" data-state="enabled">开启回馈金功能</div><div class="state-tab" data-state="disabled">关闭回馈金功能</div><div class="state-sub-tabs" id="state-sub-tabs"><span class="state-controller-label">回馈金余额：</span><div class="state-tab active" data-state="has-balance">回馈金有余额</div><div class="state-tab" data-state="no-balance">回馈金无余额</div></div></div>
+                <div class="state-controller" id="state-controller" style="display: none;"><div class="state-controller-header"><span class="state-controller-demo-tag">DEMO</span><span class="state-controller-title">场景控制（用于演示不同状态）</span></div><span class="state-controller-label">后台配置：</span><div class="state-tab active" data-state="enabled">开启回馈金功能</div><div class="state-tab" data-state="disabled">关闭回馈金功能</div><div class="state-sub-tabs" id="state-sub-tabs"><span class="state-controller-label">回馈金：</span><div class="state-tab active" data-state="has-balance">回馈金有余额</div><div class="state-tab" data-state="no-balance">回馈金无余额</div></div></div>
             </div>
 
             <div class="description-panel">
@@ -20409,11 +20412,11 @@
                 render: 'profilePayment',
                 interactionNotes: [
                     { id: 1, title: '账单信息', type: 'state', target: '[data-block="bill-info"]', content: '展示应付金额、缴费房屋、账单月份、收款单位、可用优惠等账单详情\n应付金额固定为￥167.45' },
-                    { id: 2, title: '回馈金', type: 'interaction', target: '[data-block="rebate-row"]', content: '后台「开启回馈金功能」时显示回馈金条目（金币图标 + 名称 + 问号 + 抵扣金额 + 开关）\n点击问号 → 弹出「回馈金说明」底部弹窗\n点击开关 → 切换使用/不使用，实付金额实时更新\n回馈金余额为零：条目仍显示，右侧文案变为「暂无回馈金」，无开关' },
+                    { id: 2, title: '回馈金', type: 'interaction', target: '[data-block="rebate-row"]', content: '后台「开启回馈金功能」时显示回馈金条目（金币图标 + 名称 + 问号 + 抵扣金额 + 开关）\n点击问号 → 弹出「回馈金说明」底部弹窗\n点击开关 → 切换使用/不使用，实付金额实时更新\n回馈金余额为零：条目仍显示，右侧文案变为「暂无回馈金」，无开关\n缴费类型为回馈金不可抵扣项（如计量项、公摊项）：条目仍显示，右侧文案变为「该项不支持回馈金抵扣」，无开关，实付=应付' },
                     { id: 3, title: '回馈金开关', type: 'interaction', target: '[data-block="rebate-toggle"]', content: '当回馈金有余额可抵扣时，默认开启回馈金按钮\n开关开启：显示「已抵扣￥8.37」，实付金额 = ￥159.08\n开关关闭：显示「不使用」，实付金额 = ￥167.45\n点击开关 → 切换使用/不使用，实付金额实时更新\n\n【抵扣金额计算规则】\n• 计算公式：抵扣金额 = 订单金额 × 抵扣比例（默认 5%，可在运营后台配置）\n• 计算基数：以可用优惠抵扣后的金额为基数（若无可用优惠，则以订单金额为基数），详见需求文档「实付金额计算规则」\n• 金额上限：实际抵扣金额 = MIN（计算抵扣金额, 回馈金可用余额），不超过当前可用余额，亦不超过订单金额\n• 精度规则：抵扣金额四舍五入保留两位小数（精确到分）\n• 实付金额：实付金额 = 订单金额 - 实际抵扣金额，结果不低于 ￥0.00\n• 边界场景：订单金额为 0、回馈金余额为 0 或抵扣比例为 0 时，不参与抵扣\n• 计算示例：167.45 × 5% = 8.3725 → 四舍五入 → 抵扣 ￥8.37；实付 = 167.45 - 8.37 = ￥159.08\n• 余额不足场景：若回馈金余额仅 ￥5.00，则实际抵扣 ￥5.00，实付 = 167.45 - 5.00 = ￥162.45' },
-                    { id: 4, title: '回馈金说明弹窗', type: 'interaction', target: '[data-block="rebate-popup"]', content: '点击问号图标弹出底部弹窗\n内容：「什么是回馈金？」+ 说明文案\n点击关闭按钮或遮罩 → 关闭弹窗' },
+                    { id: 4, title: '回馈金说明弹窗', type: 'interaction', target: '[data-block="rebate-popup"]', content: '点击问号图标弹出底部弹窗\n标题：「什么是回馈金？」\n正文：「在徕芙会员超市消费即可获得回馈金，消费越多回馈越多。下次缴物业费（基础项）可直接抵扣现金，1回馈金=1元。有关抵扣问题，详情请咨询物业服务中心。」\n点击关闭按钮或遮罩 → 关闭弹窗' },
                     { id: 5, title: '支付方式', type: 'state', target: '[data-block="pay-method"]', content: '默认选中微信支付' },
-                    { id: 6, title: '底部支付栏', type: 'state', target: '[data-block="pay-bar"]', content: '开启回馈金功能：左侧「实付金额」+ 金额 + 右侧「确认支付」按钮\n回馈金余额为零：左侧「实付金额」+ ￥167.45 + 右侧「确认支付」按钮（不抵扣）\n关闭回馈金功能：左侧「实付金额」+ ￥167.45 + 右侧「确认支付」按钮（不抵扣）' }
+                    { id: 6, title: '底部支付栏', type: 'state', target: '[data-block="pay-bar"]', content: '开启回馈金功能：左侧「实付金额」+ 金额 + 右侧「确认支付」按钮\n回馈金余额为零：左侧「实付金额」+ ￥167.45 + 右侧「确认支付」按钮（不抵扣）\n回馈金不支持抵扣项：左侧「实付金额」+ ￥167.45 + 右侧「确认支付」按钮（不抵扣）\n关闭回馈金功能：左侧「实付金额」+ ￥167.45 + 右侧「确认支付」按钮（不抵扣）' }
                 ],
                 requirementDoc: {
                     title: '物业缴费 · 回馈金抵扣 · 产品需求文档',
@@ -20430,17 +20433,19 @@
                             ['可用-使用抵扣', '开启回馈金功能', '开', '￥159.08', '显示「已抵扣￥8.37」'],
                             ['可用-不使用', '开启回馈金功能', '关', '￥167.45', '显示「不使用」'],
                             ['余额为零', '开启回馈金功能（余额0）', '-', '￥167.45', '条目显示，右侧「暂无回馈金」，无开关'],
+                            ['不支持抵扣', '开启回馈金功能（计量项/公摊项）', '-', '￥167.45', '条目显示，右侧「该项不支持回馈金抵扣」，无开关'],
                             ['空状态', '关闭回馈金功能', '-', '￥167.45', '隐藏「回馈金」条目，左侧实付金额 + 右侧「确认支付」按钮']
                         ]}},
                         { title: '4. 实付金额计算规则（可用优惠 + 回馈金）', paragraphs: ['当订单同时存在「可用优惠」与「回馈金余额可抵扣」时，按以下顺序抵扣：', '<b>抵扣顺序：先抵扣可用优惠 → 再抵扣回馈金</b>', '<b>步骤1</b> 优惠后金额 = 订单金额 − 可用优惠金额', '<b>步骤2</b> 回馈金计算抵扣金额 = 优惠后金额 × 抵扣比例（默认 5%，可在运营后台配置）', '<b>步骤3</b> 实际抵扣金额 = MIN（回馈金计算抵扣金额, 回馈金可用余额），不超过优惠后金额', '<b>步骤4</b> 实付金额 = 优惠后金额 − 实际抵扣金额，结果不低于 ￥0.00', '', '<b>计算示例：</b>订单金额 ￥167.45，可用优惠 ￥10.00，回馈金余额 ￥100.00，抵扣比例 5%', '• 优惠后金额 = 167.45 − 10.00 = ￥157.45', '• 回馈金抵扣金额 = 157.45 × 5% = 7.8725 → 四舍五入 → ￥7.87', '• 实付金额 = 157.45 − 7.87 = ￥149.58', '', '<b>边界场景：</b>', '• 可用优惠 ≥ 订单金额时，回馈金不参与抵扣，实付金额 = ￥0.00', '• 可用优惠为 0 时，回馈金以订单金额为基数计算（即与无优惠场景一致）', '• 回馈金余额不足时，按余额抵扣；余额为 0 时不参与抵扣', '• 用户关闭回馈金开关时，仅抵扣可用优惠，实付金额 = 订单金额 − 可用优惠金额', '• 抵扣比例配置为 0 时，回馈金不参与抵扣', '• 精度规则：所有金额四舍五入保留两位小数（精确到分）'] },
-                        { title: '5. 回馈金说明', paragraphs: ['点击回馈金条目的问号图标，弹出底部说明弹窗：', '「在会员超市消费即可获得回馈金，消费越多回馈越多，下次缴费可直接抵扣现金（1回馈金=1元）」', '回馈金计算方式：回馈金 = 订单金额 × 5%，5% 为默认百分比，该百分比可在运营后台做配置。'] },
-                        { title: '6. 更新记录', paragraphs: ['<span style="color:#828282;">更新时间：</span>2026年8月11日', '<span style="color:#828282;">更新内容：</span>新增「可用优惠 + 回馈金」同时抵扣时的实付金额计算规则'] }
+                        { title: '5. 回馈金说明', paragraphs: ['点击回馈金条目的问号图标，弹出底部说明弹窗：', '标题：「什么是回馈金？」', '正文：「在徕芙会员超市消费即可获得回馈金，消费越多回馈越多。下次缴物业费（基础项）可直接抵扣现金，1回馈金=1元。有关抵扣问题，详情请咨询物业服务中心。」', '回馈金计算方式：回馈金 = 订单金额 × 5%，5% 为默认百分比，该百分比可在运营后台做配置。'] },
+                        { title: '6. 更新记录', paragraphs: ['<span style="color:#828282;">更新时间：</span>2026年8月11日', '<span style="color:#828282;">更新内容：</span>新增「可用优惠 + 回馈金」同时抵扣时的实付金额计算规则', '<span style="color:#828282;">更新时间：</span>2026年8月19日', '<span style="color:#828282;">更新内容：</span>1. 更新回馈金说明弹窗正文文案为：在徕芙会员超市消费即可获得回馈金，消费越多回馈越多。下次缴物业费（基础项）可直接抵扣现金，1回馈金=1元。有关抵扣问题，详情请咨询物业服务中心。2. 新增「回馈金不支持抵扣」状态：缴费类型为回馈金不可抵扣项（如计量项、公摊项）时，回馈金条目右侧文案显示为「该项不支持回馈金抵扣」，无开关，实付金额=应付金额（不抵扣）'] }
                     ]
                 },
                 statusList: [
                     { block: '回馈金', state: '可用-使用中', trigger: '后台可用 + 用户开关打开', ui: '显示「已抵扣￥8.37」+ 开关，实付￥159.08' },
                     { block: '回馈金', state: '可用-不使用', trigger: '后台可用 + 用户开关关闭', ui: '显示「不使用」+ 开关，实付￥167.45' },
                     { block: '回馈金', state: '余额为零', trigger: '后台开启但回馈金余额为0', ui: '条目显示，右侧「暂无回馈金」无开关，实付￥167.45' },
+                    { block: '回馈金', state: '不支持抵扣', trigger: '缴费类型为回馈金不可抵扣项（计量项/公摊项）', ui: '条目显示，右侧「该项不支持回馈金抵扣」无开关，实付￥167.45' },
                     { block: '回馈金', state: '空状态', trigger: '后台空状态', ui: '整个条目隐藏，左侧实付金额 + 右侧「确认支付」按钮，实付￥167.45' },
                     { block: '说明弹窗', state: '显示', trigger: '点击问号图标', ui: '底部弹出说明弹窗' }
                 ]
@@ -21215,7 +21220,7 @@
                             </div>
                             <div class="pm-popup-body">
                                 <p style="padding-top:0;">什么是回馈金？</p>
-                                <p>在会员超市消费即可获得回馈金，消费越多回馈越多，下次缴费可直接抵扣现金（1回馈金=1元）</p>
+                                <p>在徕芙会员超市消费即可获得回馈金，消费越多回馈越多。下次缴物业费（基础项）可直接抵扣现金，1回馈金=1元。有关抵扣问题，详情请咨询物业服务中心。</p>
                             </div>
                         </div>
                     </div>
@@ -21839,6 +21844,7 @@
                 const helpBtn = document.getElementById('pm-help-btn');
                 const popupClose = document.getElementById('pm-popup-close');
                 const rebateRow = document.getElementById('pm-rebate-row');
+                const rebateEmptyEl = document.getElementById('pm-rebate-empty');
 
                 let rebateOn = true;
                 function updateRebateUI() {
@@ -21885,6 +21891,8 @@
                     // 开启且有余额：显示条目，默认开启抵扣
                     rebateRow.style.display = 'flex';
                     rebateRow.classList.remove('is-zero');
+                    rebateRow.classList.remove('is-unsupported');
+                    if (rebateEmptyEl) rebateEmptyEl.textContent = '暂无回馈金';
                     if (payBar) payBar.classList.remove('is-empty');
                     rebateOn = true;
                     updateRebateUI();
@@ -21892,7 +21900,19 @@
                 function applyZeroState() {
                     // 开启但无余额：条目显示，右侧"暂无回馈金"无开关，实付=应付
                     rebateRow.style.display = 'flex';
+                    rebateRow.classList.remove('is-unsupported');
                     rebateRow.classList.add('is-zero');
+                    if (rebateEmptyEl) rebateEmptyEl.textContent = '暂无回馈金';
+                    if (payBar) payBar.classList.remove('is-empty');
+                    payAmountEl.textContent = '￥' + totalAmount.toFixed(2);
+                    rebateOn = false;
+                }
+                function applyUnsupportedState() {
+                    // 不支持抵扣（计量项/公摊项等）：条目显示，右侧"该项不支持回馈金抵扣"无开关，实付=应付
+                    rebateRow.style.display = 'flex';
+                    rebateRow.classList.remove('is-zero');
+                    rebateRow.classList.add('is-unsupported');
+                    if (rebateEmptyEl) rebateEmptyEl.textContent = '该项不支持回馈金抵扣';
                     if (payBar) payBar.classList.remove('is-empty');
                     payAmountEl.textContent = '￥' + totalAmount.toFixed(2);
                     rebateOn = false;
@@ -21901,6 +21921,8 @@
                     // 关闭：隐藏回馈金条目，实付金额重置，按钮全宽
                     rebateRow.style.display = 'none';
                     rebateRow.classList.remove('is-zero');
+                    rebateRow.classList.remove('is-unsupported');
+                    if (rebateEmptyEl) rebateEmptyEl.textContent = '暂无回馈金';
                     payAmountEl.textContent = '￥' + totalAmount.toFixed(2);
                     if (payBar) payBar.classList.add('is-empty');
                     rebateOn = false;
@@ -21929,7 +21951,7 @@
                     });
                 });
 
-                // 子 tab 切换（有余额 / 无余额）
+                // 子 tab 切换（有余额 / 无余额 / 不支持抵扣）
                 subTabs.forEach(tab => {
                     tab.addEventListener('click', () => {
                         const state = tab.dataset.state;
@@ -21937,6 +21959,8 @@
                         tab.classList.add('active');
                         if (state === 'no-balance') {
                             applyZeroState();
+                        } else if (state === 'unsupported') {
+                            applyUnsupportedState();
                         } else {
                             applyEnabledState();
                         }
@@ -22113,9 +22137,10 @@
                     '<div class="state-tab active" data-state="enabled">开启回馈金功能</div>' +
                     '<div class="state-tab" data-state="disabled">关闭回馈金功能</div>' +
                     '<div class="state-sub-tabs" id="state-sub-tabs">' +
-                        '<span class="state-controller-label">回馈金余额：</span>' +
+                        '<span class="state-controller-label">回馈金：</span>' +
                         '<div class="state-tab active" data-state="has-balance">回馈金有余额</div>' +
                         '<div class="state-tab" data-state="no-balance">回馈金无余额</div>' +
+                        '<div class="state-tab" data-state="unsupported">回馈金不支持抵扣</div>' +
                     '</div>';
             } else {
                 stateCtrlTop.style.display = 'none';
