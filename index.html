@@ -1339,6 +1339,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-shrink: 0;
+            background: #FFFFFF;
         }
         .ios-home-indicator {
             width: 134px;
@@ -1522,7 +1524,7 @@
         .ph-member-link { display: flex; align-items: center; gap: 2px; font-size: 14px; color: #828282; cursor: pointer; line-height: 24px; }
         .ph-member-link img { width: 16px; height: 16px; }
         .ph-member-stats { display: flex; }
-        .ph-stat-item { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 0 20px; }
+        .ph-stat-item { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 0 12px; }
         .ph-stat-value { display: flex; align-items: baseline; gap: 1px; }
         .ph-stat-num { font-size: 16px; font-weight: 500; color: #333333; line-height: 28px; }
         .ph-stat-unit { font-size: 11px; color: #333333; line-height: 16px; }
@@ -1789,12 +1791,427 @@
         .pr-card-item-time { font-size: 12px; color: #828282; font-weight: 400; line-height: 20px; letter-spacing: 0.0167em; cursor: pointer; }
         .pr-card-item-right { display: flex; align-items: center; justify-content: flex-end; gap: 4px; width: 108px; }
         .pr-card-item-amount-col { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
-        .pr-card-item-amount { font-size: 16px; font-weight: 500; line-height: 28px; text-align: right; }
+        .pr-card-item-amount { font-size: 16px; font-weight: 500; line-height: 28px; text-align: right; white-space: nowrap; }
         .pr-card-item-amount.minus { color: #4F4F4F; }
         .pr-card-item-amount.plus { color: #333333; }
         .pr-card-item-tag { font-size: 12px; color: #828282; font-weight: 400; line-height: 20px; text-align: right; }
         .pr-card-item-arrow { width: 20px; height: 20px; flex-shrink: 0; }
         .pr-empty { text-align: center; padding: 40px 0; font-size: 14px; color: #828282; }
+        /* ====== 购物金页 ====== */
+        .sh-home-root { position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; background: #F9F9F9; overflow: hidden; }
+        .sh-page { background: #F9F9F9; width: 100%; flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; display: flex; flex-direction: column; position: relative; }
+        .sh-page::-webkit-scrollbar { display: none; }
+        .sh-balance-card { margin: 12px 16px 0; padding: 24px 20px 16px; background: rgba(37, 78, 219, 0.12); border-radius: 16px; display: flex; flex-direction: column; gap: 14px; }
+        .sh-balance-row { display: flex; flex-direction: column; gap: 6px; }
+        .sh-balance-value { font-size: 36px; color: #353B3C; font-weight: 600; line-height: 44px; letter-spacing: 0.01em; }
+        .sh-balance-desc { font-size: 13px; color: #4F4F4F; line-height: 20px; }
+        .sh-detail-btn { height: 40px; border-radius: 12px; background: #FFFFFF; display: flex; align-items: center; justify-content: center; gap: 4px; color: #353B3C; font-size: 15px; font-weight: 500; line-height: 24px; cursor: pointer; border: none; }
+        .sh-detail-btn img { width: 16px; height: 16px; }
+        .sh-section-title { font-size: 16px; color: #353B3C; font-weight: 600; line-height: 24px; margin: 20px 16px 12px; }
+        .sh-section-row { display: flex; justify-content: space-between; align-items: center; margin: 20px 16px 0; }
+        .sh-section-title-inline { font-size: 16px; color: #353B3C; font-weight: 600; line-height: 24px; }
+        .sh-store-link { display: flex; align-items: center; gap: 2px; font-size: 14px; color: #828282; line-height: 24px; cursor: pointer; }
+        .sh-store-link img { width: 16px; height: 16px; }
+        .sh-recharge-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 12px 16px 0; }
+        .sh-recharge-item { background: #FFFFFF; border-radius: 12px; padding: 16px 12px; display: flex; flex-direction: column; align-items: center; gap: 8px; cursor: pointer; border: 2px solid transparent; transition: border-color 0.15s; }
+        .sh-recharge-item.active { border-color: #254EDB; }
+        .sh-recharge-amount { font-size: 18px; color: #353B3C; font-weight: 600; line-height: 28px; }
+        .sh-recharge-gift { font-size: 12px; color: #828282; line-height: 16px; }
+        .sh-terms { padding: 0 16px; margin-top: 24px; font-size: 12px; color: #828282; line-height: 20px; }
+        .sh-terms ol { padding-left: 16px; margin: 0; }
+        .sh-terms li { margin-bottom: 4px; }
+        .sh-terms-link { color: #254EDB; cursor: pointer; }
+        .sh-bottom-bar { flex-shrink: 0; background: #FFFFFF; padding: 12px 16px 20px; border-top: 1px solid #F0F0F0; display: flex; align-items: center; justify-content: space-between; gap: 12px; z-index: 20; }
+        .sh-bottom-left { display: flex; flex-direction: column; gap: 4px; }
+        .sh-bottom-amount { font-size: 22px; color: #353B3C; font-weight: 600; line-height: 32px; }
+        .sh-bottom-checkbox { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #828282; line-height: 16px; cursor: pointer; }
+        .sh-bottom-checkbox img { width: 16px; height: 16px; }
+        .sh-bottom-checkbox .sh-terms-link { font-size: 12px; }
+        .sh-bottom-btn { flex: 1; height: 48px; border-radius: 24px; background: #254EDB; color: #FFFFFF; font-size: 17px; font-weight: 500; line-height: 24px; border: none; cursor: pointer; }
+        .sh-bottom-btn:disabled { background: #BDBDBD; }
+        /* 购物金明细 */
+        .sh-detail-tabs { display: flex; padding: 8px 16px; gap: 12px; background: #FFFFFF; }
+        .sh-detail-tab { position: relative; padding: 8px 0; font-size: 15px; color: #828282; font-weight: 500; line-height: 24px; cursor: pointer; }
+        .sh-detail-tab.active { color: #353B3C; font-weight: 600; }
+        .sh-detail-tab.active::after { content: ''; position: absolute; left: 50%; transform: translateX(-50%); bottom: -9px; width: 24px; height: 3px; background: #254EDB; border-radius: 2px; }
+        .sh-detail-list { padding: 8px 16px 20px; display: flex; flex-direction: column; gap: 8px; }
+        .sh-detail-item { background: #FFFFFF; border-radius: 12px; padding: 14px 16px; display: flex; align-items: center; gap: 12px; }
+        .sh-detail-icon { width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .sh-detail-icon.refund, .sh-detail-icon.recharge { background: #E8F5E9; color: #2E7D32; }
+        .sh-detail-icon.consume { background: #E3F2FD; color: #1976D2; }
+        .sh-detail-icon svg { width: 22px; height: 22px; }
+        .sh-detail-info { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+        .sh-detail-title { font-size: 15px; color: #353B3C; font-weight: 500; line-height: 24px; }
+        .sh-detail-sub { font-size: 12px; color: #828282; line-height: 18px; }
+        .sh-detail-right { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+        .sh-detail-amount { font-size: 15px; font-weight: 600; line-height: 24px; }
+        .sh-detail-amount.plus { color: #2E7D32; }
+        .sh-detail-amount.minus { color: #353B3C; }
+        .sh-detail-balance { font-size: 12px; color: #828282; line-height: 18px; }
+        .sh-empty { text-align: center; padding: 60px 0; font-size: 14px; color: #828282; }
+        /* ====== 购物金弹窗 ====== */
+        .sh-modal-mask { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: none; flex-direction: column; justify-content: flex-end; z-index: 200; }
+        .sh-modal-mask.show { display: flex; }
+        .sh-modal { width: 100%; background: #FFFFFF; border-radius: 16px 16px 0 0; padding: 20px 20px 34px; display: flex; flex-direction: column; gap: 16px; position: relative; animation: sh-slide-up 0.25s ease; }
+        @keyframes sh-slide-up { from { transform: translateY(100%); } to { transform: translateY(0); } }
+        .sh-modal-header { display: flex; align-items: center; justify-content: center; position: relative; }
+        .sh-modal-close { position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: 24px; height: 24px; cursor: pointer; color: #828282; font-size: 20px; line-height: 24px; display: flex; align-items: center; justify-content: center; }
+        .sh-modal-title { font-size: 17px; color: #353B3C; font-weight: 600; line-height: 24px; text-align: center; }
+        .sh-modal-body { display: flex; flex-direction: column; gap: 8px; }
+        .sh-modal-store-name { font-size: 16px; color: #353B3C; font-weight: 600; line-height: 28px; }
+        .sh-modal-store-addr { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #828282; line-height: 20px; }
+        .sh-modal-store-addr img { width: 14px; height: 14px; }
+        .sh-modal-grabber { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); width: 36px; height: 4px; background: #E0E0E0; border-radius: 2px; }
+        /* 微信支付弹窗 */
+        .sh-wxpay-mask { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.95); display: none; flex-direction: column; z-index: 200; }
+        .sh-wxpay-mask.show { display: flex; }
+        .sh-wxpay-content { width: 100%; height: 100%; display: flex; flex-direction: column; position: relative; }
+        .sh-wxpay-close { position: absolute; left: 20px; top: 48px; width: 28px; height: 28px; color: rgba(255,255,255,0.8); font-size: 24px; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; line-height: 1; }
+        .sh-wxpay-merchant { margin-top: 96px; text-align: center; color: #fff; font-size: 17px; font-weight: 400; line-height: 24px; }
+        .sh-wxpay-amount { margin-top: 16px; text-align: center; color: #fff; font-size: 48px; font-weight: 300; line-height: 56px; letter-spacing: -1px; }
+        .sh-wxpay-amount .symbol { margin-right: 4px; }
+        .sh-wxpay-method { margin: 44px 20px 0; padding: 0; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
+        .sh-wxpay-method-label { color: rgba(255,255,255,0.5); font-size: 15px; }
+        .sh-wxpay-method-change { color: rgba(255,255,255,0.6); font-size: 15px; display: flex; align-items: center; }
+        .sh-wxpay-method-change::after { content: ' ›'; margin-left: 2px; }
+        .sh-wxpay-card { margin: 16px 20px 0; padding: 16px; background: rgba(255,255,255,0.08); border-radius: 10px; display: flex; align-items: center; gap: 14px; }
+        .sh-wxpay-card-icon { width: 36px; height: 36px; border-radius: 8px; background: linear-gradient(135deg, #1E40AF 0%, #2563EB 100%); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+        .sh-wxpay-card-info { flex: 1; color: #fff; }
+        .sh-wxpay-card-name { font-size: 15px; font-weight: 500; line-height: 22px; }
+        .sh-wxpay-card-no { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 20px; margin-top: 2px; letter-spacing: 0.5px; }
+        .sh-wxpay-card-check { color: #07C160; font-size: 22px; }
+        .sh-wxpay-discount-card { margin: 12px 20px 0; padding: 14px 16px; background: rgba(255,255,255,0.05); border-radius: 10px; display: flex; align-items: center; gap: 14px; }
+        .sh-wxpay-discount-info { flex: 1; color: #fff; }
+        .sh-wxpay-discount-name { font-size: 14px; color: rgba(255,255,255,0.8); line-height: 20px; }
+        .sh-wxpay-discount-amount { font-size: 14px; color: #FF9500; line-height: 20px; margin-top: 2px; }
+        .sh-wxpay-discount-use { font-size: 15px; color: rgba(255,255,255,0.6); cursor: pointer; font-weight: 400; }
+        .sh-wxpay-discount-use.active { color: #07C160; }
+        .sh-wxpay-pwd { margin: 44px 36px 0; display: flex; justify-content: space-between; }
+        .sh-wxpay-pwd-box { width: 46px; height: 52px; border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.03); transition: all 0.15s; }
+        .sh-wxpay-pwd-box.filled { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.25); }
+        .sh-wxpay-pwd-box .dot { width: 12px; height: 12px; background: #fff; border-radius: 50%; display: block; }
+        .sh-wxpay-keypad { margin-top: auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,0.08); padding-bottom: 44px; }
+        .sh-wxpay-key { height: 56px; background: #1C1C1E; color: #fff; font-size: 28px; font-weight: 300; cursor: pointer; display: flex; align-items: center; justify-content: center; user-select: none; }
+        .sh-wxpay-key:active { background: rgba(255,255,255,0.15); }
+        .sh-wxpay-key.action { background: #2C2C2E; font-size: 14px; color: rgba(255,255,255,0.5); }
+        .sh-wxpay-key.bank { background: #2C2C2E; }
+        .sh-wxpay-key.bank .bank-icon { display: inline-block; width: 20px; height: 20px; background: #E53935; color: #fff; font-size: 10px; font-weight: 600; border-radius: 4px; line-height: 20px; text-align: center; margin-right: 2px; }
+        .sh-wxpay-key.delete { background: #2C2C2E; }
+        .sh-wxpay-key.delete .delete-icon { font-size: 20px; color: rgba(255,255,255,0.6); }
+        .sh-wxpay-home-indicator { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); width: 134px; height: 5px; background: #fff; border-radius: 3px; opacity: 0.8; }
+        .sh-wxpay-key[data-key="bank"], .sh-wxpay-key[data-key="back"] { cursor: pointer; }
+        .sh-wxpay-key[data-key="bank"]:active, .sh-wxpay-key[data-key="back"]:active { background: rgba(255,255,255,0.1); }
+        /* ====== 优惠券页（赠品核销券 - 与Figma 517:1763 100%对齐） ====== */
+        .cp-page { width: 100%; height: 100%; background: #F2F3F5; display: flex; flex-direction: column; overflow: hidden; position: relative; }
+        .cp-tabs { display: flex; background: #fff; border-bottom: 1px solid #F0F0F0; padding: 0; flex-shrink: 0; }
+        .cp-tab { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 12px 0; font-size: 14px; color: #828282; cursor: pointer; position: relative; line-height: 22px; }
+        .cp-tab.active { color: #254EDB; font-weight: 600; }
+        .cp-tab.active::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 24px; height: 3px; background: #254EDB; border-radius: 2px; }
+        .cp-content { flex: 1; overflow-y: auto; padding: 12px 16px 24px; }
+        .cp-list { display: flex; flex-direction: column; gap: 12px; }
+
+        /* ===== 赠品核销券卡片 (Figma 517:1763 100%对齐 - 342×112, 圆角8, 背景#FAFAFA, 阴影0 0 6 rgba(0,0,0,0.06)) ===== */
+        .cp-card {
+            background: #FAFAFA; /* Figma: r=0.983 g=0.983 b=0.983 */
+            border-radius: 8px;
+            min-height: 112px;
+            width: 342px;
+            max-width: 100%;
+            margin: 0 auto;
+            display: flex;
+            position: relative;
+            box-shadow: 0 0 6px rgba(0, 0, 0, 0.06); /* Figma: offset 0,0 radius 6 a=0.06 */
+            overflow: visible; /* 允许锯齿半圆露出 */
+        }
+        .cp-card.used, .cp-card.expired { opacity: 0.55; filter: grayscale(0.5); }
+
+        /* ---- 半圆锯齿缺口（挂在卡片上绝对定位） - Figma: 圆心 x=卡左+96, 上y=卡顶-8, 下y=卡顶+120 ---- */
+        .cp-card::before, .cp-card::after {
+            content: ''; position: absolute; left: 88px; /* 96 - 半径8 */
+            width: 16px; height: 16px; border-radius: 50%;
+            background: #F2F3F5; /* 页面背景色，实现挖空效果 */
+            z-index: 3; pointer-events: none;
+        }
+        .cp-card::before { top: -8px; }
+        .cp-card::after  { bottom: -8px; }
+
+        /* ---- 左侧产品图区 (Figma: x=2243→8, y=1423→16, 80×80圆角8) ---- */
+        .cp-card-left {
+            width: 96px;
+            flex-shrink: 0;
+            padding: 16px 8px; /* 上下16, 左右8 → 图框80×80居中 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        /* 图框本身 (80×80, 圆角8) */
+        .cp-product-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #FFF1D6 0%, #FFE0A8 100%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .cp-product-img img { width: 100%; height: 100%; object-fit: cover; }
+        .cp-product-emoji { font-size: 44px; line-height: 1; }
+
+        /* ---- 竖虚线分隔 (Figma: x=96, top=9, height=93, dashes 4/4, color #E0E0E0) ---- */
+        .cp-card-divider {
+            position: absolute; left: 96px; top: 9.5px;
+            width: 1px; height: 93px;
+            background-image: linear-gradient(to bottom, #E0E0E0 50%, transparent 50%);
+            background-size: 1px 8px; /* dash 4 + gap 4 = 8 */
+            background-repeat: repeat-y;
+            pointer-events: none; z-index: 2;
+        }
+
+        /* ---- 右侧内容区 (Figma: 内边距 left=16, right=16, top=12, bottom=12 → 内部起点 x=112) ---- */
+        .cp-card-right {
+            flex: 1;
+            padding: 12px 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            min-width: 0;
+        }
+        /* 上区: 标题 + 到期日期 (Figma: 标题y=12 高28, 到期y=40 高16 → 间距 40-(12+28)=0) */
+        .cp-title-block { display: flex; flex-direction: column; min-width: 0; }
+        .cp-title {
+            font-family: "PingFang SC", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 28px;
+            letter-spacing: 0;
+            color: #333333; /* Figma r=0.2 g=0.2 b=0.2 Gray 1 */
+            height: 28px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+        .cp-expire {
+            font-family: "PingFang SC", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+            font-size: 11px;
+            color: #4F4F4F; /* Figma r=0.3098 Gray 2 */
+            line-height: 16px;
+            letter-spacing: 0.2px;
+            margin-top: 0; /* 标题底部 = 12+28=40，到期顶 y=40 → 无间距 */
+        }
+        /* 下区: 门店标签 + 去使用按钮 (Figma: 标签组 y=80 高20, 按钮 y=42 高28) */
+        .cp-lower-row {
+            display: flex; justify-content: space-between; align-items: flex-end;
+            margin-top: 8px; /* 标题块底12+28+16=56 → lower-row顶64，标签y=80-64=16内偏移*/
+        }
+        .cp-store-tag {
+            display: flex; align-items: center; gap: 4px;
+            font-family: "PingFang SC", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+            font-size: 12px; color: #828282; /* Figma Gray 3 r=0.5098 */
+            line-height: 20px; letter-spacing: 0.2px;
+            font-weight: 400;
+            white-space: nowrap;
+        }
+        .cp-store-tag[data-action] { cursor: pointer; }
+        .cp-store-tag .arrow {
+            width: 16px; height: 16px;
+            display: inline-flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+        /* ====== 优惠券使用说明弹窗 ====== */
+        .cp-usage-mask { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: none; flex-direction: column; justify-content: flex-end; z-index: 300; }
+        .cp-usage-mask.show { display: flex; }
+        .cp-usage-modal { width: 100%; background: #FFFFFF; border-radius: 16px 16px 0 0; padding: 20px 20px 34px; display: flex; flex-direction: column; gap: 16px; position: relative; animation: cp-slide-up 0.25s ease; }
+        @keyframes cp-slide-up { from { transform: translateY(100%); } to { transform: translateY(0); } }
+        .cp-usage-header { display: flex; align-items: center; justify-content: center; position: relative; }
+        .cp-usage-title { font-size: 17px; color: #353B3C; font-weight: 600; line-height: 24px; text-align: center; }
+        .cp-usage-close { position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: 24px; height: 24px; cursor: pointer; color: #828282; font-size: 20px; line-height: 24px; display: flex; align-items: center; justify-content: center; }
+        .cp-usage-body { font-size: 14px; color: #4F4F4F; line-height: 24px; letter-spacing: 0.2px; }
+        /* 去使用按钮 - Figma 52×28 圆角4 背景rgba(37,78,219,0.08) padding 4 8 */
+        .cp-btn {
+            min-width: 52px;
+            min-height: 28px;
+            flex-shrink: 0;
+            background: rgba(37, 78, 219, 0.08); /* Secondary * 0.08 */
+            color: #254EDB;
+            border: none;
+            border-radius: 4px;
+            font-family: "PingFang SC", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 20px;
+            letter-spacing: 0;
+            cursor: pointer;
+            padding: 4px 8px;
+            display: inline-flex; align-items: center; justify-content: center;
+        }
+        .cp-btn:active { opacity: 0.8; }
+        .cp-btn.disabled {
+            background: #F0F0F0;
+            color: #9E9E9E;
+            cursor: not-allowed;
+        }
+
+        /* ---- 状态徽章: 已使用/已过期 (右上角丝带三角45°) ---- */
+        .cp-badge {
+            position: absolute; top: 0; right: 0; width: 60px; height: 60px;
+            overflow: hidden; z-index: 4; pointer-events: none; border-top-right-radius: 8px;
+        }
+        .cp-badge::before {
+            content: ''; position: absolute; top: 0; right: 0;
+            width: 0; height: 0;
+            border-top: 60px solid rgba(130,130,130,0.9);
+            border-left: 60px solid transparent;
+        }
+        .cp-badge span {
+            position: absolute; top: 11px; right: 0; width: 70px; text-align: center;
+            transform: rotate(45deg); transform-origin: 100% 0%;
+            color: #fff; font-size: 11px; font-weight: 600; line-height: 14px;
+        }
+
+        /* ---- 空状态 ---- */
+        .cp-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 80px 20px; color: #828282; }
+        .cp-empty-icon svg { opacity: 0.6; }
+        .cp-empty-text { font-size: 14px; line-height: 22px; margin-top: 12px; }
+
+        /* ---- 底部“领取更多优惠券”固定按钮 ---- */
+        .cp-footer-bar {
+            flex-shrink: 0;
+            width: 100%;
+            background: #FFFFFF;
+            border-top: 1px solid rgba(0, 0, 0, 0.04);
+            padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+        }
+        .cp-get-more-btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            gap: 8px;
+            background: transparent;
+            border: none;
+            color: #254EDB;
+            font-family: "PingFang SC", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 28px;
+            letter-spacing: 0;
+            cursor: pointer;
+            padding: 0;
+        }
+        .cp-get-more-btn:active { opacity: 0.75; }
+        .cp-get-more-btn svg { width: 20px; height: 20px; flex-shrink: 0; }
+
+        /* ====== 核销码页面 ====== */
+        .qrcode-page { width: 100%; height: 100%; background: #FFFFFF; display: flex; flex-direction: column; position: relative; overflow: hidden; }
+        .qrcode-content { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 24px 24px; }
+        .qrcode-number { font-family: "PingFang SC", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif; font-size: 16px; color: #333333; font-weight: 400; line-height: 24px; letter-spacing: 2px; margin-bottom: 24px; }
+        .qrcode-barcode { width: 280px; height: 80px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; }
+        .qrcode-barcode svg { width: 100%; height: 100%; }
+        .qrcode-pattern { width: 200px; height: 200px; }
+        .qrcode-pattern svg { width: 100%; height: 100%; }
+        .qrcode-tip { font-size: 14px; color: #828282; line-height: 20px; margin-top: 32px; letter-spacing: 0.2px; }
+
+        /* ====== 领券中心页面 ====== */
+        .cc-page { width: 100%; height: 100%; background: #F2F3F5; display: flex; flex-direction: column; overflow: hidden; position: relative; }
+        .cc-content { flex: 1; overflow-y: auto; padding: 16px; }
+        .cc-list { display: flex; flex-direction: column; gap: 12px; }
+        .cc-card { background: #FFFFFF; border-radius: 8px; padding: 20px 16px; display: flex; align-items: center; gap: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); position: relative; }
+        .cc-card-left { width: 72px; height: 72px; flex-shrink: 0; border-radius: 8px; background: linear-gradient(135deg, #FFF1D6 0%, #FFE0A8 100%); display: flex; align-items: center; justify-content: center; font-size: 36px; }
+        .cc-card-info { flex: 1; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+        .cc-card-title { font-size: 15px; color: #333333; font-weight: 500; line-height: 22px; }
+        .cc-card-desc { font-size: 12px; color: #828282; line-height: 18px; }
+        .cc-card-expire { font-size: 12px; color: #828282; line-height: 18px; }
+        .cc-card-btn { flex-shrink: 0; min-width: 64px; height: 32px; border-radius: 16px; border: 1px solid #254EDB; background: #FFFFFF; color: #254EDB; font-size: 14px; font-weight: 500; line-height: 20px; cursor: pointer; padding: 0 16px; display: flex; align-items: center; justify-content: center; }
+        .cc-card-btn:disabled { border-color: #E0E0E0; color: #BDBDBD; background: #F5F5F5; cursor: not-allowed; }
+        .cc-card-btn:active:not(:disabled) { opacity: 0.75; }
+        .cc-activity-title { font-size: 15px; color: #353B3C; font-weight: 600; line-height: 22px; margin-bottom: 12px; padding: 0 4px; }
+
+        /* ====== 我的订单列表页 ====== */
+        .orders-page { width: 100%; height: 100%; background: #F2F3F5; display: flex; flex-direction: column; overflow: hidden; }
+        .orders-tabs { display: flex; background: #FFFFFF; border-bottom: 1px solid #F0F0F0; flex-shrink: 0; }
+        .orders-tab-item { flex: 1; text-align: center; padding: 14px 0; font-size: 14px; color: #666666; position: relative; cursor: pointer; font-weight: 400; }
+        .orders-tab-item.active { color: #254EDB; font-weight: 500; }
+        .orders-tab-item.active::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 24px; height: 2px; background: #254EDB; border-radius: 1px; }
+        .orders-type-tabs { display: flex; background: #FFFFFF; padding: 10px 16px; gap: 12px; flex-shrink: 0; border-bottom: 1px solid #F5F5F5; }
+        .orders-type-item { padding: 6px 14px; font-size: 13px; color: #666666; background: #F5F6F8; border-radius: 14px; cursor: pointer; white-space: nowrap; }
+        .orders-type-item.active { color: #FFFFFF; background: #254EDB; font-weight: 500; }
+        .orders-scroll { flex: 1; overflow-y: auto; padding: 12px; }
+        .orders-list { display: flex; flex-direction: column; gap: 12px; }
+        .order-card { background: #FFFFFF; border-radius: 10px; overflow: hidden; }
+        .order-card-header { display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; border-bottom: 1px solid #F8F8F8; }
+        .order-card-type { font-size: 12px; color: #828282; }
+        .order-card-status { font-size: 13px; font-weight: 500; }
+        .order-card-status.pay { color: #FF6B00; }
+        .order-card-status.ship { color: #254EDB; }
+        .order-card-status.receive { color: #254EDB; }
+        .order-card-status.done { color: #828282; }
+        .order-card-body { padding: 12px 14px; display: flex; gap: 12px; align-items: flex-start; }
+        .order-card-img { width: 72px; height: 72px; border-radius: 8px; background: #F5F6F8; flex-shrink: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .order-card-img img { width: 100%; height: 100%; object-fit: cover; }
+        .order-card-info { flex: 1; min-width: 0; }
+        .order-card-title { font-size: 14px; color: #333333; line-height: 20px; margin-bottom: 6px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .order-card-spec { font-size: 12px; color: #999999; line-height: 18px; margin-bottom: 8px; }
+        .order-card-price-row { display: flex; justify-content: space-between; align-items: center; }
+        .order-card-price { font-size: 14px; color: #333333; font-weight: 500; }
+        .order-card-count { font-size: 12px; color: #999999; }
+        .order-card-footer { padding: 10px 14px; border-top: 1px solid #F8F8F8; display: flex; flex-direction: column; gap: 8px; }
+        .order-card-total { display: flex; justify-content: flex-end; align-items: center; font-size: 13px; color: #333333; }
+        .order-card-total .amount { font-size: 16px; font-weight: 600; color: #333333; margin-left: 4px; }
+        .order-card-actions { display: flex; justify-content: flex-end; gap: 10px; }
+        .order-btn { padding: 6px 14px; border-radius: 16px; font-size: 13px; cursor: pointer; border: none; background: transparent; font-family: inherit; line-height: 18px; }
+        .order-btn-outline { border: 1px solid #D9D9D9; color: #595959; background: #FFFFFF; }
+        .order-btn-primary { background: #333333; color: #FFFFFF; }
+        .order-btn-outline:active { opacity: 0.75; }
+        .order-btn-primary:active { opacity: 0.85; }
+
+        /* ====== 订单详情页 ====== */
+        .order-detail-page { width: 100%; height: 100%; background: #F2F3F5; display: flex; flex-direction: column; overflow: hidden; }
+        .od-status-bar { background: linear-gradient(180deg, rgba(200,215,255,0.5) 0%, rgba(242,243,245,1) 100%); padding: 20px 16px 28px; flex-shrink: 0; }
+        .od-status-title { font-size: 20px; font-weight: 600; color: #333333; line-height: 28px; margin-bottom: 4px; }
+        .od-status-desc { font-size: 13px; color: #666666; line-height: 18px; }
+        .od-scroll { flex: 1; overflow-y: auto; padding: 0 12px 12px; margin-top: -12px; }
+        .od-card { background: #FFFFFF; border-radius: 12px; padding: 16px; margin-bottom: 12px; }
+        .od-card-title { font-size: 14px; font-weight: 600; color: #333333; line-height: 20px; margin-bottom: 14px; }
+        .od-info-row { display: flex; align-items: flex-start; justify-content: space-between; padding: 8px 0; gap: 16px; }
+        .od-info-row + .od-info-row { border-top: 1px dashed #F0F0F0; padding-top: 12px; margin-top: 4px; }
+        .od-info-label { font-size: 13px; color: #828282; line-height: 18px; flex-shrink: 0; white-space: nowrap; }
+        .od-info-value { font-size: 13px; color: #333333; line-height: 18px; text-align: right; flex: 1; }
+        .od-product-row { display: flex; gap: 12px; align-items: center; padding-bottom: 14px; border-bottom: 1px solid #F5F5F5; margin-bottom: 14px; cursor: pointer; }
+        .od-product-img { width: 48px; height: 48px; border-radius: 8px; background: #F5F6F8; flex-shrink: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .od-product-img img { width: 100%; height: 100%; object-fit: cover; }
+        .od-product-info { flex: 1; min-width: 0; }
+        .od-product-title { font-size: 14px; color: #333333; line-height: 20px; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+        .od-product-count { font-size: 13px; color: #828282; line-height: 18px; display: flex; align-items: center; justify-content: space-between; }
+        .od-product-arrow { font-size: 12px; color: #BDBDBD; display: flex; align-items: center; flex-shrink: 0; }
+        .od-price-row { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; }
+        .od-price-label { font-size: 13px; color: #828282; line-height: 18px; }
+        .od-price-value { font-size: 13px; color: #333333; line-height: 18px; }
+        .od-price-value.plus { color: #333333; }
+        .od-price-value.minus { color: #EB5757; }
+        .od-price-divider { height: 1px; background: #F5F5F5; margin: 8px 0; }
+        .od-price-total { display: flex; justify-content: flex-end; align-items: baseline; padding-top: 6px; }
+        .od-price-total-label { font-size: 13px; color: #333333; margin-right: 4px; }
+        .od-price-total-value { font-size: 16px; font-weight: 600; color: #EB5757; line-height: 22px; }
+        .od-order-info-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; gap: 16px; }
+        .od-order-label { font-size: 13px; color: #828282; line-height: 18px; flex-shrink: 0; }
+        .od-order-value { font-size: 13px; color: #333333; line-height: 18px; text-align: right; flex: 1; word-break: break-all; }
+        .od-copy-btn { font-size: 12px; color: #254EDB; margin-left: 8px; cursor: pointer; display: inline-block; }
+        .od-copy-btn:active { opacity: 0.75; }
+        .od-bottom-bar { flex-shrink: 0; background: #FFFFFF; border-top: 1px solid rgba(0,0,0,0.04); padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px)); display: flex; align-items: center; justify-content: space-between; }
+        .od-service-btn { display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; padding: 0 4px; }
+        .od-service-btn:active { opacity: 0.75; }
+        .od-service-icon { width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; }
+        .od-service-icon svg { width: 100%; height: 100%; }
+        .od-service-text { font-size: 10px; color: #828282; line-height: 14px; }
+        .od-bottom-actions { display: flex; align-items: center; gap: 10px; }
+        .nav-home-indicator { flex-shrink: 0; width: 100%; height: 34px; background: #FFFFFF; display: flex; align-items: flex-start; justify-content: center; padding-top: 8px; box-sizing: border-box; }
+        .nav-home-indicator-bar { width: 134px; height: 5px; background: rgba(0,0,0,0.9); border-radius: 100px; }
+
         /* ====== 年月选择弹窗（滚轮样式） ====== */
         .dp-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); display: none; z-index: 1000; border-radius: 0 0 50px 50px; }
         .dp-overlay.show { display: block; }
@@ -17660,6 +18077,8 @@
                         </div>
                         <div class="menu-item" data-subpage="profile-payment-list">物业缴费</div>
                         <div class="menu-item" data-subpage="profile-rebate-all">回馈金</div>
+                        <div class="menu-item" data-subpage="profile-shopping-all">购物金</div>
+                        <div class="menu-item" data-subpage="profile-coupon-all">优惠券</div>
                         <div class="menu-item" data-subpage="profile-settings">
                             <span>设置页</span>
                         </div>
@@ -17696,6 +18115,14 @@
                     <div class="page-tab tab-rebate" data-tab="profile-rebate-all">4.1 全部</div>
                     <div class="page-tab tab-rebate" data-tab="profile-rebate-earned">4.2 已获得</div>
                     <div class="page-tab tab-rebate" data-tab="profile-rebate-deducted">4.3 已扣除</div>
+                    <div class="page-tab tab-shopping" data-tab="profile-shopping-all">1.1 我的购物金</div>
+                    <div class="page-tab tab-shopping" data-tab="profile-shopping-detail">1.2 购物金明细</div>
+                    <div class="page-tab tab-shopping" data-tab="profile-shopping-recharge">1.2 购物金明细/充值记录</div>
+                    <div class="page-tab tab-shopping" data-tab="profile-shopping-consume">1.2 购物金明细/消费记录</div>
+                    <div class="page-tab tab-coupon" data-tab="profile-coupon-all">1.1 我的优惠券/可使用</div>
+                    <div class="page-tab tab-coupon" data-tab="profile-coupon-used">1.2 我的优惠券/已使用</div>
+                    <div class="page-tab tab-coupon" data-tab="profile-coupon-expired">1.3 我的优惠券/已过期</div>
+                    <div class="page-tab tab-coupon" data-tab="profile-coupon-center">2.1 领券中心</div>
                 </div>
                 <div class="state-controller" id="state-controller-top" style="display: none;"><div class="state-controller-header"><span class="state-controller-demo-tag">DEMO</span><span class="state-controller-title">场景控制（用于演示不同状态）</span></div></div>
                 <div class="mobile-frame">
@@ -17930,37 +18357,190 @@
                 render: 'shopCheckout',
                 placeholder: { icon: 'fa fa-file-text', title: '确认订单页', desc: '确认订单信息、收货地址、支付方式等' },
                 interactionNotes: [
-                    { id: 1, target: '配送方式 Tab', desc: '默认选中"站点自提"（深灰底白字）。点击"配送到家"切换为配送场景：地址栏变为简洁收货地址行，配送费由¥0.00变为¥3.00。' },
-                    { id: 2, target: '提货门店', desc: '站点自提场景下展示定位图标+自提门店名称（16px加粗）+右箭头，下方为门店地址（12px灰色）。点击可跳转门店列表选择页。' },
-                    { id: 3, target: '提货人/自提电话', desc: '默认状态：提货人为空（灰色占位文案"请填写提货人姓名"，需用户手动填写）；自提电话自动抓取用户在小程序注册的手机号（蓝色文字）。两行均带浅灰编辑图标，支持原位编辑（无弹窗）：点击提货人输入框调起系统键盘直接输入（最多20字，输入后文字为蓝色）；点击自提电话输入框调起数字键盘（最多11位）。失焦时校验：提货人清空时 toast 提示"请输入提货人姓名"并保持占位；自提电话为空或格式错误时 toast 提示并自动回滚为上次合法值。点击编辑图标同样聚焦对应输入框。' },
-                    { id: 4, target: '商品概览', desc: '展示商品缩略图（56x56）、标题、"共1件"+右箭头。点击可跳转购物车或商品详情。' },
-                    { id: 5, target: '价格明细', desc: '五行明细：商品总价¥39.5；配送费（站点自提¥0.00，无问号图标无原价）；优惠券无可用（灰色）；回馈金（金币图标）余额￥12.00，抵扣比例为实付订单的5%（运营后台可配置），有余额时默认使用，行内显示"-￥1.98"红色抵扣；购物金（金币图标）余额￥20.00，无比例限制可全额抵扣实付订单，有余额时默认使用，行内显示"-￥20.00"红色抵扣。点击均弹出抵扣弹窗可选使用/不使用。抵扣计算顺序：先回馈金（实付×5%），再购物金（全额抵扣剩余部分）。切换使用状态或配送方式后小计与底部合计实时联动更新。分界线下方为小计。' },
-                    { id: 6, target: '订单备注', desc: '展示占位文案"可输入备注要求"+右箭头。点击进入文本输入页。' },
-                    { id: 7, target: '支付方式', desc: '支付方式列表（微信支付-绿色图标、云闪付-红色图标），每项48px高。单选框为方形圆角4px样式：未选中灰框，选中深灰框+内部圆点。默认选中微信支付。' },
-                    { id: 8, target: '底部支付栏', desc: '左侧显示"已选1件，合计:"（12px灰色）+金额（20px红色加粗），金额随回馈金/购物金使用状态实时联动。右侧"立即支付"胶囊按钮（深灰底白字）。点击触发支付流程。' }
+                    { id: 1, title: '配送方式 Tab', type: 'interaction', content: '默认选中"站点自提"（深灰底白字）。点击"配送到家"切换为配送场景：地址栏变为简洁收货地址行，配送费由¥0.00变为¥3.00。' },
+                    { id: 2, title: '提货门店', type: 'state', content: '站点自提场景下展示定位图标+自提门店名称（16px加粗）+右箭头，下方为门店地址（12px灰色）。点击可跳转门店列表选择页。' },
+                    { id: 3, title: '提货人/自提电话', type: 'interaction', content: '默认状态：提货人为空（灰色占位文案"请填写提货人姓名"，需用户手动填写）；自提电话自动抓取用户在小程序注册的手机号（蓝色文字）。\n两行均带浅灰编辑图标，支持原位编辑（无弹窗）：点击提货人输入框调起系统键盘直接输入（最多20字，输入后文字为蓝色）；点击自提电话输入框调起数字键盘（最多11位）。\n失焦时校验：提货人清空时 toast 提示"请输入提货人姓名"并保持占位；自提电话为空或格式错误时 toast 提示并自动回滚为上次合法值。点击编辑图标同样聚焦对应输入框。' },
+                    { id: 4, title: '商品概览', type: 'state', content: '展示商品缩略图（56x56）、标题、"共1件"+右箭头。点击可跳转购物车或商品详情。' },
+                    { id: 5, title: '价格明细', type: 'state', content: '五行明细：商品总价¥39.5；配送费（站点自提¥0.00，无问号图标无原价）；优惠券无可用（灰色）；回馈金（金币图标）余额￥12.00，可全额抵扣实付订单价格，有余额时默认使用，行内显示"-￥12.00"红色抵扣；购物金（金币图标）余额￥200.00，可全额抵扣实付订单价格，有余额时默认使用，行内显示"-￥27.50"红色抵扣（抵扣剩余部分，不超过余额）。\n点击均弹出抵扣弹窗可选使用/不使用。抵扣计算顺序：先回馈金（全额抵扣），再购物金（全额抵扣剩余部分）。切换使用状态或配送方式后小计与底部合计实时联动更新。\n分界线下方为小计。' },
+                    { id: 6, title: '订单备注', type: 'interaction', content: '展示占位文案"可输入备注要求"+右箭头。点击进入文本输入页。' },
+                    { id: 7, title: '支付方式', type: 'state', content: '支付方式列表（微信支付-绿色图标、云闪付-红色图标），每项48px高。单选框为方形圆角4px样式：未选中灰框，选中深灰框+内部圆点。默认选中微信支付。' },
+                    { id: 8, title: '底部支付栏', type: 'interaction', content: '左侧显示"已选1件，合计:"（12px灰色）+金额（20px红色加粗），金额随回馈金/购物金使用状态实时联动。右侧"立即支付"胶囊按钮（深灰底白字）。点击触发支付流程。' }
                 ],
                 requirementDoc: {
                     title: '确认订单页（站点自提场景）',
+                    meta: 'v1.0 · 业主端小程序 · 2026-08',
                     sections: [
-                        { title: '1. 页面定位', content: '用户在购物车点击结算后进入。用于确认订单信息、选择配送方式、查看价格明细并完成支付。' },
-                        { title: '2. 配送方式', content: '支持"配送到家"和"站点自提"两种方式。默认选中"站点自提"。切换方式时地址栏和配送费联动更新。' },
-                        { title: '3. 提货信息（站点自提）', content: '展示提货门店名称、门店地址、提货人姓名、自提电话。默认状态：提货人需用户手动填写（初始为空，展示占位文案）；自提电话系统自动抓取用户在小程序注册的手机号。提货人姓名与自提电话均支持原位编辑（无弹窗）：点击提货人输入框调起系统键盘，点击自提电话输入框调起数字键盘。输入内容显示为蓝色（与自提电话一致）。失焦时校验：提货人不可为空；自提电话需符合11位手机号格式，校验失败以 toast 轻提示（屏幕中央展示）并回滚为上次合法值。' },
-                        { title: '4. 商品概览', content: '展示商品缩略图、商品标题、购买件数。' },
-                        { title: '5. 价格明细', content: '商品总价、配送费（站点自提¥0.00，无问号图标无原价显示）、优惠券（无可用时灰色显示"无可用优惠券"）、回馈金（金币图标，点击弹出抵扣弹窗可选使用/不使用）、购物金（金币图标，点击弹出抵扣弹窗可选使用/不使用）、小计。' },
-                        { title: '6. 订单备注', content: '可输入备注要求，无内容时显示占位文案"可输入备注要求"。' },
-                        { title: '7. 支付方式', content: '可选微信支付、云闪付。默认选中微信支付。' },
-                        { title: '8. 底部支付栏', content: '显示已选件数"已选X件，合计:"和总金额（红色强调）。点击"立即支付"触发支付。' }
+                        { title: '1. 页面定位', paragraphs: ['用户在购物车点击结算后进入。用于确认订单信息、选择配送方式、查看价格明细并完成支付。'] },
+                        { title: '2. 配送方式', paragraphs: ['支持"配送到家"和"站点自提"两种方式。默认选中"站点自提"。切换方式时地址栏和配送费联动更新。'] },
+                        { title: '3. 提货信息（站点自提）', paragraphs: ['展示提货门店名称、门店地址、提货人姓名、自提电话。默认状态：提货人需用户手动填写（初始为空，展示占位文案）；自提电话系统自动抓取用户在小程序注册的手机号。', '提货人姓名与自提电话均支持原位编辑（无弹窗）：点击提货人输入框调起系统键盘，点击自提电话输入框调起数字键盘。输入内容显示为蓝色（与自提电话一致）。', '失焦时校验：提货人不可为空；自提电话需符合11位手机号格式，校验失败以 toast 轻提示（屏幕中央展示）并回滚为上次合法值。'] },
+                        { title: '4. 商品概览', paragraphs: ['展示商品缩略图、商品标题、购买件数。'] },
+                        { title: '5. 价格明细', paragraphs: ['商品总价¥39.5；配送费（站点自提¥0.00，配送到家¥3.00）；优惠券（无可用时灰色显示"无可用优惠券"）；回馈金（金币图标，余额￥12.00，可全额抵扣实付订单价格，点击弹出抵扣弹窗可选使用/不使用）；购物金（金币图标，余额￥200.00，可全额抵扣实付订单价格，点击弹出抵扣弹窗可选使用/不使用）；小计。', '抵扣计算顺序：先回馈金（全额抵扣，不超过余额），再购物金（全额抵扣剩余部分，不超过余额）。有余额时默认使用，切换使用状态或配送方式后小计与底部合计实时联动更新。'] },
+                        { title: '6. 订单备注', paragraphs: ['可输入备注要求，无内容时显示占位文案"可输入备注要求"。'] },
+                        { title: '7. 支付方式', paragraphs: ['可选微信支付、云闪付。默认选中微信支付。'] },
+                        { title: '8. 底部支付栏', paragraphs: ['显示已选件数"已选X件，合计:"和总金额（红色强调）。点击"立即支付"触发支付。'] }
                     ]
                 },
-                statusList: []
+                statusList: [
+                    { block: '配送方式', state: '站点自提（默认）', trigger: '页面加载', ui: 'Tab 选中"站点自提"，地址栏显示提货门店+门店地址，配送费¥0.00' },
+                    { block: '配送方式', state: '配送到家', trigger: '点击"配送到家" Tab', ui: '地址栏变为收货地址行，配送费变为¥3.00，小计与合计联动更新' },
+                    { block: '提货人', state: '未填写', trigger: '页面加载', ui: '灰色占位文案"请填写提货人姓名"' },
+                    { block: '提货人', state: '已填写', trigger: '输入并失焦', ui: '蓝色文字显示提货人姓名' },
+                    { block: '提货人', state: '校验失败', trigger: '清空后失焦', ui: 'toast 提示"请输入提货人姓名"（屏幕中央），保持占位文案' },
+                    { block: '回馈金', state: '使用（默认）', trigger: '页面加载（有余额）', ui: '行内显示"-￥12.00"红色抵扣，小计联动扣减' },
+                    { block: '回馈金', state: '不使用', trigger: '弹窗选择"不使用"→确定', ui: '行内显示"不使用"灰色，小计联动回增' },
+                    { block: '购物金', state: '使用（默认）', trigger: '页面加载（有余额）', ui: '行内显示"-￥27.50"红色抵扣（抵扣剩余部分，余额￥200），小计联动扣减' },
+                    { block: '购物金', state: '不使用', trigger: '弹窗选择"不使用"→确定', ui: '行内显示"不使用"灰色，小计联动回增' },
+                    { block: '小计/合计', state: '全额抵扣', trigger: '回馈金+购物金均使用', ui: '小计=商品总价¥39.5-回馈金¥12-购物金¥27.50=¥0.00' },
+                    { block: '小计/合计', state: '仅用回馈金', trigger: '购物金选择"不使用"', ui: '小计=¥39.5-¥12=¥27.50' },
+                    { block: '小计/合计', state: '仅用购物金', trigger: '回馈金选择"不使用"', ui: '小计=¥39.5-¥27.50=¥12.00' },
+                    { block: '小计/合计', state: '均不使用', trigger: '回馈金+购物金均"不使用"', ui: '小计=¥39.50（不抵扣）' },
+                    { block: '支付方式', state: '微信支付（默认）', trigger: '页面加载', ui: '微信支付项选中（深灰框+圆点）' },
+                    { block: '支付方式', state: '云闪付', trigger: '点击云闪付项', ui: '云闪付项选中，微信支付取消选中' }
+                ]
             },
             'shop-orders': {
                 title: '我的订单',
                 mainNav: 'shop',
-                placeholder: { icon: 'fa fa-list-alt', title: '我的订单页', desc: '展示用户订单列表，支持订单状态筛选和管理' },
-                interactionNotes: [],
-                requirementDoc: null,
-                statusList: []
+                render: 'shopOrders',
+                interactionNotes: [
+                    { id: 1, title: '订单类型Tab', type: 'interaction', target: '[data-block="orders-type-tabs"]', content: '「配送到家」「站点自提」两个Tab，点击切换对应类型的订单列表' },
+                    { id: 2, title: '状态Tab', type: 'interaction', target: '[data-block="orders-status-tabs"]', content: '「全部/待付款/待发货/待收货/已完成」五个Tab，点击按状态筛选订单\n配送到家：待收货状态文案为「待收货」\n站点自提：待收货状态文案为「待自提」' },
+                    { id: 3, title: '订单卡片', type: 'interaction', target: '[data-block="order-card"]', content: '点击订单卡片 → 跳转对应订单详情页\n卡片信息：订单状态标签、商品图片、商品标题、规格、数量、实付金额' }
+                ],
+                requirementDoc: {
+                    title: '我的订单需求文档',
+                    meta: 'v1.0 · 2026-08-26 · 电商/零售 · C端用户',
+                    sections: [
+                        { title: '1.0 需求背景', paragraphs: ['用户在商城下单后，可在「我的订单」查看所有订单的进度和详情。', '订单分为两种类型：配送到家（快递配送）和站点自提（到物业处自提）。', '每种类型下有四种状态：待付款、待发货、待收货/待自提、已完成。'] },
+                        { title: '2.0 页面入口', paragraphs: ['商城首页底部导航「商城」→ 点击右上角订单图标', '我的页 → 我的订单入口'] },
+                        { title: '3.0 订单类型', paragraphs: ['【配送到家】商家通过快递配送至用户填写的收货地址，含配送费。', '【站点自提】用户到物业处自提，无配送费、无包装费。'] },
+                        { title: '4.0 状态说明', paragraphs: ['待付款：用户下单未支付，倒计时23小时后自动关闭', '待发货：用户已支付，商家准备商品中', '待收货/待自提：配送到家-商品配送中；站点自提-商品已到自提点', '已完成：订单签收完成'] },
+                        { title: '5.0 筛选规则', paragraphs: ['配送到家和站点自提各自独立筛选，Tab切换时仅展示对应类型订单', '状态Tab叠加在类型Tab之上，如选中「配送到家」+「待付款」则仅展示配送到家的待付款订单'] },
+                        { title: '6.0 价格说明', paragraphs: ['配送到家：商品总价 + 配送费（当前为¥0.00） - 回馈金抵扣 - 购物金抵扣 = 实付', '站点自提：商品总价 - 回馈金抵扣 - 购物金抵扣 = 实付（无配送费、无包装费）', '回馈金抵扣比例：实付的5%（运营后台可配置）', '购物金抵扣：可全额抵扣实付金额', '待付款状态不显示抵扣项，其他状态显示回馈金和购物金抵扣'] }
+                    ]
+                },
+                statusList: [
+                    { block: '类型Tab', state: '配送到家（默认）', trigger: '页面加载', ui: '展示配送到家订单列表' },
+                    { block: '类型Tab', state: '站点自提', trigger: '点击「站点自提」Tab', ui: '展示站点自提订单列表' },
+                    { block: '状态Tab', state: '全部（默认）', trigger: '页面加载', ui: '展示当前类型的所有订单' },
+                    { block: '状态Tab', state: '待付款', trigger: '点击「待付款」Tab', ui: '仅展示待付款订单' },
+                    { block: '状态Tab', state: '待发货', trigger: '点击「待发货」Tab', ui: '仅展示待发货订单' },
+                    { block: '状态Tab', state: '待收货/待自提', trigger: '点击对应Tab', ui: '配送到家展示待收货，站点自提展示待自提' },
+                    { block: '状态Tab', state: '已完成', trigger: '点击「已完成」Tab', ui: '仅展示已完成订单' },
+                    { block: '空状态', state: '无订单', trigger: '当前筛选无数据', ui: '空态提示' }
+                ]
+            },
+            'shop-order-detail-home-pay': {
+                title: '订单详情',
+                mainNav: 'shop',
+                render: 'shopOrderDetailHomePay',
+                interactionNotes: [
+                    { id: 1, title: '状态头部', type: 'state', target: '.od-status-bar', content: '展示「待付款」+倒计时，提示订单即将关闭请及时支付' },
+                    { id: 2, title: '配送信息', type: 'state', target: '.od-card:nth-child(1)', content: '展示收货人、联系电话、收货地址' },
+                    { id: 3, title: '商品与价格明细', type: 'state', target: '.od-card:nth-child(2)', content: '商品信息 + 价格明细\n价格明细：商品总价 + 配送费¥0.00 = 待付款¥39.50\n注：待付款状态不显示回馈金/购物金抵扣项' },
+                    { id: 4, title: '底部操作', type: 'interaction', target: '.od-bottom-bar', content: '「取消订单」按钮 → 取消订单\n「立即支付」按钮 → 跳转支付流程' }
+                ],
+                statusList: [
+                    { block: '底部按钮', state: '待付款', trigger: '页面加载', ui: '取消订单 + 立即支付' }
+                ]
+            },
+            'shop-order-detail-home-ship': {
+                title: '订单详情',
+                mainNav: 'shop',
+                render: 'shopOrderDetailHomeShip',
+                interactionNotes: [
+                    { id: 1, title: '状态头部', type: 'state', target: '.od-status-bar', content: '展示「待发货」，提示商品准备中' },
+                    { id: 2, title: '配送信息', type: 'state', target: '.od-card:nth-child(1)', content: '展示收货人、联系电话、收货地址' },
+                    { id: 3, title: '商品与价格明细', type: 'state', target: '.od-card:nth-child(2)', content: '商品信息 + 价格明细\n价格明细：商品总价 + 配送费¥0.00 - 回馈金抵扣¥2.00 - 购物金抵扣¥6.00 = 实付¥31.50' },
+                    { id: 4, title: '底部操作', type: 'interaction', target: '.od-bottom-bar', content: '「再买一单」按钮 → 再次购买同款商品' }
+                ],
+                statusList: [
+                    { block: '底部按钮', state: '待发货', trigger: '页面加载', ui: '再买一单' }
+                ]
+            },
+            'shop-order-detail-home-receive': {
+                title: '订单详情',
+                mainNav: 'shop',
+                render: 'shopOrderDetailHomeReceive',
+                interactionNotes: [
+                    { id: 1, title: '状态头部', type: 'state', target: '.od-status-bar', content: '展示「待收货」，提示商品在路上了' },
+                    { id: 2, title: '配送信息', type: 'state', target: '.od-card:nth-child(1)', content: '展示收货人、联系电话、收货地址' },
+                    { id: 3, title: '商品与价格明细', type: 'state', target: '.od-card:nth-child(2)', content: '商品信息 + 价格明细\n价格明细：商品总价 + 配送费¥0.00 - 回馈金抵扣¥2.00 - 购物金抵扣¥6.00 = 实付¥31.50' },
+                    { id: 4, title: '底部操作', type: 'interaction', target: '.od-bottom-bar', content: '「确认收货」按钮 → 确认收货，订单变为已完成' }
+                ],
+                statusList: [
+                    { block: '底部按钮', state: '待收货', trigger: '页面加载', ui: '确认收货' }
+                ]
+            },
+            'shop-order-detail-home-done': {
+                title: '订单详情',
+                mainNav: 'shop',
+                render: 'shopOrderDetailHomeDone',
+                interactionNotes: [
+                    { id: 1, title: '状态头部', type: 'state', target: '.od-status-bar', content: '展示「已完成」，提示订单已签收' },
+                    { id: 2, title: '配送信息', type: 'state', target: '.od-card:nth-child(1)', content: '展示收货人、联系电话、收货地址' },
+                    { id: 3, title: '商品与价格明细', type: 'state', target: '.od-card:nth-child(2)', content: '商品信息 + 价格明细\n价格明细：商品总价 + 配送费¥0.00 - 回馈金抵扣¥2.00 - 购物金抵扣¥6.00 = 实付¥31.50' },
+                    { id: 4, title: '底部操作', type: 'interaction', target: '.od-bottom-bar', content: '「删除订单」按钮 → 删除订单记录\n「再买一单」按钮 → 再次购买同款商品' }
+                ],
+                statusList: [
+                    { block: '底部按钮', state: '已完成', trigger: '页面加载', ui: '删除订单 + 再买一单' }
+                ]
+            },
+            'shop-order-detail-pickup-pay': {
+                title: '订单详情',
+                mainNav: 'shop',
+                render: 'shopOrderDetailPickupPay',
+                interactionNotes: [
+                    { id: 1, title: '状态头部', type: 'state', target: '.od-status-bar', content: '展示「待付款」+倒计时，提示订单即将关闭请及时支付' },
+                    { id: 2, title: '自提信息', type: 'state', target: '.od-card:nth-child(1)', content: '展示提货人、自提电话、自提地址（物业处）' },
+                    { id: 3, title: '商品与价格明细', type: 'state', target: '.od-card:nth-child(2)', content: '商品信息 + 价格明细\n价格明细：商品总价¥39.50 = 待付款¥39.50\n注：站点自提无配送费、无包装费；待付款状态不显示抵扣项' },
+                    { id: 4, title: '底部操作', type: 'interaction', target: '.od-bottom-bar', content: '「取消订单」按钮 → 取消订单\n「立即支付」按钮 → 跳转支付流程' }
+                ],
+                statusList: [
+                    { block: '底部按钮', state: '待付款', trigger: '页面加载', ui: '取消订单 + 立即支付' }
+                ]
+            },
+            'shop-order-detail-pickup-ship': {
+                title: '订单详情',
+                mainNav: 'shop',
+                render: 'shopOrderDetailPickupShip',
+                interactionNotes: [
+                    { id: 1, title: '状态头部', type: 'state', target: '.od-status-bar', content: '展示「待发货」，提示商品准备中' },
+                    { id: 2, title: '自提信息', type: 'state', target: '.od-card:nth-child(1)', content: '展示提货人、自提电话、自提地址（物业处）' },
+                    { id: 3, title: '商品与价格明细', type: 'state', target: '.od-card:nth-child(2)', content: '商品信息 + 价格明细\n价格明细：商品总价¥39.50 - 回馈金抵扣¥2.00 - 购物金抵扣¥6.00 = 实付¥31.50\n注：站点自提无配送费、无包装费' },
+                    { id: 4, title: '底部操作', type: 'interaction', target: '.od-bottom-bar', content: '「再买一单」按钮 → 再次购买同款商品' }
+                ],
+                statusList: [
+                    { block: '底部按钮', state: '待发货', trigger: '页面加载', ui: '再买一单' }
+                ]
+            },
+            'shop-order-detail-pickup-receive': {
+                title: '订单详情',
+                mainNav: 'shop',
+                render: 'shopOrderDetailPickupReceive',
+                interactionNotes: [
+                    { id: 1, title: '状态头部', type: 'state', target: '.od-status-bar', content: '展示「待自提」，提示商品已到自提点请及时到站点自提' },
+                    { id: 2, title: '自提信息', type: 'state', target: '.od-card:nth-child(1)', content: '展示提货人、自提电话、自提地址（物业处）' },
+                    { id: 3, title: '商品与价格明细', type: 'state', target: '.od-card:nth-child(2)', content: '商品信息 + 价格明细\n价格明细：商品总价¥39.50 - 回馈金抵扣¥2.00 - 购物金抵扣¥6.00 = 实付¥31.50\n注：站点自提无配送费、无包装费' },
+                    { id: 4, title: '底部操作', type: 'interaction', target: '.od-bottom-bar', content: '「确认自提」按钮 → 确认自提，订单变为已完成' }
+                ],
+                statusList: [
+                    { block: '底部按钮', state: '待自提', trigger: '页面加载', ui: '确认自提' }
+                ]
+            },
+            'shop-order-detail-pickup-done': {
+                title: '订单详情',
+                mainNav: 'shop',
+                render: 'shopOrderDetailPickupDone',
+                interactionNotes: [
+                    { id: 1, title: '状态头部', type: 'state', target: '.od-status-bar', content: '展示「已完成」，提示订单已签收' },
+                    { id: 2, title: '自提信息', type: 'state', target: '.od-card:nth-child(1)', content: '展示提货人、自提电话、自提地址（物业处）' },
+                    { id: 3, title: '商品与价格明细', type: 'state', target: '.od-card:nth-child(2)', content: '商品信息 + 价格明细\n价格明细：商品总价¥39.50 - 回馈金抵扣¥2.00 - 购物金抵扣¥6.00 = 实付¥31.50\n注：站点自提无配送费、无包装费' },
+                    { id: 4, title: '底部操作', type: 'interaction', target: '.od-bottom-bar', content: '「删除订单」按钮 → 删除订单记录\n「再买一单」按钮 → 再次购买同款商品' }
+                ],
+                statusList: [
+                    { block: '底部按钮', state: '已完成', trigger: '页面加载', ui: '删除订单 + 再买一单' }
+                ]
             },
             'access-home': {
                 title: '通行',
@@ -17993,7 +18573,7 @@
                 render: 'profileHome',
                 interactionNotes: [
                     { id: 1, title: '用户信息区', type: 'state', target: '[data-block="user-info"]', content: '未登录：展示「立即登录」按钮，点击触发登录流程\n已登录：展示手机号（脱敏）+「设置」入口\n点击头像/用户名 → 跳转个人信息编辑页\n点击「设置」→ 跳转设置页' },
-                    { id: 2, title: '会员信息卡片', type: 'state', target: '[data-block="member-card"]', content: '未登录：显示「登录查看会员等级」，积分/回馈金/优惠券均为 0\n未开通：显示「V2白银会员」等级名称\n已开通/临期：显示「徕芙社区卡」+ 会员等级标签\n点击「会员中心」→ 跳转会员中心页' },
+                    { id: 2, title: '会员信息卡片', type: 'state', target: '[data-block="member-card"]', content: '未登录：显示「登录查看会员等级」，积分/回馈金/购物金/优惠券均为 0（购物金未登录时显示0，登录后显示具体金额）\n未开通：显示「V2白银会员」等级名称\n已开通/临期：显示「徕芙社区卡」+ 会员等级标签\n点击「会员中心」→ 跳转会员中心页' },
                     { id: 3, title: '到期提醒', type: 'state', target: '[data-block="living-card"]', content: '仅临期态展示\n显示到期倒计时天数\n点击「立即续费」→ 跳转续费/会员开通页' },
                     { id: 4, title: '物业服务入口', type: 'interaction', target: '[data-block="services"]', content: '9 个功能入口：我的房屋 / 物业缴费 / 我的车位 / 物业报修 / 我的押金 / 住户审核 / 实名认证 / 反馈建议 / 邻里互助\n点击各入口 → 跳转对应功能页<div><br></div><div><br></div>' },
                     { id: 5, title: '我的订单入口', type: 'interaction', target: '[data-block="orders"]', content: '5 个订单状态入口：待付款 / 待发货 / 待收货 / 待评价 / 售后\n待付款显示数量徽标\n点击入口 → 跳转「我的订单页」对应状态\n点击「全部订单」→ 跳转订单全列表' },
@@ -18014,7 +18594,7 @@
                         { title: '3. 用户流程', flow: '未登录 <span class="arrow">→</span> 点击「立即登录」 <span class="arrow">→</span> 登录页 <span class="arrow">→</span> 登录成功 <span class="arrow">→</span> 个人中心（未开通/已开通态）' },
                         { title: '4. 模块清单', table: { headers: ['模块', '包含内容'], rows: [
                             ['用户信息区', '头像、用户名/登录入口、设置入口'],
-                            ['会员信息卡片', '会员等级名称、等级标签、积分/回馈金/优惠券、会员中心入口'],
+                            ['会员信息卡片', '会员等级名称、等级标签、积分/回馈金/购物金/优惠券、会员中心入口'],
                             ['物业服务', '我的房屋、物业缴费、我的车位、物业报修、我的押金、住户审核、实名认证、反馈建议、邻里互助'],
                             ['我的订单', '待付款、待发货、待收货、待评价、售后']
                         ]}},
@@ -18047,20 +18627,21 @@
                 render: 'profileRebateAll',
                 interactionNotes: [
                     { id: 1, title: '回馈金金额卡片', type: 'state', target: '[data-block="rebate-amount"]', content: '可用回馈金余额：大字号加粗展示当前用户钱包内已到账、可立即用于抵扣的净余额\n「回馈金规则」链接，点击跳转规则说明页\n预计可到账提示栏：下方圆角白底通栏，文案格式为"X月预计可到账 Y"。固定显示下个月预计到账的。用于展示用户已下单、但尚未确认收货的在途回馈金总额。凡是处于"已付款、待发货、待收货"状态的订单，其预计返利均应计入此处。' },
-                    { id: 2, title: '明细列表卡片', type: 'state', target: '[data-block="rebate-list"]', content: '卡片标题：月份「2026年12月」+ 账单期间「11月26日-12月25日」\n按结算周期分组（上月26日00:00 至 本月25日24:00）\n明细项：左侧标题 + 时间，右侧金额 + 右箭头\n\n1. 抵扣物业费-回馈金减少\n金额来源：min（回馈金余额，物业费应缴金额），1元回馈金抵扣1元\n时间来源：抵扣操作时间\n触发时机：用户在物业费缴费页选择回馈金抵扣并完成支付\n交互：点击跳转至缴费详情页\n\n2. 订单消费-回馈金增加（已到账）\n金额来源：订单实付金额 × 5%（向上取整，保留两位小数）\n时间来源：确认收货时间\n触发时机：用户点击确认收货，或系统执行7天自动确认\n交互：点击跳转至该订单详情\n\n3. 订单消费-回馈金增加（预计返利）\n金额来源：订单实付金额 × 5%（向上取整，保留两位小数）\n时间来源：下单付款时间\n触发时机：订单已付款，但尚未确认收货\n前端显示「预计返利」字样\n交互：点击跳转至该订单详情' },
+                    { id: 2, title: '明细列表卡片', type: 'state', target: '[data-block="rebate-list"]', content: '卡片标题：月份「2026年12月」+ 账单期间「11月26日-12月25日」\n按结算周期分组（上月26日00:00 至 本月25日24:00）\n明细项：左侧标题 + 时间，右侧金额 + 右箭头\n\n1. 抵扣物业费-回馈金减少\n金额来源：min（回馈金余额，物业费应缴金额），1元回馈金抵扣1元\n时间来源：抵扣操作时间\n触发时机：用户在物业费缴费页选择回馈金抵扣并完成支付\n交互：点击跳转至缴费详情页\n\n2. <<商城订单抵扣-回馈金减少>>\n<<金额来源：min（回馈金余额，订单实付金额），1元回馈金抵扣1元>>\n<<时间来源：商城订单支付完成时间>>\n<<触发时机：用户在商城确认订单页选择使用回馈金抵扣并完成支付>>\n<<交互：点击跳转至商城订单详情>>\n\n3. 订单消费-回馈金增加（已到账）\n金额来源：订单实付金额 × 5%（向上取整，保留两位小数）\n时间来源：确认收货时间\n触发时机：用户点击确认收货，或系统执行7天自动确认\n交互：点击跳转至该订单详情\n\n4. 订单消费-回馈金增加（预计返利）\n金额来源：订单实付金额 × 5%（向上取整，保留两位小数）\n时间来源：下单付款时间\n触发时机：订单已付款，但尚未确认收货\n前端显示「预计返利」字样\n交互：点击跳转至该订单详情' },
                     { id: 3, title: '年月选择弹窗', type: 'interaction', target: '[data-block="date-picker"]', content: '点击卡片标题月份旁的下拉箭头 → 弹出底部年月选择弹窗\n双列滚轮选择器：左侧年份、右侧月份，上下滑动选择\n底部 Cancel/OK 按钮\n点击 OK/Cancel/遮罩 → 关闭弹窗' },
                     { id: 4, title: '页面入口', type: 'interaction', target: '.menu-item[data-subpage="profile-rebate-all"]', content: '从「我的页」→ 会员信息卡片 → 点击「回馈金」数值进入\n或从左侧导航菜单「我的页 → 回馈金」进入\n默认展示「全部」Tab' }
                 ],
                 requirementDoc: {
                     title: '回馈金需求文档',
-                    meta: 'v1.1 · 更新日期 2026-06-26 · 电商/零售 · C端用户',
+                    meta: 'v1.2 · 更新日期 2026-08-25 · 电商/零售 · C端用户',
                     sections: [
                         { title: '1.0 需求背景', paragraphs: ['回馈金是用户在徕芙会员超市消费后可获得的消费返利。订单完成后（确认收货后）即可获得回馈金。回馈金可用来抵扣物业费及商品，1元回馈金可抵扣1元。', '核心概念——回馈金：用户消费后获得的现金权益，延迟发放、按月结算、到账后可用；预计返利：结算周期内的中间状态，已确认产生但尚未正式到账，不可使用、可因退款减少、结算后转为"已到账"；结算周期：上月26日00:00至本月25日24:00；订单实付金额：扣除优惠券、折扣后的实际支付金额'] },
                         { title: '2.1 获取规则', paragraphs: ['计算基数：订单实付金额', '计算公式：金额 × 5%（后台可配置比例）', '取整规则：向上取整，保留小数点后两位', '示例：订单¥19.99 → ceil(19.99 × 5%) = ceil(0.9995) = ¥1.00'] },
                         { title: '2.2 发放规则', paragraphs: ['发放时机：用户确认收货后，计入「预计返利」，按结算周期发放', '自动发放：7天自动确认收货 → 自动计入预计返利（后台可配置天数）', '结算周期：上月26日00:00 — 本月25日24:00为一个结算周期，周期内确认收货的回馈金累积为预计返利', '到账时间：不迟于次月5日24:00统一发放至主回馈金账户，到账即生效', '账户状态转换：未确认收货 → 确认收货/系统自动确认 → 预计返利（不可用）→ 结算周期结束统一发放 → 已到账（可用）', '预计返利期间售后退款 → 核减预计返利；已到账后售后退款 → 从账户扣回对应金额'] },
                         { title: '2.3 扣回规则', paragraphs: ['确认收货前退货：不发放，无需扣回（权益未产生）', '确认收货后退货：预计返利状态→核减预计返利，无真实扣回；已到账状态→从回馈金账户扣回对应金额', '权益已部分使用后退货：扣除剩余回馈金 + 退款中扣除已使用等值金额（回馈金必为已到账状态）', '权益已全部使用后退货：退款中扣除全部使用等值金额'] },
-                        { title: '2.4 抵扣规则', paragraphs: ['抵扣物业费：1元回馈金抵扣1元物业费；仅「已到账」状态可用；物业费缴费页面选择"回馈金抵扣"；一次性自动抵扣，用户不可自主输入金额；系统自动计算抵扣金额 = min（回馈金余额，物业费应缴金额）；若物业费发生退款，已抵扣的回馈金原路退回', '抵扣商品：1元回馈金抵扣1元商品金额；仅「已到账」状态可用；商品结算页支付方式中选择"回馈金抵扣"；一次性自动抵扣，用户不可自主输入金额；系统自动计算抵扣金额 = min（回馈金余额，订单实付金额）；若商品订单发生退货，按扣回规则处理'] },
-                        { title: '3.0 后台配置项', paragraphs: ['回馈金比例：默认5%，订单实付金额 × 此比例 = 回馈金', '自动确认收货天数：默认7天，发货后N天未确认则自动确认', '结算周期起始日：默认每月26日00:00，回馈金结算周期的起点', '发放截止时间：默认次月5日24:00，回馈金统一发放到账的最后期限', '结算周期（26日—25日）与发放截止日（5日）形成固定节奏，两者之间的间隙（25日—次月5日）为结算处理窗口'] }
+                        { title: '2.4 抵扣规则', paragraphs: ['抵扣物业费：1元回馈金抵扣1元物业费；仅「已到账」状态可用；物业费缴费页面选择"回馈金抵扣"；一次性自动抵扣，用户不可自主输入金额；系统自动计算抵扣金额 = min（回馈金余额，物业费应缴金额）；若物业费发生退款，已抵扣的回馈金原路退回', '<<抵扣商品（商城订单）：1元回馈金抵扣1元商品金额；仅「已到账」状态可用；商城确认订单页选择"使用回馈金"；一次性自动抵扣，用户不可自主输入金额；系统自动计算抵扣金额 = min（回馈金余额，订单实付金额）；若商品订单发生退货，按扣回规则处理>>'] },
+                        { title: '3.0 后台配置项', paragraphs: ['回馈金比例：默认5%，订单实付金额 × 此比例 = 回馈金', '自动确认收货天数：默认7天，发货后N天未确认则自动确认', '结算周期起始日：默认每月26日00:00，回馈金结算周期的起点', '发放截止时间：默认次月5日24:00，回馈金统一发放到账的最后期限', '结算周期（26日—25日）与发放截止日（5日）形成固定节奏，两者之间的间隙（25日—次月5日）为结算处理窗口'] },
+                        { title: '4.0 更新记录', paragraphs: ['<span style="color:#828282;">更新时间：</span>2026年8月25日', '<span style="color:#828282;">更新内容：</span>新增商城订单抵扣功能', '1. <<回馈金抵扣范围新增商城订单>>：用户在商城确认订单页可选择使用回馈金抵扣商品金额', '2. <<明细列表新增商城订单抵扣记录>>：在「全部」和「已扣除」Tab中展示商城订单抵扣记录', '3. 扣除规则说明：商城订单抵扣按扣回规则处理（若商品订单发生退货）'] }
                     ]
                 },
                 statusList: [
@@ -18081,14 +18662,15 @@
                 ],
                 requirementDoc: {
                     title: '回馈金需求文档',
-                    meta: 'v1.1 · 更新日期 2026-06-26 · 电商/零售 · C端用户',
+                    meta: 'v1.2 · 更新日期 2026-08-25 · 电商/零售 · C端用户',
                     sections: [
                         { title: '1.0 需求背景', paragraphs: ['回馈金是用户在徕芙会员超市消费后可获得的消费返利。订单完成后（确认收货后）即可获得回馈金。回馈金可用来抵扣物业费及商品，1元回馈金可抵扣1元。', '核心概念——回馈金：用户消费后获得的现金权益，延迟发放、按月结算、到账后可用；预计返利：结算周期内的中间状态，已确认产生但尚未正式到账，不可使用、可因退款减少、结算后转为"已到账"；结算周期：上月26日00:00至本月25日24:00；订单实付金额：扣除优惠券、折扣后的实际支付金额'] },
                         { title: '2.1 获取规则', paragraphs: ['计算基数：订单实付金额', '计算公式：金额 × 5%（后台可配置比例）', '取整规则：向上取整，保留小数点后两位', '示例：订单¥19.99 → ceil(19.99 × 5%) = ceil(0.9995) = ¥1.00'] },
                         { title: '2.2 发放规则', paragraphs: ['发放时机：用户确认收货后，计入「预计返利」，按结算周期发放', '自动发放：7天自动确认收货 → 自动计入预计返利（后台可配置天数）', '结算周期：上月26日00:00 — 本月25日24:00为一个结算周期，周期内确认收货的回馈金累积为预计返利', '到账时间：不迟于次月5日24:00统一发放至主回馈金账户，到账即生效', '账户状态转换：未确认收货 → 确认收货/系统自动确认 → 预计返利（不可用）→ 结算周期结束统一发放 → 已到账（可用）', '预计返利期间售后退款 → 核减预计返利；已到账后售后退款 → 从账户扣回对应金额'] },
                         { title: '2.3 扣回规则', paragraphs: ['确认收货前退货：不发放，无需扣回（权益未产生）', '确认收货后退货：预计返利状态→核减预计返利，无真实扣回；已到账状态→从回馈金账户扣回对应金额', '权益已部分使用后退货：扣除剩余回馈金 + 退款中扣除已使用等值金额（回馈金必为已到账状态）', '权益已全部使用后退货：退款中扣除全部使用等值金额'] },
-                        { title: '2.4 抵扣规则', paragraphs: ['抵扣物业费：1元回馈金抵扣1元物业费；仅「已到账」状态可用；一次性自动抵扣，用户不可自主输入金额；系统自动计算抵扣金额 = min（回馈金余额，物业费应缴金额）；若物业费发生退款，已抵扣的回馈金原路退回', '抵扣商品：1元回馈金抵扣1元商品金额；仅「已到账」状态可用；一次性自动抵扣，用户不可自主输入金额；系统自动计算抵扣金额 = min（回馈金余额，订单实付金额）；若商品订单发生退货，按扣回规则处理'] },
-                        { title: '3.0 后台配置项', paragraphs: ['回馈金比例：默认5%，订单实付金额 × 此比例 = 回馈金', '自动确认收货天数：默认7天', '结算周期起始日：默认每月26日00:00', '发放截止时间：默认次月5日24:00', '结算周期（26日—25日）与发放截止日（5日）形成固定节奏，两者之间的间隙（25日—次月5日）为结算处理窗口'] }
+                        { title: '2.4 抵扣规则', paragraphs: ['抵扣物业费：1元回馈金抵扣1元物业费；仅「已到账」状态可用；一次性自动抵扣，用户不可自主输入金额；系统自动计算抵扣金额 = min（回馈金余额，物业费应缴金额）；若物业费发生退款，已抵扣的回馈金原路退回', '<<抵扣商品：1元回馈金抵扣1元商品金额；仅「已到账」状态可用；一次性自动抵扣，用户不可自主输入金额；系统自动计算抵扣金额 = min（回馈金余额，订单实付金额）；若商品订单发生退货，按扣回规则处理>>'] },
+                        { title: '3.0 后台配置项', paragraphs: ['回馈金比例：默认5%，订单实付金额 × 此比例 = 回馈金', '自动确认收货天数：默认7天', '结算周期起始日：默认每月26日00:00', '发放截止时间：默认次月5日24:00', '结算周期（26日—25日）与发放截止日（5日）形成固定节奏，两者之间的间隙（25日—次月5日）为结算处理窗口'] },
+                        { title: '4.0 更新记录', paragraphs: ['<span style="color:#828282;">更新时间：</span>2026年8月25日', '<span style="color:#828282;">更新内容：</span>新增商城订单抵扣功能', '1. <<回馈金抵扣范围新增商城订单>>：用户在商城确认订单页可选择使用回馈金抵扣商品金额', '2. <<明细列表新增商城订单抵扣记录>>：在「全部」和「已扣除」Tab中展示商城订单抵扣记录', '3. 扣除规则说明：商城订单抵扣按扣回规则处理（若商品订单发生退货）'] }
                     ]
                 },
                 statusList: [
@@ -18102,24 +18684,244 @@
                 render: 'profileRebateDeducted',
                 interactionNotes: [
                     { id: 1, title: '回馈金金额卡片', type: 'state', target: '[data-block="rebate-amount"]', content: '可用回馈金余额：大字号加粗展示当前用户钱包内已到账、可立即用于抵扣的净余额\n「回馈金规则」链接，点击跳转规则说明页\n预计可到账提示栏：下方圆角白底通栏，文案格式为"X月预计可到账 Y"。固定显示下个月预计到账的。用于展示用户已下单、但尚未确认收货的在途回馈金总额。凡是处于"已付款、待发货、待收货"状态的订单，其预计返利均应计入此处。' },
-                    { id: 2, title: '已扣除明细列表', type: 'state', target: '[data-block="rebate-list"]', content: '仅展示已扣除记录（抵扣物业费 -金额）\n按结算周期分组（上月26日00:00 至 本月25日24:00）\n明细项：左侧标题「抵扣物业费」+ 时间，右侧金额 -8.37 + 右箭头\n\n1. 抵扣物业费-回馈金减少\n金额来源：min（回馈金余额，物业费应缴金额），1元回馈金抵扣1元\n时间来源：抵扣操作时间\n触发时机：用户在物业费缴费页选择回馈金抵扣并完成支付\n交互：点击跳转至缴费详情页' },
+                    { id: 2, title: '已扣除明细列表', type: 'state', target: '[data-block="rebate-list"]', content: '仅展示已扣除记录（抵扣物业费 -金额、<<商城订单抵扣 -金额>>）\n按结算周期分组（上月26日00:00 至 本月25日24:00）\n明细项：左侧标题 + 时间，右侧金额 + 右箭头\n\n1. 抵扣物业费-回馈金减少\n金额来源：min（回馈金余额，物业费应缴金额），1元回馈金抵扣1元\n时间来源：抵扣操作时间\n触发时机：用户在物业费缴费页选择回馈金抵扣并完成支付\n交互：点击跳转至缴费详情页\n\n<<2. 商城订单抵扣-回馈金减少>>\n<<金额来源：min（回馈金余额，订单实付金额），1元回馈金抵扣1元>>\n<<时间来源：商城订单支付完成时间>>\n<<触发时机：用户在商城确认订单页选择使用回馈金抵扣并完成支付>>\n<<交互：点击跳转至商城订单详情>>' },
                     { id: 3, title: '年月选择弹窗', type: 'interaction', target: '[data-block="date-picker"]', content: '点击明细项时间文本 → 弹出底部年月选择弹窗\n双列滚轮：左侧年份、右侧月份，上下滑动选择\n底部 Cancel/OK 按钮' }
                 ],
                 requirementDoc: {
                     title: '回馈金需求文档',
-                    meta: 'v1.1 · 更新日期 2026-06-26 · 电商/零售 · C端用户',
+                    meta: 'v1.2 · 更新日期 2026-08-25 · 电商/零售 · C端用户',
                     sections: [
                         { title: '1.0 需求背景', paragraphs: ['回馈金是用户在徕芙会员超市消费后可获得的消费返利。订单完成后（确认收货后）即可获得回馈金。回馈金可用来抵扣物业费及商品，1元回馈金可抵扣1元。', '核心概念——回馈金：用户消费后获得的现金权益，延迟发放、按月结算、到账后可用；预计返利：结算周期内的中间状态，已确认产生但尚未正式到账，不可使用、可因退款减少、结算后转为"已到账"；结算周期：上月26日00:00至本月25日24:00；订单实付金额：扣除优惠券、折扣后的实际支付金额'] },
                         { title: '2.1 获取规则', paragraphs: ['计算基数：订单实付金额', '计算公式：金额 × 5%（后台可配置比例）', '取整规则：向上取整，保留小数点后两位', '示例：订单¥19.99 → ceil(19.99 × 5%) = ceil(0.9995) = ¥1.00'] },
                         { title: '2.2 发放规则', paragraphs: ['发放时机：用户确认收货后，计入「预计返利」，按结算周期发放', '自动发放：7天自动确认收货 → 自动计入预计返利（后台可配置天数）', '结算周期：上月26日00:00 — 本月25日24:00为一个结算周期，周期内确认收货的回馈金累积为预计返利', '到账时间：不迟于次月5日24:00统一发放至主回馈金账户，到账即生效', '账户状态转换：未确认收货 → 确认收货/系统自动确认 → 预计返利（不可用）→ 结算周期结束统一发放 → 已到账（可用）', '预计返利期间售后退款 → 核减预计返利；已到账后售后退款 → 从账户扣回对应金额'] },
                         { title: '2.3 扣回规则', paragraphs: ['确认收货前退货：不发放，无需扣回（权益未产生）', '确认收货后退货：预计返利状态→核减预计返利，无真实扣回；已到账状态→从回馈金账户扣回对应金额', '权益已部分使用后退货：扣除剩余回馈金 + 退款中扣除已使用等值金额（回馈金必为已到账状态）', '权益已全部使用后退货：退款中扣除全部使用等值金额'] },
-                        { title: '2.4 抵扣规则', paragraphs: ['抵扣物业费：1元回馈金抵扣1元物业费；仅「已到账」状态可用；一次性自动抵扣，用户不可自主输入金额；系统自动计算抵扣金额 = min（回馈金余额，物业费应缴金额）；若物业费发生退款，已抵扣的回馈金原路退回', '抵扣商品：1元回馈金抵扣1元商品金额；仅「已到账」状态可用；一次性自动抵扣，用户不可自主输入金额；系统自动计算抵扣金额 = min（回馈金余额，订单实付金额）；若商品订单发生退货，按扣回规则处理'] },
-                        { title: '3.0 后台配置项', paragraphs: ['回馈金比例：默认5%，订单实付金额 × 此比例 = 回馈金', '自动确认收货天数：默认7天', '结算周期起始日：默认每月26日00:00', '发放截止时间：默认次月5日24:00', '结算周期（26日—25日）与发放截止日（5日）形成固定节奏，两者之间的间隙（25日—次月5日）为结算处理窗口'] }
+                        { title: '2.4 抵扣规则', paragraphs: ['抵扣物业费：1元回馈金抵扣1元物业费；仅「已到账」状态可用；一次性自动抵扣，用户不可自主输入金额；系统自动计算抵扣金额 = min（回馈金余额，物业费应缴金额）；若物业费发生退款，已抵扣的回馈金原路退回', '<<抵扣商品：1元回馈金抵扣1元商品金额；仅「已到账」状态可用；一次性自动抵扣，用户不可自主输入金额；系统自动计算抵扣金额 = min（回馈金余额，订单实付金额）；若商品订单发生退货，按扣回规则处理>>'] },
+                        { title: '3.0 后台配置项', paragraphs: ['回馈金比例：默认5%，订单实付金额 × 此比例 = 回馈金', '自动确认收货天数：默认7天', '结算周期起始日：默认每月26日00:00', '发放截止时间：默认次月5日24:00', '结算周期（26日—25日）与发放截止日（5日）形成固定节奏，两者之间的间隙（25日—次月5日）为结算处理窗口'] },
+                        { title: '4.0 更新记录', paragraphs: ['<span style="color:#828282;">更新时间：</span>2026年8月25日', '<span style="color:#828282;">更新内容：</span>新增商城订单抵扣功能', '1. <<回馈金抵扣范围新增商城订单>>：用户在商城确认订单页可选择使用回馈金抵扣商品金额', '2. <<明细列表新增商城订单抵扣记录>>：在「全部」和「已扣除」Tab中展示商城订单抵扣记录', '3. 扣除规则说明：商城订单抵扣按扣回规则处理（若商品订单发生退货）'] }
                     ]
                 },
                 statusList: [
-                    { block: '明细列表', state: '已扣除', trigger: '页面加载', ui: '仅展示 - 金额的扣除记录' },
+                    { block: '明细列表', state: '已扣除', trigger: '页面加载', ui: '仅展示 - 金额的扣除记录（抵扣物业费 + 商城订单抵扣）' },
                     { block: '年月弹窗', state: '显示', trigger: '点击时间文本', ui: '底部弹窗展示双列滚轮选择器' }
+                ]
+            },
+            'profile-shopping-all': {
+                title: '我的购物金',
+                mainNav: 'profile',
+                render: 'profileShoppingAll',
+                interactionNotes: [
+                    { id: 1, title: '购物金余额卡片', type: 'state', target: '[data-block="sh-balance"]', content: '展示当前购物金总余额（大字号），本金 + 赠储拆分展示\n\n数据来源说明：\n总余额：来源于用户购物金账户实时数据，本金+赠储之和\n本金：用户历史真实支付的充值金额累计\n赠储：历史充值赠送的金额累计\n查看明细：点击跳转购物金明细页（profile-shopping-detail）' },
+                    { id: 2, title: '充值金额选择', type: 'interaction', target: '[data-block="sh-recharge"]', content: '充值档位数据来源于商城后台配置，用户端动态展示\n\n数据来源说明：\n充值档位：来源于商城后台「营销管理 > 余额充值」模块，运营创建并配置\n充值金额：后台配置的充值金额数值（如200/500/1000等）\n赠送内容：后台配置的赠送金额或赠品核销券（可同时配置）\n排序/显示：按后台配置的排序字段展示，支持控制是否显示\n\n5 档充值金额：¥200（送赠品券）/ ¥500（赠¥20）/ ¥1000（赠¥50）/ ¥2000（赠¥100）/ ¥5000（赠¥300），每档显示对应赠品\n选中态：蓝色边框高亮，支持单选切换\n点击充值项 → 更新底部结算金额' },
+                    { id: 3, title: '适用门店', type: 'interaction', target: '[data-action="sh-store"]', content: '「适用门店」+ 右箭头，点击弹出底部弹窗\n\n数据来源说明：\n门店名称/地址：2026Q3这期先由前端写死（徕芙会员超市 / 晋江市良兴路5号）\n弹窗内容：门店名称「徕芙会员超市」+ 门店地址「晋江市良兴路5号」+ 位置图标\n点击遮罩或关闭按钮可关闭弹窗' },
+                    { id: 4, title: '充值说明', type: 'state', target: '[data-block="sh-terms"]', content: '展示 4 条充值说明文案：\n1. 充值金额在线上及线下徕芙会员超市均可使用\n2. 储值完成后不支持自助退款，可联系客服处理\n3. 购物金余额不支持转赠，不可提现，长期有效\n4. 下方勾选已阅读并同意《用户储值协议》视为已读并同意《用户储值协议》内所有的内容\n\n协议链接：《用户储值协议》点击可跳转查看协议详情' },
+                    { id: 5, title: '底部结算栏', type: 'interaction', target: '[data-block="sh-bottom"]', content: '左侧展示当前选择的充值金额 + 协议勾选框，右侧「立即充值」按钮\n\n交互规则：\n未勾选协议时按钮禁用（灰色不可点击）；勾选后按钮变为蓝色可点击\n点击「立即充值」弹出微信支付弹窗，确认支付后更新余额并新增明细记录\n若充值档位含赠品券，充值成功后自动发放赠品核销券至用户优惠券账户' },
+                    { id: 6, title: '微信支付弹窗', type: 'interaction', target: '[data-block="sh-wxpay"]', content: '点击「立即充值」后弹出微信支付密码输入弹窗\n\n交互流程：\n1. 弹窗显示：点击「立即充值」后居中弹出\n2. 金额展示：显示当前充值金额（如￥200.00）\n3. 密码输入：6位数字密码，支持数字键盘输入\n4. 支付验证：输入完成后自动验证密码（模拟：任意6位数字通过）\n5. 支付结果：\n   - 成功：Toast 提示「充值成功」，余额更新，弹窗关闭，新增明细记录\n   - 失败：Toast 提示「密码错误，请重试」\n   - 取消：点击关闭按钮或遮罩，Toast 提示「已取消支付」，弹窗关闭\n6. 赠品发放：若档位含赠品券，自动发放至优惠券账户' }
+                ],
+                requirementDoc: {
+                    title: '购物金需求文档',
+                    meta: 'v1.1 · 更新日期 2026-08-26 · 电商/零售 · C端用户',
+                    sections: [
+                        { title: '1.0 需求背景', paragraphs: ['购物金是用户预充值至徕芙会员超市钱包的现金权益，充值后可在全渠道消费时直接抵扣，1元购物金可抵扣1元订单金额，无抵扣比例限制。', '核心概念——本金：用户真实支付的充值金额；赠储：充值赠送的金额，使用时按比例扣减；账户类型：在线充值账户，线上线下全渠道通用。'] },
+                        { title: '2.0 数据来源说明', paragraphs: ['购物金相关数据均来源于商城后台系统，由运营人员在后台统一配置和管理。', '购物金余额：来源于用户账户实时数据，本金+赠储之和，通过充值和消费交易自动更新', '充值档位：来源于商城后台「营销管理 > 余额充值」模块，运营创建并配置充值金额、赠送内容、排序及显示状态', '赠送内容：后台支持配置赠送余额（赠储）或赠品核销券，可同时配置', '门店信息：2026Q3这期先由前端写死（徕芙会员超市 / 晋江市良兴路5号）', '交易明细：来源于用户充值、消费、退款等交易记录，按时间顺序展示'] },
+                        { title: '3.0 充值规则', paragraphs: ['充值档位数据来源于商城后台「营销管理 > 余额充值」的配置。运营人员在后台创建充值档位，配置充值金额及赠送内容（赠送余额 / 赠品核销券，可同时配置），并设置排序、是否显示等属性。用户端充值页根据后台配置动态展示充值档位。', '充值档位：¥200（送赠品券）/ ¥500（赠¥20）/ ¥1000（赠¥50）/ ¥2000（赠¥100）/ ¥5000（赠¥300）', '充值成功后，本金立即到账，赠储同步到账', '线上充值支持微信支付；线下支持门店扫码'] },
+                        { title: '4.0 使用规则', paragraphs: ['抵扣比例：1元购物金抵扣1元实付订单金额，无比例限制，可全额抵扣', '使用范围：徕芙会员超市全部商品及物业费', '退款规则：消费后发生退款，购物金原路退回至账户（本金+赠储按比例退回）', '有效期：长期有效，不支持转赠、不支持提现'] },
+                        { title: '5.0 页面入口', paragraphs: ['我的页 → 会员信息卡片 → 点击「购物金」数值进入购物金首页，可进行充值', '首页「查看明细」按钮跳转购物金明细页'] },
+                        { title: '6.0 充值状态说明', paragraphs: ['点击「立即充值」后，页面弹出微信支付弹窗，用户完成支付流程。支付完成后根据结果进入不同状态：', '充值成功：微信支付回调成功，购物金余额实时更新（本金+赠储到账），底部 Toast 提示「充值成功」，2 秒后自动关闭弹窗并刷新首页余额展示，同时在明细页新增一条充值记录。若充值档位包含赠送赠品券，充值成功后系统自动将赠品核销券发放至用户优惠券账户，用户可在「我的 > 优惠券」中查看和使用。', '充值失败：微信支付回调失败或超时，底部 Toast 提示「充值失败，请稍后重试」，弹窗关闭，余额不变，用户可重新点击「立即充值」发起充值。', '支付取消：用户在微信支付弹窗主动关闭或取消支付，底部 Toast 提示「已取消支付」，弹窗关闭，余额不变。', '支付中：用户完成指纹/密码验证后等待微信回调期间，按钮显示「支付中...」并禁用，防止重复提交；回调到达后切换为成功或失败状态。'] }
+                    ]
+                },
+                statusList: [
+                    { block: '余额卡片', state: '默认', trigger: '页面加载', ui: '展示总余额 200（本金 180 + 赠储 20）+ 查看明细按钮' },
+                    { block: '充值选择', state: '默认选中 ¥200', trigger: '页面加载', ui: '第一个档位高亮，底部结算显示 ¥200' },
+                    { block: '充值选择', state: '切换档位', trigger: '点击其他充值档', ui: '对应档位高亮，底部结算金额同步更新' },
+                    { block: '底部结算', state: '未勾选协议', trigger: '页面加载', ui: '「立即充值」按钮禁用（灰色不可点击）' },
+                    { block: '底部结算', state: '已勾选协议', trigger: '点击协议勾选框', ui: '「立即充值」按钮变为可点击状态' },
+                    { block: '适用门店', state: '弹窗显示', trigger: '点击「适用门店」行', ui: '底部弹窗展示门店名称 + 地址，带滑入动画' },
+                    { block: '适用门店', state: '弹窗关闭', trigger: '点击遮罩或关闭按钮', ui: '弹窗滑出关闭' },
+                    { block: '微信支付', state: '弹窗显示', trigger: '点击「立即充值」', ui: '微信支付弹窗居中弹出，显示充值金额' },
+                    { block: '微信支付', state: '支付成功', trigger: '确认支付回调成功', ui: 'Toast 「充值成功」，余额+赠储更新，弹窗关闭，新增明细记录，赠品券发放至优惠券账户' },
+                    { block: '微信支付', state: '支付失败', trigger: '回调失败/超时', ui: 'Toast 「充值失败，请稍后重试」，弹窗关闭，余额不变' },
+                    { block: '微信支付', state: '支付取消', trigger: '用户主动关闭支付', ui: 'Toast 「已取消支付」，弹窗关闭，余额不变' },
+                    { block: '微信支付', state: '支付中', trigger: '等待回调期间', ui: '按钮显示「支付中...」并禁用，防重复提交' }
+                ]
+            },
+            'profile-shopping-detail': {
+                title: '购物金明细',
+                mainNav: 'profile',
+                render: 'profileShoppingDetailAll',
+                interactionNotes: [
+                    { id: 1, title: '明细页 Tab', type: 'interaction', target: '[data-block="sh-detail-tabs"]', content: '「全部/充值记录/消费记录」三个 Tab，点击切换列表\n全部 → profile-shopping-detail\n充值记录 → profile-shopping-recharge\n消费记录 → profile-shopping-consume\n选中态：底部蓝色下划线' },
+                    { id: 2, title: '明细列表', type: 'state', target: '[data-block="sh-detail-list"]', content: '展示全部交易记录：充值 / 退款返还 / 购物金消费\n充值/退款项：左侧绿色文件夹图标，标题「充值购物金」/「退款返还购物金」，右侧 +¥x 金额，下方显示交易后余额\n消费项：左侧蓝色购物车图标，标题「购物金消费」，右侧 -¥x 金额，下方显示订单号和余额\n点击记录项可跳转至对应订单详情页' }
+                ],
+                requirementDoc: {
+                    title: '购物金明细需求文档',
+                    meta: 'v1.0 · 2026-12-01',
+                    sections: [
+                        { title: '1.0 页面结构', paragraphs: ['顶部 Tab：全部/充值记录/消费记录，点击切换筛选', '列表项结构：左侧类型图标 + 标题 + 时间，右侧金额（充值为绿色+，消费为红色-）+ 底部余额/订单号'] },
+                        { title: '2.0 记录类型', paragraphs: ['充值记录：显示「充值购物金」，绿色+金额，来源为用户主动充值', '消费记录：显示「购物金消费」，红色-金额，来源为订单抵扣', '退款返还：显示「退款返还购物金」，绿色+金额，来源为订单退款'] },
+                        { title: '3.0 交互', paragraphs: ['点击「充值记录」Tab → 仅展示充值/退款返还类型记录', '点击「消费记录」Tab → 仅展示消费类型记录', '点击记录项 → 跳转对应订单详情页（待开发）'] }
+                    ]
+                },
+                statusList: [
+                    { block: 'Tab', state: '全部（默认）', trigger: '页面加载', ui: '展示充值/退款/消费全部记录' },
+                    { block: 'Tab', state: '充值记录', trigger: '点击「充值记录」Tab', ui: '仅展示充值/退款返还类型记录' },
+                    { block: 'Tab', state: '消费记录', trigger: '点击「消费记录」Tab', ui: '仅展示消费类型记录' },
+                    { block: '列表项', state: '充值项', trigger: '充值记录', ui: '绿色文件夹图标 + 绿色+金额 + 余额' },
+                    { block: '列表项', state: '消费项', trigger: '消费记录', ui: '蓝色购物车图标 + 红色-金额 + 订单号 + 余额' }
+                ]
+            },
+            'profile-shopping-recharge': {
+                title: '购物金明细',
+                mainNav: 'profile',
+                render: 'profileShoppingRecharge',
+                interactionNotes: [
+                    { id: 1, title: '明细页 Tab', type: 'interaction', target: '[data-block="sh-detail-tabs"]', content: '「全部/充值记录/消费记录」三个 Tab，点击切换列表\n当前页：充值记录 Tab 选中（底部蓝色下划线）' },
+                    { id: 2, title: '明细列表', type: 'state', target: '[data-block="sh-detail-list"]', content: '仅展示充值类型记录：充值购物金 / 退款返还购物金\n充值项：绿色文件夹图标 + 标题 + 时间，右侧绿色+¥x 金额，下方显示交易后余额\n退款返还项：绿色文件夹图标 + 标题「退款返还购物金」+ 时间，右侧绿色+¥x 金额\n点击记录项可跳转至对应订单详情页' }
+                ],
+                requirementDoc: {
+                    title: '购物金明细需求文档',
+                    meta: 'v1.0 · 2026-12-01',
+                    sections: [
+                        { title: '1.0 页面结构', paragraphs: ['默认展示充值类型记录（充值购物金 + 退款返还购物金）', '列表项结构：左侧绿色文件夹图标 + 标题 + 时间，右侧绿色+金额 + 底部余额'] },
+                        { title: '2.0 记录来源', paragraphs: ['充值购物金：用户在购物金首页完成微信充值后生成', '退款返还购物金：订单发生退款后，购物金原路退回至账户'] }
+                    ]
+                },
+                statusList: [
+                    { block: 'Tab', state: '充值记录（默认选中）', trigger: '页面加载', ui: '充值记录 Tab 高亮，展示充值/退款类型记录' }
+                ]
+            },
+            'profile-shopping-consume': {
+                title: '购物金明细',
+                mainNav: 'profile',
+                render: 'profileShoppingConsume',
+                interactionNotes: [
+                    { id: 1, title: '明细页 Tab', type: 'interaction', target: '[data-block="sh-detail-tabs"]', content: '「全部/充值记录/消费记录」三个 Tab，点击切换列表\n当前页：消费记录 Tab 选中（底部蓝色下划线）' },
+                    { id: 2, title: '明细列表', type: 'state', target: '[data-block="sh-detail-list"]', content: '仅展示消费类型记录：购物金消费\n消费项：左侧蓝色购物车图标 + 标题「购物金消费」+ 时间，右侧红色-¥x 金额，下方显示订单号和交易后余额\n点击记录项可跳转至对应订单详情页' }
+                ],
+                requirementDoc: {
+                    title: '购物金明细需求文档',
+                    meta: 'v1.0 · 2026-12-01',
+                    sections: [
+                        { title: '1.0 页面结构', paragraphs: ['默认展示消费类型记录（购物金消费）', '列表项结构：左侧蓝色购物车图标 + 标题 + 时间，右侧红色-金额 + 底部订单号和余额'] },
+                        { title: '2.0 记录来源', paragraphs: ['购物金消费：用户在确认订单页使用购物金抵扣后生成，记录关联订单编号'] }
+                    ]
+                },
+                statusList: [
+                    { block: 'Tab', state: '消费记录（默认选中）', trigger: '页面加载', ui: '消费记录 Tab 高亮，仅展示消费类型记录' }
+                ]
+            },
+            'profile-coupon-all': {
+                title: '我的优惠券',
+                mainNav: 'profile',
+                render: 'profileCouponAll',
+                interactionNotes: [
+                    { id: 1, title: '优惠券Tab', type: 'interaction', target: '[data-block="cp-tabs"]', content: '「可使用/已使用/已过期」三个Tab，点击切换优惠券列表' },
+                    { id: 2, title: '优惠券卡片', type: 'state', target: '[data-block="cp-card"]', content: '卡片包含：左侧产品图、右侧标题+到期日期+底部行（使用说明标签 + 去使用按钮）\n\n**数据来源说明：**\n1. 商品图片：来源于商城后台「营销管理 > 赠品核销券」中选择赠品商品的SKU图片，前端用emoji占位\n2. 优惠券标题：来源于后台「优惠券名称」字段，前端拼接为"免费领 + 赠品名称"\n3. 到期时间：来源于后台「使用时间」字段的截止日期，格式为"YYYY-MM-DD 23:59到期"\n4. 使用说明弹窗内容：来源于后台「赠品使用说明」字段，点击"使用说明"标签后弹窗展示' },
+                    { id: 3, title: '去使用按钮', type: 'interaction', target: '.cp-btn[data-action="use-coupon"]', content: '点击「去使用」按钮 → 跳转至核销码页面，展示16位数字核销码、条形码和二维码\n核销码页面启动轻量轮询（每3秒检测券状态），收银员扫码核销后显示「核销成功」Toast并自动返回本页，券移至「已使用」Tab' },
+                    { id: 4, title: '使用说明弹窗', type: 'interaction', target: '.cp-usage-mask', content: '点击卡片底部「使用说明」标签，弹出底部弹窗\n弹窗标题：使用说明\n弹窗文案：赠品为指定实物赠品，使用方式为线下门店出示核销码兑换，有效期以券面标注为准，每张券仅限使用一次，适用门店为徕芙会员超市线下门店；门店地址：晋江市良兴路69号。如有其他疑问，可联系在线客服咨询。\n点击遮罩或✕按钮可关闭弹窗' },
+                    { id: 5, title: '领取更多优惠券', type: 'interaction', target: '[data-action="get-more-coupon"]', content: '页面底部固定按钮，点击跳转至领券中心页面，可领取更多赠品核销券' }
+                ],
+                requirementDoc: {
+                    title: '我的优惠券需求文档',
+                    meta: 'v1.0 · 2026-08-25 · 电商/零售 · C端用户',
+                    sections: [
+                        { title: '1.0 需求背景', paragraphs: ['优惠券是徕芙会员超市发放给会员的专属折扣权益，用户可通过活动参与、充值购物金等方式获得，在门店消费时核销使用。', '当前版本仅保留赠品核销券，其他券类型（代金券、折扣券）暂不上线。'] },
+                        { title: '2.0 优惠券类型', paragraphs: ['【赠品核销券】赠品兑换券，如饮料一瓶。持券可到门店出示核销码兑换对应赠品。来源：购物金充值档位赠送、领券中心领取、活动参与。'] },
+                        { title: '3.0 数据来源说明', paragraphs: ['优惠券数据来源于商城后台「营销管理 > 赠品核销券」模块，由运营人员在后台创建和配置。', '商品图片：来源于后台「选择赠品商品」时关联的商品SKU缩略图', '优惠券标题：来源于后台「优惠券名称」字段，支持自定义输入', '到期时间：来源于后台「使用时间」字段的结束日期', '使用说明内容：来源于后台「赠品使用说明」字段'] },
+                        { title: '4.0 页面入口', paragraphs: ['我的页 → 会员信息卡片 → 点击「优惠券」数值进入我的优惠券页。'] },
+                        { title: '5.0 列表筛选规则', paragraphs: ['可使用：status=valid && 未过期 && 未核销，按有效期升序排列', '已使用：status=used，按使用时间降序排列', '已过期：status=expired（到期时间 < 当前时间），按过期时间降序排列'] },
+                        { title: '6.0 交互说明', paragraphs: ['点击可使用优惠券「去使用」按钮 → 跳转核销码页面', '已使用/已过期卡片：置灰状态，按钮禁用，底部「使用说明」标签不可点击', '点击可使用优惠券「使用说明」标签 → 弹出使用说明弹窗', '点击底部「领取更多优惠券」按钮 → 跳转领券中心页面'] }
+                    ]
+                },
+                statusList: [
+                    { block: 'Tab', state: '可使用（默认）', trigger: '页面加载', ui: '展示未使用且未过期的赠品核销券' },
+                    { block: 'Tab', state: '已使用', trigger: '点击「已使用」Tab', ui: '展示已核销的优惠券，带「已使用」徽章，卡片置灰' },
+                    { block: 'Tab', state: '已过期', trigger: '点击「已过期」Tab', ui: '展示过期优惠券，带「已过期」徽章，卡片置灰' },
+                    { block: '按钮', state: '可使用', trigger: '卡片为valid状态', ui: '按钮文案"去使用"，可点击跳转核销码页' },
+                    { block: '按钮', state: '已使用', trigger: '卡片为used状态', ui: '禁用按钮"已使用"' },
+                    { block: '按钮', state: '已过期', trigger: '卡片为expired状态', ui: '禁用按钮"已过期"' },
+                    { block: '使用说明', state: '可使用/领券中心', trigger: '卡片为valid状态', ui: '可点击弹出弹窗' },
+                    { block: '使用说明', state: '已使用/已过期', trigger: '卡片为used/expired状态', ui: '不可点击' },
+                    { block: '空状态', state: '无优惠券', trigger: '当前Tab无数据', ui: '空态文案"暂无可用优惠券"' }
+                ]
+            },
+            'profile-coupon-used': {
+                title: '我的优惠券',
+                mainNav: 'profile',
+                render: 'profileCouponUsed',
+                interactionNotes: [
+                    { id: 1, title: '优惠券Tab', type: 'interaction', target: '[data-block="cp-tabs"]', content: '当前「已使用」Tab选中' },
+                    { id: 2, title: '优惠券卡片', type: 'state', target: '[data-block="cp-card"]', content: '展示已使用的赠品核销券，卡片置灰\n• 右上角：「已使用」徽章\n• 底部左侧：「使用说明」标签，不可点击\n• 底部右侧：禁用按钮「已使用」' }
+                ],
+                requirementDoc: {
+                    title: '我的优惠券需求文档',
+                    meta: 'v1.0 · 2026-08-25',
+                    sections: [
+                        { title: '1.0 已使用Tab', paragraphs: ['展示已核销使用的赠品核销券历史，按使用时间倒序排列。', '卡片置灰，按钮禁用。'] }
+                    ]
+                },
+                statusList: [
+                    { block: 'Tab', state: '已使用（选中）', trigger: '页面加载', ui: '展示已使用的优惠券历史，带「已使用」徽章' }
+                ]
+            },
+            'profile-coupon-expired': {
+                title: '我的优惠券',
+                mainNav: 'profile',
+                render: 'profileCouponExpired',
+                interactionNotes: [
+                    { id: 1, title: '优惠券Tab', type: 'interaction', target: '[data-block="cp-tabs"]', content: '当前「已过期」Tab选中' },
+                    { id: 2, title: '优惠券卡片', type: 'state', target: '[data-block="cp-card"]', content: '展示已过期的赠品核销券，卡片置灰\n• 右上角：「已过期」徽章\n• 底部左侧：「使用说明」标签，不可点击\n• 底部右侧：禁用按钮「已过期」' }
+                ],
+                requirementDoc: {
+                    title: '我的优惠券需求文档',
+                    meta: 'v1.0 · 2026-08-25',
+                    sections: [
+                        { title: '1.0 已过期Tab', paragraphs: ['展示到期未核销的赠品核销券，按过期时间倒序排列。', '卡片置灰，按钮禁用。'] }
+                    ]
+                },
+                statusList: [
+                    { block: 'Tab', state: '已过期（选中）', trigger: '页面加载', ui: '展示过期优惠券历史，带「已过期」徽章' }
+                ]
+            },
+            'profile-coupon-qrcode': {
+                title: '核销码',
+                mainNav: 'profile',
+                render: 'couponQrcode',
+                interactionNotes: [
+                    { id: 1, title: '核销码展示', type: 'state', target: '[data-block="qrcode-content"]', content: '展示以下内容供收银员扫码核销：\n• 标题：赠品名称（如"饮料一瓶"）\n• 条形码：基于16位核销码生成\n• 二维码：16位核销码对应的QR码\n• 16位数字核销码：如545344389957394587\n• 底部提示文案："请向收银员出示此核销码"' },
+                    { id: 2, title: '核销结果轮询', type: 'interaction', target: '[data-block="qrcode-content"]', content: '核销码页面采用轻量轮询方案，每3秒检测券状态变化：\n• 收银员扫码后，后端将券状态从 valid 改为 used（成功）或 verify_failed（失败）\n• 轮询检测到 used → 显示「核销成功」Toast，1.5秒后自动返回我的优惠券页\n• 轮询检测到 verify_failed → 显示「核销失败：xxx」Toast，留在当前页面供用户重试或返回\n• 离开核销码页面时自动清除轮询定时器，避免内存泄漏\n\n注：当前原型仅模拟核销成功场景（45秒后状态变更为used），核销失败场景不在原型中展示' },
+                    { id: 3, title: '返回', type: 'interaction', target: '[data-block="back-btn"]', content: '点击返回按钮回到我的优惠券页面，同时清除轮询定时器' }
+                ],
+                requirementDoc: {
+                    title: '核销码需求文档',
+                    meta: 'v1.0 · 2026-08-26',
+                    sections: [
+                        { title: '1.0 页面功能', paragraphs: ['用户在「我的优惠券-可使用」点击「去使用」进入核销码页面，向收银员展示核销码供扫码核销。'] },
+                        { title: '2.0 核销成功流程', paragraphs: ['收银员扫码后，后端验证通过，券状态从 valid 变为 used', '前端轮询检测到状态变更，显示「核销成功」Toast', 'Toast显示1.5秒后自动返回我的优惠券-可使用页，该券移至「已使用」Tab'] },
+                        { title: '3.0 核销失败场景', paragraphs: ['以下场景后端会返回核销失败结果，券状态变为 verify_failed：', '1. 券已过期：用户出示时券已过有效期', '2. 券已被使用：重复核销（如上次已扫过）', '3. 券不存在：核销码无效或被篡改', '4. 门店不匹配：此券不适用当前门店', '5. 库存不足：赠品已发完', '6. 网络异常：门店网络故障导致请求超时', '核销失败时前端显示「核销失败：xxx原因」Toast，留在当前页面供用户重试或手动返回'] },
+                        { title: '4.0 轮询机制', paragraphs: ['轮询频率：每3秒一次', '成功检测条件：券状态变为 used', '失败检测条件：券状态变为 verify_failed', '离开页面时自动清除轮询定时器', '注：当前原型仅模拟成功场景（45秒后状态变更为used），失败场景不在原型中展示'] }
+                    ]
+                },
+                statusList: [
+                    { block: '核销码', state: '展示中', trigger: '进入页面', ui: '标题+条形码+二维码+核销码数字+底部提示文案' },
+                    { block: '核销码', state: '核销成功', trigger: '轮询检测到券状态变为used', ui: '显示「核销成功」Toast，1.5秒后自动返回我的优惠券页' },
+                    { block: '核销码', state: '核销失败', trigger: '轮询检测到券状态变为verify_failed', ui: '显示「核销失败：xxx原因」Toast，留在当前页面（注：原型不展示此场景）' }
+                ]
+            },
+            'profile-coupon-center': {
+                title: '领券中心',
+                mainNav: 'profile',
+                render: 'couponCenter',
+                interactionNotes: [
+                    { id: 1, title: '领券列表', type: 'state', target: '[data-block="cc-list"]', content: '展示可领取的赠品核销券列表，卡片样式与「我的优惠券」核销券一致' },
+                    { id: 2, title: '领取按钮', type: 'interaction', target: '.cp-btn[data-action="claim-coupon"]', content: '未领取状态：文案「领取」，可点击\n已领取状态：禁用按钮，文案「已领取」\n点击领取后按钮变为禁用，显示"领取成功"Toast提示' },
+                    { id: 3, title: '使用说明', type: 'interaction', target: '.cp-store-tag[data-action="show-usage"]', content: '点击卡片底部「使用说明」标签，弹出底部弹窗（与我的优惠券页弹窗一致）\n弹窗文案：赠品为指定实物赠品，使用方式为线下门店出示核销码兑换...' },
+                    { id: 4, title: '有效期', type: 'data-source', target: '[data-block="cc-card-expire"]', content: '数据取商城后台「营销管理 > 赠品核销券」对每张券设置的领取结束时间，前端格式为"结束日期 + 23:59到期"' },
+                    { id: 5, title: '卡片标题', type: 'data-source', target: '[data-block="cc-card-title"]', content: '数据取后台赠品商品名称，前端拼接格式为"免费领 + 赠品名称"' }
+                ],
+                statusList: [
+                    { block: '领取按钮', state: '未领取', trigger: '页面加载', ui: '按钮文案"领取"，可点击' },
+                    { block: '领取按钮', state: '已领取', trigger: '点击领取', ui: '禁用按钮"已领取" + Toast提示' },
+                    { block: '使用说明', state: '可点击', trigger: '点击标签', ui: '弹出使用说明弹窗' }
                 ]
             },
             'profile-settings': {
@@ -18341,6 +19143,7 @@
         // ====== 回馈金页面共享渲染函数 ======
         const rebateAllCards = [
             { year: 2026, month: 12, monthLabel: '2026年12月', period: '11月26日-12月25日', items: [
+                { title: '商城订单抵扣', time: '2026-12-20 16:30:45', amount: '-12.00', type: 'minus', tag: '' },
                 { title: '抵扣物业费', time: '2026-12-04 15:21:11', amount: '-8.37', type: 'minus', tag: '' },
                 { title: '订单消费', time: '2026-12-01 14:09:20', amount: '+7.72', type: 'plus', tag: '预计返利' },
                 { title: '订单消费', time: '2026-11-28 09:35:46', amount: '+12.50', type: 'plus', tag: '' }
@@ -18410,7 +19213,7 @@
                     <div class="pr-card-item-left">
                         <div class="pr-card-item-info">
                             <div class="pr-card-item-title">${item.title}</div>
-                            <div class="pr-card-item-time">${item.time}</div>
+                            <div class="pr-card-item-time">${item.time}${item.sub ? ' · ' + item.sub : ''}</div>
                         </div>
                     </div>
                     <div class="pr-card-item-right">
@@ -18501,7 +19304,7 @@
                     <div class="pr-card-item-left">
                         <div class="pr-card-item-info">
                             <div class="pr-card-item-title">${item.title}</div>
-                            <div class="pr-card-item-time">${item.time}</div>
+                            <div class="pr-card-item-time">${item.time}${item.sub ? ' · ' + item.sub : ''}</div>
                         </div>
                     </div>
                     <div class="pr-card-item-right">
@@ -18568,6 +19371,502 @@
                 });
             }
         }
+        // ====== 购物金公共数据 ======
+        const shoppingState = {
+            balance: 200,       // 总余额
+            principal: 180,     // 本金
+            bonus: 20,          // 赠储
+            rechargeAmount: 200,
+            agreed: false,
+            wxPwd: '',
+            wxPwdIndex: 0
+        };
+        const shoppingTiers = [
+            { amount: 200, gift: '送赠品券' },
+            { amount: 500, gift: '赠¥20' },
+            { amount: 1000, gift: '赠¥50' },
+            { amount: 2000, gift: '赠¥100' },
+            { amount: 5000, gift: '赠¥300' }
+        ];
+        const shoppingRecords = [
+            { type: 'recharge', title: '充值购物金', time: '2025-12-01 14:09:20', amount: 520, balance: 520, order: '' },
+            { type: 'consume', title: '购物金消费', time: '2025-12-01 14:09:20', amount: -320, balance: 200, order: '订单#20260422164313587212' },
+            { type: 'consume', title: '购物金消费', time: '2025-12-01 14:09:20', amount: -56, balance: 144, order: '订单#20260422164313587212' },
+            { type: 'recharge', title: '充值购物金', time: '2025-12-01 14:09:20', amount: 200, balance: 344, order: '' },
+            { type: 'refund', title: '退款返还购物金', time: '2025-12-01 14:09:20', amount: 56, balance: 400, order: '' }
+        ];
+        // ====== 购物金渲染函数 ======
+        function profileShoppingRender(mode) {
+            // 图标：购物金明细用到的绿色文件夹、蓝色购物车
+            const iconFolder = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/><path d="M3 11h18"/></svg>`;
+            const iconCart = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.5"/><circle cx="17" cy="20" r="1.5"/><path d="M3 4h2l2.5 12.5a1 1 0 0 0 1 .8h8.5a1 1 0 0 0 1-.7L21 8H6"/></svg>`;
+            const iconArrowRight = `<img src="figma-images/icon-arrow-right-s-line.svg" alt="">`;
+
+            // 三种明细页：全部 / 充值记录 / 消费记录
+            if (mode === 'all' || mode === 'recharge' || mode === 'consume') {
+                const filter = mode === 'recharge' ? 'recharge' : mode === 'consume' ? 'consume' : 'all';
+                const records = shoppingRecords.filter(r => {
+                    if (filter === 'all') return true;
+                    if (filter === 'recharge') return r.type === 'recharge' || r.type === 'refund';
+                    return r.type === 'consume';
+                });
+                const tabItem = (key, label) => `
+                    <div class="sh-detail-tab${(key === 'profile-shopping-detail' && filter === 'all') ||
+                            (key === 'profile-shopping-recharge' && filter === 'recharge') ||
+                            (key === 'profile-shopping-consume' && filter === 'consume') ? ' active' : ''}" data-tab="${key}">${label}</div>
+                `;
+                const itemHTML = (r) => {
+                    const iconCls = r.type === 'consume' ? 'consume' : (r.type === 'refund' ? 'refund' : 'recharge');
+                    const iconSvg = r.type === 'consume' ? iconCart : iconFolder;
+                    const isPlus = r.amount > 0;
+                    const amountStr = (isPlus ? '+' : '-') + '¥' + Math.abs(r.amount);
+                    const balanceStr = '余额¥' + r.balance;
+                    return `
+                        <div class="sh-detail-item" data-type="${r.type}">
+                            <div class="sh-detail-icon ${iconCls}">${iconSvg}</div>
+                            <div class="sh-detail-info">
+                                <div class="sh-detail-title">${r.title}</div>
+                                <div class="sh-detail-sub">${r.time}${r.order ? '<br>' + r.order : ''}</div>
+                            </div>
+                            <div class="sh-detail-right">
+                                <div class="sh-detail-amount ${isPlus ? 'plus' : 'minus'}">${amountStr}</div>
+                                <div class="sh-detail-balance">${balanceStr}</div>
+                            </div>
+                        </div>
+                    `;
+                };
+                return `
+                <div class="sh-page">
+                    <div class="sh-detail-tabs" data-block="sh-detail-tabs">
+                        ${tabItem('profile-shopping-detail', '全部')}
+                        ${tabItem('profile-shopping-recharge', '充值记录')}
+                        ${tabItem('profile-shopping-consume', '消费记录')}
+                    </div>
+                    <div class="sh-detail-list" data-block="sh-detail-list">
+                        ${records.length > 0 ? records.map(itemHTML).join('') : '<div class="sh-empty">暂无记录</div>'}
+                    </div>
+                </div>
+                `;
+            }
+            // 购物金首页（充值页）
+            const tierItem = (t) => `
+                <div class="sh-recharge-item${t.amount === shoppingState.rechargeAmount ? ' active' : ''}" data-amount="${t.amount}">
+                    <div class="sh-recharge-amount">¥ ${t.amount}</div>
+                    <div class="sh-recharge-gift">${t.gift}</div>
+                </div>
+            `;
+            return `
+            <div class="sh-home-root">
+                <div class="sh-page">
+                    <div class="sh-balance-card" data-block="sh-balance">
+                        <div class="sh-balance-row">
+                            <div class="sh-balance-value">${shoppingState.balance}</div>
+                            <div class="sh-balance-desc">本金 ${shoppingState.principal}  赠储 ${shoppingState.bonus}</div>
+                        </div>
+                        <button class="sh-detail-btn" data-action="go-shopping-detail">查看明细 ${iconArrowRight}</button>
+                    </div>
+                    <div class="sh-section-title">选择充值金额</div>
+                    <div class="sh-recharge-grid" data-block="sh-recharge">
+                        ${shoppingTiers.map(tierItem).join('')}
+                    </div>
+                    <div class="sh-section-row">
+                        <div class="sh-section-title-inline">适用门店</div>
+                        <div class="sh-store-link" data-action="sh-store">徕芙会员超市 ${iconArrowRight}</div>
+                    </div>
+                    <div class="sh-terms" data-block="sh-terms">
+                        <ol>
+                            <li>充值金额在线上及线下徕芙会员超市均可使用</li>
+                            <li>储值完成后不支持自助退款，可联系客服处理</li>
+                            <li>购物金余额不支持转赠，不可提现，长期有效</li>
+                            <li>下方勾选 已阅读并同意 <span class="sh-terms-link">《用户储值协议》</span> 视为已读并同意《用户储值协议》内所有的内容</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="sh-bottom-bar" data-block="sh-bottom">
+                    <div class="sh-bottom-left">
+                        <div class="sh-bottom-amount">¥ ${shoppingState.rechargeAmount}</div>
+                        <div class="sh-bottom-checkbox" data-action="toggle-agree">
+                            <img src="${shoppingState.agreed ? 'figma-images/icon-checkbox-checked.svg' : 'figma-images/icon-checkbox-blank.svg'}" alt="">
+                            <span>已阅读并同意 <span class="sh-terms-link">《用户储值协议》</span></span>
+                        </div>
+                    </div>
+                    <button class="sh-bottom-btn" data-action="do-recharge" ${shoppingState.agreed ? '' : 'disabled'}>立即充值</button>
+                </div>
+                <div class="nav-home-indicator"><div class="ios-home-indicator"></div></div>
+                <!-- 适用门店弹窗 -->
+                <div class="sh-modal-mask" data-action="close-store-modal">
+                    <div class="sh-modal" onclick="event.stopPropagation()">
+                        <div class="sh-modal-header">
+                            <div class="sh-modal-title">适用门店</div>
+                            <div class="sh-modal-close" data-action="close-store-modal">✕</div>
+                        </div>
+                        <div class="sh-modal-body">
+                            <div class="sh-modal-store-name">徕芙会员超市</div>
+                            <div class="sh-modal-store-addr">
+                                <img src="figma-images/icon-location.svg" alt="">
+                                <span">晋江市良兴路5号</span>
+                            </div>
+                        </div>
+                        <div class="sh-modal-grabber"></div>
+                    </div>
+                </div>
+                <!-- 微信支付弹窗 -->
+                <div class="sh-wxpay-mask">
+                    <div class="sh-wxpay-content" onclick="event.stopPropagation(); return false;">
+                        <div class="sh-wxpay-close" data-action="close-wxpay">✕</div>
+                        <div class="sh-wxpay-merchant">徕芙会员超市</div>
+                        <div class="sh-wxpay-amount"><span class="symbol">¥</span>${shoppingState.rechargeAmount}.00</div>
+                        <div class="sh-wxpay-method">
+                            <span class="sh-wxpay-method-label">Payment Method</span>
+                            <span class="sh-wxpay-method-change">Change</span>
+                        </div>
+                        <div class="sh-wxpay-card">
+                            <div class="sh-wxpay-card-icon">CCB</div>
+                            <div class="sh-wxpay-card-info">
+                                <div class="sh-wxpay-card-name">CCB Credit Card</div>
+                                <div class="sh-wxpay-card-no">**** **** **** 1496</div>
+                            </div>
+                            <div class="sh-wxpay-card-check">✓</div>
+                        </div>
+                        <div class="sh-wxpay-discount-card">
+                            <div class="sh-wxpay-card-icon" style="background: linear-gradient(135deg, #E53935 0%, #F44336 100%);">Bank</div>
+                            <div class="sh-wxpay-discount-info">
+                                <div class="sh-wxpay-discount-name">使用CEB Debit Card(7609)</div>
+                                <div class="sh-wxpay-discount-amount">优惠0.11元</div>
+                            </div>
+                            <div class="sh-wxpay-discount-use" data-action="toggle-discount">使用</div>
+                        </div>
+                        <div class="sh-wxpay-pwd">
+                            <div class="sh-wxpay-pwd-box" data-pwd-index="0"></div>
+                            <div class="sh-wxpay-pwd-box" data-pwd-index="1"></div>
+                            <div class="sh-wxpay-pwd-box" data-pwd-index="2"></div>
+                            <div class="sh-wxpay-pwd-box" data-pwd-index="3"></div>
+                            <div class="sh-wxpay-pwd-box" data-pwd-index="4"></div>
+                            <div class="sh-wxpay-pwd-box" data-pwd-index="5"></div>
+                        </div>
+                        <div class="sh-wxpay-keypad" onclick="event.stopPropagation(); return false;">
+                            <div class="sh-wxpay-key" data-key="1">1</div>
+                            <div class="sh-wxpay-key" data-key="2">2</div>
+                            <div class="sh-wxpay-key" data-key="3">3</div>
+                            <div class="sh-wxpay-key" data-key="4">4</div>
+                            <div class="sh-wxpay-key" data-key="5">5</div>
+                            <div class="sh-wxpay-key" data-key="6">6</div>
+                            <div class="sh-wxpay-key" data-key="7">7</div>
+                            <div class="sh-wxpay-key" data-key="8">8</div>
+                            <div class="sh-wxpay-key" data-key="9">9</div>
+                            <div class="sh-wxpay-key bank" data-key="bank"><span class="bank-icon">Bank</span></div>
+                            <div class="sh-wxpay-key" data-key="0">0</div>
+                            <div class="sh-wxpay-key delete" data-key="back"><span class="delete-icon">⌫</span></div>
+                        </div>
+                        <div class="sh-wxpay-home-indicator"></div>
+                    </div>
+                </div>
+            </div>
+            `;
+        }
+        // ====== 优惠券数据 ======
+        const couponRecords = [
+            // 可使用（赠品核销券）
+            { id: 1, type: 'gift', title: '赠品核销券', subtitle: '凭此券可在徕芙会员超市兑换指定饮料一瓶（购物金充值赠送）', startDate: '2026-08-25', endDate: '2026-10-25', status: 'valid', giftName: '饮料一瓶' },
+            { id: 2, type: 'gift', title: '赠品核销券', subtitle: '凭此券可兑换洗衣液一袋（来自：618活动）', startDate: '2026-08-20', endDate: '2026-09-19', status: 'valid', giftName: '洗衣液一袋' },
+            { id: 3, type: 'gift', title: '赠品核销券', subtitle: '凭此券可兑换洗洁精一瓶（会员日活动赠送）', startDate: '2026-08-18', endDate: '2026-09-18', status: 'valid', giftName: '洗洁精一瓶' },
+            // 已使用（赠品核销券）
+            { id: 4, type: 'gift', title: '赠品核销券', subtitle: '凭此券可兑换饮料一瓶（购物金充值赠送）', startDate: '2026-06-25', endDate: '2026-08-25', status: 'used', useTime: '2026-07-18 09:15:08', giftName: '饮料一瓶' },
+            { id: 5, type: 'gift', title: '赠品核销券', subtitle: '凭此券可兑换抽纸一包（会员活动赠送）', startDate: '2026-05-10', endDate: '2026-07-10', status: 'used', useTime: '2026-06-22 14:28:30', giftName: '抽纸一包' },
+            // 已过期（赠品核销券）
+            { id: 6, type: 'gift', title: '赠品核销券', subtitle: '凭此券可兑换精美礼品一份（周年庆活动）', startDate: '2026-04-01', endDate: '2026-06-30', status: 'expired', giftName: '精美礼品一份' },
+            { id: 7, type: 'gift', title: '赠品核销券', subtitle: '凭此券可兑换矿泉水一瓶（开业活动赠送）', startDate: '2026-03-01', endDate: '2026-05-31', status: 'expired', giftName: '矿泉水一瓶' }
+        ];
+        // ====== 优惠券渲染函数 ======
+        function profileCouponRender(tab) {
+            // tab: valid / used / expired
+            let list = [];
+            if (tab === 'valid') {
+                list = couponRecords.filter(c => c.status === 'valid').sort((a, b) => a.endDate.localeCompare(b.endDate));
+            } else if (tab === 'used') {
+                list = couponRecords.filter(c => c.status === 'used').sort((a, b) => b.useTime.localeCompare(a.useTime));
+            } else if (tab === 'expired') {
+                list = couponRecords.filter(c => c.status === 'expired').sort((a, b) => b.endDate.localeCompare(a.endDate));
+            }
+            const tabsHTML = `
+                <div class="cp-tabs" data-block="cp-tabs">
+                    <div class="cp-tab${tab === 'valid' ? ' active' : ''}" data-tab="profile-coupon-all">可使用<span class="cp-tab-count"></span></div>
+                    <div class="cp-tab${tab === 'used' ? ' active' : ''}" data-tab="profile-coupon-used">已使用</div>
+                    <div class="cp-tab${tab === 'expired' ? ' active' : ''}" data-tab="profile-coupon-expired">已过期</div>
+                </div>
+            `;
+            const cardHTML = (c) => {
+                // 赠品对应的emoji图标（用于产品图框）
+                const emojiMap = {
+                    '饮料一瓶': '🧃', '矿泉水一瓶': '💧', '洗衣液一袋': '🧺',
+                    '洗洁精一瓶': '🧴', '抽纸一包': '🧻', '精美礼品一份': '🎁'
+                };
+                const emoji = emojiMap[c.giftName] || '🎁';
+                // 标题: 按设计稿是赠品活动说明，如"开业领免费柠檬茶"
+                // 这里我们用"免费领取" + 赠品名称
+                const activityTitle = `免费领${c.giftName || '赠品'}`;
+                // 到期日期格式: YYYY-MM-DD HH:mm到期
+                const expireStr = `${c.endDate} 23:59到期`;
+                // 门店专用标签 + 向下箭头SVG (16×16 1.5px描边 #828282)
+                const storeTagHTML = `
+                    <div class="cp-store-tag" data-action="show-usage">
+                        <span>使用说明</span>
+                        <span class="arrow">
+                            <svg viewBox="0 0 16 16" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 6l4 4 4-4" stroke="#828282" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </span>
+                    </div>
+                `;
+                // 不带 data-action 的使用说明标签（用于已使用/已过期状态，不可点击）
+                const storeTagHTMLNoAction = `
+                    <div class="cp-store-tag">
+                        <span>使用说明</span>
+                        <span class="arrow">
+                            <svg viewBox="0 0 16 16" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 6l4 4 4-4" stroke="#828282" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </span>
+                    </div>
+                `;
+                // 状态徽章（丝带）
+                let badgeHTML = '';
+                if (c.status === 'used') badgeHTML = `<div class="cp-badge"><span>已使用</span></div>`;
+                else if (c.status === 'expired') badgeHTML = `<div class="cp-badge"><span>已过期</span></div>`;
+                // 右下按钮或状态信息
+                let actionHTML = '';
+                let leftInfoHTML = '';
+                if (c.status === 'valid') {
+                    leftInfoHTML = storeTagHTML;
+                    actionHTML = `<button class="cp-btn" data-id="${c.id}" data-action="use-coupon">去使用</button>`;
+                } else if (c.status === 'used') {
+                    leftInfoHTML = storeTagHTMLNoAction;
+                    actionHTML = `<button class="cp-btn disabled" disabled>已使用</button>`;
+                } else {
+                    leftInfoHTML = storeTagHTMLNoAction;
+                    actionHTML = `<button class="cp-btn disabled" disabled>已过期</button>`;
+                }
+                const cardClass = 'cp-card ' + (c.status !== 'valid' ? c.status : '');
+                return `
+                    <div class="${cardClass}" data-block="cp-card" data-id="${c.id}">
+                        ${badgeHTML}
+                        <div class="cp-card-left">
+                            <div class="cp-product-img">
+                                <span class="cp-product-emoji">${emoji}</span>
+                            </div>
+                        </div>
+                        <div class="cp-card-divider"></div>
+                        <div class="cp-card-right">
+                            <div class="cp-title-block">
+                                <div class="cp-title">${activityTitle}</div>
+                                <div class="cp-expire">${expireStr}</div>
+                            </div>
+                            <div class="cp-lower-row">
+                                ${leftInfoHTML}
+                                ${actionHTML}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            };
+            const listHTML = list.length === 0 ? `
+                <div class="cp-empty">
+                    <div class="cp-empty-icon">
+                        <svg viewBox="0 0 48 48" width="60" height="60" fill="none" stroke="rgba(130,130,130,0.4)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="4" y="10" width="40" height="28" rx="4"/>
+                            <path d="M16 10v28"/>
+                            <circle cx="16" cy="24" r="2" fill="rgba(130,130,130,0.4)"/>
+                            <path d="M26 18h10M26 24h10M26 30h6"/>
+                        </svg>
+                    </div>
+                    <div class="cp-empty-text">
+                        ${tab === 'valid' ? '暂无可用优惠券' : tab === 'used' ? '暂无已使用的优惠券' : '暂无已过期的优惠券'}
+                    </div>
+                </div>
+            ` : `
+                <div class="cp-list">
+                    ${list.map(cardHTML).join('')}
+                </div>
+            `;
+            return `
+                <div class="cp-page">
+                    ${tabsHTML}
+                    <div class="cp-content">
+                        ${listHTML}
+                    </div>
+                    <div class="cp-footer-bar">
+                        <button class="cp-get-more-btn" data-action="get-more-coupon">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2.5a1 1 0 0 1-1 1h-1a2 2 0 1 0 0 4h1a1 1 0 0 1 1 1V17a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2.5a1 1 0 0 1 1-1h1a2 2 0 1 0 0-4H4a1 1 0 0 1-1-1V7z" stroke="#254EDB" stroke-width="1.6" stroke-linejoin="round"/>
+                                <path d="M9.5 8.5h5M9.5 15.5h5" stroke="#254EDB" stroke-width="1.6" stroke-linecap="round"/>
+                            </svg>
+                            领取更多优惠券
+                        </button>
+                    </div>
+                    <div class="nav-home-indicator"><div class="ios-home-indicator"></div></div>
+                    <!-- 使用说明弹窗 -->
+                    <div class="cp-usage-mask" data-action="close-usage">
+                        <div class="cp-usage-modal" onclick="event.stopPropagation()">
+                            <div class="cp-usage-header">
+                                <div class="cp-usage-title">使用说明</div>
+                                <div class="cp-usage-close" data-action="close-usage">✕</div>
+                            </div>
+                            <div class="cp-usage-body">赠品为指定实物赠品，使用方式为线下门店出示核销码兑换，有效期以券面标注为准，每张券仅限使用一次，适用门店为徕芙会员超市线下门店；门店地址：晋江市良兴路69号。如有其他疑问，可联系在线客服咨询。</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        // ====== 核销码页面渲染 ======
+        const couponQrcodeData = {
+            code: '545344389957394587',
+            giftName: '饮料一瓶',
+            couponId: 1
+        };
+        // 核销码页面轮询定时器
+        let _qrcodePollTimer = null;
+        function couponQrcodeRender() {
+            const code = couponQrcodeData.code;
+            const barcodeHTML = `
+                <svg viewBox="0 0 280 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                    ${(function(){
+                        // 生成模拟条形码竖条（基于code字符串哈希确定宽度和位置）
+                        const bars = [];
+                        let x = 0;
+                        const seed = code.split('').reduce(function(s,c){ return s + c.charCodeAt(0); }, 0);
+                        for (let i = 0; i < 38; i++) {
+                            const w = (5 + ((seed + i * 7) % 11));
+                            x += 2;
+                            if (i % 3 !== 2) {
+                                bars.push('<rect x="' + x + '" y="6" width="' + w + '" height="68" fill="#1C1C1E"/>');
+                            }
+                            x += w;
+                            if (x > 260) break;
+                        }
+                        return bars.join('');
+                    })()}
+                </svg>
+            `;
+            const qrcodeHTML = `
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="200" height="200" fill="#FFFFFF"/>
+                    <!-- 三个定位角 -->
+                    <rect x="8" y="8" width="44" height="44" fill="none" stroke="#1C1C1E" stroke-width="4"/>
+                    <rect x="18" y="18" width="24" height="24" fill="#1C1C1E"/>
+                    <rect x="148" y="8" width="44" height="44" fill="none" stroke="#1C1C1E" stroke-width="4"/>
+                    <rect x="158" y="18" width="24" height="24" fill="#1C1C1E"/>
+                    <rect x="8" y="148" width="44" height="44" fill="none" stroke="#1C1C1E" stroke-width="4"/>
+                    <rect x="18" y="158" width="24" height="24" fill="#1C1C1E"/>
+                    <!-- 数据点 -->
+                    ${(function(){
+                        const dots = [];
+                        const positions = [
+                            [64,12],[80,12],[96,12],[128,12],[64,28],[96,28],[112,28],[144,28],
+                            [12,64],[28,64],[64,64],[96,64],[144,64],[160,64],[176,64],
+                            [12,80],[48,80],[80,80],[112,80],[128,80],[176,80],
+                            [28,96],[64,96],[96,96],[144,96],[160,96],
+                            [12,112],[48,112],[80,112],[128,112],[160,112],[176,112],
+                            [64,128],[112,128],[144,128],
+                            [64,144],[128,144],[176,144],
+                            [64,160],[96,160],[112,160],[144,160],[160,160]
+                        ];
+                        positions.forEach(function(p){
+                            dots.push('<rect x="' + p[0] + '" y="' + p[1] + '" width="10" height="10" fill="#1C1C1E"/>');
+                        });
+                        return dots.join('');
+                    })()}
+                </svg>
+            `;
+            return `
+                <div class="qrcode-page">
+                    <div class="qrcode-content" data-block="qrcode-content">
+                        <div class="qrcode-number">${code}</div>
+                        <div class="qrcode-barcode">${barcodeHTML}</div>
+                        <div class="qrcode-pattern">${qrcodeHTML}</div>
+                        <div class="qrcode-tip">请向收银员出示此核销码</div>
+                    </div>
+                    <div class="nav-home-indicator"><div class="ios-home-indicator"></div></div>
+                </div>
+            `;
+        }
+
+        // ====== 领券中心页面渲染（复用我的优惠券核销券样式 cp-card） ======
+        const couponCenterData = [
+            { id: 'cc1', giftName: '饮料一瓶', endDate: '2026-06-30', claimed: false },
+            { id: 'cc2', giftName: '洗衣液一袋', endDate: '2026-07-31', claimed: false },
+            { id: 'cc3', giftName: '洗洁精一瓶', endDate: '2026-08-31', claimed: false },
+            { id: 'cc4', giftName: '抽纸一包', endDate: '2026-09-30', claimed: false },
+            { id: 'cc5', giftName: '矿泉水一瓶', endDate: '2026-06-15', claimed: true },
+        ];
+        let _couponCenterState = JSON.parse(JSON.stringify(couponCenterData));
+        function couponCenterRender() {
+            const emojiMap = {
+                '饮料一瓶': '🧃', '矿泉水一瓶': '💧', '洗衣液一袋': '🧺',
+                '洗洁精一瓶': '🧴', '抽纸一包': '🧻', '精美礼品一份': '🎁'
+            };
+            const cardHTML = (c) => {
+                const emoji = emojiMap[c.giftName] || '🎁';
+                const activityTitle = `免费领${c.giftName || '赠品'}`;
+                const expireStr = `${c.endDate} 23:59到期`;
+                // 使用说明标签（带 data-action，可点击弹窗，与我的优惠券可使用状态一致）
+                const storeTagHTML = `
+                    <div class="cp-store-tag" data-action="show-usage">
+                        <span>使用说明</span>
+                        <span class="arrow">
+                            <svg viewBox="0 0 16 16" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 6l4 4 4-4" stroke="#828282" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </span>
+                    </div>
+                `;
+                // 已领取态使用灰底按钮（disabled），未领取使用蓝底"领取"按钮
+                const btnClass = `cp-btn${c.claimed ? ' disabled' : ''}`;
+                const btnDisabled = c.claimed ? 'disabled' : '';
+                const btnText = c.claimed ? '已领取' : '领取';
+                return `
+                    <div class="cp-card" data-block="cc-card" data-id="${c.id}">
+                        <div class="cp-card-left">
+                            <div class="cp-product-img">
+                                <span class="cp-product-emoji">${emoji}</span>
+                            </div>
+                        </div>
+                        <div class="cp-card-divider"></div>
+                        <div class="cp-card-right">
+                            <div class="cp-title-block">
+                                <div class="cp-title" data-block="cc-card-title">${activityTitle}</div>
+                                <div class="cp-expire" data-block="cc-card-expire">${expireStr}</div>
+                            </div>
+                            <div class="cp-lower-row">
+                                ${storeTagHTML}
+                                <button class="${btnClass}" data-id="${c.id}" data-action="claim-coupon" ${btnDisabled}>${btnText}</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            };
+            const listHTML = _couponCenterState.map(cardHTML).join('');
+            return `
+                <div class="cc-page">
+                    <div class="cp-content">
+                        <div class="cp-list" data-block="cc-list">
+                            ${listHTML}
+                        </div>
+                    </div>
+                    <div class="nav-home-indicator"><div class="ios-home-indicator"></div></div>
+                    <!-- 使用说明弹窗 -->
+                    <div class="cp-usage-mask" data-action="close-usage">
+                        <div class="cp-usage-modal" onclick="event.stopPropagation()">
+                            <div class="cp-usage-header">
+                                <div class="cp-usage-title">使用说明</div>
+                                <div class="cp-usage-close" data-action="close-usage">✕</div>
+                            </div>
+                            <div class="cp-usage-body">赠品为指定实物赠品，使用方式为线下门店出示核销码兑换，有效期以券面标注为准，每张券仅限使用一次，适用门店为徕芙会员超市线下门店；门店地址：晋江市良兴路69号。如有其他疑问，可联系在线客服咨询。</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
         // ====== 页面渲染器（具体页面内容）======
         const pageRenderers = {
             shopHome: function() {
@@ -18768,7 +20067,7 @@
                                                 <span class="co-price-label">回馈金</span>
                                             </div>
                                             <div class="co-price-right">
-                                                <span class="co-price-value discount" data-deduct-display>-￥1.98</span>
+                                                <span class="co-price-value discount" data-deduct-display>-￥12.00</span>
                                                 <span class="co-arrow-r">${rightArrow}</span>
                                             </div>
                                         </div>
@@ -18778,7 +20077,7 @@
                                                 <span class="co-price-label">购物金</span>
                                             </div>
                                             <div class="co-price-right">
-                                                <span class="co-price-value discount" data-deduct-display>-￥20.00</span>
+                                                <span class="co-price-value discount" data-deduct-display>-￥27.50</span>
                                                 <span class="co-arrow-r">${rightArrow}</span>
                                             </div>
                                         </div>
@@ -18786,7 +20085,7 @@
                                     <div class="co-divider"></div>
                                     <div class="co-subtotal">
                                         <span class="co-subtotal-label">小计：</span>
-                                        <span class="co-subtotal-value">¥17.53</span>
+                                        <span class="co-subtotal-value">¥0.00</span>
                                     </div>
                                 </div>
                                 <!-- 订单备注 -->
@@ -18829,7 +20128,7 @@
                             <div class="co-deduct-mask" data-role="deduct-close"></div>
                             <div class="co-deduct-sheet">
                                 <div class="co-deduct-title" data-role="deduct-title">回馈金</div>
-                                <div class="co-deduct-balance">可用 <span class="num" data-role="deduct-balance">￥12.00</span>，本次可抵扣 <span class="num" data-role="deduct-amount">￥12.00</span></div>
+                                <div class="co-deduct-balance">余额 <span class="num" data-role="deduct-balance">￥12.00</span></div>
                                 <div class="co-deduct-option" data-option="use">
                                     <div class="co-deduct-option-left">
                                         <span class="co-deduct-option-label">使用</span>
@@ -18895,31 +20194,31 @@
                         username: '立即登录', showSettings: false, showBell: false, avatarIcon: 'avatar-user-fill',
                         levelName: '', levelText: '登录查看会员等级', showTag: false,
                         showLivingCard: true, livingCardExpiry: '', livingCardSubtitle: '门禁权限升级等14项权益', livingCardCta: '立即开通',
-                        points: '0', balance: '0', coupons: '0', showExpire: false
+                        points: '0', balance: '0', shopping: '0', coupons: '0', showExpire: false
                     },
                     unactivated: {
                         username: '189****0990', showSettings: true, showBell: true, avatarIcon: 'avatar-user-fill',
                         levelName: 'V2白银会员', levelText: '', showTag: false,
                         showLivingCard: true, livingCardExpiry: '', livingCardSubtitle: '门禁权限升级等14项权益', livingCardCta: '立即开通',
-                        points: '600', balance: '500', coupons: '6', showExpire: false
+                        points: '600', balance: '500', shopping: '200', coupons: '6', showExpire: false
                     },
                     activated: {
                         username: '189****0990', showSettings: true, showBell: true, avatarIcon: 'avatar-user-fill',
                         levelName: '徕芙社区卡', levelText: '', showTag: true, tagText: 'V1青铜会员',
                         showLivingCard: true, livingCardExpiry: '已开通 2027-09-07到期', livingCardExpiryArrow: true, livingCardSubtitle: '', livingCardCta: '',
-                        points: '600', balance: '500', coupons: '6', showExpire: false
+                        points: '600', balance: '500', shopping: '200', coupons: '6', showExpire: false
                     },
                     expiring: {
                         username: '189****0990', showSettings: true, showBell: true, avatarIcon: 'avatar-user-fill',
                         levelName: '徕芙社区卡', levelText: '', showTag: true, tagText: 'V1青铜会员',
                         showLivingCard: true, livingCardExpiry: '', livingCardSubtitle: '30天后即将过期，无法使用远程开门', livingCardCta: '立即续费',
-                        points: '600', balance: '500', coupons: '6', showExpire: false
+                        points: '600', balance: '500', shopping: '200', coupons: '6', showExpire: false
                     },
                     expired: {
                         username: '189****0990', showSettings: true, showBell: true, avatarIcon: 'avatar-user-fill',
                         levelName: 'V2白银会员', levelText: '', showTag: false,
                         showLivingCard: true, livingCardExpiry: '', livingCardSubtitle: '会员已过期，相关权益已失效', livingCardCta: '立即续费',
-                        points: '600', balance: '500', coupons: '6', showExpire: false
+                        points: '600', balance: '500', shopping: '200', coupons: '6', showExpire: false
                     }
                 };
                 const renderState = (key, idx) => {
@@ -18962,7 +20261,11 @@
                                         <div class="ph-stat-value"><span class="ph-stat-num">${s.balance}</span><span class="ph-stat-unit">元</span></div>
                                         <div class="ph-stat-label">回馈金</div>
                                     </div>
-                                    <div class="ph-stat-item">
+                                    <div class="ph-stat-item" data-action="go-shopping">
+                                        <div class="ph-stat-value"><span class="ph-stat-num">${s.shopping}</span><span class="ph-stat-unit">元</span></div>
+                                        <div class="ph-stat-label">购物金</div>
+                                    </div>
+                                    <div class="ph-stat-item" data-action="go-coupon">
                                         <div class="ph-stat-value"><span class="ph-stat-num">${s.coupons}</span><span class="ph-stat-unit">张</span></div>
                                         <div class="ph-stat-label">优惠券</div>
                                     </div>
@@ -19010,6 +20313,126 @@
             profileRebateDeducted: function() {
                 return profileRebateRender('deducted');
             },
+            profileShoppingAll: function() {
+                return profileShoppingRender('home');
+            },
+            profileShoppingRecharge: function() {
+                return profileShoppingRender('recharge');
+            },
+            profileShoppingConsume: function() {
+                return profileShoppingRender('consume');
+            },
+            profileShoppingDetailAll: function() {
+                return profileShoppingRender('all');
+            },
+            profileCouponAll: function() {
+                return profileCouponRender('valid');
+            },
+            profileCouponUsed: function() {
+                return profileCouponRender('used');
+            },
+            profileCouponExpired: function() {
+                return profileCouponRender('expired');
+            },
+            couponQrcode: function() {
+                return couponQrcodeRender();
+            },
+            couponCenter: function() {
+                return couponCenterRender();
+            },
+            // ====== 订单数据 ======
+            shopOrders: function() {
+                const productImg = 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=' + encodeURIComponent('电商商品缩略图：迷你手持电风扇，白色浅色背景，产品摄影风格') + '&image_size=square_hd';
+                // 订单 Mock 数据
+                const ordersData = {
+                    home: [ // 配送到家
+                        { id: 'H001', status: 'pay', statusText: '待付款', typeText: '配送到家', title: '徕芙 迷你手持电风扇 便携充电款', spec: '颜色：白色', price: 39.50, count: 1, total: 51.50, img: productImg, detailPage: 'shop-order-detail-home-pay' },
+                        { id: 'H002', status: 'ship', statusText: '待发货', typeText: '配送到家', title: '徕芙 迷你手持电风扇 便携充电款', spec: '颜色：白色', price: 39.50, count: 1, total: 51.50, img: productImg, detailPage: 'shop-order-detail-home-ship' },
+                        { id: 'H003', status: 'receive', statusText: '待收货', typeText: '配送到家', title: '徕芙 迷你手持电风扇 便携充电款', spec: '颜色：白色', price: 39.50, count: 1, total: 51.50, img: productImg, detailPage: 'shop-order-detail-home-receive' },
+                        { id: 'H004', status: 'done', statusText: '已完成', typeText: '配送到家', title: '徕芙 迷你手持电风扇 便携充电款', spec: '颜色：白色', price: 39.50, count: 1, total: 51.50, img: productImg, detailPage: 'shop-order-detail-home-done' }
+                    ],
+                    pickup: [ // 站点自提
+                        { id: 'P001', status: 'pay', statusText: '待付款', typeText: '站点自提', title: '徕芙 迷你手持电风扇 便携充电款', spec: '颜色：白色', price: 39.50, count: 1, total: 51.50, img: productImg, detailPage: 'shop-order-detail-pickup-pay' },
+                        { id: 'P002', status: 'ship', statusText: '待发货', typeText: '站点自提', title: '徕芙 迷你手持电风扇 便携充电款', spec: '颜色：白色', price: 39.50, count: 1, total: 51.50, img: productImg, detailPage: 'shop-order-detail-pickup-ship' },
+                        { id: 'P003', status: 'receive', statusText: '待自提', typeText: '站点自提', title: '徕芙 迷你手持电风扇 便携充电款', spec: '颜色：白色', price: 39.50, count: 1, total: 51.50, img: productImg, detailPage: 'shop-order-detail-pickup-receive' },
+                        { id: 'P004', status: 'done', statusText: '已完成', typeText: '站点自提', title: '徕芙 迷你手持电风扇 便携充电款', spec: '颜色：白色', price: 39.50, count: 1, total: 51.50, img: productImg, detailPage: 'shop-order-detail-pickup-done' }
+                    ]
+                };
+                const statusTabs = [
+                    { key: 'all', label: '全部' },
+                    { key: 'pay', label: '待付款' },
+                    { key: 'ship', label: '待发货' },
+                    { key: 'receive', label: '待收货' },
+                    { key: 'done', label: '已完成' }
+                ];
+                const orderCard = (order, typeKey) => `
+                    <div class="order-card" data-detail="${order.detailPage}" data-id="${order.id}" data-status="${order.status}" data-type="${typeKey}">
+                        <div class="order-card-header">
+                            <span class="order-card-type">${order.typeText}</span>
+                            <span class="order-card-status ${order.status}">${order.statusText}</span>
+                        </div>
+                        <div class="order-card-body">
+                            <div class="order-card-img"><img src="${order.img}" alt=""></div>
+                            <div class="order-card-info">
+                                <div class="order-card-title">${order.title}</div>
+                                <div class="order-card-spec">${order.spec}</div>
+                                <div class="order-card-price-row">
+                                    <span class="order-card-price">¥${order.price.toFixed(2)}</span>
+                                    <span class="order-card-count">x${order.count}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="order-card-footer">
+                            <div class="order-card-total">实付 <span class="amount">¥${order.total.toFixed(2)}</span></div>
+                            <div class="order-card-actions">
+                                ${order.status === 'pay' ? `<button class="order-btn order-btn-outline" data-action="cancel-order">取消订单</button><button class="order-btn order-btn-primary" data-action="pay-now">立即支付</button>` : ''}
+                                ${order.status === 'ship' ? `<button class="order-btn order-btn-primary" data-action="buy-again">再买一单</button>` : ''}
+                                ${order.status === 'receive' ? `<button class="order-btn order-btn-primary" data-action="confirm-receive">${order.typeText === '站点自提' ? '确认自提' : '确认收货'}</button>` : ''}
+                                ${order.status === 'done' ? `<button class="order-btn order-btn-outline" data-action="delete-order">删除订单</button><button class="order-btn order-btn-primary" data-action="buy-again">再买一单</button>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                const renderList = (typeKey, statusKey) => {
+                    let list = [];
+                    if (typeKey === 'all') {
+                        list = [...ordersData.home.map(o => ({...o, __type: 'home'})), ...ordersData.pickup.map(o => ({...o, __type: 'pickup'}))];
+                    } else {
+                        list = ordersData[typeKey].map(o => ({...o, __type: typeKey}));
+                    }
+                    if (statusKey !== 'all') list = list.filter(o => o.status === statusKey);
+                    return list.length > 0 ? list.map(o => orderCard(o, o.__type)).join('') : `<div class="cp-empty"><div class="cp-empty-icon"><svg width="80" height="80" viewBox="0 0 80 80" fill="none"><rect x="20" y="15" width="40" height="50" rx="4" stroke="#D9D9D9" stroke-width="2"/><path d="M26 25h28M26 35h28M26 45h20" stroke="#D9D9D9" stroke-width="2" stroke-linecap="round"/></svg></div><div class="cp-empty-text">暂无相关订单</div></div>`;
+                };
+                // 渲染函数：获取当前状态并渲染（通过data属性保存状态）
+                const html = `
+                    <div class="orders-page" id="orders-page-root">
+                        <div class="orders-tabs" id="orders-status-tabs">
+                            ${statusTabs.map((t, i) => `<div class="orders-tab-item${i === 0 ? ' active' : ''}" data-status="${t.key}">${t.label}</div>`).join('')}
+                        </div>
+                        <div class="orders-type-tabs" id="orders-type-tabs">
+                            <div class="orders-type-item active" data-type="all">全部</div>
+                            <div class="orders-type-item" data-type="home">配送到家</div>
+                            <div class="orders-type-item" data-type="pickup">站点自提</div>
+                        </div>
+                        <div class="orders-scroll">
+                            <div class="orders-list" id="orders-list">
+                                ${renderList('all', 'all')}
+                            </div>
+                        </div>
+                        <div class="nav-home-indicator"><div class="nav-home-indicator-bar"></div></div>
+                    </div>
+                `;
+                return html;
+            },
+            // ====== 订单详情通用渲染函数 ======
+            shopOrderDetailHomePay: function() { return renderShopOrderDetail('home', 'pay'); },
+            shopOrderDetailHomeShip: function() { return renderShopOrderDetail('home', 'ship'); },
+            shopOrderDetailHomeReceive: function() { return renderShopOrderDetail('home', 'receive'); },
+            shopOrderDetailHomeDone: function() { return renderShopOrderDetail('home', 'done'); },
+            shopOrderDetailPickupPay: function() { return renderShopOrderDetail('pickup', 'pay'); },
+            shopOrderDetailPickupShip: function() { return renderShopOrderDetail('pickup', 'ship'); },
+            shopOrderDetailPickupReceive: function() { return renderShopOrderDetail('pickup', 'receive'); },
+            shopOrderDetailPickupDone: function() { return renderShopOrderDetail('pickup', 'done'); },
             profilePaymentList: function() {
                 const houses = [
                     { name: '金领国际', selected: true },
@@ -19379,6 +20802,136 @@
                 `;
             }
         };
+        // ====== 订单详情通用渲染函数（共享） ======
+        function renderShopOrderDetail(type, status) {
+            const productImg = 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=' + encodeURIComponent('电商商品缩略图：迷你手持电风扇，白色浅色背景，产品摄影风格') + '&image_size=square_hd';
+            const serviceSvg = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2a6 6 0 0 0-6 6v3H5a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h2a2 2 0 0 0 2-2v-6h1v6a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-6h1v6a2 2 0 0 0 2 2h2a1 1 0 0 0 1-1v-7a1 1 0 0 0-1-1h-1V8a6 6 0 0 0-6-6zm-4 9V8a4 4 0 1 1 8 0v3H8z" fill="#828282"/></svg>';
+            const rightArrow = '<svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="#BDBDBD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+            // 基础数据
+            const isHome = type === 'home';
+            const infoTitle = isHome ? '配送信息' : '自提信息';
+            const personLabel = isHome ? '收货人' : '提货人';
+            const phoneLabel = isHome ? '联系电话' : '自提电话';
+            const addressLabel = isHome ? '收货地址' : '自提地址';
+            const personName = '于兰莉';
+            const phone = '13241000182';
+            const addressHome = '福建省泉州市石狮市湖滨街道狮城帝苑5幢2梯0502';
+            const addressPickup = '福建省泉州市石狮市湖滨街道狮城帝苑物业处';
+            const address = isHome ? addressHome : addressPickup;
+            // 状态栏（不同状态显示不同文案）
+            let statusBarHtml = '';
+            if (status === 'pay') {
+                statusBarHtml = `<div class="od-status-bar"><div class="od-status-title">待付款 <span style="font-size:16px;font-weight:500;">23:58:12</span></div><div class="od-status-desc">订单即将关闭，请及时支付</div></div>`;
+            } else if (status === 'ship') {
+                statusBarHtml = `<div class="od-status-bar"><div class="od-status-title">待发货</div><div class="od-status-desc">商品准备中，请耐心等待</div></div>`;
+            } else if (status === 'receive') {
+                if (isHome) {
+                    statusBarHtml = `<div class="od-status-bar"><div class="od-status-title">待收货</div><div class="od-status-desc">商品在路上了</div></div>`;
+                } else {
+                    statusBarHtml = `<div class="od-status-bar"><div class="od-status-title">待自提</div><div class="od-status-desc">商品已到自提点，请及时到站点自提</div></div>`;
+                }
+            } else if (status === 'done') {
+                statusBarHtml = `<div class="od-status-bar"><div class="od-status-title">已完成</div><div class="od-status-desc">订单已签收，感谢您的支持！</div></div>`;
+            }
+            // 订单信息（不同状态显示不同字段）
+            const orderInfoRows = [];
+            orderInfoRows.push({ label: '订单号', value: '0304104855000005', copy: true });
+            orderInfoRows.push({ label: '下单时间', value: '2026-05-21 16:41:35' });
+            if (status !== 'pay') orderInfoRows.push({ label: '支付时间', value: '2026-05-21 16:42:02' });
+            if (status === 'receive' || status === 'done') orderInfoRows.push({ label: '发货时间', value: '2026-05-22 10:01:53' });
+            if (status === 'done') orderInfoRows.push({ label: '完成时间', value: '2026-06-04 13:20:20' });
+            if (status !== 'pay') orderInfoRows.push({ label: '支付方式', value: isHome ? '微信支付' : '云闪付支付' });
+            orderInfoRows.push({ label: '订单备注', value: '放门口就好' });
+            // 底部操作栏（不同状态显示不同按钮）
+            let bottomActions = '';
+            if (status === 'pay') {
+                bottomActions = `<button class="order-btn order-btn-outline" data-action="cancel-order">取消订单</button><button class="order-btn order-btn-primary" data-action="pay-now">立即支付</button>`;
+            } else if (status === 'ship') {
+                bottomActions = `<button class="order-btn order-btn-primary" data-action="buy-again">再买一单</button>`;
+            } else if (status === 'receive') {
+                bottomActions = `<button class="order-btn order-btn-primary" data-action="confirm-receive">${isHome ? '确认收货' : '确认自提'}</button>`;
+            } else if (status === 'done') {
+                bottomActions = `<button class="order-btn order-btn-outline" data-action="delete-order">删除订单</button><button class="order-btn order-btn-primary" data-action="buy-again">再买一单</button>`;
+            }
+            // 价格明细：包含回馈金和购物金抵扣（根据用户需求完善）
+            // 配送到家：商品总价39.5 + 配送费0 = 39.5（无包装费）
+            // 站点自提：商品总价39.5（无配送费、无包装费）
+            // 回馈金抵扣比例5%：可抵扣实付的5%
+            // 购物金可全额抵扣
+            const productTotal = 39.50;
+            const deliveryFee = isHome ? 0 : 0;
+            const packageFee = 0;
+            const rebateDeduct = 2.00;
+            const shoppingDeduct = 6.00;
+            const subTotal = productTotal + deliveryFee + packageFee; // 39.5
+            const actualPay = status === 'pay' ? subTotal : (subTotal - rebateDeduct - shoppingDeduct);
+            // 价格明细行
+            const priceRows = [];
+            priceRows.push({ label: '商品总价', value: '¥' + productTotal.toFixed(2), cls: '' });
+            if (isHome) priceRows.push({ label: '配送费', value: '¥' + deliveryFee.toFixed(2), cls: '' });
+            // 非待付款状态显示抵扣项
+            if (status !== 'pay') {
+                priceRows.push({ label: '回馈金抵扣', value: '-¥' + rebateDeduct.toFixed(2), cls: 'minus' });
+                priceRows.push({ label: '购物金抵扣', value: '-¥' + shoppingDeduct.toFixed(2), cls: 'minus' });
+            }
+            return `
+                <div class="order-detail-page">
+                    ${statusBarHtml}
+                    <div class="od-scroll">
+                        <!-- 配送/自提信息 -->
+                        <div class="od-card">
+                            <div class="od-card-title">${infoTitle}</div>
+                            <div class="od-info-row">
+                                <span class="od-info-label">${personLabel}</span>
+                                <span class="od-info-value">${personName}</span>
+                            </div>
+                            <div class="od-info-row">
+                                <span class="od-info-label">${phoneLabel}</span>
+                                <span class="od-info-value">${phone}</span>
+                            </div>
+                            <div class="od-info-row">
+                                <span class="od-info-label">${addressLabel}</span>
+                                <span class="od-info-value">${address}</span>
+                            </div>
+                        </div>
+                        <!-- 商品信息 -->
+                        <div class="od-card">
+                            <div class="od-card-title">商品信息</div>
+                            <div class="od-product-row" data-action="go-product-detail">
+                                <div class="od-product-img"><img src="${productImg}" alt=""></div>
+                                <div class="od-product-info">
+                                    <div class="od-product-title">徕芙 迷你手持电风扇 便携充电款</div>
+                                    <div class="od-product-count"><span>颜色：白色</span><span>x1</span></div>
+                                </div>
+                                <div class="od-product-arrow">共1件 ${rightArrow}</div>
+                            </div>
+                            ${priceRows.map(row => `<div class="od-price-row"><span class="od-price-label">${row.label}</span><span class="od-price-value ${row.cls}">${row.value}</span></div>`).join('')}
+                            <div class="od-price-divider"></div>
+                            <div class="od-price-total">
+                                <span class="od-price-total-label">${status === 'pay' ? '待付款' : '实付'}</span>
+                                <span class="od-price-total-value">¥${actualPay.toFixed(1)}</span>
+                            </div>
+                        </div>
+                        <!-- 订单信息 -->
+                        <div class="od-card">
+                            <div class="od-card-title">订单信息</div>
+                            ${orderInfoRows.map(row => `<div class="od-order-info-row"><span class="od-order-label">${row.label}</span><span class="od-order-value">${row.value}${row.copy ? '<span class="od-copy-btn" data-action="copy-order-no">复制</span>' : ''}</span></div>`).join('')}
+                        </div>
+                    </div>
+                    <!-- 底部操作栏 -->
+                    <div class="od-bottom-bar">
+                        <div class="od-service-btn" data-action="contact-service">
+                            <div class="od-service-icon">${serviceSvg}</div>
+                            <span class="od-service-text">客服</span>
+                        </div>
+                        <div class="od-bottom-actions">
+                            ${bottomActions}
+                        </div>
+                    </div>
+                    <div class="nav-home-indicator"><div class="nav-home-indicator-bar"></div></div>
+                </div>
+            `;
+        }
         // 费用单项详情弹窗 HTML（共享）
         function feeItemPopupHTML() {
             return `
@@ -19553,11 +21106,11 @@
                     const dOptions = deductModal.querySelectorAll('.co-deduct-option');
                     const dConfirm = deductModal.querySelector('[data-role="deduct-confirm"]');
                     // 各项数据配置
-                    // rebate: 回馈金，余额12，抵扣比例为实付订单的5%（运营后台可配置）
-                    // shopping: 购物金，余额20，无比例限制，可全额抵扣实付订单价格
+                    // rebate: 回馈金，余额12，可全额抵扣实付订单价格
+                    // shopping: 购物金，余额200，可全额抵扣实付订单价格
                     const deductData = {
-                        rebate: { title: '回馈金', balance: 12.00, rate: 0.05 },
-                        shopping: { title: '购物金', balance: 20.00, rate: null }
+                        rebate: { title: '回馈金', balance: 12.00, rate: null },
+                        shopping: { title: '购物金', balance: 200.00, rate: null }
                     };
                     // 各项当前选择状态（有余额时默认使用）
                     const deductState = { rebate: true, shopping: true };
@@ -19571,9 +21124,9 @@
                         const payable = getPayable();
                         let rebateAmount = 0;
                         let shoppingAmount = 0;
-                        // 回馈金：实付订单 × 比例，不超过余额
+                        // 回馈金：可全额抵扣实付订单，不超过余额
                         if (deductState.rebate) {
-                            rebateAmount = Math.min(deductData.rebate.balance, payable * deductData.rebate.rate);
+                            rebateAmount = Math.min(deductData.rebate.balance, payable);
                         }
                         // 购物金：可全额抵扣剩余部分，不超过余额
                         if (deductState.shopping) {
@@ -19615,13 +21168,22 @@
                             e.stopPropagation();
                             currentDeduct = row.dataset.deduct;
                             const cfg = deductData[currentDeduct];
-                            const { rebateAmount, shoppingAmount } = calcAllAmounts();
-                            const amount = currentDeduct === 'rebate' ? rebateAmount : shoppingAmount;
-                            const amtStr = '￥' + amount.toFixed(2);
+                            // 计算假设"使用该券"时的潜在抵扣金额（不受当前 deductState 影响）
+                            const payable = getPayable();
+                            let potentialAmount;
+                            if (currentDeduct === 'rebate') {
+                                // 回馈金优先抵扣，假设使用时可抵扣余额或订单金额
+                                potentialAmount = Math.min(cfg.balance, payable);
+                            } else {
+                                // 购物金：先按当前回馈金状态计算回馈金抵扣，再用剩余计算购物金
+                                const { rebateAmount: rA } = calcAllAmounts();
+                                const remaining = Math.max(0, payable - rA);
+                                potentialAmount = Math.min(cfg.balance, remaining);
+                            }
+                            const amtStr = '￥' + potentialAmount.toFixed(2);
                             const balStr = '￥' + cfg.balance.toFixed(2);
                             dTitle.textContent = cfg.title;
                             dBalance.textContent = balStr;
-                            dAmount.textContent = amtStr;
                             dUseAmount.textContent = '-' + amtStr;
                             // 回显当前选择
                             const using = deductState[currentDeduct];
@@ -19667,6 +21229,139 @@
                     backBtn.addEventListener('click', () => switchPage('shop-cart'));
                 }
             }
+            // ====== 我的订单列表页事件 ======
+            if (pageId === 'shop-orders') {
+                const ordersData = {
+                    home: [
+                        { id: 'H001', status: 'pay', statusText: '待付款', typeText: '配送到家', title: '徕芙 迷你手持电风扇 便携充电款', spec: '颜色：白色', price: 39.50, count: 1, total: 51.50, detailPage: 'shop-order-detail-home-pay' },
+                        { id: 'H002', status: 'ship', statusText: '待发货', typeText: '配送到家', title: '徕芙 迷你手持电风扇 便携充电款', spec: '颜色：白色', price: 39.50, count: 1, total: 51.50, detailPage: 'shop-order-detail-home-ship' },
+                        { id: 'H003', status: 'receive', statusText: '待收货', typeText: '配送到家', title: '徕芙 迷你手持电风扇 便携充电款', spec: '颜色：白色', price: 39.50, count: 1, total: 51.50, detailPage: 'shop-order-detail-home-receive' },
+                        { id: 'H004', status: 'done', statusText: '已完成', typeText: '配送到家', title: '徕芙 迷你手持电风扇 便携充电款', spec: '颜色：白色', price: 39.50, count: 1, total: 51.50, detailPage: 'shop-order-detail-home-done' }
+                    ],
+                    pickup: [
+                        { id: 'P001', status: 'pay', statusText: '待付款', typeText: '站点自提', title: '徕芙 迷你手持电风扇 便携充电款', spec: '颜色：白色', price: 39.50, count: 1, total: 51.50, detailPage: 'shop-order-detail-pickup-pay' },
+                        { id: 'P002', status: 'ship', statusText: '待发货', typeText: '站点自提', title: '徕芙 迷你手持电风扇 便携充电款', spec: '颜色：白色', price: 39.50, count: 1, total: 51.50, detailPage: 'shop-order-detail-pickup-ship' },
+                        { id: 'P003', status: 'receive', statusText: '待自提', typeText: '站点自提', title: '徕芙 迷你手持电风扇 便携充电款', spec: '颜色：白色', price: 39.50, count: 1, total: 51.50, detailPage: 'shop-order-detail-pickup-receive' },
+                        { id: 'P004', status: 'done', statusText: '已完成', typeText: '站点自提', title: '徕芙 迷你手持电风扇 便携充电款', spec: '颜色：白色', price: 39.50, count: 1, total: 51.50, detailPage: 'shop-order-detail-pickup-done' }
+                    ]
+                };
+                const productImg = 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=' + encodeURIComponent('电商商品缩略图：迷你手持电风扇，白色浅色背景，产品摄影风格') + '&image_size=square_hd';
+                let curType = 'all';
+                let curStatus = 'all';
+                const orderCard = (order, typeKey) => `
+                    <div class="order-card" data-detail="${order.detailPage}" data-id="${order.id}" data-status="${order.status}" data-type="${typeKey}">
+                        <div class="order-card-header">
+                            <span class="order-card-type">${order.typeText}</span>
+                            <span class="order-card-status ${order.status}">${order.statusText}</span>
+                        </div>
+                        <div class="order-card-body">
+                            <div class="order-card-img"><img src="${productImg}" alt=""></div>
+                            <div class="order-card-info">
+                                <div class="order-card-title">${order.title}</div>
+                                <div class="order-card-spec">${order.spec}</div>
+                                <div class="order-card-price-row">
+                                    <span class="order-card-price">¥${order.price.toFixed(2)}</span>
+                                    <span class="order-card-count">x${order.count}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="order-card-footer">
+                            <div class="order-card-total">实付 <span class="amount">¥${order.total.toFixed(2)}</span></div>
+                            <div class="order-card-actions">
+                                ${order.status === 'pay' ? `<button class="order-btn order-btn-outline" data-action="cancel-order">取消订单</button><button class="order-btn order-btn-primary" data-action="pay-now">立即支付</button>` : ''}
+                                ${order.status === 'ship' ? `<button class="order-btn order-btn-primary" data-action="buy-again">再买一单</button>` : ''}
+                                ${order.status === 'receive' ? `<button class="order-btn order-btn-primary" data-action="confirm-receive">${order.typeText === '站点自提' ? '确认自提' : '确认收货'}</button>` : ''}
+                                ${order.status === 'done' ? `<button class="order-btn order-btn-outline" data-action="delete-order">删除订单</button><button class="order-btn order-btn-primary" data-action="buy-again">再买一单</button>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                const reRenderList = () => {
+                    let list = [];
+                    if (curType === 'all') {
+                        list = [...ordersData.home.map(o => ({...o, __type: 'home'})), ...ordersData.pickup.map(o => ({...o, __type: 'pickup'}))];
+                    } else {
+                        list = ordersData[curType].map(o => ({...o, __type: curType}));
+                    }
+                    if (curStatus !== 'all') list = list.filter(o => o.status === curStatus);
+                    const listEl = document.querySelector('#orders-list');
+                    if (!listEl) return;
+                    if (list.length > 0) {
+                        listEl.innerHTML = list.map(o => orderCard(o, o.__type)).join('');
+                    } else {
+                        listEl.innerHTML = `<div class="cp-empty"><div class="cp-empty-icon"><svg width="80" height="80" viewBox="0 0 80 80" fill="none"><rect x="20" y="15" width="40" height="50" rx="4" stroke="#D9D9D9" stroke-width="2"/><path d="M26 25h28M26 35h28M26 45h20" stroke="#D9D9D9" stroke-width="2" stroke-linecap="round"/></svg></div><div class="cp-empty-text">暂无相关订单</div></div>`;
+                    }
+                    bindOrderCardEvents();
+                };
+                function bindOrderCardEvents() {
+                    // 订单卡片点击跳转详情
+                    document.querySelectorAll('#orders-list .order-card').forEach(card => {
+                        card.addEventListener('click', (e) => {
+                            if (e.target.closest('button')) return;
+                            switchPage(card.dataset.detail);
+                        });
+                    });
+                    // 卡片按钮事件
+                    document.querySelectorAll('#orders-list [data-action="pay-now"]').forEach(btn => {
+                        btn.addEventListener('click', (e) => { e.stopPropagation(); switchPage('shop-checkout'); });
+                    });
+                    document.querySelectorAll('#orders-list [data-action="buy-again"]').forEach(btn => {
+                        btn.addEventListener('click', (e) => { e.stopPropagation(); switchPage('shop-cart'); });
+                    });
+                    document.querySelectorAll('#orders-list [data-action="cancel-order"], #orders-list [data-action="delete-order"], #orders-list [data-action="confirm-receive"]').forEach(btn => {
+                        btn.addEventListener('click', (e) => { e.stopPropagation(); });
+                    });
+                }
+                bindOrderCardEvents();
+                // 状态Tab切换
+                document.querySelectorAll('#orders-status-tabs .orders-tab-item').forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        document.querySelectorAll('#orders-status-tabs .orders-tab-item').forEach(t => t.classList.remove('active'));
+                        tab.classList.add('active');
+                        curStatus = tab.dataset.status;
+                        reRenderList();
+                    });
+                });
+                // 类型Tab切换
+                document.querySelectorAll('#orders-type-tabs .orders-type-item').forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        document.querySelectorAll('#orders-type-tabs .orders-type-item').forEach(t => t.classList.remove('active'));
+                        tab.classList.add('active');
+                        curType = tab.dataset.type;
+                        reRenderList();
+                    });
+                });
+            }
+            // ====== 订单详情页事件（8个页面共享） ======
+            const orderDetailPageIds = ['shop-order-detail-home-pay', 'shop-order-detail-home-ship', 'shop-order-detail-home-receive', 'shop-order-detail-home-done', 'shop-order-detail-pickup-pay', 'shop-order-detail-pickup-ship', 'shop-order-detail-pickup-receive', 'shop-order-detail-pickup-done'];
+            if (orderDetailPageIds.indexOf(pageId) >= 0) {
+                // 复制订单号
+                const copyBtn = document.querySelector('#mobile-content [data-action="copy-order-no"]');
+                if (copyBtn) {
+                    copyBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        // 简单模拟复制提示
+                        const originalText = copyBtn.textContent;
+                        copyBtn.textContent = '已复制';
+                        setTimeout(() => { copyBtn.textContent = originalText; }, 1500);
+                    });
+                }
+                // 底部操作按钮
+                const payNowBtn = document.querySelector('#mobile-content [data-action="pay-now"]');
+                if (payNowBtn) payNowBtn.addEventListener('click', () => switchPage('shop-checkout'));
+                const buyAgainBtn = document.querySelector('#mobile-content [data-action="buy-again"]');
+                if (buyAgainBtn) buyAgainBtn.addEventListener('click', () => switchPage('shop-cart'));
+                const cancelBtn = document.querySelector('#mobile-content [data-action="cancel-order"]');
+                if (cancelBtn) cancelBtn.addEventListener('click', () => {});
+                const deleteBtn = document.querySelector('#mobile-content [data-action="delete-order"]');
+                if (deleteBtn) deleteBtn.addEventListener('click', () => {});
+                const confirmBtn = document.querySelector('#mobile-content [data-action="confirm-receive"]');
+                if (confirmBtn) confirmBtn.addEventListener('click', () => {
+                    // 跳转到对应已完成页面
+                    if (pageId.indexOf('home') >= 0) switchPage('shop-order-detail-home-done');
+                    else switchPage('shop-order-detail-pickup-done');
+                });
+            }
             if (pageId === 'profile-home') {
                 // 外部状态控制器切换
                 document.querySelectorAll('#state-controller-top .state-tab').forEach(tab => {
@@ -19693,6 +21388,16 @@
                 document.querySelectorAll('#mobile-content [data-action="go-rebate"]').forEach(el => {
                     el.style.cursor = 'pointer';
                     el.addEventListener('click', () => switchPage('profile-rebate-all'));
+                });
+                // 购物金入口点击跳转
+                document.querySelectorAll('#mobile-content [data-action="go-shopping"]').forEach(el => {
+                    el.style.cursor = 'pointer';
+                    el.addEventListener('click', () => switchPage('profile-shopping-all'));
+                });
+                // 优惠券入口点击跳转
+                document.querySelectorAll('#mobile-content [data-action="go-coupon"]').forEach(el => {
+                    el.style.cursor = 'pointer';
+                    el.addEventListener('click', () => switchPage('profile-coupon-all'));
                 });
             }
             if (pageId === 'profile-rebate-all' || pageId === 'profile-rebate-earned' || pageId === 'profile-rebate-deducted') {
@@ -19812,6 +21517,277 @@
                         }
                     });
                 }
+            }
+            if (pageId === 'profile-shopping-all') {
+                // 首页：充值档位点击切换
+                document.querySelectorAll('#mobile-content .sh-recharge-item').forEach(item => {
+                    item.addEventListener('click', () => {
+                        const amount = parseInt(item.dataset.amount, 10);
+                        shoppingState.rechargeAmount = amount;
+                        // 重新渲染页面（仅刷新底部 + 选中态）
+                        const activeItems = document.querySelectorAll('#mobile-content .sh-recharge-item');
+                        activeItems.forEach(i => i.classList.toggle('active', parseInt(i.dataset.amount, 10) === amount));
+                        // 更新底部金额
+                        const amtEl = document.querySelector('#mobile-content .sh-bottom-amount');
+                        if (amtEl) amtEl.textContent = '¥ ' + amount;
+                    });
+                });
+                // 首页：查看明细 → 跳转明细页（全部）
+                document.querySelectorAll('#mobile-content [data-action="go-shopping-detail"]').forEach(el => {
+                    el.addEventListener('click', () => switchPage('profile-shopping-detail'));
+                });
+                // 首页：适用门店 → 弹窗显示
+                document.querySelectorAll('#mobile-content [data-action="sh-store"]').forEach(el => {
+                    el.addEventListener('click', () => {
+                        const modal = document.querySelector('#mobile-content .sh-modal-mask');
+                        if (modal) modal.classList.add('show');
+                    });
+                });
+                // 关闭门店弹窗
+                document.querySelectorAll('#mobile-content [data-action="close-store-modal"]').forEach(el => {
+                    el.addEventListener('click', () => {
+                        const modal = document.querySelector('#mobile-content .sh-modal-mask');
+                        if (modal) modal.classList.remove('show');
+                    });
+                });
+                // 首页：勾选协议
+                document.querySelectorAll('#mobile-content [data-action="toggle-agree"]').forEach(el => {
+                    el.addEventListener('click', () => {
+                        shoppingState.agreed = !shoppingState.agreed;
+                        const img = el.querySelector('img');
+                        if (img) img.src = shoppingState.agreed ? 'figma-images/icon-checkbox-checked.svg' : 'figma-images/icon-checkbox-blank.svg';
+                        const btn = document.querySelector('#mobile-content [data-action="do-recharge"]');
+                        if (btn) btn.disabled = !shoppingState.agreed;
+                    });
+                });
+                // 首页：立即充值 → 调用微信支付
+                document.querySelectorAll('#mobile-content [data-action="do-recharge"]').forEach(el => {
+                    el.addEventListener('click', () => {
+                        if (!shoppingState.agreed) return;
+                        const modal = document.querySelector('#mobile-content .sh-wxpay-mask');
+                        if (modal) {
+                            // 重置密码输入
+                            shoppingState.wxPwd = '';
+                            shoppingState.wxPwdIndex = 0;
+                            modal.querySelectorAll('.sh-wxpay-pwd-box').forEach(box => {
+                                box.textContent = '';
+                                box.classList.remove('filled');
+                            });
+                            modal.classList.add('show');
+                        }
+                    });
+                });
+                // 购物金 Toast 通知
+                const shShowToast = (msg) => {
+                    let toastEl = document.querySelector('#mobile-content .sh-toast');
+                    if (!toastEl) {
+                        toastEl = document.createElement('div');
+                        toastEl.className = 'sh-toast';
+                        toastEl.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,0.75);color:#fff;padding:12px 24px;border-radius:8px;font-size:14px;z-index:9999;pointer-events:none;transition:opacity 0.3s;opacity:0;';
+                        document.querySelector('#mobile-content').appendChild(toastEl);
+                    }
+                    toastEl.textContent = msg;
+                    toastEl.style.opacity = '1';
+                    clearTimeout(toastEl._timer);
+                    toastEl._timer = setTimeout(() => { toastEl.style.opacity = '0'; }, 2000);
+                };
+                // 关闭微信支付弹窗
+                document.querySelectorAll('#mobile-content [data-action="close-wxpay"]').forEach(el => {
+                    el.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const modal = document.querySelector('#mobile-content .sh-wxpay-mask');
+                        if (modal) modal.classList.remove('show');
+                    });
+                });
+                // 优惠卡切换
+                document.querySelectorAll('#mobile-content [data-action="toggle-discount"]').forEach(el => {
+                    el.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        el.classList.toggle('active');
+                        if (el.classList.contains('active')) {
+                            el.textContent = '已使用';
+                        } else {
+                            el.textContent = '使用';
+                        }
+                    });
+                });
+                // 数字键盘输入
+                document.querySelectorAll('#mobile-content .sh-wxpay-key').forEach(key => {
+                    key.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const k = key.dataset.key;
+                        if (!k || k === 'bank') return;
+                        const modal = document.querySelector('#mobile-content .sh-wxpay-mask');
+                        if (!modal || !modal.classList.contains('show')) return;
+                        if (k === 'back') {
+                            // 删除最后一位
+                            if (shoppingState.wxPwdIndex > 0) {
+                                shoppingState.wxPwdIndex--;
+                                shoppingState.wxPwd = shoppingState.wxPwd.slice(0, -1);
+                                const box = modal.querySelector(`.sh-wxpay-pwd-box[data-pwd-index="${shoppingState.wxPwdIndex}"]`);
+                                if (box) { box.innerHTML = ''; box.classList.remove('filled'); }
+                            }
+                            return;
+                        }
+                        // 数字键
+                        if (shoppingState.wxPwdIndex < 6) {
+                            shoppingState.wxPwd += k;
+                            const box = modal.querySelector(`.sh-wxpay-pwd-box[data-pwd-index="${shoppingState.wxPwdIndex}"]`);
+                            if (box) { box.innerHTML = '<span class="dot"></span>'; box.classList.add('filled'); }
+                            shoppingState.wxPwdIndex++;
+                            // 满 6 位自动确认支付
+                            if (shoppingState.wxPwdIndex === 6) {
+                                setTimeout(() => {
+                                    if (shoppingState.wxPwd.length === 6) {
+                                        const m = document.querySelector('#mobile-content .sh-wxpay-mask');
+                                        if (m) m.classList.remove('show');
+                                        const amount = shoppingState.rechargeAmount;
+                                        shoppingState.balance += amount;
+                                        shoppingState.principal += amount;
+                                        shoppingRecords.unshift({
+                                            type: 'recharge',
+                                            title: '充值购物金',
+                                            time: new Date().toLocaleString('zh-CN', { hour12: false }).replace(/\//g, '-'),
+                                            amount: amount,
+                                            balance: shoppingState.balance,
+                                            order: ''
+                                        });
+                                        shShowToast('充值成功，' + amount + '元已到账');
+                                        setTimeout(() => switchPage('profile-shopping-all'), 500);
+                                    }
+                                }, 300);
+                            }
+                        }
+                    });
+                });
+            }
+            if (pageId === 'profile-shopping-all' || pageId === 'profile-shopping-detail' || pageId === 'profile-shopping-recharge' || pageId === 'profile-shopping-consume') {
+                // 明细页 Tab 切换
+                document.querySelectorAll('#mobile-content .sh-detail-tab').forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        switchPage(tab.dataset.tab);
+                    });
+                });
+            }
+            if (pageId === 'profile-coupon-all' || pageId === 'profile-coupon-used' || pageId === 'profile-coupon-expired') {
+                // 优惠券 Tab 切换
+                document.querySelectorAll('#mobile-content .cp-tab').forEach(tab => {
+                    tab.style.cursor = 'pointer';
+                    tab.addEventListener('click', () => {
+                        switchPage(tab.dataset.tab);
+                    });
+                });
+                // 立即使用按钮 → 跳转核销码页面
+                document.querySelectorAll('#mobile-content [data-action="use-coupon"]').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        // 设置当前核销的优惠券ID和赠品名称
+                        const couponId = parseInt(btn.dataset.id);
+                        const coupon = couponRecords.find(c => c.id === couponId);
+                        if (coupon) {
+                            couponQrcodeData.couponId = couponId;
+                            couponQrcodeData.giftName = coupon.giftName || '赠品';
+                        }
+                        switchPage('profile-coupon-qrcode');
+                    });
+                });
+                // 领取更多优惠券 → 跳转领券中心
+                const getMoreBtn = document.querySelector('#mobile-content [data-action="get-more-coupon"]');
+                if (getMoreBtn) {
+                    getMoreBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        switchPage('profile-coupon-center');
+                    });
+                }
+                // 使用说明 → 显示弹窗
+                document.querySelectorAll('#mobile-content [data-action="show-usage"]').forEach(el => {
+                    el.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const mask = document.querySelector('#mobile-content .cp-usage-mask');
+                        if (mask) mask.classList.add('show');
+                    });
+                });
+                // 关闭使用说明弹窗（点击遮罩或✕）
+                document.querySelectorAll('#mobile-content [data-action="close-usage"]').forEach(el => {
+                    el.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const mask = el.closest('.cp-usage-mask') || document.querySelector('#mobile-content .cp-usage-mask');
+                        if (mask) mask.classList.remove('show');
+                    });
+                });
+            }
+            if (pageId === 'profile-coupon-qrcode') {
+                // 核销码页面：轻量轮询，每3秒检测券状态变化
+                // 原型模拟：45秒后收银员扫码核销成功，券状态 valid → used
+                const _simulateDelay = 45000;
+                setTimeout(function() {
+                    const coupon = couponRecords.find(function(c) { return c.id === couponQrcodeData.couponId; });
+                    if (coupon && coupon.status === 'valid') {
+                        coupon.status = 'used';
+                        coupon.useTime = new Date().toISOString().replace('T', ' ').substring(0, 19);
+                    }
+                }, _simulateDelay);
+
+                _qrcodePollTimer = setInterval(function() {
+                    const coupon = couponRecords.find(function(c) { return c.id === couponQrcodeData.couponId; });
+                    if (coupon && coupon.status === 'used') {
+                        // 核销成功，清除轮询
+                        clearInterval(_qrcodePollTimer);
+                        _qrcodePollTimer = null;
+                        // 显示核销成功 Toast
+                        var toast = document.createElement('div');
+                        toast.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,0.7);color:#fff;padding:12px 24px;border-radius:8px;font-size:15px;z-index:9999;white-space:nowrap;';
+                        toast.textContent = '核销成功';
+                        var qrcodePage = document.querySelector('#mobile-content .qrcode-page');
+                        if (qrcodePage) qrcodePage.appendChild(toast);
+                        // 1.5秒后自动返回我的优惠券页
+                        setTimeout(function() {
+                            if (toast.parentNode) toast.remove();
+                            switchPage('profile-coupon-all');
+                        }, 1500);
+                    }
+                }, 3000);
+            }
+            if (pageId === 'profile-coupon-center') {
+                // 领券中心：点击领取按钮
+                document.querySelectorAll('#mobile-content [data-action="claim-coupon"]').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        if (btn.disabled) return;
+                        var id = btn.dataset.id;
+                        // 更新状态并重新渲染
+                        _couponCenterState = _couponCenterState.map(function(c) {
+                            if (c.id === id) c.claimed = true;
+                            return c;
+                        });
+                        // 直接更新按钮文本和状态，不整体重渲染
+                        btn.textContent = '已领取';
+                        btn.disabled = true;
+                        btn.classList.add('disabled');
+                        // 显示成功Toast
+                        var toast = document.createElement('div');
+                        toast.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,0.7);color:#fff;padding:10px 20px;border-radius:8px;font-size:14px;z-index:9999;';
+                        toast.textContent = '领取成功';
+                        document.querySelector('#mobile-content').appendChild(toast);
+                        setTimeout(function(){ toast.remove(); }, 1500);
+                    });
+                });
+                // 使用说明 → 显示弹窗
+                document.querySelectorAll('#mobile-content [data-action="show-usage"]').forEach(el => {
+                    el.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const mask = document.querySelector('#mobile-content .cp-usage-mask');
+                        if (mask) mask.classList.add('show');
+                    });
+                });
+                // 关闭使用说明弹窗（点击遮罩或✕）
+                document.querySelectorAll('#mobile-content [data-action="close-usage"]').forEach(el => {
+                    el.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const mask = el.closest('.cp-usage-mask') || document.querySelector('#mobile-content .cp-usage-mask');
+                        if (mask) mask.classList.remove('show');
+                    });
+                });
             }
             if (pageId === 'profile-payment-list') {
                 // 缴费按钮 → 跳转到物业缴费详情页
@@ -20108,6 +22084,10 @@
             const content = document.getElementById('mobile-content');
             if (content) content.scrollTop = 0;
         }
+        // ====== 高亮辅助：将 <<text>> 标记转为黄色背景高亮 ======
+        function highlightText(text) {
+            return text.replace(/<<([^>]+)>>/g, '<span style="background:#FFF3A0;color:#333;padding:0 2px;border-radius:2px;">$1</span>');
+        }
         // ====== 渲染：交互注释 ======
         function renderInteractionNotes(notes) {
             if (!notes || notes.length === 0) return '<p style="color:#999;font-size:12px;">暂无交互注释</p>';
@@ -20118,13 +22098,13 @@
                             if (!line.trim()) return '';
                             // 子项：以 "  · " 开头
                             if (/^\s*·\s/.test(line)) {
-                                return `<div class="note-line sub">${line.replace(/^\s*·\s/, '')}</div>`;
+                                return `<div class="note-line sub">${highlightText(line.replace(/^\s*·\s/, ''))}</div>`;
                             }
                             // 标签行：以"："结尾且短（如"结构："）
                             if (/^[^：]{1,8}：$/.test(line.trim())) {
                                 return `<div class="note-line label">${line.trim()}</div>`;
                             }
-                            return `<div class="note-line">${line}</div>`;
+                            return `<div class="note-line">${highlightText(line)}</div>`;
                         }).join('');
                         return `
                             <div class="interaction-card${note.target ? ' has-target' : ''}"${note.target ? ` data-target="${note.target}"` : ''}>
@@ -20153,7 +22133,7 @@
                 ${doc.sections.map(section => `
                     <div class="prd-section">
                         <div class="prd-section-title">${section.title}</div>
-                        ${section.paragraphs ? section.paragraphs.map(p => `<p>${p}</p>`).join('') : ''}
+                        ${section.paragraphs ? section.paragraphs.map(p => `<p>${highlightText(p)}</p>`).join('') : ''}
                         ${section.flow ? `<div class="prd-flow">${section.flow}</div>` : ''}
                         ${section.table ? renderTable(section.table) : ''}
                         ${section.code ? `<pre class="prd-code">${section.code}</pre>` : ''}
@@ -20217,14 +22197,28 @@
             // 回馈金相关页面
             const rebatePageIds = ['profile-rebate-all', 'profile-rebate-earned', 'profile-rebate-deducted'];
             const isRebatePage = rebatePageIds.indexOf(pageId) >= 0;
-            // 商城 page-tabs：仅商城页面显示
-            document.getElementById('page-tabs').style.display = (!isPaymentPage && !isRebatePage && matchedTabs.length > 0) ? 'flex' : 'none';
-            // 物业缴费/回馈金 page-tabs：仅这两类页面显示
+            // 购物金相关页面
+            const shoppingPageIds = ['profile-shopping-all', 'profile-shopping-detail', 'profile-shopping-recharge', 'profile-shopping-consume'];
+            const isShoppingPage = shoppingPageIds.indexOf(pageId) >= 0;
+            // 优惠券相关页面
+            const couponPageIds = ['profile-coupon-all', 'profile-coupon-used', 'profile-coupon-expired', 'profile-coupon-qrcode', 'profile-coupon-center'];
+            const isCouponPage = couponPageIds.indexOf(pageId) >= 0;
+            // 订单相关页面（我的订单 + 8个详情页）
+            const orderPageIds = ['shop-orders', 'shop-order-detail-home-pay', 'shop-order-detail-home-ship', 'shop-order-detail-home-receive', 'shop-order-detail-home-done', 'shop-order-detail-pickup-pay', 'shop-order-detail-pickup-ship', 'shop-order-detail-pickup-receive', 'shop-order-detail-pickup-done'];
+            const isOrderPage = orderPageIds.indexOf(pageId) >= 0;
+            // 商城 page-tabs：仅商城页面显示（排除订单页）
+            const tabsShouldShow = !isPaymentPage && !isRebatePage && !isShoppingPage && !isCouponPage && !isOrderPage && matchedTabs.length > 0;
+            window.__debugTabs = window.__debugTabs || [];
+            window.__debugTabs.push({pageId, isShoppingPage, isCouponPage, matchedCount: matchedTabs.length, shouldShow: tabsShouldShow});
+            document.getElementById('page-tabs').style.display = tabsShouldShow ? 'flex' : 'none';
+            // 物业缴费/回馈金/购物金/优惠券 page-tabs：这些页面显示
             const paymentTabsBar = document.getElementById('payment-page-tabs');
-            paymentTabsBar.style.display = (isPaymentPage || isRebatePage) ? 'flex' : 'none';
-            // 物业缴费页面：显示缴费Tab、隐藏回馈金Tab；回馈金页面：反之
+            paymentTabsBar.style.display = (isPaymentPage || isRebatePage || isShoppingPage || isCouponPage) ? 'flex' : 'none';
+            // 物业缴费页面：显示缴费Tab；回馈金页面：显示回馈金Tab；购物金页面：显示购物金Tab；优惠券页面：显示优惠券Tab
             paymentTabsBar.querySelectorAll('.tab-payment').forEach(t => t.style.display = isPaymentPage ? '' : 'none');
             paymentTabsBar.querySelectorAll('.tab-rebate').forEach(t => t.style.display = isRebatePage ? '' : 'none');
+            paymentTabsBar.querySelectorAll('.tab-shopping').forEach(t => t.style.display = isShoppingPage ? '' : 'none');
+            paymentTabsBar.querySelectorAll('.tab-coupon').forEach(t => t.style.display = isCouponPage ? '' : 'none');
             // 状态控制器：profile-home（上方）和 profile-payment（下方）显示
             const stateCtrlTop = document.getElementById('state-controller-top');
             const stateCtrlBottom = document.getElementById('state-controller');
@@ -20283,9 +22277,10 @@
             document.querySelector('.mobile-header').style.display = (pageId === 'profile-home' || pageId === 'shop-checkout') ? 'none' : 'flex';
             // 个人中心：状态栏叠加在背景图上（透明背景、白色文字）
             document.querySelector('.mobile-status-bar').classList.toggle('profile', pageId === 'profile-home');
-            // 子页面（物业缴费列表、物业缴费详情、设置等）隐藏底部Tab导航
-            const isSubPage = (pageId === 'profile-payment-list' || pageId === 'profile-payment' || pageId === 'profile-settings' || pageId === 'property-bill' || pageId === 'bill-month-detail' || pageId === 'payment-records' || pageId === 'record-bill-detail' || pageId === 'record-month-detail' || pageId === 'profile-rebate-all' || pageId === 'profile-rebate-earned' || pageId === 'profile-rebate-deducted' || pageId === 'shop-checkout');
-            const needFixedLayout = (pageId === 'profile-payment' || pageId === 'property-bill' || pageId === 'bill-month-detail' || pageId === 'shop-checkout'); // 需要固定底部栏的页面
+            // 子页面（物业缴费列表、物业缴费详情、设置、订单相关页面等）隐藏底部Tab导航
+            const _orderSubPages = ['shop-orders', 'shop-order-detail-home-pay', 'shop-order-detail-home-ship', 'shop-order-detail-home-receive', 'shop-order-detail-home-done', 'shop-order-detail-pickup-pay', 'shop-order-detail-pickup-ship', 'shop-order-detail-pickup-receive', 'shop-order-detail-pickup-done'];
+            const isSubPage = (pageId === 'profile-payment-list' || pageId === 'profile-payment' || pageId === 'profile-settings' || pageId === 'property-bill' || pageId === 'bill-month-detail' || pageId === 'payment-records' || pageId === 'record-bill-detail' || pageId === 'record-month-detail' || pageId === 'profile-rebate-all' || pageId === 'profile-rebate-earned' || pageId === 'profile-rebate-deducted' || pageId === 'profile-shopping-all' || pageId === 'profile-shopping-detail' || pageId === 'profile-shopping-recharge' || pageId === 'profile-shopping-consume' || pageId === 'profile-coupon-all' || pageId === 'profile-coupon-used' || pageId === 'profile-coupon-expired' || pageId === 'profile-coupon-qrcode' || pageId === 'profile-coupon-center' || pageId === 'shop-checkout' || _orderSubPages.indexOf(pageId) >= 0);
+            const needFixedLayout = (pageId === 'profile-payment' || pageId === 'property-bill' || pageId === 'bill-month-detail' || pageId === 'shop-checkout' || pageId === 'profile-shopping-all');
             document.querySelector('.mobile-bottom-nav').style.display = isSubPage ? 'none' : 'block';
             // 右侧更多按钮：设计稿中各缴费页面导航栏均含此按钮（83x30）；仅个人中心首页（无导航栏）与设置页不显示
             const moreBtn = document.querySelector('.mobile-header-more');
@@ -20362,7 +22357,7 @@
             backBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 const cur = getPageIdFromHash();
-                const backMap = { 'profile-payment-list': 'profile-home', 'profile-payment': 'profile-payment-list', 'profile-settings': 'profile-home', 'property-bill': 'profile-payment-list', 'bill-month-detail': 'property-bill', 'payment-records': 'profile-payment-list', 'record-bill-detail': 'payment-records', 'record-month-detail': 'record-bill-detail', 'profile-rebate-all': 'profile-home', 'profile-rebate-earned': 'profile-home', 'profile-rebate-deducted': 'profile-home' };
+                const backMap = { 'profile-payment-list': 'profile-home', 'profile-payment': 'profile-payment-list', 'profile-settings': 'profile-home', 'property-bill': 'profile-payment-list', 'bill-month-detail': 'property-bill', 'payment-records': 'profile-payment-list', 'record-bill-detail': 'payment-records', 'record-month-detail': 'record-bill-detail', 'profile-rebate-all': 'profile-home', 'profile-rebate-earned': 'profile-home', 'profile-rebate-deducted': 'profile-home', 'profile-shopping-all': 'profile-home', 'profile-shopping-detail': 'profile-shopping-all', 'profile-shopping-recharge': 'profile-shopping-all', 'profile-shopping-consume': 'profile-shopping-all', 'profile-coupon-all': 'profile-home', 'profile-coupon-used': 'profile-home', 'profile-coupon-expired': 'profile-home', 'profile-coupon-qrcode': 'profile-coupon-all', 'profile-coupon-center': 'profile-coupon-all', 'shop-orders': 'profile-home', 'shop-order-detail-home-pay': 'shop-orders', 'shop-order-detail-home-ship': 'shop-orders', 'shop-order-detail-home-receive': 'shop-orders', 'shop-order-detail-home-done': 'shop-orders', 'shop-order-detail-pickup-pay': 'shop-orders', 'shop-order-detail-pickup-ship': 'shop-orders', 'shop-order-detail-pickup-receive': 'shop-orders', 'shop-order-detail-pickup-done': 'shop-orders' };
                 if (backMap[cur]) {
                     switchPage(backMap[cur]);
                 }
@@ -20437,8 +22432,29 @@
         }
         const _originalSwitchPage = switchPage;
         switchPage = function(pageId, opts = {}) {
+            // 离开核销码页面时清除轮询定时器
+            if (_qrcodePollTimer) {
+                clearInterval(_qrcodePollTimer);
+                _qrcodePollTimer = null;
+            }
             expandParentMenu(pageId);
             _originalSwitchPage(pageId);
+            // 购物金/优惠券相关页面：强制隐藏商城 page-tabs，保持缴费/回馈金/购物金/优惠券 page-tabs 显示
+            const shoppingPageIds = ['profile-shopping-all', 'profile-shopping-detail', 'profile-shopping-recharge', 'profile-shopping-consume'];
+            const couponPageIds = ['profile-coupon-all', 'profile-coupon-used', 'profile-coupon-expired', 'profile-coupon-qrcode', 'profile-coupon-center'];
+            const isShoppingPage = shoppingPageIds.indexOf(pageId) >= 0;
+            const isCouponPage = couponPageIds.indexOf(pageId) >= 0;
+            if (isShoppingPage || isCouponPage) {
+                document.getElementById('page-tabs').style.display = 'none';
+                // payment-page-tabs 由 switchPage 内部逻辑控制，此处不再强制隐藏
+            }
+            // 订单相关页面（我的订单列表 + 8个订单详情页）：强制隐藏底部导航栏
+            const _orderSubPagesExtra = ['shop-orders', 'shop-order-detail-home-pay', 'shop-order-detail-home-ship', 'shop-order-detail-home-receive', 'shop-order-detail-home-done', 'shop-order-detail-pickup-pay', 'shop-order-detail-pickup-ship', 'shop-order-detail-pickup-receive', 'shop-order-detail-pickup-done'];
+            const _isOrderPage = _orderSubPagesExtra.indexOf(pageId) >= 0;
+            if (_isOrderPage) {
+                const _bottomNav = document.querySelector('.mobile-bottom-nav');
+                if (_bottomNav) _bottomNav.style.display = 'none';
+            }
             // 同步 URL hash（opts.fromHash 表示由 hashchange 触发，避免循环）
             if (!opts.fromHash && pageId !== getPageIdFromHash()) {
                 history.replaceState(null, '', '#' + pageId);
