@@ -1805,6 +1805,7 @@
         .sh-balance-row { display: flex; flex-direction: column; gap: 6px; }
         .sh-balance-value { font-size: 36px; color: #353B3C; font-weight: 600; line-height: 44px; letter-spacing: 0.01em; }
         .sh-balance-desc { font-size: 13px; color: #4F4F4F; line-height: 20px; }
+        .sh-balance-desc .sep { color: #BDBDBD; margin: 0 10px; }
         .sh-detail-btn { height: 40px; border-radius: 12px; background: #FFFFFF; display: flex; align-items: center; justify-content: center; gap: 4px; color: #353B3C; font-size: 15px; font-weight: 500; line-height: 24px; cursor: pointer; border: none; }
         .sh-detail-btn img { width: 16px; height: 16px; }
         .sh-section-title { font-size: 16px; color: #353B3C; font-weight: 600; line-height: 24px; margin: 20px 16px 12px; }
@@ -18710,27 +18711,27 @@
                 mainNav: 'profile',
                 render: 'profileShoppingAll',
                 interactionNotes: [
-                    { id: 1, title: '购物金余额卡片', type: 'state', target: '[data-block="sh-balance"]', content: '展示当前购物金总余额（大字号），本金 + 赠储拆分展示\n\n数据来源说明：\n总余额：来源于用户购物金账户实时数据，本金+赠储之和\n本金：用户历史真实支付的充值金额，扣除已消费和退款后的余额\n赠储：历史充值赠送的金额，扣除已消费后的余额\n扣减顺序：消费时优先扣减赠储，不足部分扣减本金\n查看明细：点击跳转购物金明细页（profile-shopping-detail）' },
-                    { id: 2, title: '充值金额选择', type: 'interaction', target: '[data-block="sh-recharge"]', content: '充值档位数据来源于商城后台配置，用户端动态展示\n\n数据来源说明：\n充值档位：来源于商城后台「营销管理 > 余额充值」模块，运营创建并配置\n充值金额：后台配置的充值金额数值（如200/500/1000等）\n赠送内容：后台配置的赠送金额或赠品核销券（可同时配置）\n排序/显示：按后台配置的排序字段展示，支持控制是否显示\n\n5 档充值金额：¥200（送赠品券）/ ¥500（赠¥20）/ ¥1000（赠¥50）/ ¥2000（赠¥100）/ ¥5000（赠¥300），每档显示对应赠品\n选中态：蓝色边框高亮，支持单选切换\n点击充值项 → 更新底部结算金额' },
+                    { id: 1, title: '购物金余额卡片', type: 'state', target: '[data-block="sh-balance"]', content: '展示当前购物金总余额（大字号），本金 + 赠储拆分展示\n\n展示格式：\n总余额：大字号数值\n下方说明行：「本金 X  赠储 X」（双空格分隔）\n\n数据来源说明：\n总余额：来源于用户购物金账户实时数据，本金+赠储之和\n本金：用户历史真实支付的充值金额，扣除已消费和退款后的余额\n赠储：历史充值赠送的金额，扣除已消费后的余额\n<<扣减规则：消费时按本金与赠储比例同步扣减，总额=本金+赠储恒成立。例：充值500元（本金500+赠储20，比例25:1），消费104元时，消耗本金100+赠储4，剩余本金400+赠储16>>\n<<退款规则：退款时本金优先返还。退全款时，退还该订单中消耗的全部本金部分，赠储消耗部分不予退还；若部分退款，则按比例退还对应本金。系统需在每笔订单中记录本金与赠储的消耗明细，作为退款时的计算依据>>\n查看明细：点击跳转购物金明细页（profile-shopping-detail）' },
+                    { id: 2, title: '充值金额选择', type: 'interaction', target: '[data-block="sh-recharge"]', content: '充值档位数据来源于商城后台配置，用户端动态展示\n\n数据来源说明：\n充值档位：来源于商城后台「营销管理 > 余额充值」模块，运营创建并配置\n充值金额：后台配置的充值金额数值（如200/500/1000等）\n赠送内容：后台配置的赠送金额或赠品核销券（可同时配置）\n排序/显示：按后台配置的排序字段展示，支持控制是否显示\n\n5 档充值金额：¥200（送赠品券）/ ¥500（赠¥20）/ ¥1000（赠¥50）/ ¥2000（赠¥100）/ ¥5000（赠¥300），每档显示对应赠品\n<<档位说明：¥200档赠送赠品核销券（无赠储金额，到账本金=充值金额）；¥500及以上档位赠送赠储金额（到账本金=充值金额，赠储=后台配置赠送金额）>>\n选中态：蓝色边框高亮，支持单选切换\n点击充值项 → 更新底部结算金额' },
                     { id: 3, title: '适用门店', type: 'interaction', target: '[data-action="sh-store"]', content: '「适用门店」+ 右箭头，点击弹出底部弹窗\n\n数据来源说明：\n门店名称/地址：2026Q3这期先由前端写死（徕芙会员超市 / 晋江市良兴路5号）\n弹窗内容：门店名称「徕芙会员超市」+ 门店地址「晋江市良兴路5号」+ 位置图标\n点击遮罩或关闭按钮可关闭弹窗' },
-                    { id: 4, title: '充值说明', type: 'state', target: '[data-block="sh-terms"]', content: '展示 4 条充值说明文案：\n1. 充值金额在线上及线下徕芙会员超市均可使用\n2. 储值完成后不支持自助退款，可联系客服处理\n3. 购物金余额不支持转赠，不可提现，长期有效\n4. 下方勾选已阅读并同意《用户储值协议》视为已读并同意《用户储值协议》内所有的内容\n\n协议链接：《用户储值协议》点击可跳转查看协议详情' },
+                    { id: 4, title: '充值说明', type: 'state', target: '[data-block="sh-terms"]', content: '展示 4 条充值说明文案：\n1. 充值金额在线上及线下徕芙会员超市均可使用\n2. 储值完成后不支持自助退款，可联系客服处理<<；客服退款时，仅退还未消费的本金余额，赠储不予退还>>\n3. 购物金余额不支持转赠，不可提现，长期有效\n4. 下方勾选已阅读并同意《用户储值协议》视为已读并同意《用户储值协议》内所有的内容\n\n协议链接：《用户储值协议》点击可跳转查看协议详情' },
                     { id: 5, title: '底部结算栏', type: 'interaction', target: '[data-block="sh-bottom"]', content: '左侧展示当前选择的充值金额 + 协议勾选框，右侧「立即充值」按钮\n\n交互规则：\n未勾选协议时按钮禁用（灰色不可点击）；勾选后按钮变为蓝色可点击\n点击「立即充值」弹出微信支付弹窗，确认支付后更新余额并新增明细记录\n若充值档位含赠品券，充值成功后自动发放赠品核销券至用户优惠券账户' },
-                    { id: 6, title: '微信支付弹窗', type: 'interaction', target: '[data-block="sh-wxpay"]', content: '点击「立即充值」后弹出微信支付密码输入弹窗\n\n交互流程：\n1. 弹窗显示：点击「立即充值」后居中弹出\n2. 金额展示：显示当前充值金额（如￥200.00）\n3. 密码输入：6位数字密码，支持数字键盘输入\n4. 支付验证：输入完成后自动验证密码（模拟：任意6位数字通过）\n5. 支付结果：\n   - 成功：Toast 提示「充值成功」，余额更新，弹窗关闭，新增明细记录\n   - 失败：Toast 提示「密码错误，请重试」\n   - 取消：点击关闭按钮或遮罩，Toast 提示「已取消支付」，弹窗关闭\n6. 赠品发放：若档位含赠品券，自动发放至优惠券账户' }
+                    { id: 6, title: '微信支付弹窗', type: 'interaction', target: '[data-block="sh-wxpay"]', content: '点击「立即充值」后弹出微信支付密码输入弹窗\n\n交互流程：\n1. 弹窗显示：点击「立即充值」后居中弹出\n2. 金额展示：显示当前充值金额（如￥200.00）\n3. 密码输入：6位数字密码，支持数字键盘输入\n4. 支付验证：输入完成后自动验证密码（模拟：任意6位数字通过）\n5. 支付结果：\n   - 成功：Toast 提示「充值成功」，余额更新，弹窗关闭，新增明细记录。<<到账规则：¥200档仅本金到账（赠储0），同时发放赠品核销券；¥500及以上档位本金+赠储同步到账（如充500到账本金500+赠储20）>>\n   - 失败：Toast 提示「密码错误，请重试」\n   - 取消：点击关闭按钮或遮罩，Toast 提示「已取消支付」，弹窗关闭\n6. 赠品发放：若档位含赠品券<<（¥200档）>>，自动发放至优惠券账户' }
                 ],
                 requirementDoc: {
                     title: '购物金需求文档',
-                    meta: 'v1.1 · 更新日期 2026-08-26 · 电商/零售 · C端用户',
+                    meta: '<<v1.2>> · 更新日期 2026-08-26 · 电商/零售 · C端用户',
                     sections: [
-                        { title: '1.0 需求背景', paragraphs: ['购物金是用户预充值至徕芙会员超市钱包的现金权益，充值后可在全渠道消费时直接抵扣，1元购物金可抵扣1元订单金额，无抵扣比例限制。', '核心概念——本金：用户真实支付的充值金额；赠储：充值赠送的金额，消费时优先扣减赠储，不足部分扣减本金；账户类型：在线充值账户，线上线下全渠道通用。'] },
+                        { title: '1.0 需求背景', paragraphs: ['购物金是用户预充值至徕芙会员超市钱包的现金权益，充值后可在全渠道消费时直接抵扣，1元购物金可抵扣1元订单金额，无抵扣比例限制。', '核心概念——本金：用户真实支付的充值金额；赠储：充值赠送的金额；<<消费时按本金与赠储比例同步扣减，总额=本金+赠储恒成立>>；<<退款时本金优先返还：退全款时退还该订单中消耗的全部本金部分，赠储消耗部分不予退还；若部分退款则按比例退还对应本金；系统需在每笔订单中记录本金与赠储的消耗明细，作为退款时的计算依据>>；账户类型：在线充值账户，线上线下全渠道通用。'] },
                         { title: '2.0 数据来源说明', paragraphs: ['购物金相关数据均来源于商城后台系统，由运营人员在后台统一配置和管理。', '购物金余额：来源于用户账户实时数据，本金+赠储之和，通过充值和消费交易自动更新', '充值档位：来源于商城后台「营销管理 > 余额充值」模块，运营创建并配置充值金额、赠送内容、排序及显示状态', '赠送内容：后台支持配置赠送余额（赠储）或赠品核销券，可同时配置', '门店信息：2026Q3这期先由前端写死（徕芙会员超市 / 晋江市良兴路5号）', '交易明细：来源于用户充值、消费、退款等交易记录，按时间顺序展示'] },
-                        { title: '3.0 充值规则', paragraphs: ['充值档位数据来源于商城后台「营销管理 > 余额充值」的配置。运营人员在后台创建充值档位，配置充值金额及赠送内容（赠送余额 / 赠品核销券，可同时配置），并设置排序、是否显示等属性。用户端充值页根据后台配置动态展示充值档位。', '充值档位：¥200（送赠品券）/ ¥500（赠¥20）/ ¥1000（赠¥50）/ ¥2000（赠¥100）/ ¥5000（赠¥300）', '充值成功后，本金立即到账，赠储同步到账', '线上充值支持微信支付；线下支持门店扫码'] },
-                        { title: '4.0 使用规则', paragraphs: ['抵扣比例：1元购物金抵扣1元实付订单金额，无比例限制，可全额抵扣', '使用范围：徕芙会员超市全部商品及物业费', '退款规则：消费后发生退款，仅退还未消费的本金余额，赠储不可退', '有效期：长期有效，不支持转赠、不支持提现'] },
+                        { title: '3.0 充值规则', paragraphs: ['充值档位数据来源于商城后台「营销管理 > 余额充值」的配置。运营人员在后台创建充值档位，配置充值金额及赠送内容（赠送余额 / 赠品核销券，可同时配置），并设置排序、是否显示等属性。用户端充值页根据后台配置动态展示充值档位。', '充值档位：¥200（<<送赠品核销券，无赠储金额，到账本金=200>>）/ ¥500（<<赠¥20，到账本金500+赠储20>>）/ ¥1000（<<赠¥50，到账本金1000+赠储50>>）/ ¥2000（<<赠¥100，到账本金2000+赠储100>>）/ ¥5000（<<赠¥300，到账本金5000+赠储300>>）', '充值成功后，本金立即到账，赠储同步到账', '线上充值支持微信支付；线下支持门店扫码'] },
+                        { title: '4.0 使用规则', paragraphs: ['抵扣比例：1元购物金抵扣1元实付订单金额，无比例限制，可全额抵扣', '使用范围：徕芙会员超市全部商品及物业费', '<<扣减规则：消费时按本金与赠储比例同步扣减，总额=本金+赠储恒成立。例：充值500元（本金500+赠储20，比例25:1），消费104元时，消耗本金100+赠储4，剩余本金400+赠储16>>', '<<退款规则：退款时本金优先返还。退全款时，退还该订单中消耗的全部本金部分，赠储消耗部分不予退还；若部分退款，则按比例退还对应本金。系统需在每笔订单中记录本金与赠储的消耗明细，作为退款时的计算依据>>', '有效期：长期有效，不支持转赠、不支持提现'] },
                         { title: '5.0 页面入口', paragraphs: ['我的页 → 会员信息卡片 → 点击「购物金」数值进入购物金首页，可进行充值', '首页「查看明细」按钮跳转购物金明细页'] },
                         { title: '6.0 充值状态说明', paragraphs: ['点击「立即充值」后，页面弹出微信支付弹窗，用户完成支付流程。支付完成后根据结果进入不同状态：', '充值成功：微信支付回调成功，购物金余额实时更新（本金+赠储到账），底部 Toast 提示「充值成功」，2 秒后自动关闭弹窗并刷新首页余额展示，同时在明细页新增一条充值记录。若充值档位包含赠送赠品券，充值成功后系统自动将赠品核销券发放至用户优惠券账户，用户可在「我的 > 优惠券」中查看和使用。', '充值失败：微信支付回调失败或超时，底部 Toast 提示「充值失败，请稍后重试」，弹窗关闭，余额不变，用户可重新点击「立即充值」发起充值。', '支付取消：用户在微信支付弹窗主动关闭或取消支付，底部 Toast 提示「已取消支付」，弹窗关闭，余额不变。', '支付中：用户完成指纹/密码验证后等待微信回调期间，按钮显示「支付中...」并禁用，防止重复提交；回调到达后切换为成功或失败状态。'] }
                     ]
                 },
                 statusList: [
-                    { block: '余额卡片', state: '默认', trigger: '页面加载', ui: '展示总余额 200（本金 180 + 赠储 20）+ 查看明细按钮' },
+                    { block: '余额卡片', state: '默认', trigger: '页面加载', ui: '展示总余额 520（下方说明行：本金 500  赠储 20）+ 查看明细按钮' },
                     { block: '充值选择', state: '默认选中 ¥200', trigger: '页面加载', ui: '第一个档位高亮，底部结算显示 ¥200' },
                     { block: '充值选择', state: '切换档位', trigger: '点击其他充值档', ui: '对应档位高亮，底部结算金额同步更新' },
                     { block: '底部结算', state: '未勾选协议', trigger: '页面加载', ui: '「立即充值」按钮禁用（灰色不可点击）' },
@@ -19385,8 +19386,8 @@
         }
         // ====== 购物金公共数据 ======
         const shoppingState = {
-            balance: 200,       // 总余额
-            principal: 180,     // 本金
+            balance: 520,       // 总余额
+            principal: 500,     // 本金
             bonus: 20,          // 赠储
             rechargeAmount: 200,
             agreed: false,
@@ -19401,11 +19402,11 @@
             { amount: 5000, gift: '赠¥300' }
         ];
         const shoppingRecords = [
-            { type: 'recharge', title: '充值购物金', time: '2025-12-01 14:09:20', amount: 520, balance: 520, order: '' },
-            { type: 'consume', title: '购物金消费', time: '2025-12-01 14:09:20', amount: -320, balance: 200, order: '订单#20260422164313587212' },
-            { type: 'consume', title: '购物金消费', time: '2025-12-01 14:09:20', amount: -56, balance: 144, order: '订单#20260422164313587212' },
-            { type: 'recharge', title: '充值购物金', time: '2025-12-01 14:09:20', amount: 200, balance: 344, order: '' },
-            { type: 'refund', title: '退款返还购物金', time: '2025-12-01 14:09:20', amount: 56, balance: 400, order: '' }
+            { type: 'refund',   title: '退款返还购物金', time: '2026-08-25 10:15:30', amount: 156, balance: 520, order: '订单#20260825101530005' },
+            { type: 'consume',  title: '购物金消费',     time: '2026-08-24 18:42:10', amount: -260, balance: 364, order: '订单#20260824184210004' },
+            { type: 'consume',  title: '购物金消费',     time: '2026-08-23 12:08:55', amount: -100, balance: 624, order: '订单#20260823120855003' },
+            { type: 'consume',  title: '购物金消费',     time: '2026-08-22 09:30:18', amount: -96,  balance: 724, order: '订单#20260822093018002' },
+            { type: 'recharge', title: '充值购物金',     time: '2026-08-20 14:20:00', amount: 520, balance: 820, order: '' }
         ];
         // ====== 购物金渲染函数 ======
         function profileShoppingRender(mode) {
@@ -19473,9 +19474,9 @@
                     <div class="sh-balance-card" data-block="sh-balance">
                         <div class="sh-balance-row">
                             <div class="sh-balance-value">${shoppingState.balance}</div>
-                            <div class="sh-balance-desc">本金 ${shoppingState.principal}  赠储 ${shoppingState.bonus}</div>
+                            <div class="sh-balance-desc">本金 ${shoppingState.principal}&nbsp;&nbsp;赠储 ${shoppingState.bonus}</div>
                         </div>
-                        <button class="sh-detail-btn" data-action="go-shopping-detail">查看明细 ${iconArrowRight}</button>
+                        <button class="sh-detail-btn" data-action="go-shopping-detail">查看明细</button>
                     </div>
                     <div class="sh-section-title">选择充值金额</div>
                     <div class="sh-recharge-grid" data-block="sh-recharge">
@@ -20212,25 +20213,25 @@
                         username: '189****0990', showSettings: true, showBell: true, avatarIcon: 'avatar-user-fill',
                         levelName: 'V2白银会员', levelText: '', showTag: false,
                         showLivingCard: true, livingCardExpiry: '', livingCardSubtitle: '门禁权限升级等14项权益', livingCardCta: '立即开通',
-                        points: '600', balance: '500', shopping: '200', coupons: '6', showExpire: false
+                        points: '600', balance: '500', shopping: '520', coupons: '6', showExpire: false
                     },
                     activated: {
                         username: '189****0990', showSettings: true, showBell: true, avatarIcon: 'avatar-user-fill',
                         levelName: '徕芙社区卡', levelText: '', showTag: true, tagText: 'V1青铜会员',
                         showLivingCard: true, livingCardExpiry: '已开通 2027-09-07到期', livingCardExpiryArrow: true, livingCardSubtitle: '', livingCardCta: '',
-                        points: '600', balance: '500', shopping: '200', coupons: '6', showExpire: false
+                        points: '600', balance: '500', shopping: '520', coupons: '6', showExpire: false
                     },
                     expiring: {
                         username: '189****0990', showSettings: true, showBell: true, avatarIcon: 'avatar-user-fill',
                         levelName: '徕芙社区卡', levelText: '', showTag: true, tagText: 'V1青铜会员',
                         showLivingCard: true, livingCardExpiry: '', livingCardSubtitle: '30天后即将过期，无法使用远程开门', livingCardCta: '立即续费',
-                        points: '600', balance: '500', shopping: '200', coupons: '6', showExpire: false
+                        points: '600', balance: '500', shopping: '520', coupons: '6', showExpire: false
                     },
                     expired: {
                         username: '189****0990', showSettings: true, showBell: true, avatarIcon: 'avatar-user-fill',
                         levelName: 'V2白银会员', levelText: '', showTag: false,
                         showLivingCard: true, livingCardExpiry: '', livingCardSubtitle: '会员已过期，相关权益已失效', livingCardCta: '立即续费',
-                        points: '600', balance: '500', shopping: '200', coupons: '6', showExpire: false
+                        points: '600', balance: '500', shopping: '520', coupons: '6', showExpire: false
                     }
                 };
                 const renderState = (key, idx) => {
@@ -21119,10 +21120,10 @@
                     const dConfirm = deductModal.querySelector('[data-role="deduct-confirm"]');
                     // 各项数据配置
                     // rebate: 回馈金，余额12，可全额抵扣实付订单价格
-                    // shopping: 购物金，余额200，可全额抵扣实付订单价格
+                    // shopping: 购物金，余额520，可全额抵扣实付订单价格
                     const deductData = {
                         rebate: { title: '回馈金', balance: 12.00, rate: null },
-                        shopping: { title: '购物金', balance: 200.00, rate: null }
+                        shopping: { title: '购物金', balance: 520.00, rate: null }
                     };
                     // 各项当前选择状态（有余额时默认使用）
                     const deductState = { rebate: true, shopping: true };
