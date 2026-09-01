@@ -2111,8 +2111,6 @@
         .qrcode-page { width: 100%; height: 100%; background: #FFFFFF; display: flex; flex-direction: column; position: relative; overflow: hidden; }
         .qrcode-content { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 24px 24px; }
         .qrcode-number { font-family: "PingFang SC", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif; font-size: 16px; color: #333333; font-weight: 400; line-height: 24px; letter-spacing: 2px; margin-bottom: 24px; }
-        .qrcode-barcode { width: 280px; height: 80px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; }
-        .qrcode-barcode svg { width: 100%; height: 100%; }
         .qrcode-pattern { width: 200px; height: 200px; }
         .qrcode-pattern svg { width: 100%; height: 100%; }
         .qrcode-tip { font-size: 14px; color: #828282; line-height: 20px; margin-top: 32px; letter-spacing: 0.2px; }
@@ -2141,7 +2139,8 @@
         .orders-type-tabs { display: flex; background: #FFFFFF; padding: 10px 16px; gap: 12px; flex-shrink: 0; border-bottom: 1px solid #F5F5F5; }
         .orders-type-item { padding: 6px 14px; font-size: 13px; color: #666666; background: #F5F6F8; border-radius: 14px; cursor: pointer; white-space: nowrap; }
         .orders-type-item.active { color: #FFFFFF; background: #254EDB; font-weight: 500; }
-        .orders-scroll { flex: 1; overflow-y: auto; padding: 12px; }
+        .orders-scroll { flex: 1; overflow-y: auto; padding: 12px; scrollbar-width: none; -ms-overflow-style: none; }
+        .orders-scroll::-webkit-scrollbar { display: none; width: 0; height: 0; }
         .orders-list { display: flex; flex-direction: column; gap: 12px; }
         .order-card { background: #FFFFFF; border-radius: 10px; overflow: hidden; }
         .order-card-header { display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; border-bottom: 1px solid #F8F8F8; }
@@ -2169,25 +2168,76 @@
         .order-btn-primary { background: #333333; color: #FFFFFF; }
         .order-btn-outline:active { opacity: 0.75; }
         .order-btn-primary:active { opacity: 0.85; }
+        /* V1订单卡片样式 - 按Figma设计稿 */
+        .orders-page.v1 .order-card { padding: 14px 14px 10px; border-radius: 12px; }
+        .orders-page.v1 .order-card-header { border-bottom: none; padding: 0 0 10px; }
+        .orders-page.v1 .order-card-status { font-size: 16px; font-weight: 500; line-height: 28px; color: #333333; }
+        .orders-page.v1 .order-card-status.gift { color: #333333; }
+        .orders-page.v1 .order-card-status.cancel { color: #333333; }
+        .orders-page.v1 .order-card-status.evaluate { color: #333333; }
+        .orders-page.v1 .order-card-status.pay { color: #333333; }
+        .orders-page.v1 .order-card-status.ship { color: #333333; }
+        .orders-page.v1 .order-card-status.receive { color: #333333; }
+        .orders-page.v1 .order-card-status-desc { font-size: 12px; color: #828282; line-height: 20px; margin-top: 2px; }
+        .orders-page.v1 .order-card-countdown { font-size: 13px; color: #333333; font-weight: 500; margin-left: 4px; }
+        .orders-page.v1 .order-card-body { padding: 0; display: block; }
+        /* 商品行 */
+        .orders-page.v1 .order-card-product-row { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+        .orders-page.v1 .order-card-gallery { display: flex; gap: 8px; align-items: center; }
+        .orders-page.v1 .order-card-gallery-item { width: 72px; height: 72px; flex-shrink: 0; border-radius: 8px; background: #E0E0E0; overflow: hidden; }
+        .orders-page.v1 .order-card-gallery-item img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; -webkit-user-drag: none; user-drag: none; }
+        .orders-page.v1 .order-card-gallery-item.more { background: #E0E0E0; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #999999; }
+        .orders-page.v1 .order-card-count { font-size: 14px; font-weight: 400; color: #828282; line-height: 24px; display: flex; align-items: center; gap: 0; flex-shrink: 0; }
+        .orders-page.v1 .order-card-count .arrow { font-size: 14px; color: #828282; line-height: 24px; }
+        /* 价格行+操作行 合共72px */
+        .orders-page.v1 .order-card-bottom { padding: 0; margin-top: 10px; }
+        .orders-page.v1 .order-card-price-row { display: flex; justify-content: flex-end; align-items: baseline; gap: 4px; height: 28px; margin-bottom: 12px; }
+        .orders-page.v1 .order-card-price-label { font-size: 14px; font-weight: 400; color: #4F4F4F; line-height: 24px; }
+        .orders-page.v1 .order-card-price-value { font-size: 16px; font-weight: 500; color: #333333; line-height: 28px; }
+        .orders-page.v1 .order-card-price-value.pay-red { color: #F24333; }
+        .orders-page.v1 .order-card-footer { padding: 0; border-top: none; margin-top: 0; }
+        .orders-page.v1 .order-card-actions { justify-content: flex-end; gap: 8px; }
+        .orders-page.v1 .order-btn { width: 80px; height: 32px; font-size: 12px; font-weight: 500; border-radius: 16px; padding: 0; line-height: 20px; }
+        .orders-page.v1 .order-btn-outline { border: 1px solid #353B3C; color: #353B3C; background: #FFFFFF; }
+        .orders-page.v1 .order-btn-primary { background: #353B3C; color: #FFFFFF; border: none; }
+        /* 赠品兑换卡片 - 统一 */
+        .orders-page.v1 .gift-card .gift-product-row { display: flex; align-items: center; gap: 8px; }
+        .orders-page.v1 .gift-card .gift-product-img { width: 72px; height: 72px; border-radius: 8px; background: #E0E0E0; overflow: hidden; flex-shrink: 0; }
+        .orders-page.v1 .gift-card .gift-product-img img { width: 100%; height: 100%; object-fit: cover; }
+        .orders-page.v1 .gift-card .gift-product-info { flex: 1; min-width: 0; }
+        .orders-page.v1 .gift-card .gift-product-info .order-card-title { font-size: 14px !important; font-weight: 500 !important; color: #333333; line-height: 24px; }
+        .orders-page.v1 .gift-card .gift-product-spec { font-size: 12px; color: #828282; line-height: 20px; }
+        .orders-page.v1 .gift-card .gift-product-count { font-size: 14px; font-weight: 400; color: #828282; line-height: 24px; flex-shrink: 0; display: flex; align-items: center; }
+        .orders-page.v1 .gift-card .gift-product-count .arrow { font-size: 14px; color: #828282; line-height: 24px; }
+        .orders-page.v1 .gift-card .gift-price-row { display: flex; justify-content: flex-end; align-items: baseline; gap: 4px; padding: 0; border-top: none; margin-top: 10px; margin-bottom: 12px; height: 28px; }
+        .orders-page.v1 .gift-card .gift-price-label { font-size: 14px; font-weight: 400; color: #4F4F4F; line-height: 24px; }
+        .orders-page.v1 .gift-card .gift-price-value { font-size: 16px; font-weight: 500; color: #333333; line-height: 28px; }
+        .orders-page.v1 .gift-card .order-card-footer { padding: 0; border-top: none; margin-top: 0; }
 
         /* ====== 订单详情页 ====== */
         .order-detail-page { width: 100%; height: 100%; background: #F2F3F5; display: flex; flex-direction: column; overflow: hidden; }
         .od-status-bar { background: linear-gradient(180deg, rgba(200,215,255,0.5) 0%, rgba(242,243,245,1) 100%); padding: 20px 16px 28px; flex-shrink: 0; }
         .od-status-title { font-size: 20px; font-weight: 600; color: #333333; line-height: 28px; margin-bottom: 4px; }
         .od-status-desc { font-size: 13px; color: #666666; line-height: 18px; }
-        .od-scroll { flex: 1; overflow-y: auto; padding: 0 12px 12px; margin-top: -12px; }
+        .od-scroll { flex: 1; overflow-y: auto; padding: 0 12px 12px; margin-top: -12px; scrollbar-width: none; -ms-overflow-style: none; }
+        .od-scroll::-webkit-scrollbar { display: none; width: 0; height: 0; }
         .od-card { background: #FFFFFF; border-radius: 12px; padding: 16px; margin-bottom: 12px; }
         .od-card-title { font-size: 14px; font-weight: 600; color: #333333; line-height: 20px; margin-bottom: 14px; }
         .od-info-row { display: flex; align-items: flex-start; justify-content: space-between; padding: 8px 0; gap: 16px; }
         .od-info-row + .od-info-row { border-top: 1px dashed #F0F0F0; padding-top: 12px; margin-top: 4px; }
         .od-info-label { font-size: 13px; color: #828282; line-height: 18px; flex-shrink: 0; white-space: nowrap; }
         .od-info-value { font-size: 13px; color: #333333; line-height: 18px; text-align: right; flex: 1; }
-        .od-product-row { display: flex; gap: 12px; align-items: center; padding-bottom: 14px; border-bottom: 1px solid #F5F5F5; margin-bottom: 14px; cursor: pointer; }
-        .od-product-img { width: 48px; height: 48px; border-radius: 8px; background: #F5F6F8; flex-shrink: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .od-product-row { display: flex; gap: 8px; align-items: center; padding-bottom: 14px; border-bottom: 1px solid #F5F5F5; margin-bottom: 14px; }
+        .od-product-gallery { display: flex; gap: 4px; flex: 1; min-width: 0; overflow: hidden; }
+        .od-product-gallery-img { width: 56px; height: 56px; border-radius: 8px; background: #E0E0E0; flex-shrink: 0; overflow: hidden; }
+        .od-product-gallery-img img { width: 100%; height: 100%; object-fit: cover; }
+        .od-product-single { display: flex; gap: 12px; align-items: center; flex: 1; min-width: 0; }
+        .od-product-img { width: 56px; height: 56px; border-radius: 8px; background: #E0E0E0; flex-shrink: 0; overflow: hidden; }
         .od-product-img img { width: 100%; height: 100%; object-fit: cover; }
         .od-product-info { flex: 1; min-width: 0; }
         .od-product-title { font-size: 14px; color: #333333; line-height: 20px; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
-        .od-product-count { font-size: 13px; color: #828282; line-height: 18px; display: flex; align-items: center; justify-content: space-between; }
+        .od-product-count { font-size: 13px; color: #828282; line-height: 18px; display: flex; align-items: center; }
+        .od-product-count-text { font-size: 14px; font-weight: 400; color: #828282; line-height: 24px; display: flex; align-items: center; gap: 2px; flex-shrink: 0; }
         .od-product-arrow { font-size: 12px; color: #BDBDBD; display: flex; align-items: center; flex-shrink: 0; }
         .od-price-row { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; }
         .od-price-label { font-size: 13px; color: #828282; line-height: 18px; }
@@ -2212,6 +2262,100 @@
         .od-bottom-actions { display: flex; align-items: center; gap: 10px; }
         .nav-home-indicator { flex-shrink: 0; width: 100%; height: 34px; background: #FFFFFF; display: flex; align-items: flex-start; justify-content: center; padding-top: 8px; box-sizing: border-box; }
         .nav-home-indicator-bar { width: 134px; height: 5px; background: rgba(0,0,0,0.9); border-radius: 100px; }
+        /* ====== 再买一单商品弹窗 ====== */
+        .ba-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.5); z-index: 9998; display: none; }
+        .ba-overlay.show { display: block; }
+        .ba-sheet { position: absolute; left: 0; right: 0; bottom: 0; background: #FFFFFF; border-radius: 12px 12px 0 0; display: flex; flex-direction: column; max-height: 80%; transform: translateY(100%); transition: transform 0.3s ease; }
+        .ba-overlay.show .ba-sheet { transform: translateY(0); }
+        .ba-header { flex-shrink: 0; display: flex; align-items: center; justify-content: space-between; padding: 15px 20px; border-bottom: 0.5px solid #F5F5F5; }
+        .ba-title { font-size: 16px; font-weight: 500; color: #333333; line-height: 28px; }
+        .ba-close { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; }
+        .ba-close:active { opacity: 0.6; }
+        .ba-close svg { width: 14px; height: 14px; }
+        .ba-list { flex: 1; overflow-y: auto; background: #F9F9F9; padding: 12px; display: flex; flex-direction: column; gap: 12px; scrollbar-width: none; -ms-overflow-style: none; }
+        .ba-list::-webkit-scrollbar { display: none; width: 0; height: 0; }
+        .ba-item { background: #FFFFFF; border-radius: 8px; padding: 16px; display: flex; gap: 12px; }
+        .ba-item-img { width: 64px; height: 64px; border-radius: 8px; background: #E0E0E0; flex-shrink: 0; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .ba-item-img img { width: 100%; height: 100%; object-fit: cover; }
+        .ba-item-img .pr-emoji { font-size: 36px; }
+        .ba-item-info { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+        .ba-item-titlerow { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+        .ba-item-name { font-size: 14px; font-weight: 500; color: #1F2937; line-height: 24px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; min-width: 0; }
+        .ba-item-price { font-size: 14px; font-weight: 500; color: #F24333; line-height: 24px; flex-shrink: 0; }
+        .ba-item-unit { font-size: 12px; color: #828282; line-height: 20px; }
+        .ba-item-qty { font-size: 12px; color: #828282; line-height: 20px; }
+        .ba-footer { flex-shrink: 0; background: #FFFFFF; padding: 16px; display: flex; gap: 16px; }
+        .ba-cart-btn { flex: 1; height: 48px; background: #353B3C; border-radius: 8px; display: flex; align-items: center; justify-content: center; gap: 4px; color: #FFFFFF; font-size: 14px; font-weight: 500; cursor: pointer; }
+        .ba-cart-btn:active { opacity: 0.85; }
+        /* ====== 订单操作确认弹窗（取消订单/删除订单/确认收货共用） ====== */
+        .oc-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.5); z-index: 9997; display: none; }
+        .oc-overlay.show { display: block; }
+        .oc-modal { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: 280px; background: #FFFFFF; border-radius: 12px; overflow: hidden; }
+        .oc-msg { padding: 32px 20px 28px; text-align: center; font-size: 15px; color: #1F2937; line-height: 24px; }
+        .oc-btns { display: flex; border-top: 0.5px solid #F0F0F0; }
+        .oc-btn { flex: 1; height: 48px; display: flex; align-items: center; justify-content: center; font-size: 15px; cursor: pointer; background: none; border: none; }
+        .oc-btn-cancel { color: #828282; }
+        .oc-btn-confirm { color: #254EDB; font-weight: 500; border-left: 0.5px solid #F0F0F0; }
+        .oc-btn:active { opacity: 0.7; }
+
+        /* ====== 商品emoji占位（替换AI生成图，避免AI图中自带放大镜图标） ====== */
+        .pr-emoji { display: inline-flex; align-items: center; justify-content: center; line-height: 1; text-indent: 0; }
+        /* —— 72x72 类容器 emoji 尺寸 —— */
+        .orders-page.v1 .order-card-gallery-item,
+        .order-card-img,
+        .mh-product-img { display: flex; align-items: center; justify-content: center; }
+        .orders-page.v1 .gift-card .gift-product-img { display: flex; align-items: center; justify-content: center; }
+        .gift-product-img { display: flex; align-items: center; justify-content: center; }
+        .orders-page.v1 .order-card-gallery-item .pr-emoji,
+        .orders-page.v1 .gift-card .gift-product-img .pr-emoji,
+        .gift-product-img .pr-emoji,
+        .order-card-img .pr-emoji,
+        .mh-product-img .pr-emoji { font-size: 40px; }
+        /* —— 56x56 类容器 emoji 尺寸 —— */
+        .co-product-img,
+        .od-product-img,
+        .od-product-gallery-img { display: flex !important; align-items: center !important; justify-content: center !important; background-image: none !important; }
+        .co-product-img .pr-emoji,
+        .od-product-img .pr-emoji,
+        .od-product-gallery-img .pr-emoji { font-size: 32px; }
+
+        /* ====== 商品图片防放大、防下载、防长按保存（全局） ====== */
+        .mh-product-img img,
+        .od-product-img img,
+        .od-product-gallery-img img,
+        .gift-product-img img,
+        .order-card-gallery-item img,
+        .cp-product-img img,
+        .ba-item-img img {
+            -webkit-touch-callout: none;   /* iOS Safari 长按弹窗 */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+            -webkit-user-drag: none;       /* HTML5 拖拽 */
+            -khtml-user-drag: none;
+            pointer-events: none;          /* 图片不接收鼠标/触摸事件，避免放大、下载 */
+            cursor: auto !important;
+            background: transparent;
+        }
+        /* 带 background-image 的商品图容器（如确认订单页 co-product-img） */
+        .co-product-img,
+        .mh-product-img,
+        .od-product-img,
+        .od-product-gallery-img,
+        .gift-product-img,
+        .order-card-gallery-item,
+        .cp-product-img,
+        .ba-item-img {
+            cursor: auto;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+        /* 确认订单页商品概览行：无点击跳转、无手型 */
+        .co-product {
+            cursor: auto;
+        }
 
         /* ====== 年月选择弹窗（滚轮样式） ====== */
         .dp-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); display: none; z-index: 1000; border-radius: 0 0 50px 50px; }
@@ -18040,7 +18184,10 @@
                             <span>确认订单页</span>
                         </div>
                         <div class="menu-item" data-subpage="shop-orders">
-                            <span>我的订单页</span>
+                            <span>我的订单页（V1）</span>
+                        </div>
+                        <div class="menu-item" data-subpage="shop-orders-v2">
+                            <span>我的订单页（V2）</span>
                         </div>
                     </div>
                 </div>
@@ -18104,6 +18251,7 @@
                     <div class="page-tab" data-tab="shop-cart">购物车页</div>
                     <div class="page-tab" data-tab="shop-checkout">确认订单页</div>
                     <div class="page-tab" data-tab="shop-orders">我的订单页</div>
+                    <div class="page-tab" data-tab="shop-orders-v2">我的订单页（V2）</div>
                 </div>
                 <div class="page-tabs" id="payment-page-tabs" style="display: flex;">
                     <div class="page-tab tab-payment" data-tab="profile-payment-list">1.1 缴费列表</div>
@@ -18315,6 +18463,7 @@
             'shop-home': {
                 title: '商城',
                 mainNav: 'shop',
+                render: 'shopHome',
                 placeholder: { icon: 'fa fa-shopping-bag', title: '商城首页', desc: '展示商城首页的商品列表、促销活动、轮播图等内容' },
                 interactionNotes: [],
                 requirementDoc: null,
@@ -18404,31 +18553,78 @@
                 mainNav: 'shop',
                 render: 'shopOrders',
                 interactionNotes: [
-                    { id: 1, title: '订单类型Tab', type: 'interaction', target: '[data-block="orders-type-tabs"]', content: '「配送到家」「站点自提」两个Tab，点击切换对应类型的订单列表' },
+                    { id: 1, title: '状态Tab', type: 'interaction', target: '[data-block="orders-status-tabs"]', content: '「全部/待付款/待发货/待收货/待评价」五个Tab，点击按状态筛选订单\n待付款订单显示支付倒计时「23:58:12」，超时后订单自动关闭\n注：待评价Tab无订单数据，显示空状态（暂无订单 + 逛一逛按钮，点击跳转商城首页）；已完成订单仅在「全部」Tab中展示' },
+                    { id: 2, title: '订单卡片', type: 'interaction', target: '[data-block="order-card"]', content: '卡片头部：订单状态标签 + 下单时间\n点击订单卡片（非按钮区域）→ 跳转对应订单详情页\n单商品订单：展示商品图+「共N件 ›」\n多商品订单：展示商品图册+「共N件 ›」\n商品图片不可放大、不可下载' },
+                    { id: 3, title: '赠品订单卡片', type: 'interaction', target: '[data-block="order-card"].gift-card', content: '赠品兑换订单卡片，展示：商品图 + 商品名称 + 规格 + 「共N件」\n价格行：「实付 ¥0.00」\n按钮：删除订单 / 详情' },
+                    { id: 4, title: '卡片按钮', type: 'interaction', target: '[data-block="order-card-actions"]', content: '已兑换赠品：删除订单 / 详情\n待付款：取消订单 / 立即支付\n待发货：取消订单 / 再买一单\n待收货：确认收货\n已完成：删除订单 / 再买一单\n已取消：删除订单 / 再买一单\n按钮行为：\n• 立即支付 → Toast提示「调用微信支付」\n• 再买一单 → 弹出再买一单弹窗（商品清单，可加入购物车）\n• 详情（赠品）→ 跳转赠品兑换订单详情页\n• 取消订单 → 弹出确认弹窗「确定要取消该订单吗？」，确认后Toast「订单已取消」\n• 删除订单 → 弹出确认弹窗「删除后订单将无法恢复，确定删除吗？」，确认后移除该订单卡片并Toast「订单已删除」\n• 确认收货 → 弹出确认弹窗「请确认已收到商品」，确认后移除该订单卡片并Toast「确认收货成功」' },
+                ],
+                requirementDoc: {
+                    title: '我的订单需求文档（V1）',
+                    meta: 'v1.0 · 2026-08-27 · 电商/零售 · C端用户',
+                    sections: [
+                        { title: '1.0 需求背景', paragraphs: ['用户在商城下单后，可在「我的订单」查看所有订单的进度和详情。', 'V1版本展示统一订单列表，不再区分配送到家/站点自提/赠品兑换类型。', '订单状态包括：已兑换赠品、待付款、待发货、待收货、待评价、已取消。'] },
+                        { title: '2.0 页面入口', paragraphs: ['商城首页底部导航「商城」→ 点击右上角订单图标', '我的页 → 我的订单入口'] },
+                        { title: '3.0 订单状态', paragraphs: ['【已兑换赠品】使用赠品核销券兑换成功的订单，展示核销时间', '【待付款】下单未支付，显示倒计时，超时后订单自动取消', '【待发货】已支付，商家准备商品中', '【待收货】商品配送中或已到自提点', '【待评价】订单已完成，等待用户评价', '【已取消】订单已取消，展示总额'] },
+                        { title: '4.0 商品展示', paragraphs: ['单商品：展示商品图+「共N件 ›」', '多商品（2-3件）：展示商品图册+「共N件 ›」', '多商品（4+件）：展示前4个商品图册+「共N件 ›」', '商品图片不可放大、不可下载', '赠品兑换订单展示商品图+商品名称+规格+「共N件」水平排列；其他订单不显示商品名称'] },
+                        { title: '5.0 价格说明', paragraphs: ['已兑换赠品：实付 ¥0.00', '其他订单：实付或总额 ¥39.90', '待付款、待发货、待收货、已完成使用「实付」标签', '已取消使用「总额」标签'] },
+                        { title: '6.0 交互说明', paragraphs: ['点击订单卡片（非按钮区域）→ 跳转对应订单详情页', '点击「立即支付」→ 调用微信支付', '点击「再买一单」→ 弹出再买一单弹窗，展示订单商品清单（名称/单价/数量），点击「加入购物车」后Toast提示加入成功并关闭弹窗', '点击赠品订单「详情」→ 跳转赠品兑换订单详情页', '点击「取消订单」→ 弹出确认弹窗「确定要取消该订单吗？」，点击「取消订单」确认后Toast「订单已取消」，点击「取消」或遮罩关闭弹窗', '点击「删除订单」→ 弹出确认弹窗「删除后订单将无法恢复，确定删除吗？」，确认后移除该订单卡片并Toast「订单已删除」', '点击「确认收货」→ 弹出确认弹窗「请确认已收到商品」，确认后移除该订单卡片并Toast「确认收货成功」', '待评价Tab无订单数据，显示空状态「暂无订单」+「逛一逛」按钮，点击「逛一逛」跳转商城首页'] }
+                    ]
+                },
+                statusList: [
+                    { block: '状态Tab', state: '全部（默认）', trigger: '页面加载', ui: '展示所有订单（含已兑换赠品）' },
+                    { block: '状态Tab', state: '待付款', trigger: '点击「待付款」Tab', ui: '仅展示待付款订单，含倒计时' },
+                    { block: '状态Tab', state: '待发货', trigger: '点击「待发货」Tab', ui: '仅展示待发货订单' },
+                    { block: '状态Tab', state: '待收货', trigger: '点击「待收货」Tab', ui: '仅展示待收货订单' },
+                    { block: '状态Tab', state: '待评价', trigger: '点击「待评价」Tab', ui: '无订单，显示空状态：暂无订单 + 逛一逛按钮' },
+                    { block: '卡片操作', state: '订单详情', trigger: '点击订单卡片', ui: '跳转对应订单详情页' },
+                    { block: '卡片操作', state: '立即支付', trigger: '点击立即支付按钮', ui: 'Toast提示「调用微信支付」' },
+                    { block: '卡片操作', state: '再买一单', trigger: '点击再买一单按钮', ui: '弹出再买一单弹窗，可加入购物车' },
+                    { block: '卡片操作', state: '取消订单', trigger: '点击取消订单按钮', ui: '弹出确认弹窗，确认后Toast「订单已取消」' },
+                    { block: '卡片操作', state: '删除订单', trigger: '点击删除订单按钮', ui: '弹出确认弹窗，确认后移除卡片并Toast「订单已删除」' },
+                    { block: '卡片操作', state: '确认收货', trigger: '点击确认收货按钮', ui: '弹出确认弹窗，确认后移除卡片并Toast「确认收货成功」' },
+                    { block: '卡片操作', state: '详情（赠品）', trigger: '点击详情按钮', ui: '跳转赠品兑换详情页' },
+                    { block: '空状态', state: '无订单', trigger: '当前筛选无数据（如待评价Tab）', ui: '空态提示「暂无订单」+「逛一逛」按钮，点击跳转商城首页' }
+                ]
+            },
+            'shop-orders-v2': {
+                title: '我的订单',
+                mainNav: 'shop',
+                render: 'shopOrdersV2',
+                interactionNotes: [
+                    { id: 1, title: '订单类型Tab', type: 'interaction', target: '[data-block="orders-type-tabs"]', content: '「全部/配送到家/站点自提/赠品兑换」Tab，点击切换对应类型的订单列表\n类型Tab与状态Tab叠加筛选，如选中「配送到家」+「待付款」则仅展示配送到家的待付款订单\n当前筛选无订单时显示空态提示「暂无相关订单」' },
                     { id: 2, title: '状态Tab', type: 'interaction', target: '[data-block="orders-status-tabs"]', content: '「全部/待付款/待发货/待收货/已完成」五个Tab，点击按状态筛选订单\n配送到家：待收货状态文案为「待收货」\n站点自提：待收货状态文案为「待自提」' },
-                    { id: 3, title: '订单卡片', type: 'interaction', target: '[data-block="order-card"]', content: '点击订单卡片 → 跳转对应订单详情页\n卡片信息：订单状态标签、商品图片、商品标题、规格、数量、实付金额' }
+                    { id: 3, title: '订单卡片', type: 'interaction', target: '[data-block="order-card"]', content: '卡片信息：订单类型标签、订单状态标签、商品图、商品标题、规格、单价、数量、实付金额\n点击订单卡片（非按钮区域）→ 跳转对应订单详情页\n商品图片不可放大、不可下载' },
+                    { id: 4, title: '卡片按钮', type: 'interaction', target: '[data-block="order-card-actions"]', content: '待付款：取消订单 / 立即支付\n待发货：再买一单\n待收货/待自提：确认收货 / 确认自提\n已完成：删除订单 / 再买一单\n赠品兑换（已完成）：删除订单 / 详情\n按钮行为：\n• 立即支付 → Toast提示「调用微信支付」\n• 再买一单 → 弹出再买一单弹窗（商品清单，可加入购物车）\n• 详情（赠品）→ 跳转赠品兑换订单详情页\n• 取消订单 → 弹出确认弹窗「确定要取消该订单吗？」，确认后Toast「订单已取消」\n• 删除订单 → 弹出确认弹窗「删除后订单将无法恢复，确定删除吗？」，确认后移除该订单卡片并Toast「订单已删除」\n• 确认收货/确认自提 → 弹出确认弹窗（配送到家「请确认已收到商品」/ 站点自提「请确认已到自提点提取商品」），确认后移除该订单卡片并Toast「确认收货成功」/「自提成功」' }
                 ],
                 requirementDoc: {
                     title: '我的订单需求文档',
                     meta: 'v1.0 · 2026-08-26 · 电商/零售 · C端用户',
                     sections: [
-                        { title: '1.0 需求背景', paragraphs: ['用户在商城下单后，可在「我的订单」查看所有订单的进度和详情。', '订单分为两种类型：配送到家（快递配送）和站点自提（到物业处自提）。', '每种类型下有四种状态：待付款、待发货、待收货/待自提、已完成。'] },
+                        { title: '1.0 需求背景', paragraphs: ['用户在商城下单后，可在「我的订单」查看所有订单的进度和详情。', '订单分为三种类型：配送到家（快递配送）、站点自提（到物业处自提）和赠品兑换（赠品核销券兑换）。', '配送到家和站点自提有四种状态：待付款、待发货、待收货/待自提、已完成。赠品兑换订单仅有已完成状态。'] },
                         { title: '2.0 页面入口', paragraphs: ['商城首页底部导航「商城」→ 点击右上角订单图标', '我的页 → 我的订单入口'] },
-                        { title: '3.0 订单类型', paragraphs: ['【配送到家】商家通过快递配送至用户填写的收货地址，含配送费。', '【站点自提】用户到物业处自提，无配送费、无包装费。'] },
+                        { title: '3.0 订单类型', paragraphs: ['【配送到家】商家通过快递配送至用户填写的收货地址，含配送费。', '【站点自提】用户到物业处自提，无配送费、无包装费。', '【赠品兑换】用户使用赠品核销券兑换商品后产生的订单，0元支付，需展示核销信息。'] },
                         { title: '4.0 状态说明', paragraphs: ['待付款：用户下单未支付，倒计时23小时后自动关闭', '待发货：用户已支付，商家准备商品中', '待收货/待自提：配送到家-商品配送中；站点自提-商品已到自提点', '已完成：订单签收完成'] },
-                        { title: '5.0 筛选规则', paragraphs: ['配送到家和站点自提各自独立筛选，Tab切换时仅展示对应类型订单', '状态Tab叠加在类型Tab之上，如选中「配送到家」+「待付款」则仅展示配送到家的待付款订单'] },
-                        { title: '6.0 价格说明', paragraphs: ['配送到家：商品总价 + 配送费（当前为¥0.00） - 回馈金抵扣 - 购物金抵扣 = 实付', '站点自提：商品总价 - 回馈金抵扣 - 购物金抵扣 = 实付（无配送费、无包装费）', '回馈金抵扣比例：实付的5%（运营后台可配置）', '购物金抵扣：可全额抵扣实付金额', '待付款状态不显示抵扣项，其他状态显示回馈金和购物金抵扣'] }
+                        { title: '5.0 筛选规则', paragraphs: ['配送到家和站点自提各自独立筛选，Tab切换时仅展示对应类型订单', '状态Tab叠加在类型Tab之上，如选中「配送到家」+「待付款」则仅展示配送到家的待付款订单', '当前筛选无订单时显示空态提示「暂无相关订单」'] },
+                        { title: '6.0 价格说明', paragraphs: ['配送到家：商品总价 + 配送费（当前为¥0.00） - 回馈金抵扣 - 购物金抵扣 = 实付', '站点自提：商品总价 - 回馈金抵扣 - 购物金抵扣 = 实付（无配送费、无包装费）', '赠品兑换：实付款为¥0.00，使用赠品核销券抵扣，无需实际支付', '回馈金抵扣比例：实付的5%（运营后台可配置）', '购物金抵扣：可全额抵扣实付金额', '待付款状态不显示抵扣项，其他状态显示回馈金和购物金抵扣'] },
+                        { title: '7.0 交互说明', paragraphs: ['点击订单卡片（非按钮区域）→ 跳转对应订单详情页', '点击「立即支付」→ 调用微信支付', '点击「再买一单」→ 弹出再买一单弹窗，展示订单商品清单（名称/单价/数量），点击「加入购物车」后Toast提示加入成功并关闭弹窗', '点击赠品订单「详情」→ 跳转赠品兑换订单详情页', '点击「取消订单」→ 弹出确认弹窗「确定要取消该订单吗？」，确认后Toast「订单已取消」', '点击「删除订单」→ 弹出确认弹窗「删除后订单将无法恢复，确定删除吗？」，确认后移除该订单卡片并Toast「订单已删除」', '点击「确认收货/确认自提」→ 弹出确认弹窗（配送到家「请确认已收到商品」/ 站点自提「请确认已到自提点提取商品」），确认后移除该订单卡片并Toast「确认收货成功」/「自提成功」'] }
                     ]
                 },
                 statusList: [
                     { block: '类型Tab', state: '配送到家（默认）', trigger: '页面加载', ui: '展示配送到家订单列表' },
                     { block: '类型Tab', state: '站点自提', trigger: '点击「站点自提」Tab', ui: '展示站点自提订单列表' },
+                    { block: '类型Tab', state: '赠品兑换', trigger: '点击「赠品兑换」Tab', ui: '展示赠品兑换订单列表（0元订单）' },
                     { block: '状态Tab', state: '全部（默认）', trigger: '页面加载', ui: '展示当前类型的所有订单' },
                     { block: '状态Tab', state: '待付款', trigger: '点击「待付款」Tab', ui: '仅展示待付款订单' },
                     { block: '状态Tab', state: '待发货', trigger: '点击「待发货」Tab', ui: '仅展示待发货订单' },
                     { block: '状态Tab', state: '待收货/待自提', trigger: '点击对应Tab', ui: '配送到家展示待收货，站点自提展示待自提' },
                     { block: '状态Tab', state: '已完成', trigger: '点击「已完成」Tab', ui: '仅展示已完成订单' },
-                    { block: '空状态', state: '无订单', trigger: '当前筛选无数据', ui: '空态提示' }
+                    { block: '卡片操作', state: '订单详情', trigger: '点击订单卡片', ui: '跳转对应订单详情页' },
+                    { block: '卡片操作', state: '再买一单', trigger: '点击再买一单按钮', ui: '弹出再买一单弹窗，可加入购物车' },
+                    { block: '卡片操作', state: '取消订单', trigger: '点击取消订单按钮', ui: '弹出确认弹窗，确认后Toast「订单已取消」' },
+                    { block: '卡片操作', state: '删除订单', trigger: '点击删除订单按钮', ui: '弹出确认弹窗，确认后移除卡片并Toast「订单已删除」' },
+                    { block: '卡片操作', state: '确认收货/确认自提', trigger: '点击确认按钮', ui: '弹出确认弹窗，确认后移除卡片并Toast成功提示' },
+                    { block: '卡片操作', state: '详情（赠品）', trigger: '点击详情按钮', ui: '跳转赠品兑换详情页' },
+                    { block: '空状态', state: '无订单', trigger: '当前筛选无数据', ui: '空态提示「暂无相关订单」' }
                 ]
             },
             'shop-order-detail-home-pay': {
@@ -18438,11 +18634,14 @@
                 interactionNotes: [
                     { id: 1, title: '状态头部', type: 'state', target: '.od-status-bar', content: '展示「待付款」+倒计时，提示订单即将关闭请及时支付' },
                     { id: 2, title: '配送信息', type: 'state', target: '.od-card:nth-child(1)', content: '展示收货人、联系电话、收货地址' },
-                    { id: 3, title: '商品与价格明细', type: 'state', target: '.od-card:nth-child(2)', content: '商品信息 + 价格明细\n价格明细：商品总价 + 配送费¥0.00 = 待付款¥39.50\n注：待付款状态不显示回馈金/购物金抵扣项' },
-                    { id: 4, title: '底部操作', type: 'interaction', target: '.od-bottom-bar', content: '「取消订单」按钮 → 取消订单\n「立即支付」按钮 → 跳转支付流程' }
+                    { id: 3, title: '商品与价格明细', type: 'state', target: '.od-card:nth-child(2)', content: '商品信息：单商品展示商品图+名称+规格+「共N件 ›」；多商品展示商品图册+「共N件 ›」\n价格明细：商品总价 + 配送费¥0.00 = 待付款¥39.50\n注：待付款状态不显示回馈金/购物金抵扣项' },
+                    { id: 4, title: '订单信息', type: 'state', target: '.od-card:nth-child(3)', content: '订单号（点击「复制」可复制，按钮短暂变为「已复制」）、下单时间、订单备注\n注：待付款状态不显示支付时间、发货时间、完成时间、支付方式' },
+                    { id: 5, title: '底部操作', type: 'interaction', target: '.od-bottom-bar', content: '左侧「客服」按钮 → 跳转客服功能\n「取消订单」按钮 → 弹出确认弹窗「确定要取消该订单吗？」，确认后Toast「订单已取消」\n「立即支付」按钮 → Toast提示「调用微信支付」' }
                 ],
                 statusList: [
-                    { block: '底部按钮', state: '待付款', trigger: '页面加载', ui: '取消订单 + 立即支付' }
+                    { block: '底部按钮', state: '待付款', trigger: '页面加载', ui: '客服 + 取消订单 + 立即支付' },
+                    { block: '取消订单', state: '已取消', trigger: '点击「取消订单」并确认', ui: 'Toast「订单已取消」' },
+                    { block: '复制订单号', state: '已复制', trigger: '点击「复制」', ui: '按钮文案短暂变为「已复制」，1.5秒后恢复' }
                 ]
             },
             'shop-order-detail-home-ship': {
@@ -18452,11 +18651,13 @@
                 interactionNotes: [
                     { id: 1, title: '状态头部', type: 'state', target: '.od-status-bar', content: '展示「待发货」，提示商品准备中' },
                     { id: 2, title: '配送信息', type: 'state', target: '.od-card:nth-child(1)', content: '展示收货人、联系电话、收货地址' },
-                    { id: 3, title: '商品与价格明细', type: 'state', target: '.od-card:nth-child(2)', content: '商品信息 + 价格明细\n价格明细：商品总价 + 配送费¥0.00 - 回馈金抵扣¥2.00 - 购物金抵扣¥6.00 = 实付¥31.50' },
-                    { id: 4, title: '底部操作', type: 'interaction', target: '.od-bottom-bar', content: '「再买一单」按钮 → 再次购买同款商品' }
+                    { id: 3, title: '商品与价格明细', type: 'state', target: '.od-card:nth-child(2)', content: '商品信息：单商品展示商品图+名称+规格+「共N件 ›」；多商品展示商品图册+「共N件 ›」\n价格明细：商品总价 + 配送费¥0.00 - 回馈金抵扣¥2.00 - 购物金抵扣¥6.00 = 实付¥31.50' },
+                    { id: 4, title: '订单信息', type: 'state', target: '.od-card:nth-child(3)', content: '订单号（点击「复制」可复制，按钮短暂变为「已复制」）、下单时间、支付时间、支付方式（微信支付）、订单备注\n注：待发货状态不显示发货时间、完成时间' },
+                    { id: 5, title: '底部操作', type: 'interaction', target: '.od-bottom-bar', content: '左侧「客服」按钮 → 跳转客服功能\n「再买一单」按钮 → 弹出再买一单弹窗（商品清单，可加入购物车）' }
                 ],
                 statusList: [
-                    { block: '底部按钮', state: '待发货', trigger: '页面加载', ui: '再买一单' }
+                    { block: '底部按钮', state: '待发货', trigger: '页面加载', ui: '客服 + 再买一单' },
+                    { block: '复制订单号', state: '已复制', trigger: '点击「复制」', ui: '按钮文案短暂变为「已复制」，1.5秒后恢复' }
                 ]
             },
             'shop-order-detail-home-receive': {
@@ -18466,11 +18667,14 @@
                 interactionNotes: [
                     { id: 1, title: '状态头部', type: 'state', target: '.od-status-bar', content: '展示「待收货」，提示商品在路上了' },
                     { id: 2, title: '配送信息', type: 'state', target: '.od-card:nth-child(1)', content: '展示收货人、联系电话、收货地址' },
-                    { id: 3, title: '商品与价格明细', type: 'state', target: '.od-card:nth-child(2)', content: '商品信息 + 价格明细\n价格明细：商品总价 + 配送费¥0.00 - 回馈金抵扣¥2.00 - 购物金抵扣¥6.00 = 实付¥31.50' },
-                    { id: 4, title: '底部操作', type: 'interaction', target: '.od-bottom-bar', content: '「确认收货」按钮 → 确认收货，订单变为已完成' }
+                    { id: 3, title: '商品与价格明细', type: 'state', target: '.od-card:nth-child(2)', content: '商品信息：单商品展示商品图+名称+规格+「共N件 ›」；多商品展示商品图册+「共N件 ›」\n价格明细：商品总价 + 配送费¥0.00 - 回馈金抵扣¥2.00 - 购物金抵扣¥6.00 = 实付¥31.50' },
+                    { id: 4, title: '订单信息', type: 'state', target: '.od-card:nth-child(3)', content: '订单号（点击「复制」可复制，按钮短暂变为「已复制」）、下单时间、支付时间、发货时间、支付方式（微信支付）、订单备注\n注：待收货状态不显示完成时间' },
+                    { id: 5, title: '底部操作', type: 'interaction', target: '.od-bottom-bar', content: '左侧「客服」按钮 → 跳转客服功能\n「确认收货」按钮 → 弹出确认弹窗「请确认已收到商品」，确认后跳转已完成订单详情页' }
                 ],
                 statusList: [
-                    { block: '底部按钮', state: '待收货', trigger: '页面加载', ui: '确认收货' }
+                    { block: '底部按钮', state: '待收货', trigger: '页面加载', ui: '客服 + 确认收货' },
+                    { block: '确认收货', state: '已收货', trigger: '点击「确认收货」并确认', ui: '跳转已完成订单详情页' },
+                    { block: '复制订单号', state: '已复制', trigger: '点击「复制」', ui: '按钮文案短暂变为「已复制」，1.5秒后恢复' }
                 ]
             },
             'shop-order-detail-home-done': {
@@ -18480,11 +18684,14 @@
                 interactionNotes: [
                     { id: 1, title: '状态头部', type: 'state', target: '.od-status-bar', content: '展示「已完成」，提示订单已签收' },
                     { id: 2, title: '配送信息', type: 'state', target: '.od-card:nth-child(1)', content: '展示收货人、联系电话、收货地址' },
-                    { id: 3, title: '商品与价格明细', type: 'state', target: '.od-card:nth-child(2)', content: '商品信息 + 价格明细\n价格明细：商品总价 + 配送费¥0.00 - 回馈金抵扣¥2.00 - 购物金抵扣¥6.00 = 实付¥31.50' },
-                    { id: 4, title: '底部操作', type: 'interaction', target: '.od-bottom-bar', content: '「删除订单」按钮 → 删除订单记录\n「再买一单」按钮 → 再次购买同款商品' }
+                    { id: 3, title: '商品与价格明细', type: 'state', target: '.od-card:nth-child(2)', content: '商品信息：单商品展示商品图+名称+规格+「共N件 ›」；多商品展示商品图册+「共N件 ›」\n价格明细：商品总价 + 配送费¥0.00 - 回馈金抵扣¥2.00 - 购物金抵扣¥6.00 = 实付¥31.50' },
+                    { id: 4, title: '订单信息', type: 'state', target: '.od-card:nth-child(3)', content: '订单号（点击「复制」可复制，按钮短暂变为「已复制」）、下单时间、支付时间、发货时间、完成时间、支付方式（微信支付）、订单备注\n注：已完成状态展示全部时间字段' },
+                    { id: 5, title: '底部操作', type: 'interaction', target: '.od-bottom-bar', content: '左侧「客服」按钮 → 跳转客服功能\n「删除订单」按钮 → 弹出确认弹窗「删除后订单将无法恢复，确定删除吗？」，确认后Toast「订单已删除」并返回订单列表\n「再买一单」按钮 → 弹出再买一单弹窗（商品清单，可加入购物车）' }
                 ],
                 statusList: [
-                    { block: '底部按钮', state: '已完成', trigger: '页面加载', ui: '删除订单 + 再买一单' }
+                    { block: '底部按钮', state: '已完成', trigger: '页面加载', ui: '客服 + 删除订单 + 再买一单' },
+                    { block: '删除订单', state: '已删除', trigger: '点击「删除订单」并确认', ui: 'Toast「订单已删除」，返回订单列表' },
+                    { block: '复制订单号', state: '已复制', trigger: '点击「复制」', ui: '按钮文案短暂变为「已复制」，1.5秒后恢复' }
                 ]
             },
             'shop-order-detail-pickup-pay': {
@@ -18494,11 +18701,14 @@
                 interactionNotes: [
                     { id: 1, title: '状态头部', type: 'state', target: '.od-status-bar', content: '展示「待付款」+倒计时，提示订单即将关闭请及时支付' },
                     { id: 2, title: '自提信息', type: 'state', target: '.od-card:nth-child(1)', content: '展示提货人、自提电话、自提地址（物业处）' },
-                    { id: 3, title: '商品与价格明细', type: 'state', target: '.od-card:nth-child(2)', content: '商品信息 + 价格明细\n价格明细：商品总价¥39.50 = 待付款¥39.50\n注：站点自提无配送费、无包装费；待付款状态不显示抵扣项' },
-                    { id: 4, title: '底部操作', type: 'interaction', target: '.od-bottom-bar', content: '「取消订单」按钮 → 取消订单\n「立即支付」按钮 → 跳转支付流程' }
+                    { id: 3, title: '商品与价格明细', type: 'state', target: '.od-card:nth-child(2)', content: '商品信息：单商品展示商品图+名称+规格+「共N件 ›」；多商品展示商品图册+「共N件 ›」\n价格明细：商品总价¥39.50 = 待付款¥39.50\n注：站点自提无配送费、无包装费；待付款状态不显示抵扣项' },
+                    { id: 4, title: '订单信息', type: 'state', target: '.od-card:nth-child(3)', content: '订单号（点击「复制」可复制，按钮短暂变为「已复制」）、下单时间、订单备注\n注：待付款状态不显示支付时间、发货时间、完成时间、支付方式' },
+                    { id: 5, title: '底部操作', type: 'interaction', target: '.od-bottom-bar', content: '左侧「客服」按钮 → 跳转客服功能\n「取消订单」按钮 → 弹出确认弹窗「确定要取消该订单吗？」，确认后Toast「订单已取消」\n「立即支付」按钮 → Toast提示「调用微信支付」' }
                 ],
                 statusList: [
-                    { block: '底部按钮', state: '待付款', trigger: '页面加载', ui: '取消订单 + 立即支付' }
+                    { block: '底部按钮', state: '待付款', trigger: '页面加载', ui: '客服 + 取消订单 + 立即支付' },
+                    { block: '取消订单', state: '已取消', trigger: '点击「取消订单」并确认', ui: 'Toast「订单已取消」' },
+                    { block: '复制订单号', state: '已复制', trigger: '点击「复制」', ui: '按钮文案短暂变为「已复制」，1.5秒后恢复' }
                 ]
             },
             'shop-order-detail-pickup-ship': {
@@ -18508,11 +18718,13 @@
                 interactionNotes: [
                     { id: 1, title: '状态头部', type: 'state', target: '.od-status-bar', content: '展示「待发货」，提示商品准备中' },
                     { id: 2, title: '自提信息', type: 'state', target: '.od-card:nth-child(1)', content: '展示提货人、自提电话、自提地址（物业处）' },
-                    { id: 3, title: '商品与价格明细', type: 'state', target: '.od-card:nth-child(2)', content: '商品信息 + 价格明细\n价格明细：商品总价¥39.50 - 回馈金抵扣¥2.00 - 购物金抵扣¥6.00 = 实付¥31.50\n注：站点自提无配送费、无包装费' },
-                    { id: 4, title: '底部操作', type: 'interaction', target: '.od-bottom-bar', content: '「再买一单」按钮 → 再次购买同款商品' }
+                    { id: 3, title: '商品与价格明细', type: 'state', target: '.od-card:nth-child(2)', content: '商品信息：单商品展示商品图+名称+规格+「共N件 ›」；多商品展示商品图册+「共N件 ›」\n价格明细：商品总价¥39.50 - 回馈金抵扣¥2.00 - 购物金抵扣¥6.00 = 实付¥31.50\n注：站点自提无配送费、无包装费' },
+                    { id: 4, title: '订单信息', type: 'state', target: '.od-card:nth-child(3)', content: '订单号（点击「复制」可复制，按钮短暂变为「已复制」）、下单时间、支付时间、支付方式（云闪付支付）、订单备注\n注：待发货状态不显示发货时间、完成时间' },
+                    { id: 5, title: '底部操作', type: 'interaction', target: '.od-bottom-bar', content: '左侧「客服」按钮 → 跳转客服功能\n「再买一单」按钮 → 弹出再买一单弹窗（商品清单，可加入购物车）' }
                 ],
                 statusList: [
-                    { block: '底部按钮', state: '待发货', trigger: '页面加载', ui: '再买一单' }
+                    { block: '底部按钮', state: '待发货', trigger: '页面加载', ui: '客服 + 再买一单' },
+                    { block: '复制订单号', state: '已复制', trigger: '点击「复制」', ui: '按钮文案短暂变为「已复制」，1.5秒后恢复' }
                 ]
             },
             'shop-order-detail-pickup-receive': {
@@ -18522,11 +18734,14 @@
                 interactionNotes: [
                     { id: 1, title: '状态头部', type: 'state', target: '.od-status-bar', content: '展示「待自提」，提示商品已到自提点请及时到站点自提' },
                     { id: 2, title: '自提信息', type: 'state', target: '.od-card:nth-child(1)', content: '展示提货人、自提电话、自提地址（物业处）' },
-                    { id: 3, title: '商品与价格明细', type: 'state', target: '.od-card:nth-child(2)', content: '商品信息 + 价格明细\n价格明细：商品总价¥39.50 - 回馈金抵扣¥2.00 - 购物金抵扣¥6.00 = 实付¥31.50\n注：站点自提无配送费、无包装费' },
-                    { id: 4, title: '底部操作', type: 'interaction', target: '.od-bottom-bar', content: '「确认自提」按钮 → 确认自提，订单变为已完成' }
+                    { id: 3, title: '商品与价格明细', type: 'state', target: '.od-card:nth-child(2)', content: '商品信息：单商品展示商品图+名称+规格+「共N件 ›」；多商品展示商品图册+「共N件 ›」\n价格明细：商品总价¥39.50 - 回馈金抵扣¥2.00 - 购物金抵扣¥6.00 = 实付¥31.50\n注：站点自提无配送费、无包装费' },
+                    { id: 4, title: '订单信息', type: 'state', target: '.od-card:nth-child(3)', content: '订单号（点击「复制」可复制，按钮短暂变为「已复制」）、下单时间、支付时间、发货时间、支付方式（云闪付支付）、订单备注\n注：待自提状态不显示完成时间' },
+                    { id: 5, title: '底部操作', type: 'interaction', target: '.od-bottom-bar', content: '左侧「客服」按钮 → 跳转客服功能\n「确认自提」按钮 → 弹出确认弹窗「请确认已到自提点提取商品」，确认后跳转已完成订单详情页' }
                 ],
                 statusList: [
-                    { block: '底部按钮', state: '待自提', trigger: '页面加载', ui: '确认自提' }
+                    { block: '底部按钮', state: '待自提', trigger: '页面加载', ui: '客服 + 确认自提' },
+                    { block: '确认自提', state: '已自提', trigger: '点击「确认自提」', ui: '跳转已完成订单详情页' },
+                    { block: '复制订单号', state: '已复制', trigger: '点击「复制」', ui: '按钮文案短暂变为「已复制」，1.5秒后恢复' }
                 ]
             },
             'shop-order-detail-pickup-done': {
@@ -18536,11 +18751,45 @@
                 interactionNotes: [
                     { id: 1, title: '状态头部', type: 'state', target: '.od-status-bar', content: '展示「已完成」，提示订单已签收' },
                     { id: 2, title: '自提信息', type: 'state', target: '.od-card:nth-child(1)', content: '展示提货人、自提电话、自提地址（物业处）' },
-                    { id: 3, title: '商品与价格明细', type: 'state', target: '.od-card:nth-child(2)', content: '商品信息 + 价格明细\n价格明细：商品总价¥39.50 - 回馈金抵扣¥2.00 - 购物金抵扣¥6.00 = 实付¥31.50\n注：站点自提无配送费、无包装费' },
-                    { id: 4, title: '底部操作', type: 'interaction', target: '.od-bottom-bar', content: '「删除订单」按钮 → 删除订单记录\n「再买一单」按钮 → 再次购买同款商品' }
+                    { id: 3, title: '商品与价格明细', type: 'state', target: '.od-card:nth-child(2)', content: '商品信息：单商品展示商品图+名称+规格+「共N件 ›」；多商品展示商品图册+「共N件 ›」\n价格明细：商品总价¥39.50 - 回馈金抵扣¥2.00 - 购物金抵扣¥6.00 = 实付¥31.50\n注：站点自提无配送费、无包装费' },
+                    { id: 4, title: '订单信息', type: 'state', target: '.od-card:nth-child(3)', content: '订单号（点击「复制」可复制，按钮短暂变为「已复制」）、下单时间、支付时间、发货时间、完成时间、支付方式（云闪付支付）、订单备注\n注：已完成状态展示全部时间字段' },
+                    { id: 5, title: '底部操作', type: 'interaction', target: '.od-bottom-bar', content: '左侧「客服」按钮 → 跳转客服功能\n「删除订单」按钮 → 弹出确认弹窗「删除后订单将无法恢复，确定删除吗？」，确认后Toast「订单已删除」并返回订单列表\n「再买一单」按钮 → 弹出再买一单弹窗（商品清单，可加入购物车）' }
                 ],
                 statusList: [
-                    { block: '底部按钮', state: '已完成', trigger: '页面加载', ui: '删除订单 + 再买一单' }
+                    { block: '底部按钮', state: '已完成', trigger: '页面加载', ui: '客服 + 删除订单 + 再买一单' },
+                    { block: '删除订单', state: '已删除', trigger: '点击「删除订单」并确认', ui: 'Toast「订单已删除」，返回订单列表' },
+                    { block: '复制订单号', state: '已复制', trigger: '点击「复制」', ui: '按钮文案短暂变为「已复制」，1.5秒后恢复' }
+                ]
+            },
+            'shop-order-detail-gift-done': {
+                title: '订单详情',
+                mainNav: 'shop',
+                render: 'shopOrderDetailGiftDone',
+                interactionNotes: [
+                    { id: 1, title: '状态头部', type: 'state', target: '.od-status-bar', content: '展示「已完成」，提示「赠品兑换成功，感谢您的支持！」' },
+                    { id: 2, title: '核销信息', type: 'state', target: '.od-card:nth-child(1)', content: '展示核销时间和券码\n核销时间：2026-05-21 16:41:35\n券码：12位数字核销码（如545344389957）\n注：券码不可复制' },
+                    { id: 3, title: '商品信息', type: 'state', target: '.od-card:nth-child(2)', content: '商品图 + 商品名（迷你手持风扇）+ 规格（白色）+ 共1件\n商品总价：¥0.00\n实付款：¥0.00' },
+                    { id: 4, title: '订单信息', type: 'state', target: '.od-card:nth-child(3)', content: '订单号：030410485500005（点击「复制」可复制，按钮短暂变为「已复制」）\n支付方式：赠品券兑换（0元支付）\n注：赠品订单无下单/支付/发货/完成时间及订单备注字段' },
+                    { id: 5, title: '底部操作', type: 'interaction', target: '.od-bottom-bar', content: '左侧「客服」按钮 → 跳转客服功能\n「删除订单」按钮 → 弹出确认弹窗「删除后订单将无法恢复，确定删除吗？」，确认后Toast「订单已删除」并返回订单列表' }
+                ],
+                requirementDoc: {
+                    title: '赠品兑换订单需求文档',
+                    meta: 'v1.0 · 更新日期 2026-08-27 · 电商/零售 · C端用户',
+                    sections: [
+                        { title: '1.0 需求背景', paragraphs: ['赠品兑换订单是用户使用赠品核销券兑换商品后产生的订单记录，用于追踪核销状态和商品信息。', '订单特点：0元支付，无需物流配送，需展示核销信息。'] },
+                        { title: '2.0 页面入口', paragraphs: ['我的订单 → 选择「赠品兑换」类型Tab → 已完成状态 → 点击订单卡片进入详情'] },
+                        { title: '3.0 页面结构', paragraphs: ['状态头部：已完成 + 赠品兑换成功提示', '核销信息卡片：核销时间 + 券码', '商品信息卡片：商品图 + 名称 + 规格 + 商品总价¥0.00 + 实付款¥0.00', '订单信息卡片：订单号 + 支付方式（赠品券兑换·0元支付）', '底部操作栏：客服 + 删除订单'] },
+                        { title: '4.0 数据来源', paragraphs: ['订单数据：来源于赠品核销券核销成功后生成的订单记录', '商品信息：来源于核销券绑定的赠品商品信息', '核销信息：核销时间和券码来源于核销系统记录', '支付方式：固定显示「赠品券兑换（0元支付）」'] },
+                        { title: '5.0 交互说明', paragraphs: ['点击券码区域不支持复制（无复制按钮）', '点击订单号「复制」按钮可复制订单号，按钮文案短暂变为「已复制」', '点击客服按钮跳转客服功能', '点击删除订单弹出确认弹窗「删除后订单将无法恢复，确定删除吗？」，确认后Toast「订单已删除」并返回订单列表'] }
+                    ]
+                },
+                statusList: [
+                    { block: '状态头部', state: '已完成', trigger: '页面加载', ui: '已完成 + 赠品兑换成功，感谢您的支持！' },
+                    { block: '核销信息', state: '已核销', trigger: '页面加载', ui: '核销时间 + 券码（545344389957，不可复制）' },
+                    { block: '商品信息', state: '已兑换', trigger: '页面加载', ui: '商品图 + 名称 + 规格 + 共1件 + ¥0.00' },
+                    { block: '订单信息', state: '已创建', trigger: '页面加载', ui: '订单号（可复制） + 支付方式' },
+                    { block: '底部按钮', state: '已完成', trigger: '页面加载', ui: '客服 + 删除订单' },
+                    { block: '删除订单', state: '已删除', trigger: '点击「删除订单」并确认', ui: 'Toast「订单已删除」，返回订单列表' }
                 ]
             },
             'access-home': {
@@ -18817,7 +19066,7 @@
                 interactionNotes: [
                     { id: 1, title: '优惠券Tab', type: 'interaction', target: '[data-block="cp-tabs"]', content: '「可使用/已使用/已过期」三个Tab，点击切换优惠券列表' },
                     { id: 2, title: '优惠券卡片', type: 'state', target: '[data-block="cp-card"]', content: '卡片包含：左侧产品图、右侧标题+到期日期+底部行（使用说明标签 + 去使用按钮）\n\n**数据来源说明：**\n1. 商品图片：来源于商城后台「营销管理 > 赠品核销券」中选择赠品商品的SKU图片，前端用emoji占位\n2. 优惠券标题：来源于后台「优惠券名称」字段\n3. 到期时间：来源于后台「使用时间」字段的截止日期，格式为"YYYY-MM-DD 23:59到期"\n4. 使用说明弹窗内容：来源于后台「赠品使用说明」字段，点击"使用说明"标签后弹窗展示' },
-                    { id: 3, title: '去使用按钮', type: 'interaction', target: '.cp-btn[data-action="use-coupon"]', content: '点击「去使用」按钮 → 跳转至核销码页面，展示16位数字核销码、条形码和二维码\n核销码页面启动轻量轮询（每3秒检测券状态），收银员扫码核销后显示「核销成功」Toast并自动返回本页，券移至「已使用」Tab' },
+                    { id: 3, title: '去使用按钮', type: 'interaction', target: '.cp-btn[data-action="use-coupon"]', content: '点击「去使用」按钮 → 跳转至核销码页面，展示12位数字核销码和二维码\n用户向收银员出示核销码后，返回本页时自动刷新券列表，若已核销则该券移至「已使用」Tab' },
                     { id: 4, title: '使用说明弹窗', type: 'interaction', target: '.cp-usage-mask', content: '点击卡片底部「使用说明」标签，弹出底部弹窗\n弹窗标题：使用说明\n弹窗文案：赠品为指定实物赠品，使用方式为线下门店出示核销码兑换，有效期以券面标注为准，每张券仅限使用一次，适用门店为徕芙会员超市线下门店；门店地址：晋江市良兴路69号。如有其他疑问，可联系在线客服咨询。\n点击遮罩或✕按钮可关闭弹窗' },
                     { id: 5, title: '领取更多优惠券', type: 'interaction', target: '[data-action="get-more-coupon"]', content: '页面底部固定按钮，点击跳转至领券中心页面，可领取更多赠品核销券' }
                 ],
@@ -18888,24 +19137,23 @@
                 mainNav: 'profile',
                 render: 'couponQrcode',
                 interactionNotes: [
-                    { id: 1, title: '核销码展示', type: 'state', target: '[data-block="qrcode-content"]', content: '展示以下内容供收银员扫码核销：\n• 标题：赠品名称（如"饮料一瓶"）\n• 条形码：基于16位核销码生成\n• 二维码：16位核销码对应的QR码\n• 16位数字核销码：如545344389957394587\n• 底部提示文案："请向收银员出示此核销码"' },
-                    { id: 2, title: '核销结果轮询', type: 'interaction', target: '[data-block="qrcode-content"]', content: '核销码页面采用轻量轮询方案，每3秒检测券状态变化：\n• 收银员扫码后，后端将券状态从 valid 改为 used（成功）或 verify_failed（失败）\n• 轮询检测到 used → 显示「核销成功」Toast，1.5秒后自动返回我的优惠券页\n• 轮询检测到 verify_failed → 显示「核销失败：xxx」Toast，留在当前页面供用户重试或返回\n• 离开核销码页面时自动清除轮询定时器，避免内存泄漏\n\n注：当前原型仅模拟核销成功场景（45秒后状态变更为used），核销失败场景不在原型中展示' },
-                    { id: 3, title: '返回', type: 'interaction', target: '[data-block="back-btn"]', content: '点击返回按钮回到我的优惠券页面，同时清除轮询定时器' }
+                    { id: 1, title: '核销码展示', type: 'state', target: '[data-block="qrcode-content"]', content: '展示以下内容供收银员扫码核销：\n• 12位数字核销码：如545344389957\n• 二维码：12位核销码对应的QR码\n• 底部提示文案："请向收银员出示此核销码"' },
+                    { id: 2, title: '核销状态刷新', type: 'interaction', target: '[data-block="qrcode-content"]', content: '核销码页面仅展示码，不做实时轮询\n用户向收银员出示核销码后，返回「我的优惠券」页面时自动刷新券列表数据\n若收银员已核销，券状态从 valid 变为 used，该券自动移至「已使用」Tab\n核销码页面不做核销结果展示' },
+                    { id: 3, title: '返回', type: 'interaction', target: '[data-block="back-btn"]', content: '点击返回按钮回到我的优惠券页面，页面重新请求券列表数据刷新状态' }
                 ],
                 requirementDoc: {
                     title: '核销码需求文档',
                     meta: 'v1.0 · 2026-08-26',
                     sections: [
                         { title: '1.0 页面功能', paragraphs: ['用户在「我的优惠券-可使用」点击「去使用」进入核销码页面，向收银员展示核销码供扫码核销。'] },
-                        { title: '2.0 核销成功流程', paragraphs: ['收银员扫码后，后端验证通过，券状态从 valid 变为 used', '前端轮询检测到状态变更，显示「核销成功」Toast', 'Toast显示1.5秒后自动返回我的优惠券-可使用页，该券移至「已使用」Tab'] },
-                        { title: '3.0 核销失败场景', paragraphs: ['以下场景后端会返回核销失败结果，券状态变为 verify_failed：', '1. 券已过期：用户出示时券已过有效期', '2. 券已被使用：重复核销（如上次已扫过）', '3. 券不存在：核销码无效或被篡改', '4. 门店不匹配：此券不适用当前门店', '5. 库存不足：赠品已发完', '6. 网络异常：门店网络故障导致请求超时', '核销失败时前端显示「核销失败：xxx原因」Toast，留在当前页面供用户重试或手动返回'] },
-                        { title: '4.0 轮询机制', paragraphs: ['轮询频率：每3秒一次', '成功检测条件：券状态变为 used', '失败检测条件：券状态变为 verify_failed', '离开页面时自动清除轮询定时器', '注：当前原型仅模拟成功场景（45秒后状态变更为used），失败场景不在原型中展示'] }
+                        { title: '2.0 核销状态刷新', paragraphs: ['核销码页面仅展示码，不做实时轮询，不做核销结果展示', '用户向收银员出示核销码后，自行点击返回按钮回到「我的优惠券」页面', '返回时页面重新请求券列表数据，若收银员已完成核销，券状态从 valid 变为 used，该券自动移至「已使用」Tab'] },
+                        { title: '3.0 核销失败场景（后端逻辑）', paragraphs: ['以下场景后端会返回核销失败（收银员系统提示，用户端不展示失败场景）：', '1. 券码不存在：查询券实例券码不存在或无效', '2. 券已核销：状态校验该券已使用', '3. 券已过期：状态校验该券已过期', '4. 未到核销时间：使用时间校验暂未到可核销时间', '5. 已过核销时间：使用时间校验已过核销使用时间', '6. 赠品 SKU 库存为 0：库存校验赠品库存不足，无法兑换', '7. 扣库存失败：核销失败，请重试', '8. 重复核销：该券已被核销', '9. 订单生成失败：核销失败，请稍后重试', '10. 核销记录写入失败：核销失败，请稍后重试', '11. 系统异常 / 数据库错误：任意阶段核销失败，请稍后重试', '所有失败场景均不改变券状态、不扣减库存'] },
+                        { title: '4.0 后期优化：核销结果实时返回', paragraphs: ['后期可升级为轻量轮询方案，在核销码页面实时展示核销结果：', '• 轮询频率：每3秒一次，检测券状态变化', '• 检测到 used → 显示「核销成功」Toast，1.5秒后自动返回我的优惠券页', '• 检测到 verify_failed → 显示「核销失败：xxx」Toast，留在当前页面', '• 离开页面时自动清除轮询定时器', '• 前提条件：后端提供券状态查询接口，支持前端轮询调用', '• 当前原型中已预留轮询代码（注释状态），后端接口ready后可快速接入'] }
                     ]
                 },
                 statusList: [
-                    { block: '核销码', state: '展示中', trigger: '进入页面', ui: '标题+条形码+二维码+核销码数字+底部提示文案' },
-                    { block: '核销码', state: '核销成功', trigger: '轮询检测到券状态变为used', ui: '显示「核销成功」Toast，1.5秒后自动返回我的优惠券页' },
-                    { block: '核销码', state: '核销失败', trigger: '轮询检测到券状态变为verify_failed', ui: '显示「核销失败：xxx原因」Toast，留在当前页面（注：原型不展示此场景）' }
+                    { block: '核销码', state: '展示中', trigger: '进入页面', ui: '二维码+核销码数字+底部提示文案' },
+                    { block: '核销码', state: '已离开', trigger: '点击返回', ui: '返回我的优惠券页面，列表刷新券状态（若已核销则移至「已使用」Tab）' }
                 ]
             },
             'profile-coupon-center': {
@@ -18917,11 +19165,14 @@
                     { id: 2, title: '领取按钮', type: 'interaction', target: '.cp-btn[data-action="claim-coupon"]', content: '未领取状态：文案「领取」，可点击\n已领取状态：禁用按钮，文案「已领取」\n点击领取后按钮变为禁用，显示"领取成功"Toast提示' },
                     { id: 3, title: '使用说明', type: 'interaction', target: '.cp-store-tag[data-action="show-usage"]', content: '点击卡片底部「使用说明」标签，弹出底部弹窗（与我的优惠券页弹窗一致）\n弹窗文案：赠品为指定实物赠品，使用方式为线下门店出示核销码兑换...' },
                     { id: 4, title: '有效期', type: 'data-source', target: '[data-block="cc-card-expire"]', content: '数据取商城后台「营销管理 > 赠品核销券」对每张券设置的领取结束时间，前端格式为"结束日期 + 23:59到期"' },
-                    { id: 5, title: '卡片标题', type: 'data-source', target: '[data-block="cc-card-title"]', content: '优惠券标题：来源于后台「优惠券名称」字段' }
+                    { id: 5, title: '卡片标题', type: 'data-source', target: '[data-block="cc-card-title"]', content: '优惠券标题：来源于后台「优惠券名称」字段' },
+                    { id: 6, title: '可领取多次·表现', type: 'interaction', target: '.cp-btn[data-action="claim-coupon"]', content: '当后台对该券设置了「可领取次数 > 1」时，<<未领满显示「领取」可继续点击，领满后置灰「已领取」>>，<<通过Toast提示剩余次数>>：\n① 领取后未领满：显示「领取成功，还可领取X次」\n② 领取后已达上限（最后一次）：显示「领取成功，已达领取上限」\n单次券（可领取次数=1）仍显示「领取成功」' }
                 ],
                 statusList: [
                     { block: '领取按钮', state: '未领取', trigger: '页面加载', ui: '按钮文案"领取"，可点击' },
-                    { block: '领取按钮', state: '已领取', trigger: '点击领取', ui: '禁用按钮"已领取" + Toast提示' },
+                    { block: '领取按钮', state: '<<已领取(单次券)>>', trigger: '点击领取', ui: '禁用按钮"已领取" + Toast提示' },
+                    { block: '领取按钮', state: '<<多次券·已领未满>>', trigger: '<<点击"领取">>', ui: '<<按钮保持"领取"仍可点击，Toast"领取成功，还可领取X次">>' },
+                    { block: '领取按钮', state: '<<多次券·已领满>>', trigger: '<<领满N张后>>', ui: '<<禁用按钮"已领取"，Toast"领取成功，已达领取上限">>' },
                     { block: '使用说明', state: '可点击', trigger: '点击标签', ui: '弹出使用说明弹窗' }
                 ],
                 requirementDoc: {
@@ -18930,10 +19181,10 @@
                     sections: [
                         { title: '1.0 需求背景', paragraphs: ['领券中心是徕芙会员超市向用户发放赠品核销券的集中入口，用户可在此浏览和领取当前可用的赠品核销券，领取后在「我的 > 优惠券」中查看和使用。', '领券中心仅展示赠品核销券，券样式与「我的优惠券」中的赠品核销券卡片一致。'] },
                         { title: '2.0 页面入口', paragraphs: ['我的优惠券页底部 → 点击「领取更多优惠券」按钮进入领券中心。'] },
-                        { title: '3.0 数据来源说明', paragraphs: ['赠品核销券数据来源于商城后台「营销管理 > 赠品核销券」模块，由运营人员在后台创建和配置。', '商品图片：来源于后台「选择赠品商品」时关联的商品SKU缩略图，前端用emoji占位', '优惠券标题：来源于后台「优惠券名称」字段', '有效期：取后台对每张券设置的领取结束时间，前端格式为"结束日期 + 23:59到期"', '使用说明弹窗内容：来源于后台「赠品使用说明」字段，点击"使用说明"标签后弹窗展示'] },
-                        { title: '4.0 列表展示规则', paragraphs: ['仅展示领取结束时间未到期的赠品核销券，按领取结束时间升序排列（即将到期在前）。', '已领取的券仍展示在列表中，按钮置灰不可再次点击。'] },
-                        { title: '5.0 交互说明', paragraphs: ['点击「领取」按钮 → 领取成功，按钮变为禁用文案"已领取"，显示"领取成功"Toast提示', '已领取券的「领取」按钮不可再次点击', '点击卡片底部「使用说明」标签 → 弹出使用说明弹窗（与我的优惠券页弹窗一致），弹窗文案：赠品为指定实物赠品，使用方式为线下门店出示核销码兑换，有效期以券面标注为准，每张券仅限使用一次，适用门店为徕芙会员超市线下门店；门店地址：晋江市良兴路69号。如有其他疑问，可联系在线客服咨询。', '点击遮罩或✕按钮可关闭弹窗'] },
-                        { title: '6.0 领取后流转', paragraphs: ['领取成功后，赠品核销券自动发放至用户优惠券账户，用户可在「我的 > 优惠券」的「可使用」Tab中查看。', '券进入可使用状态后，可点击「去使用」跳转至核销码页面进行线下核销。'] }
+                        { title: '3.0 数据来源说明', paragraphs: ['赠品核销券数据来源于商城后台「营销管理 > 赠品核销券」模块，由运营人员在后台创建和配置。', '商品图片：来源于后台「选择赠品商品」时关联的商品SKU缩略图，前端用emoji占位', '优惠券标题：来源于后台「优惠券名称」字段', '有效期：取后台对每张券设置的领取结束时间，前端格式为"结束日期 + 23:59到期"', '使用说明弹窗内容：来源于后台「赠品使用说明」字段，点击"使用说明"标签后弹窗展示', '<<可领取次数：来源于后台「可领取次数」字段（每人最多可领取张数）>>，1=仅限领取一次，>1=可领取多次；<<已领取张数取用户优惠券账户中该券的有效张数>>'] },
+                        { title: '4.0 列表展示规则', paragraphs: ['仅展示领取结束时间未到期的赠品核销券，按领取结束时间升序排列（即将到期在前）。', '已领取的券仍展示在列表中，按钮置灰不可再次点击。', '<<对于已到领取时间且库存为0的券，用户端不展示该券。>>', '可领取多次的券（可领取次数>1）：<<不展示领取进度标签，按钮文案保持不变——未领满时按钮文案「领取」且仍可继续点击，领满后置灰「已领取」；剩余次数仅通过领取后的Toast提示告知用户。>>'] },
+                        { title: '5.0 交互说明', paragraphs: ['点击「领取」按钮 → 领取成功，按钮变为禁用文案"已领取"，显示"领取成功"Toast提示', '已领取券的「领取」按钮不可再次点击', '<<多次券未领满时点击「领取」→ 领取成功，按钮保持「领取」可继续点击，Toast显示「领取成功，还可领取X次」>>', '<<多次券领满（最后一次）→ 按钮置灰「已领取」，Toast显示「领取成功，已达领取上限」>>', '点击卡片底部「使用说明」标签 → 弹出使用说明弹窗（与我的优惠券页弹窗一致），弹窗文案：赠品为指定实物赠品，使用方式为线下门店出示核销码兑换，有效期以券面标注为准，每张券仅限使用一次，适用门店为徕芙会员超市线下门店；门店地址：晋江市良兴路69号。如有其他疑问，可联系在线客服咨询。', '点击遮罩或✕按钮可关闭弹窗'] },
+                        { title: '6.0 领取后流转', paragraphs: ['领取成功后，赠品核销券自动发放至用户优惠券账户，用户可在「我的 > 优惠券」的「可使用」Tab中查看。', '<<可领取多次的券，每次领取均独立发放一张新券：用户优惠券账户中同时存在同一券的多张记录，每张有独立核销码，互不影响。>>', '券进入可使用状态后，可点击「去使用」跳转至核销码页面进行线下核销。'] }
                     ]
                 }
             },
@@ -19732,7 +19983,7 @@
         }
         // ====== 核销码页面渲染 ======
         const couponQrcodeData = {
-            code: '545344389957394587',
+            code: '545344389957',
             giftName: '饮料一瓶',
             couponId: 1
         };
@@ -19740,26 +19991,6 @@
         let _qrcodePollTimer = null;
         function couponQrcodeRender() {
             const code = couponQrcodeData.code;
-            const barcodeHTML = `
-                <svg viewBox="0 0 280 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-                    ${(function(){
-                        // 生成模拟条形码竖条（基于code字符串哈希确定宽度和位置）
-                        const bars = [];
-                        let x = 0;
-                        const seed = code.split('').reduce(function(s,c){ return s + c.charCodeAt(0); }, 0);
-                        for (let i = 0; i < 38; i++) {
-                            const w = (5 + ((seed + i * 7) % 11));
-                            x += 2;
-                            if (i % 3 !== 2) {
-                                bars.push('<rect x="' + x + '" y="6" width="' + w + '" height="68" fill="#1C1C1E"/>');
-                            }
-                            x += w;
-                            if (x > 260) break;
-                        }
-                        return bars.join('');
-                    })()}
-                </svg>
-            `;
             const qrcodeHTML = `
                 <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
                     <rect width="200" height="200" fill="#FFFFFF"/>
@@ -19794,7 +20025,6 @@
                 <div class="qrcode-page">
                     <div class="qrcode-content" data-block="qrcode-content">
                         <div class="qrcode-number">${code}</div>
-                        <div class="qrcode-barcode">${barcodeHTML}</div>
                         <div class="qrcode-pattern">${qrcodeHTML}</div>
                         <div class="qrcode-tip">请向收银员出示此核销码</div>
                     </div>
@@ -19804,12 +20034,14 @@
         }
 
         // ====== 领券中心页面渲染（复用我的优惠券核销券样式 cp-card） ======
+        // claimLimit：后台「可领取次数」字段（每人最多可领取张数，1=仅限领取一次）
+        // claimedCount：当前用户已领取张数；领满后按钮置灰
         const couponCenterData = [
-            { id: 'cc1', giftName: '饮料一瓶', endDate: '2026-06-30', claimed: false },
-            { id: 'cc2', giftName: '洗衣液一袋', endDate: '2026-07-31', claimed: false },
-            { id: 'cc3', giftName: '洗洁精一瓶', endDate: '2026-08-31', claimed: false },
-            { id: 'cc4', giftName: '抽纸一包', endDate: '2026-09-30', claimed: false },
-            { id: 'cc5', giftName: '矿泉水一瓶', endDate: '2026-06-15', claimed: true },
+            { id: 'cc1', giftName: '饮料一瓶', endDate: '2026-06-30', claimLimit: 3, claimedCount: 1 },
+            { id: 'cc2', giftName: '洗衣液一袋', endDate: '2026-07-31', claimLimit: 2, claimedCount: 0 },
+            { id: 'cc3', giftName: '洗洁精一瓶', endDate: '2026-08-31', claimLimit: 1, claimedCount: 0 },
+            { id: 'cc4', giftName: '抽纸一包', endDate: '2026-09-30', claimLimit: 1, claimedCount: 0 },
+            { id: 'cc5', giftName: '矿泉水一瓶', endDate: '2026-06-15', claimLimit: 1, claimedCount: 1 },
         ];
         let _couponCenterState = JSON.parse(JSON.stringify(couponCenterData));
         function couponCenterRender() {
@@ -19832,10 +20064,14 @@
                         </span>
                     </div>
                 `;
-                // 已领取态使用灰底按钮（disabled），未领取使用蓝底"领取"按钮
-                const btnClass = `cp-btn${c.claimed ? ' disabled' : ''}`;
-                const btnDisabled = c.claimed ? 'disabled' : '';
-                const btnText = c.claimed ? '已领取' : '领取';
+                // 可领取多次：不展示进度标签、按钮文案不变（领取/已领取），仅通过Toast提示剩余次数
+                const claimedCount = c.claimedCount || 0;
+                const claimLimit = c.claimLimit || 1;
+                // 按钮状态：未领满可继续点击；领满后置灰
+                const isFull = claimedCount >= claimLimit;
+                const btnClass = `cp-btn${isFull ? ' disabled' : ''}`;
+                const btnDisabled = isFull ? 'disabled' : '';
+                const btnText = isFull ? '已领取' : '领取';
                 return `
                     <div class="cp-card" data-block="cc-card" data-id="${c.id}">
                         <div class="cp-card-left">
@@ -19880,109 +20116,30 @@
             `;
         }
 
+        // ====== AI 商品图（订单/确认订单/赠品兑换/再买一单弹窗专用） ======
+        // 说明：仅用于"我的订单"相关页面的商品图片；不添加点击放大/下载等额外交互；
+        //       防交互/防下载通过已有的全局 CSS（pointer-events: none、-webkit-touch-callout、user-select、-webkit-user-drag）
+        //       与 protectProductImages() 的 contextmenu/dragstart 阻止监听器共同兜底。
+        const AI_IMG_MINI_FAN = 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=' + encodeURIComponent('E-commerce product photo, mini handheld portable fan, white body, compact USB rechargeable, clean white studio background, centered composition, soft lighting, realistic product shot, no watermark, no magnifier icon, no button') + '&image_size=square_hd';
+        const AI_IMG_WATERMELON = 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=' + encodeURIComponent('E-commerce product photo, cream watermelon whole fruit, 4.5kg, fresh green striped rind, clean white studio background, centered composition, soft lighting, realistic product shot, no watermark, no magnifier icon, no button') + '&image_size=square_hd';
+        const AI_IMG_EGGS = 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=' + encodeURIComponent('E-commerce product photo, fresh brown cage-free eggs in carton, 1.5kg about 30 eggs, clean white studio background, centered composition, soft lighting, realistic product shot, no watermark, no magnifier icon, no button') + '&image_size=square_hd';
+        const AI_IMG_EGGS_FRESH = AI_IMG_EGGS;
+        function productImgTag(src) {
+            // 渲染防交互商品 <img>：inline style 与 class 双重兜底；draggable=false 再额外兜底
+            // 外层 CSS 已对 .xxx-img img 做 pointer-events / touch-callout / user-drag 屏蔽；
+            // protectProductImages() 还会对其再绑定 contextmenu / dragstart preventDefault。
+            return `<img src="${src}" alt="" class="product-img-protected" draggable="false" ondragstart="return false;" oncontextmenu="return false;" style="-webkit-touch-callout:none;-webkit-user-drag:none;user-select:none;pointer-events:none;cursor:auto;display:block;width:100%;height:100%;object-fit:cover;background:#F0F0F0;">`;
+        }
+
         // ====== 页面渲染器（具体页面内容）======
         const pageRenderers = {
             shopHome: function() {
-                // 金刚位 10 个分类
-                const categories = [
-                    { icon: 'fa fa-star', label: '推荐' },
-                    { icon: 'fa fa-fire', label: '新品' },
-                    { icon: 'fa fa-percent', label: '折扣' },
-                    { icon: 'fa fa-home', label: '家居' },
-                    { icon: 'fa fa-cutlery', label: '食品' },
-                    { icon: 'fa fa-mobile', label: '数码' },
-                    { icon: 'fa fa-plug', label: '家电' },
-                    { icon: 'fa fa-tshirt', label: '服饰' },
-                    { icon: 'fa fa-magic', label: '美妆' },
-                    { icon: 'fa fa-child', label: '母婴' }
-                ];
-                const catHtml = categories.map(c => `
-                    <div class="mh-cat-item">
-                        <div class="mh-cat-icon"><i class="${c.icon}"></i></div>
-                        <div class="mh-cat-label">${c.label}</div>
-                    </div>
-                `).join('');
-                // 专题排行榜（2 行 × 2 列 = 4 个卡片）
-                const rankingCard = (title) => `
-                    <div class="mh-ranking-card">
-                        <div class="mh-ranking-title">${title} <span class="mh-more">更多 ›</span></div>
-                        <div class="mh-ranking-grid">
-                            ${[1,2,3,4].map(i => `
-                                <div class="mh-ranking-item">
-                                    <div class="mh-ranking-img"></div>
-                                    <div class="mh-ranking-name">商品${i}</div>
-                                    <div class="mh-ranking-price">¥${(99 + i * 17).toFixed(0)}</div>
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
-                `;
-                // 商品瀑布流（2×2 = 4 个商品卡）
-                const productCard = (i, withBadge) => {
-                    const price = (49 + i * 23).toFixed(0);
-                    const original = (parseInt(price) + 40).toFixed(0);
-                    return `
-                        <div class="mh-product-card">
-                            <div class="mh-product-img">
-                                ${withBadge ? `<span class="mh-product-badge">已售 ${100 + i * 13}</span>` : ''}
-                            </div>
-                            <div class="mh-product-body">
-                                <div class="mh-product-title">商品标题示例 ${i} 号 - 优质好物限时特惠</div>
-                                <div class="mh-product-tags">
-                                    <span class="mh-product-tag">特惠</span>
-                                    <span class="mh-product-tag gray">包邮</span>
-                                </div>
-                                <div class="mh-product-price-row">
-                                    <span class="mh-product-price">¥${price}<span class="mh-original">¥${original}</span></span>
-                                    <div class="mh-product-cart"><i class="fa fa-plus"></i></div>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                };
                 return `
-                    <div class="mh-page">
-                        <!-- 1. 顶部搜索栏 -->
-                        <div class="mh-search-row">
-                            <div class="mh-search-bar">
-                                <i class="fa fa-search mh-search-icon"></i>
-                                <span class="mh-search-placeholder">输入关键字搜索</span>
-                                <button class="mh-search-btn">搜索</button>
-                            </div>
-                            <i class="fa fa-headphones mh-cs-icon"></i>
-                        </div>
-                        <!-- 2. Hero Banner -->
-                        <div class="mh-banner">
-                            <div class="mh-banner-overlay">在家也能吃到
-星级酒店美味</div>
-                            <span class="mh-pagination">1/6</span>
-                        </div>
-                        <!-- 3. 金刚位分类 -->
-                        <div class="mh-section">
-                            <div class="mh-category-grid">${catHtml}</div>
-                        </div>
-                        <!-- 4. 专题排行榜 -->
-                        <div class="mh-section">
-                            <div class="mh-ranking-row">
-                                ${rankingCard('热销榜')}
-                                ${rankingCard('新品榜')}
-                            </div>
-                            <div class="mh-ranking-row">
-                                ${rankingCard('折扣榜')}
-                                ${rankingCard('好评榜')}
-                            </div>
-                        </div>
-                        <!-- 5. 商品瀑布流（2×2） -->
-                        <div class="mh-waterfall">
-                            ${productCard(1, false)}
-                            ${productCard(2, false)}
-                            ${productCard(3, true)}
-                            ${productCard(4, true)}
-                        </div>
-                        <!-- 6. 悬浮购物车按钮（带数量徽标） -->
-                        <div class="mh-fab" title="购物车">
-                            <i class="fa fa-shopping-cart"></i>
-                            <span class="mh-fab-badge">3</span>
+                    <div style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+                        <div class="page-placeholder">
+                            <i class="fa fa-shopping-bag"></i>
+                            <h3>商城首页</h3>
+                            <p>页面建设中，敬请期待</p>
                         </div>
                     </div>
                 `;
@@ -19995,8 +20152,8 @@
                 const coinIcon = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" fill="#F6AD16"/><circle cx="12" cy="12" r="6" fill="#FFFFFF"/><circle cx="12" cy="12" r="4" fill="#F6AD16"/></svg>';
                 const wechatPayIcon = '<svg width="20" height="20" viewBox="0 0 24 24" fill="#0DC803" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 4C5.36 4 2 6.69 2 10c0 1.89 1.08 3.56 2.78 4.66l-.7 2.1 2.45-1.23c.64.18 1.32.3 2.02.33A5.65 5.65 0 0 1 8.5 14c0-3.09 3.02-5.6 6.75-5.6.24 0 .47.01.7.03C15.2 6 12.6 4 9.5 4zM7.75 7.5a.9.9 0 1 1 0 1.8.9.9 0 0 1 0-1.8zm3.5 0a.9.9 0 1 1 0 1.8.9.9 0 0 1 0-1.8zM15.25 9.5C11.8 9.5 9 11.63 9 14.25s2.8 4.75 6.25 4.75c.72 0 1.4-.1 2.03-.3l2.1 1.05-.6-1.8c1.4-.87 2.22-2.2 2.22-3.7 0-2.62-2.8-4.75-6.25-4.75zm-2.1 3a.8.8 0 1 1 0 1.6.8.8 0 0 1 0-1.6zm4.2 0a.8.8 0 1 1 0 1.6.8.8 0 0 1 0-1.6z"/></svg>';
                 const unionPayIcon = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="5" width="20" height="14" rx="2.5" fill="#FD2821"/><path d="M6.5 9l2 6M10 9l-1.5 6M14.5 9l-2 6M17 9c1.2.3 1.8 1.2 1.5 2.5-.3 1.3-1.2 1.8-2.5 2M14.5 15l2-6" stroke="#FFFFFF" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-                // 商品图
-                const productImg = 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=' + encodeURIComponent('电商商品缩略图：迷你手持风扇，白色浅色背景，产品摄影风格') + '&image_size=square_hd';
+                // 商品图（AI生成，订单页专用，无额外交互）
+                const productImg = AI_IMG_MINI_FAN;
                 return `
                     <div class="co-page">
                         <!-- 顶部导航栏 -->
@@ -20054,7 +20211,7 @@
                                 <!-- 商品概览 + 价格明细 -->
                                 <div class="co-section">
                                     <div class="co-product">
-                                        <div class="co-product-img" style="background-image: url('${productImg}')"></div>
+                                        <div class="co-product-img">${productImgTag(productImg)}</div>
                                         <div class="co-product-title">迷你手持风扇</div>
                                         <div class="co-info-value" style="gap:4px;">
                                             <span class="co-product-count">共1件</span>
@@ -20355,7 +20512,128 @@
             },
             // ====== 订单数据 ======
             shopOrders: function() {
-                const productImg = 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=' + encodeURIComponent('电商商品缩略图：迷你手持电风扇，白色浅色背景，产品摄影风格') + '&image_size=square_hd';
+                const productImg = AI_IMG_MINI_FAN; // 迷你手持电风扇 - AI生成图片，订单页专用，无额外交互
+                const ordersData = [
+                    { id: 'G001', status: 'gift', statusText: '已兑换赠品', timeLabel: '核销时间', time: '2026-05-22 16:41:35', title: '迷你手持风扇', spec: '规格：白色', count: 1, total: 0, priceLabel: '实付', img: productImg, detailPage: 'shop-order-detail-gift-done', actions: [{ text: '删除订单', cls: 'order-btn-outline', action: 'delete-order' }, { text: '详情', cls: 'order-btn-primary', action: 'claim-again' }] },
+                    { id: 'P001', status: 'pay', statusText: '待付款', countdown: '23:58:12', timeLabel: '下单时间', time: '2026-05-22 16:41:35', title: '迷你手持风扇', count: 6, total: 39.90, priceLabel: '实付', img: productImg, detailPage: 'shop-order-detail-home-pay', actions: [{ text: '取消订单', cls: 'order-btn-outline', action: 'cancel-order' }, { text: '立即支付', cls: 'order-btn-primary', action: 'pay-now' }] },
+                    { id: 'S001', status: 'ship', statusText: '待发货', timeLabel: '下单时间', time: '2026-05-22 16:41:35', title: '迷你手持风扇', count: 1, total: 39.90, priceLabel: '实付', img: productImg, detailPage: 'shop-order-detail-home-ship', actions: [{ text: '取消订单', cls: 'order-btn-outline', action: 'cancel-order' }, { text: '再买一单', cls: 'order-btn-primary', action: 'buy-again' }] },
+                    { id: 'R001', status: 'receive', statusText: '待收货', timeLabel: '下单时间', time: '2026-05-22 16:41:35', title: '迷你手持风扇', count: 2, total: 39.90, priceLabel: '实付', img: productImg, detailPage: 'shop-order-detail-home-receive', actions: [{ text: '确认收货', cls: 'order-btn-primary', action: 'confirm-receive' }] },
+                    { id: 'E001', status: 'evaluate', statusText: '已完成', timeLabel: '下单时间', time: '2026-05-22 16:41:35', title: '迷你手持风扇', count: 6, total: 39.90, priceLabel: '实付', img: productImg, detailPage: 'shop-order-detail-home-done', actions: [{ text: '删除订单', cls: 'order-btn-outline', action: 'delete-order' }, { text: '再买一单', cls: 'order-btn-primary', action: 'buy-again' }] },
+                    { id: 'C001', status: 'cancel', statusText: '已取消', timeLabel: '下单时间', time: '2026-05-22 16:41:35', title: '迷你手持风扇', count: 6, total: 39.90, priceLabel: '总额', img: productImg, detailPage: 'shop-order-detail-home-pay', actions: [{ text: '删除订单', cls: 'order-btn-outline', action: 'delete-order' }, { text: '再买一单', cls: 'order-btn-primary', action: 'buy-again' }] }
+                ];
+                const statusTabs = [
+                    { key: 'all', label: '全部' },
+                    { key: 'pay', label: '待付款' },
+                    { key: 'ship', label: '待发货' },
+                    { key: 'receive', label: '待收货' },
+                    { key: 'evaluate', label: '待评价' }
+                ];
+                const renderGallery = (order) => {
+                    if (order.count === 1) {
+                        return `<div class="order-card-gallery single"><div class="order-card-gallery-item">${productImgTag(order.img)}</div></div>`;
+                    }
+                    const imgCount = Math.min(order.count, 4);
+                    let items = '';
+                    for (let i = 0; i < imgCount; i++) {
+                        items += `<div class="order-card-gallery-item">${productImgTag(order.img)}</div>`;
+                    }
+                    return `<div class="order-card-gallery">${items}</div>`;
+                };
+                const orderCard = (order) => {
+                    const isGift = order.status === 'gift';
+                    const displayCount = Math.min(order.count, 3);
+                    const items = [];
+                    for (let i = 0; i < displayCount; i++) {
+                        items.push(`<div class="order-card-gallery-item">${productImgTag(order.img)}</div>`);
+                    }
+                    const priceValue = order.total === 0 ? '¥0.00' : '¥' + order.total.toFixed(2);
+                    const isPay = order.status === 'pay';
+                    const valueCls = isPay ? 'order-card-price-value pay-red' : 'order-card-price-value';
+                    const countdown = order.countdown ? `<span class="order-card-countdown">${order.countdown}</span>` : '';
+                    const timeInfo = `<div class="order-card-status-desc">${order.timeLabel}：${order.time}</div>`;
+                    if (isGift) {
+                        return `
+                        <div class="order-card gift-card" data-detail="${order.detailPage}" data-id="${order.id}" data-status="${order.status}">
+                            <div class="order-card-header">
+                                <div>
+                                    <span class="order-card-status ${order.status}">${order.statusText}</span>
+                                    ${timeInfo}
+                                </div>
+                            </div>
+                            <div class="order-card-body">
+                                <div class="order-card-product-row">
+                                    <div class="gift-product-row" style="flex:1;min-width:0;">
+                                        <div class="gift-product-img">${productImgTag(order.img)}</div>
+                                        <div class="gift-product-info">
+                                            <div class="order-card-title">${order.title}</div>
+                                            ${order.spec ? `<div class="gift-product-spec">${order.spec}</div>` : ''}
+                                        </div>
+                                    </div>
+                                    <div class="gift-product-count">共${order.count}件 <span class="arrow">›</span></div>
+                                </div>
+                                <div class="gift-price-row">
+                                    <span class="gift-price-label">${order.priceLabel}</span>
+                                    <span class="gift-price-value">${priceValue}</span>
+                                </div>
+                            </div>
+                            ${order.actions && order.actions.length > 0 ? `
+                            <div class="order-card-footer">
+                                <div class="order-card-actions">
+                                    ${order.actions.map(a => `<button class="order-btn ${a.cls}" data-action="${a.action}">${a.text}</button>`).join('')}
+                                </div>
+                            </div>` : ''}
+                        </div>`;
+                    }
+                    return `
+                    <div class="order-card" data-detail="${order.detailPage}" data-id="${order.id}" data-status="${order.status}">
+                        <div class="order-card-header">
+                            <div>
+                                <span class="order-card-status ${order.status}">${order.statusText}</span>${countdown}
+                                ${timeInfo}
+                            </div>
+                        </div>
+                        <div class="order-card-body">
+                            <div class="order-card-product-row">
+                                <div class="order-card-gallery">${items.join('')}</div>
+                                <div class="order-card-count">共${order.count}件 <span class="arrow">›</span></div>
+                            </div>
+                            <div class="order-card-bottom">
+                                <div class="order-card-price-row">
+                                    <span class="order-card-price-label">${order.priceLabel}</span>
+                                    <span class="${valueCls}">${priceValue}</span>
+                                </div>
+                            </div>
+                        </div>
+                        ${order.actions && order.actions.length > 0 ? `
+                        <div class="order-card-footer">
+                            <div class="order-card-actions">
+                                ${order.actions.map(a => `<button class="order-btn ${a.cls}" data-action="${a.action}">${a.text}</button>`).join('')}
+                            </div>
+                        </div>` : ''}
+                    </div>`;
+                };
+                const renderList = (statusKey) => {
+                    let list = ordersData;
+                    if (statusKey !== 'all') list = list.filter(o => o.status === statusKey);
+                    return list.length > 0 ? list.map(o => orderCard(o)).join('') : `<div class="cp-empty"><div class="cp-empty-icon"><svg width="80" height="80" viewBox="0 0 80 80" fill="none"><rect x="20" y="15" width="40" height="50" rx="4" stroke="#D9D9D9" stroke-width="2"/><path d="M26 25h28M26 35h28M26 45h20" stroke="#D9D9D9" stroke-width="2" stroke-linecap="round"/></svg></div><div class="cp-empty-text">暂无相关订单</div></div>`;
+                };
+                const html = `
+                    <div class="orders-page v1" id="orders-page-root">
+                        <div class="orders-tabs" id="orders-status-tabs">
+                            ${statusTabs.map((t, i) => `<div class="orders-tab-item${i === 0 ? ' active' : ''}" data-status="${t.key}">${t.label}</div>`).join('')}
+                        </div>
+                        <div class="orders-scroll">
+                            <div class="orders-list" id="orders-list">
+                                ${renderList('all')}
+                            </div>
+                        </div>
+                        <div class="nav-home-indicator"><div class="nav-home-indicator-bar"></div></div>
+                    </div>
+                `;
+                return html;
+            },
+            shopOrdersV2: function() {
+                const productImg = AI_IMG_MINI_FAN; // 迷你手持电风扇 - AI生成图片，订单页专用，无额外交互
                 // 订单 Mock 数据
                 const ordersData = {
                     home: [ // 配送到家
@@ -20369,6 +20647,9 @@
                         { id: 'P002', status: 'ship', statusText: '待发货', typeText: '站点自提', title: '徕芙 迷你手持电风扇 便携充电款', spec: '颜色：白色', price: 39.50, count: 1, total: 51.50, img: productImg, detailPage: 'shop-order-detail-pickup-ship' },
                         { id: 'P003', status: 'receive', statusText: '待自提', typeText: '站点自提', title: '徕芙 迷你手持电风扇 便携充电款', spec: '颜色：白色', price: 39.50, count: 1, total: 51.50, img: productImg, detailPage: 'shop-order-detail-pickup-receive' },
                         { id: 'P004', status: 'done', statusText: '已完成', typeText: '站点自提', title: '徕芙 迷你手持电风扇 便携充电款', spec: '颜色：白色', price: 39.50, count: 1, total: 51.50, img: productImg, detailPage: 'shop-order-detail-pickup-done' }
+                    ],
+                    gift: [ // 赠品兑换
+                        { id: 'G001', status: 'done', statusText: '已完成', typeText: '赠品兑换', title: '迷你手持风扇', spec: '规格：白色', price: 0, count: 1, total: 0, img: productImg, detailPage: 'shop-order-detail-gift-done' }
                     ]
                 };
                 const statusTabs = [
@@ -20385,23 +20666,23 @@
                             <span class="order-card-status ${order.status}">${order.statusText}</span>
                         </div>
                         <div class="order-card-body">
-                            <div class="order-card-img"><img src="${order.img}" alt=""></div>
+                            <div class="order-card-img">${productImgTag(order.img)}</div>
                             <div class="order-card-info">
                                 <div class="order-card-title">${order.title}</div>
                                 <div class="order-card-spec">${order.spec}</div>
                                 <div class="order-card-price-row">
-                                    <span class="order-card-price">¥${order.price.toFixed(2)}</span>
+                                    <span class="order-card-price">${order.price === 0 ? '¥0.00' : '¥' + order.price.toFixed(2)}</span>
                                     <span class="order-card-count">x${order.count}</span>
                                 </div>
                             </div>
                         </div>
                         <div class="order-card-footer">
-                            <div class="order-card-total">实付 <span class="amount">¥${order.total.toFixed(2)}</span></div>
+                            <div class="order-card-total">实付 <span class="amount">${order.total === 0 ? '¥0.00' : '¥' + order.total.toFixed(2)}</span></div>
                             <div class="order-card-actions">
                                 ${order.status === 'pay' ? `<button class="order-btn order-btn-outline" data-action="cancel-order">取消订单</button><button class="order-btn order-btn-primary" data-action="pay-now">立即支付</button>` : ''}
                                 ${order.status === 'ship' ? `<button class="order-btn order-btn-primary" data-action="buy-again">再买一单</button>` : ''}
                                 ${order.status === 'receive' ? `<button class="order-btn order-btn-primary" data-action="confirm-receive">${order.typeText === '站点自提' ? '确认自提' : '确认收货'}</button>` : ''}
-                                ${order.status === 'done' ? `<button class="order-btn order-btn-outline" data-action="delete-order">删除订单</button><button class="order-btn order-btn-primary" data-action="buy-again">再买一单</button>` : ''}
+                                ${order.status === 'done' ? `<button class="order-btn order-btn-outline" data-action="delete-order">删除订单</button><button class="order-btn order-btn-primary" data-action="${typeKey === 'gift' ? 'claim-again' : 'buy-again'}">${typeKey === 'gift' ? '详情' : '再买一单'}</button>` : ''}
                             </div>
                         </div>
                     </div>
@@ -20409,26 +20690,26 @@
                 const renderList = (typeKey, statusKey) => {
                     let list = [];
                     if (typeKey === 'all') {
-                        list = [...ordersData.home.map(o => ({...o, __type: 'home'})), ...ordersData.pickup.map(o => ({...o, __type: 'pickup'}))];
+                        list = [...ordersData.home.map(o => ({...o, __type: 'home'})), ...ordersData.pickup.map(o => ({...o, __type: 'pickup'})), ...ordersData.gift.map(o => ({...o, __type: 'gift'}))];
                     } else {
                         list = ordersData[typeKey].map(o => ({...o, __type: typeKey}));
                     }
                     if (statusKey !== 'all') list = list.filter(o => o.status === statusKey);
                     return list.length > 0 ? list.map(o => orderCard(o, o.__type)).join('') : `<div class="cp-empty"><div class="cp-empty-icon"><svg width="80" height="80" viewBox="0 0 80 80" fill="none"><rect x="20" y="15" width="40" height="50" rx="4" stroke="#D9D9D9" stroke-width="2"/><path d="M26 25h28M26 35h28M26 45h20" stroke="#D9D9D9" stroke-width="2" stroke-linecap="round"/></svg></div><div class="cp-empty-text">暂无相关订单</div></div>`;
                 };
-                // 渲染函数：获取当前状态并渲染（通过data属性保存状态）
                 const html = `
-                    <div class="orders-page" id="orders-page-root">
-                        <div class="orders-tabs" id="orders-status-tabs">
+                    <div class="orders-page" id="orders-page-root-v2">
+                        <div class="orders-tabs" id="orders-status-tabs-v2">
                             ${statusTabs.map((t, i) => `<div class="orders-tab-item${i === 0 ? ' active' : ''}" data-status="${t.key}">${t.label}</div>`).join('')}
                         </div>
-                        <div class="orders-type-tabs" id="orders-type-tabs">
+                        <div class="orders-type-tabs" id="orders-type-tabs-v2">
                             <div class="orders-type-item active" data-type="all">全部</div>
                             <div class="orders-type-item" data-type="home">配送到家</div>
                             <div class="orders-type-item" data-type="pickup">站点自提</div>
+                            <div class="orders-type-item" data-type="gift">赠品兑换</div>
                         </div>
                         <div class="orders-scroll">
-                            <div class="orders-list" id="orders-list">
+                            <div class="orders-list" id="orders-list-v2">
                                 ${renderList('all', 'all')}
                             </div>
                         </div>
@@ -20446,6 +20727,68 @@
             shopOrderDetailPickupShip: function() { return renderShopOrderDetail('pickup', 'ship'); },
             shopOrderDetailPickupReceive: function() { return renderShopOrderDetail('pickup', 'receive'); },
             shopOrderDetailPickupDone: function() { return renderShopOrderDetail('pickup', 'done'); },
+            shopOrderDetailGiftDone: function() {
+                const productImg = AI_IMG_MINI_FAN; // 迷你手持电风扇 - AI生成图片，订单页专用，无额外交互
+                const serviceSvg = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2a6 6 0 0 0-6 6v3H5a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h2a2 2 0 0 0 2-2v-6h1v6a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-6h1v6a2 2 0 0 0 2 2h2a1 1 0 0 0 1-1v-7a1 1 0 0 0-1-1h-1V8a6 6 0 0 0-6-6zm-4 9V8a4 4 0 1 1 8 0v3H8z" fill="#828282"/></svg>';
+                const rightArrow = '<svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="#BDBDBD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+                return `
+                <div class="order-detail-page">
+                    <div class="od-status-bar">
+                        <div class="od-status-title">已完成</div>
+                        <div class="od-status-desc">赠品兑换成功，感谢您的支持！</div>
+                    </div>
+                    <div class="od-scroll">
+                        <!-- 核销信息 -->
+                        <div class="od-card">
+                            <div class="od-card-title">核销信息</div>
+                            <div class="od-info-row">
+                                <span class="od-info-label">核销时间</span>
+                                <span class="od-info-value">2026-05-21 16:41:35</span>
+                            </div>
+                            <div class="od-info-row">
+                                <span class="od-info-label">券码</span>
+                                <span class="od-info-value">545344389957</span>
+                            </div>
+                        </div>
+                        <!-- 商品信息 -->
+                        <div class="od-card">
+                            <div class="od-card-title">商品信息</div>
+                            <div class="od-product-row">
+                                <div class="od-product-img">${productImgTag(productImg)}</div>
+                                <div class="od-product-info">
+                                    <div class="od-product-title">迷你手持风扇</div>
+                                    <div class="od-product-count"><span>规格：白色</span></div>
+                                </div>
+                                <div class="od-product-arrow">共1件</div>
+                            </div>
+                            <div class="od-price-row"><span class="od-price-label">商品总价</span><span class="od-price-value">¥0.00</span></div>
+                            <div class="od-price-divider"></div>
+                            <div class="od-price-total">
+                                <span class="od-price-total-label">实付款</span>
+                                <span class="od-price-total-value" style="color:#E53935;">¥0.00</span>
+                            </div>
+                        </div>
+                        <!-- 订单信息 -->
+                        <div class="od-card">
+                            <div class="od-card-title">订单信息</div>
+                            <div class="od-order-info-row"><span class="od-order-label">订单号</span><span class="od-order-value">030410485500005<span class="od-copy-btn" data-action="copy-order-no">复制</span></span></div>
+                            <div class="od-order-info-row"><span class="od-order-label">支付方式</span><span class="od-order-value">赠品券兑换（0元支付）</span></div>
+                        </div>
+                    </div>
+                    <!-- 底部操作栏 -->
+                    <div class="od-bottom-bar">
+                        <div class="od-service-btn" data-action="contact-service">
+                            <div class="od-service-icon">${serviceSvg}</div>
+                            <span class="od-service-text">客服</span>
+                        </div>
+                        <div class="od-bottom-actions">
+                            <button class="order-btn order-btn-outline" data-action="delete-order">删除订单</button>
+                        </div>
+                    </div>
+                    <div class="nav-home-indicator"><div class="nav-home-indicator-bar"></div></div>
+                </div>
+            `;
+            },
             profilePaymentList: function() {
                 const houses = [
                     { name: '金领国际', selected: true },
@@ -20817,7 +21160,7 @@
         };
         // ====== 订单详情通用渲染函数（共享） ======
         function renderShopOrderDetail(type, status) {
-            const productImg = 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=' + encodeURIComponent('电商商品缩略图：迷你手持电风扇，白色浅色背景，产品摄影风格') + '&image_size=square_hd';
+            const productImg = AI_IMG_MINI_FAN; // 迷你手持电风扇 - AI生成图片，订单页专用，无额外交互
             const serviceSvg = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2a6 6 0 0 0-6 6v3H5a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h2a2 2 0 0 0 2-2v-6h1v6a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-6h1v6a2 2 0 0 0 2 2h2a1 1 0 0 0 1-1v-7a1 1 0 0 0-1-1h-1V8a6 6 0 0 0-6-6zm-4 9V8a4 4 0 1 1 8 0v3H8z" fill="#828282"/></svg>';
             const rightArrow = '<svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="#BDBDBD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
             // 基础数据
@@ -20910,13 +21253,26 @@
                         <!-- 商品信息 -->
                         <div class="od-card">
                             <div class="od-card-title">商品信息</div>
-                            <div class="od-product-row" data-action="go-product-detail">
-                                <div class="od-product-img"><img src="${productImg}" alt=""></div>
-                                <div class="od-product-info">
-                                    <div class="od-product-title">徕芙 迷你手持电风扇 便携充电款</div>
-                                    <div class="od-product-count"><span>颜色：白色</span><span>x1</span></div>
+                            <div class="od-product-row">
+                                ${(() => {
+                                    const countMap = { pay: 6, ship: 1, receive: 2, done: 6 };
+                                    const count = countMap[status] || 1;
+                                    if (count === 1) {
+                                        return `<div class="od-product-single">
+                                    <div class="od-product-img">${productImgTag(productImg)}</div>
+                                    <div class="od-product-info">
+                                        <div class="od-product-title">徕芙 迷你手持电风扇 便携充电款</div>
+                                        <div class="od-product-count"><span>颜色：白色</span></div>
+                                    </div>
                                 </div>
-                                <div class="od-product-arrow">共1件 ${rightArrow}</div>
+                                <div class="od-product-count-text">共1件 ${rightArrow}</div>`;
+                                    } else {
+                                        const imgCount = Math.min(count, 4);
+                                        const imgs = Array(imgCount).fill(0).map(() => `<div class="od-product-gallery-img">${productImgTag(productImg)}</div>`).join('');
+                                        return `<div class="od-product-gallery">${imgs}</div>
+                                <div class="od-product-count-text">共${count}件 ${rightArrow}</div>`;
+                                    }
+                                })()}
                             </div>
                             ${priceRows.map(row => `<div class="od-price-row"><span class="od-price-label">${row.label}</span><span class="od-price-value ${row.cls}">${row.value}</span></div>`).join('')}
                             <div class="od-price-divider"></div>
@@ -20995,22 +21351,149 @@
             if (closeBtn) closeBtn.addEventListener('click', closeFeePopup);
             overlay.addEventListener('click', closeFeePopup);
         }
+        // ====== 再买一单商品弹窗 ======
+        function showBuyAgainPopup() {
+            const mc = document.querySelector('#mobile-content');
+            if (!mc) return;
+            // 移除已有的弹窗
+            const existing = mc.querySelector('.ba-overlay');
+            if (existing) existing.remove();
+            // 各商品对应 AI 生成图（仅展示，无额外交互）
+            const items = [
+                { name: '迷你手持风扇', price: 39.9, qty: 1, img: AI_IMG_MINI_FAN },
+                { name: '奶油西瓜 4.5kg', price: 39.9, qty: 1, img: AI_IMG_WATERMELON },
+                { name: '谷物鸡蛋 1.5kg (30枚)', price: 39.9, qty: 1, img: AI_IMG_EGGS },
+                { name: '精选鲜鸡蛋', price: 39.9, qty: 1, img: AI_IMG_EGGS_FRESH }
+            ];
+            const totalCount = items.reduce((s, i) => s + i.qty, 0);
+            const itemHTML = items.map(i => `
+                <div class="ba-item">
+                    <div class="ba-item-img">${productImgTag(i.img)}</div>
+                    <div class="ba-item-info">
+                        <div class="ba-item-titlerow">
+                            <span class="ba-item-name">${i.name}</span>
+                            <span class="ba-item-price">¥${i.price.toFixed(1)}</span>
+                        </div>
+                        <span class="ba-item-unit">单价：¥${i.price.toFixed(1)}</span>
+                        <span class="ba-item-qty">数量：${i.qty}</span>
+                    </div>
+                </div>`).join('');
+            const overlay = document.createElement('div');
+            overlay.className = 'ba-overlay';
+            overlay.innerHTML = `
+                <div class="ba-sheet">
+                    <div class="ba-header">
+                        <span class="ba-title">商品（共${totalCount}件）</span>
+                        <div class="ba-close"><svg viewBox="0 0 14 14" fill="none"><path d="M1 1L13 13M1 13L13 1" stroke="#4F4F4F" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+                    </div>
+                    <div class="ba-list">${itemHTML}</div>
+                    <div class="ba-footer">
+                        <div class="ba-cart-btn">加入购物车</div>
+                    </div>
+                </div>`;
+            mc.appendChild(overlay);
+            // 触发动画
+            requestAnimationFrame(() => overlay.classList.add('show'));
+            // 关闭
+            const closeBtn = overlay.querySelector('.ba-close');
+            const closePopup = () => {
+                overlay.classList.remove('show');
+                setTimeout(() => overlay.remove(), 300);
+            };
+            closeBtn.addEventListener('click', closePopup);
+            overlay.addEventListener('click', (e) => { if (e.target === overlay) closePopup(); });
+            // 加入购物车
+            const cartBtn = overlay.querySelector('.ba-cart-btn');
+            cartBtn.addEventListener('click', () => {
+                closePopup();
+                const toast = document.createElement('div');
+                toast.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,0.7);color:#fff;padding:10px 20px;border-radius:8px;font-size:14px;z-index:9999;white-space:nowrap;';
+                toast.textContent = '已加入购物车';
+                mc.appendChild(toast);
+                setTimeout(() => toast.remove(), 1500);
+            });
+        }
+        // ====== 订单操作确认弹窗（取消订单/删除订单/确认收货/确认自提共用） ======
+        // opts: { message, confirmText, onConfirm }
+        function showOrderConfirmPopup(opts) {
+            const mc = document.querySelector('#mobile-content');
+            if (!mc) return;
+            // 移除已有弹窗
+            const existing = mc.querySelector('.oc-overlay');
+            if (existing) existing.remove();
+            const overlay = document.createElement('div');
+            overlay.className = 'oc-overlay';
+            overlay.innerHTML = `
+                <div class="oc-modal">
+                    <div class="oc-msg">${opts.message}</div>
+                    <div class="oc-btns">
+                        <button class="oc-btn oc-btn-cancel">取消</button>
+                        <button class="oc-btn oc-btn-confirm">${opts.confirmText || '确定'}</button>
+                    </div>
+                </div>`;
+            mc.appendChild(overlay);
+            requestAnimationFrame(() => overlay.classList.add('show'));
+            const closePopup = () => {
+                overlay.classList.remove('show');
+                overlay.remove();
+            };
+            overlay.querySelector('.oc-btn-cancel').addEventListener('click', closePopup);
+            overlay.querySelector('.oc-btn-confirm').addEventListener('click', () => {
+                closePopup();
+                if (typeof opts.onConfirm === 'function') opts.onConfirm();
+            });
+            // 点击遮罩关闭
+            overlay.addEventListener('click', (e) => { if (e.target === overlay) closePopup(); });
+        }
+        // ====== 订单页 Toast ======
+        function showOrderToast(msg) {
+            const mc = document.querySelector('#mobile-content');
+            if (!mc) return;
+            const toast = document.createElement('div');
+            toast.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,0.7);color:#fff;padding:10px 20px;border-radius:8px;font-size:14px;z-index:9999;white-space:nowrap;';
+            toast.textContent = msg;
+            mc.appendChild(toast);
+            setTimeout(() => toast.remove(), 1500);
+        }
+        // ====== 订单操作统一处理（列表页 + 详情页共用） ======
+        // action: 'cancel-order' | 'delete-order' | 'confirm-receive'
+        // btn: 触发按钮（用于读取所在卡片的订单信息）
+        function handleOrderAction(action, btn) {
+            const card = btn ? btn.closest('.order-card') : null;
+            const isPickup = card ? (card.dataset.type === 'pickup' || (card.querySelector('.order-card-type') && card.querySelector('.order-card-type').textContent === '站点自提')) : false;
+            if (action === 'cancel-order') {
+                showOrderConfirmPopup({
+                    message: '确定要取消该订单吗？',
+                    confirmText: '取消订单',
+                    onConfirm: () => showOrderToast('订单已取消')
+                });
+            } else if (action === 'delete-order') {
+                showOrderConfirmPopup({
+                    message: '删除后订单将无法恢复，确定删除吗？',
+                    confirmText: '删除',
+                    onConfirm: () => {
+                        if (card) card.remove();
+                        showOrderToast('订单已删除');
+                    }
+                });
+            } else if (action === 'confirm-receive') {
+                showOrderConfirmPopup({
+                    message: isPickup ? '请确认已到自提点提取商品' : '请确认已收到商品',
+                    confirmText: isPickup ? '确认自提' : '确认收货',
+                    onConfirm: () => {
+                        // 列表页：移除该卡片；详情页：跳转已完成页（由调用方处理）
+                        if (card) {
+                            card.remove();
+                            showOrderToast(isPickup ? '自提成功' : '确认收货成功');
+                        }
+                    }
+                });
+            }
+        }
         // ====== 渲染后事件绑定 ======
         function bindPageEvents(pageId) {
             if (pageId === 'shop-home') {
-                const fab = document.querySelector('#mobile-content .mh-fab');
-                if (fab) {
-                    fab.addEventListener('click', () => switchPage('shop-cart'));
-                }
-                document.querySelectorAll('#mobile-content .mh-cat-item').forEach(el => {
-                    el.addEventListener('click', () => switchPage('shop-category'));
-                });
-                document.querySelectorAll('#mobile-content .mh-product-card').forEach(el => {
-                    el.addEventListener('click', () => switchPage('shop-detail'));
-                });
-                document.querySelectorAll('#mobile-content .mh-search-bar').forEach(el => {
-                    el.addEventListener('click', () => switchPage('shop-search'));
-                });
+                // placeholder 页面，无需事件绑定
             }
             if (pageId === 'shop-checkout') {
                 // 1. 配送方式 Tab 切换
@@ -21244,6 +21727,150 @@
             }
             // ====== 我的订单列表页事件 ======
             if (pageId === 'shop-orders') {
+                const productImg = AI_IMG_MINI_FAN; // 迷你手持电风扇 - AI生成图片，订单页专用，无额外交互
+                const ordersData = [
+                    { id: 'G001', status: 'gift', statusText: '已兑换赠品', timeLabel: '核销时间', time: '2026-05-22 16:41:35', title: '迷你手持风扇', spec: '规格：白色', count: 1, total: 0, priceLabel: '实付', img: productImg, detailPage: 'shop-order-detail-gift-done', actions: [{ text: '删除订单', cls: 'order-btn-outline', action: 'delete-order' }, { text: '详情', cls: 'order-btn-primary', action: 'claim-again' }] },
+                    { id: 'P001', status: 'pay', statusText: '待付款', countdown: '23:58:12', timeLabel: '下单时间', time: '2026-05-22 16:41:35', title: '迷你手持风扇', count: 6, total: 39.90, priceLabel: '实付', img: productImg, detailPage: 'shop-order-detail-home-pay', actions: [{ text: '取消订单', cls: 'order-btn-outline', action: 'cancel-order' }, { text: '立即支付', cls: 'order-btn-primary', action: 'pay-now' }] },
+                    { id: 'S001', status: 'ship', statusText: '待发货', timeLabel: '下单时间', time: '2026-05-22 16:41:35', title: '迷你手持风扇', count: 1, total: 39.90, priceLabel: '实付', img: productImg, detailPage: 'shop-order-detail-home-ship', actions: [{ text: '取消订单', cls: 'order-btn-outline', action: 'cancel-order' }, { text: '再买一单', cls: 'order-btn-primary', action: 'buy-again' }] },
+                    { id: 'R001', status: 'receive', statusText: '待收货', timeLabel: '下单时间', time: '2026-05-22 16:41:35', title: '迷你手持风扇', count: 2, total: 39.90, priceLabel: '实付', img: productImg, detailPage: 'shop-order-detail-home-receive', actions: [{ text: '确认收货', cls: 'order-btn-primary', action: 'confirm-receive' }] },
+                    { id: 'E001', status: 'evaluate', statusText: '已完成', timeLabel: '下单时间', time: '2026-05-22 16:41:35', title: '迷你手持风扇', count: 6, total: 39.90, priceLabel: '实付', img: productImg, detailPage: 'shop-order-detail-home-done', actions: [{ text: '删除订单', cls: 'order-btn-outline', action: 'delete-order' }, { text: '再买一单', cls: 'order-btn-primary', action: 'buy-again' }] },
+                    { id: 'C001', status: 'cancel', statusText: '已取消', timeLabel: '下单时间', time: '2026-05-22 16:41:35', title: '迷你手持风扇', count: 6, total: 39.90, priceLabel: '总额', img: productImg, detailPage: 'shop-order-detail-home-pay', actions: [{ text: '删除订单', cls: 'order-btn-outline', action: 'delete-order' }, { text: '再买一单', cls: 'order-btn-primary', action: 'buy-again' }] }
+                ];
+                let curStatus = 'all';
+                const renderOrderCard = (order) => {
+                    const isGift = order.status === 'gift';
+                    const items = [];
+                    const displayCount = Math.min(order.count, 3);
+                    for (let i = 0; i < displayCount; i++) {
+                        items.push(`<div class="order-card-gallery-item">${productImgTag(order.img || '')}</div>`);
+                    }
+                    const galleryCols = order.count === 1 ? 'grid-template-columns: 80px;' : `grid-template-columns: repeat(${order.count > 3 ? 3 : order.count}, 1fr);`;
+                    const priceValue = order.total === 0 ? '¥0.00' : '¥' + order.total.toFixed(2);
+                    const isPay = order.status === 'pay';
+                    const valueCls = isPay ? 'order-card-price-value pay-red' : 'order-card-price-value';
+                    const countdown = order.countdown ? `<span class="order-card-countdown">${order.countdown}</span>` : '';
+                    const timeInfo = `<div class="order-card-status-desc">${order.timeLabel}：${order.time}</div>`;
+                    if (isGift) {
+                        return `
+                        <div class="order-card gift-card" data-detail="${order.detailPage}" data-id="${order.id}" data-status="${order.status}">
+                            <div class="order-card-header">
+                                <div>
+                                    <span class="order-card-status ${order.status}">${order.statusText}</span>
+                                    ${timeInfo}
+                                </div>
+                            </div>
+                            <div class="order-card-body">
+                                <div class="order-card-product-row">
+                                    <div class="gift-product-row" style="flex:1;min-width:0;">
+                                        <div class="gift-product-img">${productImgTag(order.img || '')}</div>
+                                        <div class="gift-product-info">
+                                            <div class="order-card-title">${order.title}</div>
+                                            ${order.spec ? `<div class="gift-product-spec">${order.spec}</div>` : ''}
+                                        </div>
+                                    </div>
+                                    <div class="gift-product-count">共${order.count}件 <span class="arrow">›</span></div>
+                                </div>
+                                <div class="gift-price-row">
+                                    <span class="gift-price-label">${order.priceLabel}</span>
+                                    <span class="gift-price-value">${priceValue}</span>
+                                </div>
+                            </div>
+                            ${order.actions && order.actions.length > 0 ? `
+                            <div class="order-card-footer">
+                                <div class="order-card-actions">
+                                    ${order.actions.map(a => `<button class="order-btn ${a.cls}" data-action="${a.action}">${a.text}</button>`).join('')}
+                                </div>
+                            </div>` : ''}
+                        </div>`;
+                    }
+                    return `
+                    <div class="order-card" data-detail="${order.detailPage}" data-id="${order.id}" data-status="${order.status}">
+                        <div class="order-card-header">
+                            <div>
+                                <span class="order-card-status ${order.status}">${order.statusText}</span>${countdown}
+                                ${timeInfo}
+                            </div>
+                        </div>
+                        <div class="order-card-body">
+                            <div class="order-card-product-row">
+                                <div class="order-card-gallery">${items.join('')}</div>
+                                <div class="order-card-count">共${order.count}件 <span class="arrow">›</span></div>
+                            </div>
+                            <div class="order-card-bottom">
+                                <div class="order-card-price-row">
+                                    <span class="order-card-price-label">${order.priceLabel}</span>
+                                    <span class="${valueCls}">${priceValue}</span>
+                                </div>
+                            </div>
+                        </div>
+                        ${order.actions && order.actions.length > 0 ? `
+                        <div class="order-card-footer">
+                            <div class="order-card-actions">
+                                ${order.actions.map(a => `<button class="order-btn ${a.cls}" data-action="${a.action}">${a.text}</button>`).join('')}
+                            </div>
+                        </div>` : ''}
+                    </div>`;
+                };
+                const reRenderList = () => {
+                    let list = ordersData;
+                    // 待评价tab不展示已完成卡片（显示空状态），全部tab保留已完成卡片
+                    if (curStatus === 'evaluate') {
+                        list = [];
+                    } else if (curStatus !== 'all') {
+                        list = list.filter(o => o.status === curStatus);
+                    }
+                    const listEl = document.querySelector('#orders-list');
+                    if (!listEl) return;
+                    if (list.length > 0) {
+                        listEl.innerHTML = list.map(o => renderOrderCard(o)).join('');
+                    } else {
+                        listEl.innerHTML = `<div class="cp-empty"><div class="cp-empty-icon"><svg width="80" height="80" viewBox="0 0 80 80" fill="none"><rect x="20" y="15" width="40" height="50" rx="4" stroke="#D9D9D9" stroke-width="2"/><path d="M26 25h28M26 35h28M26 45h20" stroke="#D9D9D9" stroke-width="2" stroke-linecap="round"/></svg></div><div class="cp-empty-text">暂无订单</div><button data-action="browse-shop" style="margin-top:16px;padding:8px 28px;background:#254EDB;color:#fff;border:none;border-radius:20px;font-size:14px;">逛一逛</button></div>`;
+                    }
+                    bindOrderCardEvents();
+                };
+                function bindOrderCardEvents() {
+                    document.querySelectorAll('#orders-list .order-card').forEach(card => {
+                        card.addEventListener('click', (e) => {
+                            if (e.target.closest('button')) return;
+                            switchPage(card.dataset.detail);
+                        });
+                    });
+                    document.querySelectorAll('#orders-list [data-action="pay-now"]').forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            const toast = document.createElement('div');
+                            toast.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,0.7);color:#fff;padding:10px 20px;border-radius:8px;font-size:14px;z-index:9999;white-space:nowrap;';
+                            toast.textContent = '调用微信支付';
+                            document.querySelector('#mobile-content').appendChild(toast);
+                            setTimeout(function(){ toast.remove(); }, 1500);
+                        });
+                    });
+                    document.querySelectorAll('#orders-list [data-action="buy-again"]').forEach(btn => {
+                        btn.addEventListener('click', (e) => { e.stopPropagation(); showBuyAgainPopup(); });
+                    });
+                    document.querySelectorAll('#orders-list [data-action="claim-again"]').forEach(btn => {
+                        btn.addEventListener('click', (e) => { e.stopPropagation(); const card = btn.closest('.order-card'); if (card && card.dataset.detail) switchPage(card.dataset.detail); });
+                    });
+                    document.querySelectorAll('#orders-list [data-action="cancel-order"], #orders-list [data-action="delete-order"], #orders-list [data-action="confirm-receive"]').forEach(btn => {
+                        btn.addEventListener('click', (e) => { e.stopPropagation(); handleOrderAction(btn.dataset.action, btn); });
+                    });
+                    // 空状态「逛一逛」按钮 → 跳转商城首页
+                    document.querySelectorAll('#orders-list [data-action="browse-shop"]').forEach(btn => {
+                        btn.addEventListener('click', () => switchPage('shop-home'));
+                    });
+                }
+                bindOrderCardEvents();
+                document.querySelectorAll('#orders-status-tabs .orders-tab-item').forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        document.querySelectorAll('#orders-status-tabs .orders-tab-item').forEach(t => t.classList.remove('active'));
+                        tab.classList.add('active');
+                        curStatus = tab.dataset.status;
+                        reRenderList();
+                    });
+                });
+            }
+            // ====== 我的订单列表页（V2）事件 ======
+            if (pageId === 'shop-orders-v2') {
                 const ordersData = {
                     home: [
                         { id: 'H001', status: 'pay', statusText: '待付款', typeText: '配送到家', title: '徕芙 迷你手持电风扇 便携充电款', spec: '颜色：白色', price: 39.50, count: 1, total: 51.50, detailPage: 'shop-order-detail-home-pay' },
@@ -21256,9 +21883,12 @@
                         { id: 'P002', status: 'ship', statusText: '待发货', typeText: '站点自提', title: '徕芙 迷你手持电风扇 便携充电款', spec: '颜色：白色', price: 39.50, count: 1, total: 51.50, detailPage: 'shop-order-detail-pickup-ship' },
                         { id: 'P003', status: 'receive', statusText: '待自提', typeText: '站点自提', title: '徕芙 迷你手持电风扇 便携充电款', spec: '颜色：白色', price: 39.50, count: 1, total: 51.50, detailPage: 'shop-order-detail-pickup-receive' },
                         { id: 'P004', status: 'done', statusText: '已完成', typeText: '站点自提', title: '徕芙 迷你手持电风扇 便携充电款', spec: '颜色：白色', price: 39.50, count: 1, total: 51.50, detailPage: 'shop-order-detail-pickup-done' }
+                    ],
+                    gift: [
+                        { id: 'G001', status: 'done', statusText: '已完成', typeText: '赠品兑换', title: '迷你手持风扇', spec: '规格：白色', price: 0, count: 1, total: 0, detailPage: 'shop-order-detail-gift-done' }
                     ]
                 };
-                const productImg = 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=' + encodeURIComponent('电商商品缩略图：迷你手持电风扇，白色浅色背景，产品摄影风格') + '&image_size=square_hd';
+                const productImg = AI_IMG_MINI_FAN; // 迷你手持电风扇 - AI生成图片，订单页专用，无额外交互
                 let curType = 'all';
                 let curStatus = 'all';
                 const orderCard = (order, typeKey) => `
@@ -21268,23 +21898,23 @@
                             <span class="order-card-status ${order.status}">${order.statusText}</span>
                         </div>
                         <div class="order-card-body">
-                            <div class="order-card-img"><img src="${productImg}" alt=""></div>
+                            <div class="order-card-img">${productImgTag(productImg)}</div>
                             <div class="order-card-info">
                                 <div class="order-card-title">${order.title}</div>
                                 <div class="order-card-spec">${order.spec}</div>
                                 <div class="order-card-price-row">
-                                    <span class="order-card-price">¥${order.price.toFixed(2)}</span>
+                                    <span class="order-card-price">${order.price === 0 ? '¥0.00' : '¥' + order.price.toFixed(2)}</span>
                                     <span class="order-card-count">x${order.count}</span>
                                 </div>
                             </div>
                         </div>
                         <div class="order-card-footer">
-                            <div class="order-card-total">实付 <span class="amount">¥${order.total.toFixed(2)}</span></div>
+                            <div class="order-card-total">实付 <span class="amount">${order.total === 0 ? '¥0.00' : '¥' + order.total.toFixed(2)}</span></div>
                             <div class="order-card-actions">
                                 ${order.status === 'pay' ? `<button class="order-btn order-btn-outline" data-action="cancel-order">取消订单</button><button class="order-btn order-btn-primary" data-action="pay-now">立即支付</button>` : ''}
                                 ${order.status === 'ship' ? `<button class="order-btn order-btn-primary" data-action="buy-again">再买一单</button>` : ''}
                                 ${order.status === 'receive' ? `<button class="order-btn order-btn-primary" data-action="confirm-receive">${order.typeText === '站点自提' ? '确认自提' : '确认收货'}</button>` : ''}
-                                ${order.status === 'done' ? `<button class="order-btn order-btn-outline" data-action="delete-order">删除订单</button><button class="order-btn order-btn-primary" data-action="buy-again">再买一单</button>` : ''}
+                                ${order.status === 'done' ? `<button class="order-btn order-btn-outline" data-action="delete-order">删除订单</button><button class="order-btn order-btn-primary" data-action="${typeKey === 'gift' ? 'claim-again' : 'buy-again'}">${typeKey === 'gift' ? '详情' : '再买一单'}</button>` : ''}
                             </div>
                         </div>
                     </div>
@@ -21292,12 +21922,12 @@
                 const reRenderList = () => {
                     let list = [];
                     if (curType === 'all') {
-                        list = [...ordersData.home.map(o => ({...o, __type: 'home'})), ...ordersData.pickup.map(o => ({...o, __type: 'pickup'}))];
+                        list = [...ordersData.home.map(o => ({...o, __type: 'home'})), ...ordersData.pickup.map(o => ({...o, __type: 'pickup'})), ...ordersData.gift.map(o => ({...o, __type: 'gift'}))];
                     } else {
                         list = ordersData[curType].map(o => ({...o, __type: curType}));
                     }
                     if (curStatus !== 'all') list = list.filter(o => o.status === curStatus);
-                    const listEl = document.querySelector('#orders-list');
+                    const listEl = document.querySelector('#orders-list-v2');
                     if (!listEl) return;
                     if (list.length > 0) {
                         listEl.innerHTML = list.map(o => orderCard(o, o.__type)).join('');
@@ -21307,46 +21937,52 @@
                     bindOrderCardEvents();
                 };
                 function bindOrderCardEvents() {
-                    // 订单卡片点击跳转详情
-                    document.querySelectorAll('#orders-list .order-card').forEach(card => {
+                    document.querySelectorAll('#orders-list-v2 .order-card').forEach(card => {
                         card.addEventListener('click', (e) => {
                             if (e.target.closest('button')) return;
                             switchPage(card.dataset.detail);
                         });
                     });
-                    // 卡片按钮事件
-                    document.querySelectorAll('#orders-list [data-action="pay-now"]').forEach(btn => {
-                        btn.addEventListener('click', (e) => { e.stopPropagation(); switchPage('shop-checkout'); });
+                    document.querySelectorAll('#orders-list-v2 [data-action="pay-now"]').forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            const toast = document.createElement('div');
+                            toast.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,0.7);color:#fff;padding:10px 20px;border-radius:8px;font-size:14px;z-index:9999;white-space:nowrap;';
+                            toast.textContent = '调用微信支付';
+                            document.querySelector('#mobile-content').appendChild(toast);
+                            setTimeout(function(){ toast.remove(); }, 1500);
+                        });
                     });
-                    document.querySelectorAll('#orders-list [data-action="buy-again"]').forEach(btn => {
-                        btn.addEventListener('click', (e) => { e.stopPropagation(); switchPage('shop-cart'); });
+                    document.querySelectorAll('#orders-list-v2 [data-action="buy-again"]').forEach(btn => {
+                        btn.addEventListener('click', (e) => { e.stopPropagation(); showBuyAgainPopup(); });
                     });
-                    document.querySelectorAll('#orders-list [data-action="cancel-order"], #orders-list [data-action="delete-order"], #orders-list [data-action="confirm-receive"]').forEach(btn => {
-                        btn.addEventListener('click', (e) => { e.stopPropagation(); });
+                    document.querySelectorAll('#orders-list-v2 [data-action="claim-again"]').forEach(btn => {
+                        btn.addEventListener('click', (e) => { e.stopPropagation(); const card = btn.closest('.order-card'); if (card && card.dataset.detail) switchPage(card.dataset.detail); });
+                    });
+                    document.querySelectorAll('#orders-list-v2 [data-action="cancel-order"], #orders-list-v2 [data-action="delete-order"], #orders-list-v2 [data-action="confirm-receive"]').forEach(btn => {
+                        btn.addEventListener('click', (e) => { e.stopPropagation(); handleOrderAction(btn.dataset.action, btn); });
                     });
                 }
                 bindOrderCardEvents();
-                // 状态Tab切换
-                document.querySelectorAll('#orders-status-tabs .orders-tab-item').forEach(tab => {
+                document.querySelectorAll('#orders-status-tabs-v2 .orders-tab-item').forEach(tab => {
                     tab.addEventListener('click', () => {
-                        document.querySelectorAll('#orders-status-tabs .orders-tab-item').forEach(t => t.classList.remove('active'));
+                        document.querySelectorAll('#orders-status-tabs-v2 .orders-tab-item').forEach(t => t.classList.remove('active'));
                         tab.classList.add('active');
                         curStatus = tab.dataset.status;
                         reRenderList();
                     });
                 });
-                // 类型Tab切换
-                document.querySelectorAll('#orders-type-tabs .orders-type-item').forEach(tab => {
+                document.querySelectorAll('#orders-type-tabs-v2 .orders-type-item').forEach(tab => {
                     tab.addEventListener('click', () => {
-                        document.querySelectorAll('#orders-type-tabs .orders-type-item').forEach(t => t.classList.remove('active'));
+                        document.querySelectorAll('#orders-type-tabs-v2 .orders-type-item').forEach(t => t.classList.remove('active'));
                         tab.classList.add('active');
                         curType = tab.dataset.type;
                         reRenderList();
                     });
                 });
             }
-            // ====== 订单详情页事件（8个页面共享） ======
-            const orderDetailPageIds = ['shop-order-detail-home-pay', 'shop-order-detail-home-ship', 'shop-order-detail-home-receive', 'shop-order-detail-home-done', 'shop-order-detail-pickup-pay', 'shop-order-detail-pickup-ship', 'shop-order-detail-pickup-receive', 'shop-order-detail-pickup-done'];
+            // ====== 订单详情页事件（9个页面共享） ======
+            const orderDetailPageIds = ['shop-order-detail-home-pay', 'shop-order-detail-home-ship', 'shop-order-detail-home-receive', 'shop-order-detail-home-done', 'shop-order-detail-pickup-pay', 'shop-order-detail-pickup-ship', 'shop-order-detail-pickup-receive', 'shop-order-detail-pickup-done', 'shop-order-detail-gift-done'];
             if (orderDetailPageIds.indexOf(pageId) >= 0) {
                 // 复制订单号
                 const copyBtn = document.querySelector('#mobile-content [data-action="copy-order-no"]');
@@ -21361,18 +21997,41 @@
                 }
                 // 底部操作按钮
                 const payNowBtn = document.querySelector('#mobile-content [data-action="pay-now"]');
-                if (payNowBtn) payNowBtn.addEventListener('click', () => switchPage('shop-checkout'));
+                if (payNowBtn) payNowBtn.addEventListener('click', () => {
+                    const toast = document.createElement('div');
+                    toast.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,0.7);color:#fff;padding:10px 20px;border-radius:8px;font-size:14px;z-index:9999;white-space:nowrap;';
+                    toast.textContent = '调用微信支付';
+                    document.querySelector('#mobile-content').appendChild(toast);
+                    setTimeout(function(){ toast.remove(); }, 1500);
+                });
                 const buyAgainBtn = document.querySelector('#mobile-content [data-action="buy-again"]');
-                if (buyAgainBtn) buyAgainBtn.addEventListener('click', () => switchPage('shop-cart'));
+                if (buyAgainBtn) buyAgainBtn.addEventListener('click', () => showBuyAgainPopup());
                 const cancelBtn = document.querySelector('#mobile-content [data-action="cancel-order"]');
-                if (cancelBtn) cancelBtn.addEventListener('click', () => {});
+                if (cancelBtn) cancelBtn.addEventListener('click', () => handleOrderAction('cancel-order', cancelBtn));
                 const deleteBtn = document.querySelector('#mobile-content [data-action="delete-order"]');
-                if (deleteBtn) deleteBtn.addEventListener('click', () => {});
+                if (deleteBtn) deleteBtn.addEventListener('click', () => {
+                    showOrderConfirmPopup({
+                        message: '删除后订单将无法恢复，确定删除吗？',
+                        confirmText: '删除',
+                        onConfirm: () => {
+                            showOrderToast('订单已删除');
+                            // 返回我的订单列表
+                            switchPage('shop-orders');
+                        }
+                    });
+                });
                 const confirmBtn = document.querySelector('#mobile-content [data-action="confirm-receive"]');
                 if (confirmBtn) confirmBtn.addEventListener('click', () => {
-                    // 跳转到对应已完成页面
-                    if (pageId.indexOf('home') >= 0) switchPage('shop-order-detail-home-done');
-                    else switchPage('shop-order-detail-pickup-done');
+                    const isPickup = pageId.indexOf('pickup') >= 0;
+                    showOrderConfirmPopup({
+                        message: isPickup ? '请确认已到自提点提取商品' : '请确认已收到商品',
+                        confirmText: isPickup ? '确认自提' : '确认收货',
+                        onConfirm: () => {
+                            // 跳转到对应已完成页面
+                            if (isPickup) switchPage('shop-order-detail-pickup-done');
+                            else switchPage('shop-order-detail-home-done');
+                        }
+                    });
                 });
             }
             if (pageId === 'profile-home') {
@@ -21730,57 +22389,54 @@
                 });
             }
             if (pageId === 'profile-coupon-qrcode') {
-                // 核销码页面：轻量轮询，每3秒检测券状态变化
-                // 原型模拟：45秒后收银员扫码核销成功，券状态 valid → used
-                const _simulateDelay = 45000;
-                setTimeout(function() {
-                    const coupon = couponRecords.find(function(c) { return c.id === couponQrcodeData.couponId; });
-                    if (coupon && coupon.status === 'valid') {
-                        coupon.status = 'used';
-                        coupon.useTime = new Date().toISOString().replace('T', ' ').substring(0, 19);
-                    }
-                }, _simulateDelay);
-
-                _qrcodePollTimer = setInterval(function() {
-                    const coupon = couponRecords.find(function(c) { return c.id === couponQrcodeData.couponId; });
-                    if (coupon && coupon.status === 'used') {
-                        // 核销成功，清除轮询
-                        clearInterval(_qrcodePollTimer);
-                        _qrcodePollTimer = null;
-                        // 显示核销成功 Toast
-                        var toast = document.createElement('div');
-                        toast.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,0.7);color:#fff;padding:12px 24px;border-radius:8px;font-size:15px;z-index:9999;white-space:nowrap;';
-                        toast.textContent = '核销成功';
-                        var qrcodePage = document.querySelector('#mobile-content .qrcode-page');
-                        if (qrcodePage) qrcodePage.appendChild(toast);
-                        // 1.5秒后自动返回我的优惠券页
-                        setTimeout(function() {
-                            if (toast.parentNode) toast.remove();
-                            switchPage('profile-coupon-all');
-                        }, 1500);
-                    }
-                }, 3000);
+                // 核销码页面仅展示码，不做轮询
+                // 轮询代码已注释保留，后端接口ready后可恢复
+                // 原轮询方案：
+                // const _simulateDelay = 45000;
+                // setTimeout(function() {
+                //     const coupon = couponRecords.find(function(c) { return c.id === couponQrcodeData.couponId; });
+                //     if (coupon && coupon.status === 'valid') {
+                //         coupon.status = 'used';
+                //         coupon.useTime = new Date().toISOString().replace('T', ' ').substring(0, 19);
+                //     }
+                // }, _simulateDelay);
+                // _qrcodePollTimer = setInterval(function() {
+                //     const coupon = couponRecords.find(function(c) { return c.id === couponQrcodeData.couponId; });
+                //     if (coupon && coupon.status === 'used') {
+                //         clearInterval(_qrcodePollTimer); _qrcodePollTimer = null;
+                //         var toast = ...; toast.textContent = '核销成功';
+                //         setTimeout(function() { switchPage('profile-coupon-all'); }, 1500);
+                //     }
+                // }, 3000);
             }
             if (pageId === 'profile-coupon-center') {
-                // 领券中心：点击领取按钮
+                // 领券中心：点击领取按钮（支持后台「可领取多次」配置）
                 document.querySelectorAll('#mobile-content [data-action="claim-coupon"]').forEach(btn => {
                     btn.addEventListener('click', (e) => {
                         e.stopPropagation();
                         if (btn.disabled) return;
                         var id = btn.dataset.id;
-                        // 更新状态并重新渲染
+                        // 累加已领取张数（多次券未领满时按钮仍可继续点击，文案不变）
+                        var claimedCoupon = null;
                         _couponCenterState = _couponCenterState.map(function(c) {
-                            if (c.id === id) c.claimed = true;
+                            if (c.id === id) {
+                                c.claimedCount = (c.claimedCount || 0) + 1;
+                                claimedCoupon = c;
+                            }
                             return c;
                         });
-                        // 直接更新按钮文本和状态，不整体重渲染
-                        btn.textContent = '已领取';
-                        btn.disabled = true;
-                        btn.classList.add('disabled');
-                        // 显示成功Toast
+                        var claimLimit = claimedCoupon ? (claimedCoupon.claimLimit || 1) : 1;
+                        var isFull = claimedCoupon && claimedCoupon.claimedCount >= claimLimit;
+                        // 领满后按钮置灰「已领取」；未领满按钮文案保持「领取」
+                        if (isFull) {
+                            btn.textContent = '已领取';
+                            btn.disabled = true;
+                            btn.classList.add('disabled');
+                        }
+                        // 显示成功Toast（区分剩余次数提示）
                         var toast = document.createElement('div');
-                        toast.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,0.7);color:#fff;padding:10px 20px;border-radius:8px;font-size:14px;z-index:9999;';
-                        toast.textContent = '领取成功';
+                        toast.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,0.7);color:#fff;padding:10px 20px;border-radius:8px;font-size:14px;z-index:9999;white-space:nowrap;';
+                        toast.textContent = isFull ? (claimLimit > 1 ? '领取成功，已达领取上限' : '领取成功') : '领取成功，还可领取' + (claimLimit - claimedCoupon.claimedCount) + '次';
                         document.querySelector('#mobile-content').appendChild(toast);
                         setTimeout(function(){ toast.remove(); }, 1500);
                     });
@@ -22085,6 +22741,55 @@
                 if (stateControllerEl) stateControllerEl.classList.add('has-sub-tabs');
             }
         }
+        // ====== 全局：商品图片防下载、防放大、禁止右键菜单 & 拖拽（适用于手机预览区所有页面） ======
+        function applyProductImageProtection() {
+            const mc = document.getElementById('mobile-content');
+            if (!mc) return;
+            // 阻止 contextmenu（右键 / 移动端长按保存图片）
+            const productSelector = [
+                '.mh-product-img', '.mh-product-img img',
+                '.co-product-img', '.co-product-img img',
+                '.od-product-img', '.od-product-img img',
+                '.od-product-gallery-img', '.od-product-gallery-img img',
+                '.gift-product-img', '.gift-product-img img',
+                '.order-card-gallery-item', '.order-card-gallery-item img',
+                '.cp-product-img', '.cp-product-img img',
+                '.ba-item-img', '.ba-item-img img'
+            ].join(',');
+            mc.querySelectorAll(productSelector).forEach(el => {
+                // 显式阻止右键/长按菜单（不重复绑定，通过 dataset 标记）
+                if (!el.dataset.__imgProtected) {
+                    el.dataset.__imgProtected = '1';
+                    el.addEventListener('contextmenu', (e) => { e.preventDefault(); return false; }, { passive: false, capture: true });
+                    el.addEventListener('dragstart', (e) => { e.preventDefault(); return false; }, { passive: false });
+                    el.addEventListener('drag', (e) => { e.preventDefault(); }, { passive: false });
+                }
+                // 禁止选中 & draggable=false（每次重刷都重置一次，幂等）
+                if (el.style) {
+                    el.style.webkitTouchCallout = 'none';
+                    el.style.webkitUserSelect = 'none';
+                    el.style.userSelect = 'none';
+                    el.style.MozUserSelect = 'none';
+                }
+                if (el.tagName === 'IMG') {
+                    el.setAttribute('draggable', 'false');
+                }
+            });
+            // 委托型监听器：只注册一次，兜底防止右键长按冒泡（幂等）
+            if (!mc.__imgProtectBound) {
+                mc.__imgProtectBound = true;
+                mc.addEventListener('contextmenu', function(e) {
+                    const target = e.target;
+                    if (!target) return;
+                    if (target.closest && target.closest(productSelector)) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        return false;
+                    }
+                }, true);
+            }
+        }
+
         // 应用个人中心会员状态到控制器与原型
         function applyProfileState(state) {
             const tab = document.querySelector(`#state-controller-top .state-tab[data-state="${state}"]`);
@@ -22185,10 +22890,10 @@
                     <tbody>
                         ${list.map(item => `
                             <tr>
-                                <td class="block-name">${item.block}</td>
-                                <td>${item.state}</td>
-                                <td>${item.trigger}</td>
-                                <td class="ui-cell">${item.ui}</td>
+                                <td class="block-name">${highlightText(item.block)}</td>
+                                <td>${highlightText(item.state)}</td>
+                                <td>${highlightText(item.trigger)}</td>
+                                <td class="ui-cell">${highlightText(item.ui)}</td>
                             </tr>
                         `).join('')}
                     </tbody>
@@ -22216,8 +22921,8 @@
             // 优惠券相关页面
             const couponPageIds = ['profile-coupon-all', 'profile-coupon-used', 'profile-coupon-expired', 'profile-coupon-qrcode', 'profile-coupon-center'];
             const isCouponPage = couponPageIds.indexOf(pageId) >= 0;
-            // 订单相关页面（我的订单 + 8个详情页）
-            const orderPageIds = ['shop-orders', 'shop-order-detail-home-pay', 'shop-order-detail-home-ship', 'shop-order-detail-home-receive', 'shop-order-detail-home-done', 'shop-order-detail-pickup-pay', 'shop-order-detail-pickup-ship', 'shop-order-detail-pickup-receive', 'shop-order-detail-pickup-done'];
+            // 订单相关页面（我的订单 + 9个详情页）
+            const orderPageIds = ['shop-orders', 'shop-orders-v2', 'shop-order-detail-home-pay', 'shop-order-detail-home-ship', 'shop-order-detail-home-receive', 'shop-order-detail-home-done', 'shop-order-detail-pickup-pay', 'shop-order-detail-pickup-ship', 'shop-order-detail-pickup-receive', 'shop-order-detail-pickup-done', 'shop-order-detail-gift-done'];
             const isOrderPage = orderPageIds.indexOf(pageId) >= 0;
             // 商城 page-tabs：仅商城页面显示（排除订单页）
             const tabsShouldShow = !isPaymentPage && !isRebatePage && !isShoppingPage && !isCouponPage && !isOrderPage && matchedTabs.length > 0;
@@ -22291,7 +22996,7 @@
             // 个人中心：状态栏叠加在背景图上（透明背景、白色文字）
             document.querySelector('.mobile-status-bar').classList.toggle('profile', pageId === 'profile-home');
             // 子页面（物业缴费列表、物业缴费详情、设置、订单相关页面等）隐藏底部Tab导航
-            const _orderSubPages = ['shop-orders', 'shop-order-detail-home-pay', 'shop-order-detail-home-ship', 'shop-order-detail-home-receive', 'shop-order-detail-home-done', 'shop-order-detail-pickup-pay', 'shop-order-detail-pickup-ship', 'shop-order-detail-pickup-receive', 'shop-order-detail-pickup-done'];
+            const _orderSubPages = ['shop-orders', 'shop-orders-v2', 'shop-order-detail-home-pay', 'shop-order-detail-home-ship', 'shop-order-detail-home-receive', 'shop-order-detail-home-done', 'shop-order-detail-pickup-pay', 'shop-order-detail-pickup-ship', 'shop-order-detail-pickup-receive', 'shop-order-detail-pickup-done', 'shop-order-detail-gift-done'];
             const isSubPage = (pageId === 'profile-payment-list' || pageId === 'profile-payment' || pageId === 'profile-settings' || pageId === 'property-bill' || pageId === 'bill-month-detail' || pageId === 'payment-records' || pageId === 'record-bill-detail' || pageId === 'record-month-detail' || pageId === 'profile-rebate-all' || pageId === 'profile-rebate-earned' || pageId === 'profile-rebate-deducted' || pageId === 'profile-shopping-all' || pageId === 'profile-shopping-detail' || pageId === 'profile-shopping-recharge' || pageId === 'profile-shopping-consume' || pageId === 'profile-coupon-all' || pageId === 'profile-coupon-used' || pageId === 'profile-coupon-expired' || pageId === 'profile-coupon-qrcode' || pageId === 'profile-coupon-center' || pageId === 'shop-checkout' || _orderSubPages.indexOf(pageId) >= 0);
             const needFixedLayout = (pageId === 'profile-payment' || pageId === 'property-bill' || pageId === 'bill-month-detail' || pageId === 'shop-checkout' || pageId === 'profile-shopping-all');
             document.querySelector('.mobile-bottom-nav').style.display = isSubPage ? 'none' : 'block';
@@ -22344,6 +23049,8 @@
                     </div>
                 `;
             }
+            // 全局：应用商品图片防放大、防下载保护（每次渲染后执行）
+            if (typeof applyProductImageProtection === 'function') applyProductImageProtection();
             // 切换页面时清除残留的注释选中态与原型高亮
             document.querySelectorAll('.interaction-card.selected').forEach(c => c.classList.remove('selected'));
             document.querySelectorAll('.ph-highlight').forEach(el => el.classList.remove('ph-highlight'));
@@ -22370,7 +23077,7 @@
             backBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 const cur = getPageIdFromHash();
-                const backMap = { 'profile-payment-list': 'profile-home', 'profile-payment': 'profile-payment-list', 'profile-settings': 'profile-home', 'property-bill': 'profile-payment-list', 'bill-month-detail': 'property-bill', 'payment-records': 'profile-payment-list', 'record-bill-detail': 'payment-records', 'record-month-detail': 'record-bill-detail', 'profile-rebate-all': 'profile-home', 'profile-rebate-earned': 'profile-home', 'profile-rebate-deducted': 'profile-home', 'profile-shopping-all': 'profile-home', 'profile-shopping-detail': 'profile-shopping-all', 'profile-shopping-recharge': 'profile-shopping-all', 'profile-shopping-consume': 'profile-shopping-all', 'profile-coupon-all': 'profile-home', 'profile-coupon-used': 'profile-home', 'profile-coupon-expired': 'profile-home', 'profile-coupon-qrcode': 'profile-coupon-all', 'profile-coupon-center': 'profile-coupon-all', 'shop-orders': 'profile-home', 'shop-order-detail-home-pay': 'shop-orders', 'shop-order-detail-home-ship': 'shop-orders', 'shop-order-detail-home-receive': 'shop-orders', 'shop-order-detail-home-done': 'shop-orders', 'shop-order-detail-pickup-pay': 'shop-orders', 'shop-order-detail-pickup-ship': 'shop-orders', 'shop-order-detail-pickup-receive': 'shop-orders', 'shop-order-detail-pickup-done': 'shop-orders' };
+                const backMap = { 'profile-payment-list': 'profile-home', 'profile-payment': 'profile-payment-list', 'profile-settings': 'profile-home', 'property-bill': 'profile-payment-list', 'bill-month-detail': 'property-bill', 'payment-records': 'profile-payment-list', 'record-bill-detail': 'payment-records', 'record-month-detail': 'record-bill-detail', 'profile-rebate-all': 'profile-home', 'profile-rebate-earned': 'profile-home', 'profile-rebate-deducted': 'profile-home', 'profile-shopping-all': 'profile-home', 'profile-shopping-detail': 'profile-shopping-all', 'profile-shopping-recharge': 'profile-shopping-all', 'profile-shopping-consume': 'profile-shopping-all', 'profile-coupon-all': 'profile-home', 'profile-coupon-used': 'profile-home', 'profile-coupon-expired': 'profile-home', 'profile-coupon-qrcode': 'profile-coupon-all', 'profile-coupon-center': 'profile-coupon-all', 'shop-orders': 'profile-home', 'shop-orders-v2': 'profile-home', 'shop-order-detail-home-pay': 'shop-orders', 'shop-order-detail-home-ship': 'shop-orders', 'shop-order-detail-home-receive': 'shop-orders', 'shop-order-detail-home-done': 'shop-orders', 'shop-order-detail-pickup-pay': 'shop-orders', 'shop-order-detail-pickup-ship': 'shop-orders', 'shop-order-detail-pickup-receive': 'shop-orders', 'shop-order-detail-pickup-done': 'shop-orders', 'shop-order-detail-gift-done': 'shop-orders' };
                 if (backMap[cur]) {
                     switchPage(backMap[cur]);
                 }
@@ -22445,11 +23152,11 @@
         }
         const _originalSwitchPage = switchPage;
         switchPage = function(pageId, opts = {}) {
-            // 离开核销码页面时清除轮询定时器
-            if (_qrcodePollTimer) {
-                clearInterval(_qrcodePollTimer);
-                _qrcodePollTimer = null;
-            }
+            // 离开核销码页面时无需清除轮询（已注释），保留代码供后期恢复
+            // if (_qrcodePollTimer) {
+            //     clearInterval(_qrcodePollTimer);
+            //     _qrcodePollTimer = null;
+            // }
             expandParentMenu(pageId);
             _originalSwitchPage(pageId);
             // 购物金/优惠券相关页面：强制隐藏商城 page-tabs，保持缴费/回馈金/购物金/优惠券 page-tabs 显示
@@ -22461,8 +23168,8 @@
                 document.getElementById('page-tabs').style.display = 'none';
                 // payment-page-tabs 由 switchPage 内部逻辑控制，此处不再强制隐藏
             }
-            // 订单相关页面（我的订单列表 + 8个订单详情页）：强制隐藏底部导航栏
-            const _orderSubPagesExtra = ['shop-orders', 'shop-order-detail-home-pay', 'shop-order-detail-home-ship', 'shop-order-detail-home-receive', 'shop-order-detail-home-done', 'shop-order-detail-pickup-pay', 'shop-order-detail-pickup-ship', 'shop-order-detail-pickup-receive', 'shop-order-detail-pickup-done'];
+            // 订单相关页面（我的订单列表 + 9个订单详情页）：强制隐藏底部导航栏
+            const _orderSubPagesExtra = ['shop-orders', 'shop-orders-v2', 'shop-order-detail-home-pay', 'shop-order-detail-home-ship', 'shop-order-detail-home-receive', 'shop-order-detail-home-done', 'shop-order-detail-pickup-pay', 'shop-order-detail-pickup-ship', 'shop-order-detail-pickup-receive', 'shop-order-detail-pickup-done', 'shop-order-detail-gift-done'];
             const _isOrderPage = _orderSubPagesExtra.indexOf(pageId) >= 0;
             if (_isOrderPage) {
                 const _bottomNav = document.querySelector('.mobile-bottom-nav');
