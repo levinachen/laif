@@ -498,252 +498,553 @@
             border-radius: 12px;
             position: relative;
             overflow: hidden;
-        }
-        .mh-banner .mh-banner-overlay {
-            position: absolute;
-            left: 24px;
-            top: 24px;
-            color: #FFFFFF;
-            font-size: 24px;
-            line-height: 36px;
-            font-family: "jiangxizhuokai", "PingFang SC", serif;
-            letter-spacing: -0.06em;
-            white-space: pre-line;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-        }
-        .mh-banner .mh-pagination {
-            position: absolute;
-            bottom: 18px;
-            right: 18px;
-            background: rgba(255, 255, 255, 0.1);
-            color: #FFFFFF;
-            font-size: 11px;
-            padding: 2px 8px;
-            border-radius: 24px;
-            letter-spacing: 0.0182em;
-        }
-        .mh-section {
-            padding: 8px 12px;
-        }
-        .mh-category-grid {
-            background: #FFFFFF;
-            border-radius: 12px;
-            padding: 12px 4px;
-            display: grid;
-            grid-template-columns: repeat(5, minmax(0, 1fr));
-            grid-template-rows: 68px 68px;
-            gap: 16px 0;
-            box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.02);
-        }
-        .mh-cat-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            cursor: pointer;
-        }
-        .mh-cat-icon {
-            width: 48px;
-            height: 48px;
-            background: #DBEAFE;
-            border-radius: 9999px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #353B3C;
-            font-size: 18px;
-        }
-        .mh-cat-label {
-            margin-top: 4px;
-            font-size: 11px;
-            color: #333;
-            line-height: 1.2;
-        }
-        .mh-ranking-row {
-            display: flex;
-            gap: 8px;
-        }
-        .mh-ranking-row + .mh-ranking-row {
-            margin-top: 8px;
-        }
-        .mh-ranking-card {
-            flex: 1;
-            background: #FFFFFF;
-            border-radius: 12px;
-            box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.02);
-            padding: 8px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        .mh-ranking-title {
-            font-size: 14px;
-            font-weight: 600;
-            color: #1D1D1D;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .mh-ranking-title .mh-more {
-            font-size: 11px;
-            color: #828282;
-            font-weight: 400;
-        }
-        .mh-ranking-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 8px;
-        }
-        .mh-ranking-item {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-        .mh-ranking-img {
-            height: 72.5px;
-            background: #E0E0E0;
-            border-radius: 6px;
-        }
-        .mh-ranking-name {
-            font-size: 11px;
-            color: #333;
-            line-height: 1.3;
-        }
-        .mh-ranking-price {
-            font-size: 11px;
-            color: #D42222;
-            font-weight: 600;
-        }
-        .mh-waterfall {
-            padding: 8px 12px;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            grid-template-rows: repeat(2, fit-content(100%));
-            gap: 8px;
-        }
-        .mh-product-card {
-            background: #FFFFFF;
-            border-radius: 12px;
-            box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.04);
-            overflow: hidden;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            align-items: stretch;
-        }
-        .mh-product-img {
-            width: 100%;
-            aspect-ratio: 1 / 1;
-            background: #E0E0E0;
-            border-radius: 8px 8px 0 0;
-            position: relative;
             background-size: cover;
             background-position: center;
         }
-        .mh-product-img .mh-product-badge {
+        .mh-banner .mh-banner-overlay {
             position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.4);
-            color: #FFFFFF;
-            font-size: 10px;
-            padding: 2px 4px;
-            border-radius: 4px;
-            white-space: nowrap;
-        }
-        .mh-product-body {
-            padding: 8px 12px 12px;
+            inset: 0;
             display: flex;
             flex-direction: column;
-            gap: 4px;
-        }
-        .mh-product-title {
-            font-size: 13px;
-            color: #1D1D1D;
-            line-height: 1.4;
-            font-weight: 500;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        .mh-product-tags {
-            display: flex;
-            gap: 4px;
-            margin-bottom: 4px;
-        }
-        .mh-product-tag {
-            font-size: 10px;
-            padding: 1px 4px;
-            border-radius: 2px;
-            background: #F0BCBC;
-            color: #D42222;
-        }
-        .mh-product-tag.gray {
-            background: #F3F4F6;
-            color: #828282;
-        }
-        .mh-product-price-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-top: 16px;
-        }
-        .mh-product-price {
-            color: #D42222;
-            font-size: 16px;
-            font-weight: 600;
-        }
-        .mh-product-price .mh-original {
-            color: #BDBDBD;
-            font-size: 11px;
-            text-decoration: line-through;
-            margin-left: 4px;
-            font-weight: 400;
-        }
-        .mh-product-cart {
-            width: 24px;
-            height: 24px;
-            background: #353B3C;
-            color: #FFFFFF;
-            border-radius: 9999px;
-            display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 12px;
+            gap: 8px;
+            text-align: center;
         }
-        .mh-fab {
+        .mh-banner .mh-banner-title {
+            color: #FFFFFF;
+            font-size: 32px;
+            line-height: 39px;
+            font-family: "jiangxizhuokai", "PingFang SC", serif;
+            letter-spacing: -0.06em;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+        }
+        .mh-banner .mh-banner-sub {
+            color: #FFFFFF;
+            font-size: 16px;
+            line-height: 16px;
+            letter-spacing: 0.02em;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+        }
+        /* ====== 分类入口大卡（2列，设计稿 Container）====== */
+        .mh-cat-card {
+            margin: 8px 12px 0;
+            background: #FFFFFF;
+            border-radius: 8px;
+            height: 164px;
+            display: flex;
+            position: relative;
+        }
+        .mh-cat-half {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+            cursor: pointer;
+        }
+        .mh-cat-img {
+            width: 72px;
+            height: 72px;
+            object-fit: contain;
+        }
+        .mh-cat-title {
+            margin-top: 8px;
+            font-size: 20px;
+            font-weight: 600;
+            color: #1C1C1C;
+            line-height: 28px;
+        }
+        .mh-cat-sub {
+            font-size: 11px;
+            color: #828282;
+            line-height: 15px;
+        }
+        .mh-cat-divider {
             position: absolute;
-            right: 24px;
-            bottom: 96px;
+            left: 50%;
+            top: 20.5px;
+            width: 1px;
+            height: 124px;
+            background: #F5F5F5;
+        }
+        /* ====== 功能入口（储值有礼/添加企微 + 购物车悬浮钮，设计稿 Frame 268/133）====== */
+        .mh-func-row {
+            margin: 8px 12px 0;
+            display: flex;
+            gap: 8px;
+            position: relative;
+            height: 88px;
+        }
+        .mh-func-card {
+            flex: 1;
+            background: #FFFFFF;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 16px;
+            cursor: pointer;
+        }
+        .mh-func-card .mh-func-icon {
+            width: 32px;
+            height: 32px;
+        }
+        .mh-func-card .mh-func-label {
+            margin-top: 2px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #4F4F4F;
+            line-height: 24px;
+        }
+        .mh-cart-fab {
+            position: absolute;
+            left: 12px;
+            top: 5px;
             width: 48px;
             height: 48px;
             background: #353B3C;
-            color: #FFFFFF;
-            border-radius: 24px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
-            box-shadow: 0 0 8px 0 rgba(22, 22, 22, 0.08);
             cursor: pointer;
-            z-index: 10;
+            z-index: 2;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
         }
-        .mh-fab .mh-fab-badge {
+        .mh-cart-fab .mh-cart-badge {
             position: absolute;
-            top: -3px;
-            right: -16px;
-            width: 16px;
+            top: 0;
+            right: 0;
+            min-width: 16px;
             height: 17px;
+            padding: 0 2px;
             background: #F24333;
             color: #FFFFFF;
-            font-size: 10px;
-            border: 1px solid #FFFFFF;
-            border-radius: 24px;
+            font-size: 11px;
+            border-radius: 999px;
             display: flex;
             align-items: center;
             justify-content: center;
             line-height: 1;
+        }
+        /* ====== 商城首页：状态卡（未登录/已登录/扫码）+ 登录弹窗 ====== */
+        .mh-guest-card {
+            margin: 8px 12px 0;
+            background: #FFFFFF;
+            border-radius: 8px;
+            height: 80px;
+            padding: 0 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-sizing: border-box;
+        }
+        .mh-guest-text {
+            display: flex;
+            flex-direction: column;
+        }
+        .mh-guest-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: #1C1C1C;
+            line-height: 28px;
+        }
+        .mh-guest-sub {
+            font-size: 12px;
+            color: #828282;
+            line-height: 20px;
+        }
+        .mh-guest-btn {
+            width: 80px;
+            height: 32px;
+            background: #1CB2D4;
+            color: #FFFFFF;
+            font-size: 12px;
+            font-weight: 500;
+            padding: 0;
+            border-radius: 24px;
+            border: none;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .mh-member-card {
+            margin: 8px 12px 0;
+            background: #FFFFFF;
+            border-radius: 8px;
+            height: 80px;
+            padding: 0 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-sizing: border-box;
+        }
+        .mh-member-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .mh-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 50% 45%, #EDFAFF 0%, #B8E1FD 100%);
+            flex-shrink: 0;
+        }
+        .mh-member-info {
+            display: flex;
+            flex-direction: column;
+        }
+        .mh-member-name {
+            font-size: 16px;
+            color: #1D1D1D;
+            font-weight: 500;
+            line-height: 28px;
+        }
+        .mh-member-tag {
+            font-size: 12px;
+            color: #828282;
+            font-weight: 400;
+            line-height: 20px;
+            letter-spacing: 0.2px;
+        }
+        .mh-member-code {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        .mh-member-code .mh-member-code-label {
+            font-size: 12px;
+            color: #282828;
+            line-height: 20px;
+            letter-spacing: 0.2px;
+        }
+        /* 扫码登录态：提示卡 */
+        .mh-scan-banner {
+            margin: 8px 12px 0;
+            background: #FFFFFF;
+            border-radius: 8px;
+            height: 80px;
+            padding: 0 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-sizing: border-box;
+        }
+        .mh-scan-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #1CB2D4;
+            color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+        .mh-scan-text {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .mh-scan-title {
+            font-size: 13px;
+            color: #1C1C1C;
+            font-weight: 500;
+            line-height: 1.3;
+        }
+        .mh-scan-sub {
+            font-size: 11px;
+            color: #828282;
+            line-height: 1.3;
+        }
+        /* 登录引导弹窗（iOS 风格） */
+        .mh-login-mask {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+        }
+        .mh-login-dialog {
+            width: 280px;
+            background: #FFFFFF;
+            border-radius: 14px;
+            padding: 24px 20px 0;
+            text-align: center;
+            overflow: hidden;
+        }
+        .mh-login-dialog-body {
+            font-size: 15px;
+            color: #1D1D1D;
+            line-height: 22px;
+            margin-bottom: 20px;
+        }
+        .mh-login-dialog-btns {
+            display: flex;
+            border-top: 1px solid #E5E5EA;
+        }
+        .mh-login-dialog-btn {
+            flex: 1;
+            height: 44px;
+            border: none;
+            background: transparent;
+            font-size: 17px;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        .mh-login-dialog-btn.mh-cancel {
+            color: #1D1D1D;
+            border-right: 1px solid #E5E5EA;
+        }
+        .mh-login-dialog-btn.mh-confirm {
+            color: #007AFF;
+            font-weight: 600;
+        }
+        /* ====== 登录页（设计稿 LoSxUkBYmcZuVekSCnXwcv 3176:6561）====== */
+        .lg-page {
+            background: #FFFFFF;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+        .lg-logo {
+            margin-top: 201px;
+            width: 64px;
+            height: 64px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .lg-logo svg {
+            width: 64px;
+            height: 64px;
+        }
+        .lg-btn-group {
+            margin-top: 120px;
+            width: 295px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            flex-shrink: 0;
+        }
+        .lg-btn-primary {
+            height: 48px;
+            background: #353B3C;
+            border-radius: 8px;
+            color: #FFFFFF;
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 24px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .lg-btn-back {
+            height: 48px;
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            border-radius: 8px;
+            color: #1C1C1C;
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 24px;
+            cursor: pointer;
+            width: 100%;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .lg-agreement {
+            margin-top: 178px;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        .lg-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 1px solid #BDBDBD;
+            border-radius: 4px;
+            background: #FFFFFF;
+            flex-shrink: 0;
+            margin-top: 2px;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.15s ease;
+        }
+        .lg-checkbox.checked {
+            background: #353B3C;
+            border-color: #353B3C;
+        }
+        .lg-checkbox.checked::after {
+            content: '';
+            width: 10px;
+            height: 6px;
+            border-left: 2px solid #FFFFFF;
+            border-bottom: 2px solid #FFFFFF;
+            transform: rotate(-45deg) translateY(-1px);
+        }
+        .lg-agreement-text {
+            font-size: 12px;
+            color: #3F3F46;
+            line-height: 20px;
+            font-weight: 400;
+        }
+        .lg-agreement-text .lg-link {
+            color: #3F3F46;
+        }
+        .lg-page .nav-home-indicator {
+            margin-top: auto;
+        }
+        /* ====== 会员码页（设计稿 602-3174）====== */
+        .mc-page {
+            background: #E0E0E0;
+            height: 100%;
+            width: 100%;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .mc-card {
+            position: relative;
+            margin: 75px 16px 0;
+            background: #FFFFFF;
+            border-radius: 12px;
+            padding: 34px 16px 24px;
+            box-sizing: border-box;
+        }
+        .mc-avatar-wrap {
+            position: absolute;
+            top: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .mc-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 50% 45%, #EDFAFF 0%, #B8E1FD 100%);
+        }
+        .mc-phone {
+            text-align: center;
+            font-size: 14px;
+            color: #000000;
+            line-height: 20px;
+        }
+        .mc-qr {
+            width: 170px;
+            height: 170px;
+            margin: 64px auto 0;
+            display: block;
+        }
+        .mc-divider {
+            margin: 63px 8px 0;
+            border-top: 1px dashed #CDCDCD;
+        }
+        .mc-stats {
+            margin-top: 16px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .mc-stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 78px;
+        }
+        .mc-stat-value {
+            font-size: 16px;
+            font-weight: 500;
+            color: #333333;
+            line-height: 28px;
+        }
+        .mc-stat-label {
+            font-size: 12px;
+            color: #333333;
+            line-height: 20px;
+        }
+        /* ====== 添加企微页（设计稿 633-2066）====== */
+        .wc-page {
+            background: #E0E0E0;
+            height: 100%;
+            width: 100%;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .wc-card {
+            margin: 119px 16px 0;
+            background: #FFFFFF;
+            border-radius: 12px;
+            padding: 32px 24px 48px;
+            box-sizing: border-box;
+        }
+        .wc-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+        }
+        .wc-title {
+            font-size: 20px;
+            font-weight: 500;
+            color: #1D1D1D;
+            line-height: 32px;
+        }
+        .wc-subtitle {
+            font-size: 14px;
+            color: #828282;
+            line-height: 24px;
+        }
+        .wc-logo {
+            width: 48px;
+            height: 48px;
+            flex-shrink: 0;
+        }
+        .wc-qr {
+            width: 170px;
+            height: 170px;
+            margin: 48px auto 0;
+            display: block;
+        }
+        .wc-tip {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #828282;
+            line-height: 24px;
+        }
+        .mc-page .nav-home-indicator,
+        .wc-page .nav-home-indicator {
+            background: transparent;
+            margin-top: auto;
         }
         /* ====== 确认订单页专用样式 ====== */
         .co-page {
@@ -1246,6 +1547,27 @@
             pointer-events: none;
         }
         .co-toast.show {
+            display: block;
+        }
+        /* 全局 Toast（商城首页/登录页等） */
+        .gt-toast {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 80%;
+            background: rgba(0, 0, 0, 0.75);
+            color: #FFFFFF;
+            font-size: 13px;
+            line-height: 20px;
+            padding: 10px 16px;
+            border-radius: 8px;
+            z-index: 3000;
+            display: none;
+            box-sizing: border-box;
+            pointer-events: none;
+        }
+        .gt-toast.show {
             display: block;
         }
         /* 可点击价格行 */
@@ -19065,14 +19387,9 @@
                 </div>
                 <div class="page-tabs" id="page-tabs" style="display: none;">
                     <div class="page-tab" data-tab="shop-home">商城首页</div>
-                    <div class="page-tab" data-tab="shop-search">搜索商品页</div>
-                    <div class="page-tab" data-tab="shop-category">分类页</div>
-                    <div class="page-tab" data-tab="shop-detail">商品详情页</div>
-                    <div class="page-tab" data-tab="shop-cart">购物车页</div>
-                    <div class="page-tab" data-tab="shop-checkout">确认订单页</div>
-                    <div class="page-tab" data-tab="shop-checkout-v2">确认订单页（V2）</div>
-                    <div class="page-tab" data-tab="shop-orders">我的订单页</div>
-                    <div class="page-tab" data-tab="shop-orders-v2">我的订单页（V2）</div>
+                    <div class="page-tab" data-tab="shop-login">登录页</div>
+                    <div class="page-tab" data-tab="shop-member-code">会员码页</div>
+                    <div class="page-tab" data-tab="shop-wecom">添加企微页</div>
                 </div>
                 <div class="page-tabs" id="payment-page-tabs" style="display: flex;">
                     <div class="page-tab tab-payment" data-tab="profile-payment-list">1.1 缴费列表</div>
@@ -19168,7 +19485,7 @@
                         <div class="nav-tabs">
                             <div class="nav-item" data-nav="shop" data-icon="tab-shop">
                                 <img src="figma-images/tab-shop.svg" alt="">
-                                <span>商城</span>
+                                <span>首页</span>
                             </div>
                             <div class="nav-item" data-nav="access" data-icon="tab-access">
                                 <img src="figma-images/tab-access.svg" alt="">
@@ -19282,12 +19599,120 @@
         // ====== 页面数据：交互注释 + 需求文档 + 状态清单 ======
         const pages = {
             'shop-home': {
-                title: '商城',
+                title: '徕芙会员超市',
                 mainNav: 'shop',
                 render: 'shopHome',
-                placeholder: { icon: 'fa fa-shopping-bag', title: '商城首页', desc: '展示商城首页的商品列表、促销活动、轮播图等内容' },
-                interactionNotes: [],
-                requirementDoc: null,
+                interactionNotes: [
+                    { id: 1, title: '登录状态切换', type: 'interaction', target: '#scene-control-home', content: '场景控制器提供三种登录状态切换：未登录 / 已登录 / 扫码进入\n• 未登录：展示"登录成为会员"引导卡 + "成为会员"按钮\n• 已登录：展示会员信息卡（脱敏手机号+会员标签+会员码入口）\n• 扫码进入：渲染未登录态首页 + 自动弹出登录引导弹窗（"去登录"跳登录页，"暂不登录"关闭弹窗）\n搜索栏/Banner/分类入口/功能入口为静态结构，不随状态变化' },
+                    { id: 2, title: '成为会员', type: 'interaction', target: '[data-action="mh-become-member"]', content: '未登录态点击"成为会员"按钮 → 跳转登录页\n登录页点击"手机号快捷登录"（需先勾选协议）→ 登录成功，返回首页并切换为已登录态\n登录页点击"返回" → 返回首页，保持未登录态' },
+                    { id: 3, title: '会员码', type: 'interaction', target: '[data-action="mh-show-member-code"]', content: '已登录态点击"会员码" → 跳转会员码页\n会员码页展示：头像+脱敏手机号+会员二维码+资产概览（积分/回馈金/优惠券/购物金，点击可跳转对应资产页）' },
+                    { id: 4, title: '分类入口', type: 'interaction', target: '[data-block="mh-cat-card"]', content: '分类入口双卡：新鲜零食 / 生鲜超市\n• 新鲜零食：任意登录状态点击 → 跳转分类页（浏览无需登录；在分类页/商品详情页加购时才拦截跳转登录页）\n• 生鲜超市（敬请期待）：任意状态点击 → Toast"生鲜超市 · 敬请期待"' },
+                    { id: 5, title: '功能入口', type: 'interaction', target: '[data-block="mh-func-row"]', content: '功能入口双卡：储值有礼 / 添加企微\n• 储值有礼（需登录）：未登录态点击 → 直接跳转登录页；已登录/扫码态点击 → 跳转我的购物金页\n• 添加企微（无需登录）：任意状态点击 → 直接跳转添加企微页（企微二维码）' },
+                    { id: 6, title: '购物车悬浮钮', type: 'interaction', target: '[data-block="mh-cart-fab"]', content: '购物车悬浮钮（含数量角标"2"）\n未登录态点击 → 直接跳转登录页（需登录）\n已登录态点击 → Toast"购物车（演示）"' },
+                    { id: 7, title: '搜索与客服', type: 'interaction', target: '[data-block="mh-search-bar"]', content: '点击搜索框或"搜索"按钮 → 跳转搜索页（搜索无需登录，加购商品时才跳转登录页）\n点击右侧客服图标 → Toast"在线客服（演示）"（企微会话入口，无需登录）' },
+                ],
+                requirementDoc: {
+                    title: '商城首页需求文档',
+                    meta: 'v1.2 · 2026-09-17 · 电商/零售 · C端用户',
+                    sections: [
+                        { title: '1.0 需求背景', paragraphs: ['商城首页是用户进入小程序的第一屏，需根据登录状态展示不同内容，引导未登录用户注册转化，已登录用户进入留存运营。', '三种登录状态：未登录（游客）、已登录（会员）、线下扫码进入（门店扫码进入小程序）。'] },
+                        { title: '2.0 页面入口', paragraphs: ['底部导航「首页」Tab', '小程序启动默认页'] },
+                        { title: '3.0 页面结构', paragraphs: ['导航栏：标题"徕芙会员超市"，右侧"更多"胶囊按钮，一级页面无返回按钮', '搜索行：搜索框（占位"输入关键字搜索" + "搜索"按钮）+ 客服图标（耳机造型，企微会话入口）', 'Banner：品牌宣传位（文案"徕芙会员优选 · 用徕芙开启美好生活"）', '状态卡片区：随登录状态切换（见 4.0）', '分类入口：新鲜零食 / 生鲜超市（敬请期待）双卡', '功能入口：储值有礼 / 添加企微 + 购物车悬浮钮（角标"2"）'] },
+                        { title: '4.0 登录状态', paragraphs: ['【未登录】展示"登录成为会员"引导卡，利益点"到店免费领取招牌柠檬水"，按钮"成为会员"', '【已登录】展示会员信息卡：脱敏手机号 + "徕芙会员"标签 + "会员码"入口', '【扫码进入】线下扫小程序二维码 → 进入未登录态首页 + 自动弹出登录引导弹窗（"去登录"跳登录页，"暂不登录"关闭弹窗停留首页）'] },
+                        { title: '5.0 登录拦截与登录页', paragraphs: ['需登录的入口（储值有礼/购物车悬浮钮/商品详情页加购按钮）：未登录态点击 → 直接跳转登录页（无弹窗）', '登录页：主按钮"手机号快捷登录"（需先勾选协议，未勾选点击 Toast 提示）', '登录页登录成功 → 返回首页并切换为已登录态；点击"返回" → 保持未登录态', '未登录态点击"成为会员" → 直接跳转登录页', '扫码进入未登录态首页 → 弹出登录引导弹窗，点击"去登录"跳登录页，点击"暂不登录"关闭弹窗'] },
+                        { title: '6.0 交互说明', paragraphs: ['点击搜索框/搜索按钮 → 跳转搜索页（搜索无需登录，加购时才跳转登录页）；点击客服图标 → Toast（企微会话入口，无需登录）', '点击"新鲜零食" → 跳转分类页（浏览无需登录，加购时才跳转登录页）', '点击"生鲜超市" → Toast"生鲜超市 · 敬请期待"', '点击储值有礼 → 未登录直接跳转登录页，已登录跳转我的购物金页', '点击添加企微 → 直接跳转添加企微页（无需登录）', '点击购物车悬浮钮 → 未登录直接跳转登录页，已登录 Toast"购物车（演示）"', '点击"成为会员" → 跳转登录页；登录成功后返回首页并切换为已登录态', '已登录点击"会员码" → 跳转会员码页（二维码+资产概览）'] },
+                        { title: '7.0 线下扫码注册流程', paragraphs: ['【二维码生成】系统调用后端接口生成注册令牌（token），用令牌拼出小程序页面 URL 并生成二维码，供门店线下投放。', '【扫码进入】用户扫码后打开徕芙微信小程序，进入商城首页（未登录态）。', '【弹窗引导】显示登录引导弹窗（仅弹一次），用户点击"去登录"跳转登录页；点击"暂不登录"关闭弹窗并记录扫码来源（有效期 24 小时）。', '【授权登录】用户使用微信绑定的手机号登录（无需填写手机号、验证码、姓名等任何表单字段），后端查询是否已有会员记录：若无则自动创建会员（昵称默认使用手机号）并登录。', '【会员赠送】登录（注册）成功后默认赠送 1 年徕芙会员，起始日期以首次登录成功时间为准。', '【流程总结】用户扫描二维码 → 进入小程序商城 → 显示弹窗引导登录 → 点击登录 → 进入登录页 → 授权手机号登录 → 后端查询会员记录 → 若无则自动创建会员并登录（昵称默认手机号）同时赠送 1 年徕芙会员。'] },
+                        { title: '8.0 扫码登录规则', paragraphs: ['扫码注册-01：扫码进入且未登录 → 弹窗引导登录，仅弹一次。', '扫码注册-02：用户点击"暂不登录"关闭弹窗 → 记录扫码来源，有效期 24 小时。', '扫码注册-03：有效期内且在本次小程序内完成登录 → 视为扫码注册，赠送 1 年会员。', '扫码注册-04：超出有效期或从其他入口登录 → 普通登录，不赠送。', '扫码注册-05：已登录用户扫码进入 → 不弹窗，展示轻 Toast"您已登录，可直接购物"。', '扫码注册-06：用户拒绝授权手机号 → 停留在登录页，可返回首页，不赠送。', '扫码注册-07：扫码进入即记录扫码来源，弹窗是否展示不影响赠送。只有扫码来源确实完全无法记录且无法恢复时，才不赠送。', '扫码注册-08：用户重复扫码 → 每次扫码都记录新的 scan_time，以最后一次为准。'] }
+                    ]
+                },
+                statusList: [
+                    { block: '登录状态', state: '未登录（默认）', trigger: '页面加载/点击"未登录"Tab', ui: '展示"登录成为会员"引导卡 + "成为会员"按钮' },
+                    { block: '登录状态', state: '已登录', trigger: '点击"已登录"Tab 或弹窗"去登录"', ui: '展示会员信息卡（脱敏手机号+会员标签+会员码入口）' },
+                    { block: '登录状态', state: '扫码进入', trigger: '点击"扫码进入"Tab', ui: '渲染未登录态首页 + 自动弹出登录引导弹窗' },
+                    { block: '分类入口', state: '新鲜零食', trigger: '点击"新鲜零食"卡', ui: '跳转分类页（浏览无需登录，加购时才跳转登录页）' },
+                    { block: '分类入口', state: '生鲜超市', trigger: '点击"生鲜超市"卡', ui: 'Toast"生鲜超市 · 敬请期待"' },
+                    { block: '功能入口', state: '储值有礼-未登录拦截', trigger: '未登录态点击储值有礼', ui: '直接跳转登录页' },
+                    { block: '功能入口', state: '储值有礼-已登录可用', trigger: '已登录态点击储值有礼', ui: '跳转我的购物金页' },
+                    { block: '功能入口', state: '添加企微-无需登录', trigger: '任意状态点击添加企微', ui: '直接跳转添加企微页' },
+                    { block: '购物车', state: '未登录拦截', trigger: '未登录态点击购物车悬浮钮', ui: '直接跳转登录页' },
+                    { block: '购物车', state: '已登录可用', trigger: '已登录态点击购物车悬浮钮', ui: 'Toast"购物车（演示）"' },
+                    { block: '扫码注册', state: '扫码进入-未登录', trigger: '扫码进入且未登录', ui: '弹出登录引导弹窗（仅一次），"去登录"跳登录页，"暂不登录"关闭弹窗并记录扫码来源（24h 有效）' },
+                    { block: '扫码注册', state: '扫码进入-已登录', trigger: '已登录用户扫码进入', ui: '不弹窗，展示轻 Toast"您已登录，可直接购物"' },
+                    { block: '扫码注册', state: '扫码注册成功', trigger: '扫码来源有效期内完成登录', ui: '自动创建会员（昵称默认手机号）+赠送 1 年徕芙会员（起始日期以首次登录成功时间为准）' },
+                    { block: '扫码注册', state: '普通登录', trigger: '超有效期或非扫码入口登录', ui: '不赠送 1 年会员' },
+                    { block: '扫码注册', state: '拒绝授权', trigger: '用户拒绝授权手机号', ui: '停留在登录页，可返回首页，不赠送' },
+                ]
+            },
+            'shop-login': {
+                title: '登录',
+                mainNav: 'shop',
+                render: 'shopLogin',
+                interactionNotes: [
+                    { id: 1, title: '进入方式', type: 'interaction', target: '[data-action="mh-become-member"]', content: '商城首页（未登录态）点击"成为会员"按钮 → 跳转登录页\n登录引导弹窗点击"去登录" → 跳转登录页\n线下扫码进入（未登录态）→ 弹窗"去登录" → 跳转登录页' },
+                    { id: 2, title: '手机号快捷登录', type: 'interaction', target: '[data-action="lg-login"]', content: '未勾选协议时点击 → Toast"请先阅读并同意用户服务协议和隐私政策"\n已勾选协议时点击 → 模拟登录成功，返回商城首页并切换为已登录态（会员信息卡）\n扫码注册场景：有效期内登录 → 后端查询无会员记录则自动创建会员（昵称默认手机号）并赠送 1 年徕芙会员；拒绝授权手机号 → 停留登录页，不赠送' },
+                    { id: 3, title: '返回', type: 'interaction', target: '[data-action="lg-back"]', content: '点击"返回" → 返回商城首页，保持未登录态' },
+                    { id: 4, title: '协议勾选', type: 'interaction', target: '[data-action="lg-toggle-agree"]', content: '点击复选框或协议文字 → 切换勾选状态\n点击"用户服务协议"/"隐私政策"链接 → Toast"打开协议（演示）"，不切换勾选状态' },
+                ],
+                requirementDoc: {
+                    title: '登录页需求文档',
+                    meta: 'v1.1 · 2026-09-17 · 电商/零售 · C端用户',
+                    sections: [
+                        { title: '1.0 需求背景', paragraphs: ['未登录用户在商城首页点击"成为会员"或需登录功能时，进入登录页完成快捷登录转化。', '线下扫码注册场景：扫码进入未登录态首页 → 弹窗"去登录" → 进入登录页 → 授权微信绑定手机号登录，后端查询无会员记录则自动创建会员并赠送 1 年徕芙会员。'] },
+                        { title: '2.0 页面入口', paragraphs: ['商城首页（未登录态）"成为会员"按钮', '商城首页登录引导弹窗"去登录"按钮', '线下扫码进入（未登录态）弹窗"去登录"按钮'] },
+                        { title: '3.0 页面结构', paragraphs: ['品牌 Logo 居中展示', '主按钮"手机号快捷登录"（需登录）', '次按钮"返回"（回到上一页，保持未登录）', '底部协议勾选行：已阅读并同意 用户服务协议 和 隐私政策'] },
+                        { title: '4.0 交互说明', paragraphs: ['点击"手机号快捷登录"：未勾选协议 → Toast提示；已勾选 → 模拟登录成功，返回商城首页并切换为已登录态', '扫码注册场景：已勾选协议点击登录 → 后端查询会员记录，无则自动创建会员（昵称默认手机号）并赠送 1 年徕芙会员；拒绝授权手机号 → 停留登录页，不赠送', '点击"返回" → 返回商城首页，保持未登录态', '点击协议勾选区域 → 切换勾选状态；点击协议链接 → Toast"打开协议（演示）"'] },
+                        { title: '5.0 扫码注册与普通登录区分', paragraphs: ['扫码来源有效期 24 小时，有效期内完成登录视为扫码注册（赠送 1 年会员）；超有效期或从其他入口登录为普通登录（不赠送）。', '用户拒绝授权手机号 → 停留登录页，可返回首页，不赠送。', '详细规则见商城首页需求文档 8.0 扫码登录规则。'] }
+                    ]
+                },
+                statusList: [
+                    { block: '快捷登录', state: '未勾选协议', trigger: '点击"手机号快捷登录"', ui: 'Toast"请先阅读并同意用户服务协议和隐私政策"' },
+                    { block: '快捷登录', state: '已勾选协议-普通登录', trigger: '非扫码入口点击"手机号快捷登录"', ui: '登录成功，返回商城首页并切换为已登录态（不赠送会员）' },
+                    { block: '快捷登录', state: '已勾选协议-扫码注册', trigger: '扫码来源有效期内点击"手机号快捷登录"', ui: '后端查询无会员记录则自动创建会员（昵称默认手机号）+赠送 1 年徕芙会员' },
+                    { block: '快捷登录', state: '拒绝授权手机号', trigger: '用户拒绝授权', ui: '停留登录页，可返回首页，不赠送' },
+                    { block: '返回', state: '任意', trigger: '点击"返回"', ui: '返回商城首页，保持未登录态' },
+                    { block: '协议勾选', state: '切换', trigger: '点击复选框/协议文字', ui: '勾选状态切换' },
+                ]
+            },
+            'shop-member-code': {
+                title: '会员码',
+                mainNav: 'shop',
+                render: 'shopMemberCode',
+                interactionNotes: [
+                    { id: 1, title: '进入方式', type: 'interaction', target: '[data-action="mh-show-member-code"]', content: '商城首页（已登录态）点击"会员码"入口 → 跳转会员码页' },
+                    { id: 2, title: '返回', type: 'interaction', target: '.mobile-header-back', content: '点击导航栏左侧返回按钮 → 返回商城首页' },
+                ],
+                requirementDoc: {
+                    title: '会员码页需求文档',
+                    meta: 'v1.0 · 2026-09-17 · 电商/零售 · C端用户',
+                    sections: [
+                        { title: '1.0 需求背景', paragraphs: ['会员到店消费时出示会员码供门店核销，同时展示积分/回馈金/优惠券/购物金资产概览。'] },
+                        { title: '2.0 页面入口', paragraphs: ['商城首页（已登录态）会员信息卡"会员码"入口'] },
+                        { title: '3.0 页面结构', paragraphs: ['会员卡：顶部头像（居中突出于卡片上边缘）+ 脱敏手机号 + 会员二维码（170×170，由用户登录手机号生成，门店扫码核销会员身份）', '虚线分隔线下方为四项资产概览：积分 600 / 回馈金 ¥68 / 优惠券 1 / 购物金 ¥168（点击可跳转对应资产页）', '导航栏返回按钮返回商城首页'] },
+                        { title: '4.0 交互说明', paragraphs: ['点击"积分/回馈金/优惠券/购物金"资产项 → 跳转我的页对应资产页面（演示）', '点击导航栏返回 → 返回商城首页'] }
+                    ]
+                },
+                statusList: [
+                    { block: '资产概览', state: '点击资产项', trigger: '点击积分/回馈金/优惠券/购物金', ui: '跳转我的页对应资产页面（演示）' },
+                ]
+            },
+            'shop-wecom': {
+                title: '徕芙会员专属福利官',
+                mainNav: 'shop',
+                render: 'shopWecom',
+                interactionNotes: [
+                    { id: 1, title: '进入方式', type: 'interaction', target: '[data-action="mh-func-wecom"]', content: '商城首页（任意登录状态）点击"添加企微"功能卡 → 跳转添加企微页（无需登录）' },
+                    { id: 2, title: '返回', type: 'interaction', target: '.mobile-header-back', content: '点击导航栏左侧返回按钮 → 返回商城首页' },
+                ],
+                requirementDoc: {
+                    title: '添加企微页需求文档',
+                    meta: 'v1.0 · 2026-09-17 · 电商/零售 · C端用户',
+                    sections: [
+                        { title: '1.0 需求背景', paragraphs: ['引导会员添加企微福利官，沉淀私域流量，便于后续福利触达与运营。'] },
+                        { title: '2.0 页面入口', paragraphs: ['商城首页（任意登录状态）"添加企微"功能卡（无需登录）'] },
+                        { title: '3.0 页面结构', paragraphs: ['福利官卡片：标题"徕芙会员福利官" + 副文案"添加解锁更多福利" + 品牌 Logo', '企微二维码（170×170）', '引导文案"请长按识别或微信扫码二维码去添加"'] },
+                        { title: '4.0 交互说明', paragraphs: ['页面为静态展示，用户长按识别或扫码二维码完成添加', '点击导航栏返回 → 返回商城首页'] }
+                    ]
+                },
                 statusList: []
             },
             'shop-search': {
@@ -19345,7 +19770,7 @@
                     sections: [
                         { title: '1. 页面定位', paragraphs: ['用户在购物车点击结算后进入。用于确认订单信息、选择配送方式、查看价格明细并完成支付。'] },
                         { title: '2. 配送方式', paragraphs: ['支持"极速达"和"站点自提"两种方式。默认选中"极速达"。切换方式时地址栏和配送费联动更新。'] },
-                        { title: '3. 收货地址（极速达）', paragraphs: ['展示收货人、手机号、收货地址、门牌号。点击地址行打开地址选择弹窗，可选择已有地址或新增地址。选择后地址行、配送信息、警告条同步更新。', '新增地址页面包含收货人、手机号（11位）、收货地址（地图选点）、门牌号（非必填）、标签。手机号失焦校验格式，错误以 toast 提示。'] },
+                        { title: '3. 收货地址（极速达）', paragraphs: ['展示收货人、手机号、收货地址（精确到省市区及详细地址，不显示街道）、门牌号。点击地址行打开地址选择弹窗，可选择已有地址或新增地址。选择后地址行、配送信息、警告条同步更新。', '新增地址页面包含收货人、手机号（11位）、收货地址（地图选点，精确到省市区，不显示街道）、门牌号（非必填）、标签。手机号失焦校验格式，错误以 toast 提示。'] },
                         { title: '4. 超出配送范围弹窗', paragraphs: ['【触发条件】极速达模式下，选中地址的配送距离>3公里时触发。配送距离=3公里（含）视为在范围内，不触发。', '【触发时机】用户在地址选择弹窗中选择超出范围的地址后，关闭弹窗、地址行与警告条同步更新，随即弹出超出配送范围弹窗（居中 dialog，半透明遮罩）。', '【弹窗内容】标题"当前收货地址超出配送范围"+三个按钮：\n• 切换配送方式（蓝色文字）：关闭弹窗→自动切换到"站点自提"Tab，地址栏变为提货门店+提货人，配送费变¥0.00；\n• 修改收货地址（黑色文字）：关闭弹窗→重新打开地址选择弹窗，引导用户选择范围内的地址；\n• 取消（灰色文字）：关闭弹窗，保留当前超范围地址与警告条。', '【页内警告条】地址行下方持续显示警告条"该地址超出配送范围，请尝试更换地址"，含"更换地址"快捷入口（点击打开地址选择弹窗）。警告条在地址切回范围内后自动消失。', '【支付阻断】超范围状态下点击"立即支付"被阻断，toast 提示"该地址超出配送范围"，不进入支付流程。', '【展示频率与抑制】弹窗仅在"选中超范围地址"时弹出一次；用户通过"取消"关闭后不重复弹出，除非重新选择另一个超范围地址。切换到站点自提再切回极速达时，若地址仍超范围则重新弹出。无地址状态下不触发弹窗与警告条。', '【边界与异常】地址列表为空时选择地址入口走无地址空状态流程，不触发弹窗；新增地址返回后若地址超范围，同样触发弹窗。'] },
                         { title: '5. 配送信息说明', paragraphs: ['配送信息旁"?"图标，点击弹出说明弹窗，显示门店名称、配送范围、门店地址。'] },
                         { title: '6. 商品概览', paragraphs: ['展示商品标题、购买件数。'] },
@@ -19450,7 +19875,7 @@
                     sections: [
                         { title: '1. 页面定位', paragraphs: ['用户在购物车点击结算后进入。用于确认订单信息、选择配送方式、查看价格明细并完成支付。'] },
                         { title: '2. 配送方式', paragraphs: ['支持"配送到家"和"站点自提"两种方式。默认选中"配送到家"。切换方式时地址栏和配送费联动更新。'] },
-                        { title: '3. 收货地址（配送到家）', paragraphs: ['展示收货人、手机号、收货地址、门牌号。点击地址行打开地址选择弹窗，可选择已有地址或新增地址。选择后地址行、配送信息、警告条同步更新。', '新增地址页面包含收货人、手机号（11位）、收货地址（地图选点）、门牌号（非必填）、标签。手机号失焦校验格式，错误以 toast 提示。'] },
+                        { title: '3. 收货地址（配送到家）', paragraphs: ['展示收货人、手机号、收货地址（精确到省市区及详细地址，不显示街道）、门牌号。点击地址行打开地址选择弹窗，可选择已有地址或新增地址。选择后地址行、配送信息、警告条同步更新。', '新增地址页面包含收货人、手机号（11位）、收货地址（地图选点，精确到省市区，不显示街道）、门牌号（非必填）、标签。手机号失焦校验格式，错误以 toast 提示。'] },
                         { title: '4. 配送时效', paragraphs: ['"极速达"（默认）和"次日达"。极速达由门店3公里范围内配送，超范围地址显示警告条并阻断支付；次日达由履约站配送到已开通服务的服务小区。'] },
                         { title: '5. 配送信息说明', paragraphs: ['配送信息旁"?"图标，点击弹出说明弹窗。极速达显示门店名称、配送范围、门店地址；次日达显示履约站名称、配送服务说明，不展示门店信息。'] },
                         { title: '6. 商品概览', paragraphs: ['展示商品缩略图、商品标题、购买件数。'] },
@@ -19542,12 +19967,28 @@
                 render: 'shopAddressMap',
                 placeholder: { icon: 'fa fa-map', title: '选择收货地址', desc: '地图定位 + 附近地址列表选择' },
                 interactionNotes: [
-                    { id: 1, title: '城市切换', type: 'interaction', content: '点击左上角城市（泉州市 ▼）跳转城市选择页，可切换当前支持配送的城市。' },
-                    { id: 2, title: '附近地址', type: 'interaction', content: '底部弹层展示附近 POI 列表，每项含名称、地址。点击 POI 项回填至新增收货地址页的收货地址字段。' },
-                    { id: 3, title: '配送范围', type: 'state', content: '地图上蓝色虚线圆圈表示门店3公里配送范围。超出范围的地址在确认订单页将提示"超出配送范围"。' }
+                    { id: 1, title: '地图定位', type: 'state', content: '地图默认显示用户当前定位的位置，中心点为蓝色定位光标，用户可在地图上拖动调整选点。' },
+                    { id: 2, title: '城市切换', type: 'interaction', content: '点击左上角城市（泉州市 ▼）跳转城市选择页，可切换当前支持配送的城市。切换后地图中心移至所选城市。' },
+                    { id: 3, title: '搜索地址', type: 'interaction', content: '点击顶部搜索框进入地址搜索，输入关键字后展示匹配的 POI 结果，点击结果项定位至对应地图位置。' },
+                    { id: 4, title: '附近地址', type: 'interaction', content: '底部弹层展示当前定位附近的 POI 列表，每项含名称、地址。点击 POI 项回填至新增收货地址页的收货地址字段。' }
                 ],
-                requirementDoc: null,
-                statusList: []
+                requirementDoc: {
+                    title: '选择收货地址需求文档',
+                    meta: 'v1.0 · 2026-09-18 · 电商/零售 · C端用户',
+                    sections: [
+                        { title: '1.0 需求背景', paragraphs: ['用户新增收货地址时，需通过地图选点确定收货地址。页面以地图为核心，结合附近 POI 列表，帮助用户快速定位并选择收货地址。'] },
+                        { title: '2.0 页面入口', paragraphs: ['新增收货地址页点击"收货地址"行 → 跳转至地图选点页。'] },
+                        { title: '3.0 页面结构', paragraphs: ['顶部：搜索框（占位"请输入您的收货地址"）+ 左上角城市切换入口（当前定位城市 ▼）', '地图区：默认显示用户当前定位的地图，中心点为蓝色定位光标，支持拖动调整选点位置', '底部弹层：附近 POI 列表，每项含名称 + 地址，按距离排序'] },
+                        { title: '4.0 交互说明', paragraphs: ['地图默认定位至用户当前位置，中心点显示蓝色定位光标，用户可拖动地图调整选点，松手后附近列表更新为选点附近的 POI。', '点击搜索框输入关键字 → 展示匹配 POI 结果 → 点击结果项地图定位至对应位置。', '点击左上角城市 → 跳转城市选择页 → 选择城市后地图中心移至所选城市。', '点击附近 POI 列表项 → 回填至新增收货地址页的收货地址字段并返回。'] }
+                    ]
+                },
+                statusList: [
+                    { block: '地图', state: '默认定位', trigger: '页面加载', ui: '显示用户当前定位的地图，中心点为蓝色定位光标' },
+                    { block: '地图', state: '拖动调整', trigger: '拖动地图', ui: '选点位置更新，附近 POI 列表同步刷新' },
+                    { block: '搜索', state: '输入关键字', trigger: '点击搜索框输入', ui: '展示匹配 POI 结果列表' },
+                    { block: '城市切换', state: '选择城市', trigger: '点击左上角城市入口', ui: '跳转城市选择页，选择后地图移至所选城市' },
+                    { block: '附近地址', state: '选择 POI', trigger: '点击 POI 列表项', ui: '回填收货地址字段并返回新增地址页' }
+                ]
             },
             'shop-city-select': {
                 title: '选择城市',
@@ -21162,13 +21603,183 @@
         // ====== 页面渲染器（具体页面内容）======
         const pageRenderers = {
             shopHome: function() {
-                return `
-                    <div style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;">
-                        <div class="page-placeholder">
-                            <i class="fa fa-shopping-bag"></i>
-                            <h3>商城首页</h3>
-                            <p>页面建设中，敬请期待</p>
+                // 商城首页：三种登录状态（guest=未登录 / member=已登录 / scan=线下扫码登录）
+                // 布局依据 Figma 设计稿（node 602:3037）：搜索行 → Banner → 状态卡 → 分类入口 → 功能入口
+                const csIcon = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 3C7.58172 3 4 6.58172 4 11V15C4 16.1046 4.89543 17 6 17H8V12H6V11C6 7.68629 8.68629 5 12 5C15.3137 5 18 7.68629 18 11V12H16V17H18C19.1046 17 20 16.1046 20 15V11C20 6.58172 16.4183 3 12 3Z" stroke="#353B3C" stroke-width="1.8" stroke-linejoin="round"/><rect x="5" y="11" width="3" height="6" rx="1.5" stroke="#353B3C" stroke-width="1.8"/><rect x="16" y="11" width="3" height="6" rx="1.5" stroke="#353B3C" stroke-width="1.8"/><path d="M17.5 17V18C17.5 19.3807 16.3807 20.5 15 20.5H13" stroke="#353B3C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="20.5" r="1.5" fill="#353B3C"/></svg>';
+                const scanIcon = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 4h6v2H6v4H4V4zm16 0v6h-2V6h-4V4h6zM4 14v6h6v-2H6v-4H4zm16 6v-6h-2v4h-4v2h6z" fill="#FFFFFF"/><path d="M3 11h18v2H3v-2z" fill="#FFFFFF"/></svg>';
+                // 功能入口图标（设计稿：gift-line / chat-smile-2-line，#1CB2D4）
+                const giftIcon = '<svg class="mh-func-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M26 11H6v-2h20v2zm1-5h-5.4A4.6 4.6 0 0 0 16 2.2 4.6 4.6 0 0 0 10.4 6H5a1 1 0 0 0-1 1v5h24V7a1 1 0 0 0-1-1zm-8.6 0h-4.8A2.8 2.8 0 0 1 16 3.9 2.8 2.8 0 0 1 18.4 6zM6 13v15a1 1 0 0 0 1 1h8V13H6zm11 0v16h8a1 1 0 0 0 1-1V13H17z" fill="#1CB2D4"/></svg>';
+                const chatIcon = '<svg class="mh-func-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 4C23.2 4 29 8.4 29 13.8s-5.8 9.8-13 9.8c-1.2 0-2.3-.1-3.4-.4L8 26l-4.3 1.9.6-4.9C2.3 21.4 3 17.7 3 13.8 3 8.4 8.8 4 16 4zm-4.5 8.3a1.9 1.9 0 1 0 0 3.8 1.9 1.9 0 0 0 0-3.8zm9 0a1.9 1.9 0 1 0 0 3.8 1.9 1.9 0 0 0 0-3.8z" fill="#1CB2D4"/></svg>';
+                // 购物车图标（白色，悬浮钮）
+                const cartIcon = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 4h2.2l.7 2H21l-1.9 7.4a1 1 0 0 1-1 .6H8.6a1 1 0 0 1-1-.7L5 6m3.2 13a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4zm8.4 0a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4z" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+                // 状态卡渲染（guest=未登录引导卡 / member=会员信息卡 / scan=扫码提示卡）
+                const renderMemberArea = (state) => {
+                    if (state === 'guest') {
+                        return `
+                            <div class="mh-guest-card" data-block="mh-guest-card">
+                                <div class="mh-guest-text">
+                                    <div class="mh-guest-title">登录成为会员</div>
+                                    <div class="mh-guest-sub">到店免费领取招牌柠檬水</div>
+                                </div>
+                                <button class="mh-guest-btn" data-action="mh-become-member">成为会员</button>
+                            </div>
+                        `;
+                    }
+                    if (state === 'scan') {
+                        return `
+                            <div class="mh-scan-banner" data-block="mh-scan-banner">
+                                <div class="mh-scan-icon">${scanIcon}</div>
+                                <div class="mh-scan-text">
+                                    <div class="mh-scan-title">已通过线下扫码登录</div>
+                                    <div class="mh-scan-sub">门店：徕芙会员超市（泉州晋江店）</div>
+                                </div>
+                            </div>
+                        `;
+                    }
+                    return `
+                        <div class="mh-member-card" data-block="mh-member-card">
+                            <div class="mh-member-left">
+                                <div class="mh-avatar"></div>
+                                <div class="mh-member-info">
+                                    <div class="mh-member-name">189****0990</div>
+                                    <div class="mh-member-tag">徕芙会员</div>
+                                </div>
+                            </div>
+                            <div class="mh-member-code" data-action="mh-show-member-code">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 3h8v8H3V3zm2 2v4h4V5H5zm8-2h8v8h-8V3zm2 2v4h4V5h-4zM3 13h8v8H3v-8zm2 2v4h4v-4H5zm10-2h2v2h-2v-2zm4 0h2v2h-2v-2zm-4 4h2v2h-2v-2zm4 0h2v2h-2v-2zm-4 4h2v2h-2v-2zm4 0h2v2h-2v-2z" fill="#1D1D1D"/></svg>
+                                <span class="mh-member-code-label">会员码</span>
+                            </div>
                         </div>
+                    `;
+                };
+
+                return `
+                    <div class="mh-page" data-page-state="guest">
+                        <!-- 搜索行 -->
+                        <div class="mh-search-row">
+                            <div class="mh-search-bar">
+                                <span class="mh-search-icon"><i class="fa fa-search"></i></span>
+                                <span class="mh-search-placeholder">输入关键字搜索</span>
+                                <button class="mh-search-btn">搜索</button>
+                            </div>
+                            <span class="mh-cs-icon">${csIcon}</span>
+                        </div>
+                        <!-- Banner -->
+                        <div class="mh-banner" data-block="mh-banner" style="background-image:url('figma-images/shop-home-banner.png');">
+                            <div class="mh-banner-overlay">
+                                <div class="mh-banner-title">徕芙会员优选</div>
+                                <div class="mh-banner-sub">用徕芙开启美好生活</div>
+                            </div>
+                        </div>
+                        <!-- 状态卡片区（由场景控制器切换注入） -->
+                        <div id="mh-state-area">${renderMemberArea('guest')}</div>
+                        <!-- 分类入口（2列大卡） -->
+                        <div class="mh-cat-card" data-block="mh-cat-card">
+                            <div class="mh-cat-half" data-action="mh-cat-snack">
+                                <img class="mh-cat-img" src="figma-images/shop-cat-snack.png" alt="新鲜零食">
+                                <div class="mh-cat-title">新鲜零食</div>
+                                <div class="mh-cat-sub">新鲜*现做</div>
+                            </div>
+                            <div class="mh-cat-divider"></div>
+                            <div class="mh-cat-half" data-action="mh-cat-fresh">
+                                <img class="mh-cat-img" src="figma-images/shop-cat-fresh.png" alt="生鲜超市">
+                                <div class="mh-cat-title">生鲜超市</div>
+                                <div class="mh-cat-sub">敬请期待</div>
+                            </div>
+                        </div>
+                        <!-- 功能入口（储值有礼/添加企微 + 购物车悬浮钮） -->
+                        <div class="mh-func-row" data-block="mh-func-row">
+                            <div class="mh-func-card" data-action="mh-func-stored">
+                                ${giftIcon}
+                                <span class="mh-func-label">储值有礼</span>
+                            </div>
+                            <div class="mh-func-card" data-action="mh-func-wecom">
+                                ${chatIcon}
+                                <span class="mh-func-label">添加企微</span>
+                            </div>
+                            <div class="mh-cart-fab" data-action="mh-cart" data-block="mh-cart-fab">
+                                ${cartIcon}
+                                <span class="mh-cart-badge">2</span>
+                            </div>
+                        </div>
+                        <!-- 登录引导弹窗（扫码进入未登录态触发） -->
+                        <div class="mh-login-mask" id="mh-login-dialog" style="display:none;">
+                            <div class="mh-login-dialog">
+                                <div class="mh-login-dialog-body">欢迎登录徕芙会员超市，登录后解锁更多优惠</div>
+                                <div class="mh-login-dialog-btns">
+                                    <button class="mh-login-dialog-btn mh-cancel" data-action="mh-login-dismiss">暂不登录</button>
+                                    <button class="mh-login-dialog-btn mh-confirm" data-action="mh-login-go">去登录</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            },
+            shopLogin: function() {
+                // 登录页（设计稿-登录页）：Logo → 手机号快捷登录/返回 → 底部协议勾选
+                const logoSvg = '<svg width="80" height="80" viewBox="0 0 63.6968 62.0463" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"><path d="M52.2022 62.0385C58.5556 61.9373 63.6968 56.737 63.6968 50.36L63.6968 23.86C63.6968 19.7933 61.5335 15.9633 58.0534 13.86L37.8834 1.68C36.0635 0.579999 33.9734 0 31.8468 0C31.7861 0 31.7258 0.00147893 31.6659 0.00440231C29.6019 0.0363115 27.5816 0.614193 25.81 1.68301L5.64 13.863C2.16 15.9663 0 19.7963 0 23.863L0 50.363C0 56.803 5.24 62.043 11.68 62.043L11.6767 62.0463C11.732 62.0463 11.787 62.0451 11.8417 62.0427C20.8151 62.0147 27.3381 59.6551 32.0002 56.6796C36.9425 59.8493 43.4779 62.0333 51.9637 62.0429C51.9825 62.0432 52.0013 62.0433 52.0201 62.0433C52.0204 62.0433 52.0198 62.0433 52.0201 62.0433C52.0812 62.0433 52.1419 62.0414 52.2022 62.0385ZM52.0601 54.7165C52.0468 54.7163 52.0335 54.7163 52.0202 54.7163C46.1802 54.7163 41.5802 53.4829 37.9802 51.6263C38.1035 51.4896 38.2235 51.3529 38.3435 51.2163C43.6835 45.0596 45.1068 38.2996 45.1068 35.2763C45.1068 27.9663 39.1602 22.0196 31.8502 22.0196C24.5402 22.0196 18.5935 27.9663 18.5935 35.2763C18.5935 38.9129 20.6468 45.7829 26.0235 51.6496C22.3835 53.4929 17.6902 54.7163 11.6802 54.7163C11.6404 54.7163 11.6007 54.7169 11.5613 54.7182C9.21101 54.6568 7.31667 52.7278 7.31667 50.363L7.31667 23.863C7.31667 22.3463 8.12333 20.9163 9.42 20.133L29.59 7.95301C30.27 7.54301 31.05 7.32634 31.8433 7.32634C31.8812 7.32634 31.919 7.32576 31.9566 7.32462C32.7159 7.34304 33.4538 7.55828 34.1035 7.95L54.2734 20.13C55.5734 20.9133 56.3768 22.3433 56.3768 23.86L56.3768 50.36C56.3768 52.75 54.4451 54.695 52.0601 54.7165ZM25.9168 35.2763C25.9168 32.0035 28.5793 29.3438 31.8485 29.3429C35.1211 29.3438 37.7802 32.0068 37.7802 35.2763C37.7802 37.3229 36.4702 42.6829 32.0235 47.2563C27.3335 42.4929 25.9168 36.9163 25.9168 35.2763Z" fill="#353B3C"/></svg>';
+                return `
+                    <div class="lg-page">
+                        <div class="lg-logo" data-block="lg-logo">${logoSvg}</div>
+                        <div class="lg-btn-group" data-block="lg-btn-group">
+                            <button class="lg-btn-primary" data-action="lg-login">手机号快捷登录</button>
+                            <button class="lg-btn-back" data-action="lg-back">返回</button>
+                        </div>
+                        <div class="lg-agreement" data-block="lg-agreement">
+                            <img id="lg-agree-icon" src="figma-images/icon-checkbox-blank.svg" alt="" data-action="lg-toggle-agree">
+                            <span class="lg-agreement-text" data-action="lg-toggle-agree">已阅读并同意 <span class="lg-link" data-action="lg-link">用户服务协议</span> 和 <span class="lg-link" data-action="lg-link">隐私政策</span></span>
+                        </div>
+                        <div class="nav-home-indicator"><div class="ios-home-indicator"></div></div>
+                    </div>
+                `;
+            },
+            shopMemberCode: function() {
+                // 会员码页（设计稿 602-3174）：头像+手机号+二维码+资产概览
+                const stats = [
+                    { value: '600', label: '积分', target: null },
+                    { value: '¥68', label: '回馈金', target: 'profile-rebate-all' },
+                    { value: '1', label: '优惠券', target: 'profile-coupon-all' },
+                    { value: '¥168', label: '购物金', target: 'profile-shopping-all' },
+                ];
+                return `
+                    <div class="mc-page">
+                        <div class="mc-card" data-block="mc-card">
+                            <div class="mc-avatar-wrap" data-block="mc-avatar">
+                                <div class="mc-avatar"></div>
+                            </div>
+                            <div class="mc-phone">189****0990</div>
+                            <img class="mc-qr" src="figma-images/qr-wecom-member.png" alt="会员码" data-block="mc-qr">
+                            <div class="mc-divider"></div>
+                            <div class="mc-stats" data-block="mc-stats">
+                                ${stats.map(s => `
+                                <div class="mc-stat" ${s.target ? `data-target="${s.target}"` : ''}>
+                                    <span class="mc-stat-value">${s.value}</span>
+                                    <span class="mc-stat-label">${s.label}</span>
+                                </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                        <div class="nav-home-indicator"><div class="ios-home-indicator"></div></div>
+                    </div>
+                `;
+            },
+            shopWecom: function() {
+                // 添加企微页（设计稿 633-2066）：福利官卡片+企微二维码
+                return `
+                    <div class="wc-page">
+                        <div class="wc-card" data-block="wc-card">
+                            <div class="wc-header" data-block="wc-header">
+                                <div class="wc-header-left">
+                                    <div class="wc-title">徕芙会员福利官</div>
+                                    <div class="wc-subtitle">添加解锁更多福利</div>
+                                </div>
+                                <img class="wc-logo" src="figma-images/wecom-logo.png" alt="Logo">
+                            </div>
+                            <img class="wc-qr" src="figma-images/qr-wecom-member.png" alt="企微二维码" data-block="wc-qr">
+                            <div class="wc-tip">请长按识别或微信扫码二维码去添加</div>
+                        </div>
+                        <div class="nav-home-indicator"><div class="ios-home-indicator"></div></div>
                     </div>
                 `;
             },
@@ -22746,8 +23357,8 @@
             const addressLabel = isHome ? '收货地址' : '自提地址';
             const personName = '于兰莉';
             const phone = '13241000182';
-            const addressHome = '福建省泉州市石狮市湖滨街道狮城帝苑5幢2梯0502';
-            const addressPickup = '福建省泉州市石狮市湖滨街道狮城帝苑物业处';
+            const addressHome = '福建省泉州市石狮市狮城帝苑5幢2梯0502';
+            const addressPickup = '福建省泉州市石狮市狮城帝苑物业处';
             const address = isHome ? addressHome : addressPickup;
             // 状态栏（不同状态显示不同文案）
             let statusBarHtml = '';
@@ -23068,7 +23679,207 @@
         // ====== 渲染后事件绑定 ======
         function bindPageEvents(pageId) {
             if (pageId === 'shop-home') {
-                // placeholder 页面，无需事件绑定
+                // 商城首页：三种登录状态切换 + 登录引导弹窗
+                const stateArea = document.querySelector('#mobile-content #mh-state-area');
+                const loginDialog = document.querySelector('#mobile-content #mh-login-dialog');
+                const pageEl = document.querySelector('#mobile-content .mh-page');
+
+                // 重新渲染状态区（保留其他DOM，仅替换会员卡+功能入口）
+                const renderMemberArea = (state) => {
+                    const scanIcon = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 4h6v2H6v4H4V4zm16 0v6h-2V6h-4V4h6zM4 14v6h6v-2H6v-4H4zm16 6v-6h-2v4h-4v2h6z" fill="#FFFFFF"/><path d="M3 11h18v2H3v-2z" fill="#FFFFFF"/></svg>';
+                    if (state === 'guest') {
+                        return `<div class="mh-guest-card" data-block="mh-guest-card">
+                            <div class="mh-guest-text">
+                                <div class="mh-guest-title">登录成为会员</div>
+                                <div class="mh-guest-sub">到店免费领取招牌柠檬水</div>
+                            </div>
+                            <button class="mh-guest-btn" data-action="mh-become-member">成为会员</button>
+                        </div>`;
+                    }
+                    if (state === 'scan') {
+                        // 扫码进入：渲染未登录态首页卡片（与 guest 一致）
+                        return `<div class="mh-guest-card" data-block="mh-guest-card">
+                            <div class="mh-guest-text">
+                                <div class="mh-guest-title">登录成为会员</div>
+                                <div class="mh-guest-sub">到店免费领取招牌柠檬水</div>
+                            </div>
+                            <button class="mh-guest-btn" data-action="mh-become-member">成为会员</button>
+                        </div>`;
+                    }
+                    return `<div class="mh-member-card" data-block="mh-member-card">
+                        <div class="mh-member-left">
+                            <div class="mh-avatar"></div>
+                            <div class="mh-member-info">
+                                <div class="mh-member-name">189****0990</div>
+                                <div class="mh-member-tag">徕芙会员</div>
+                            </div>
+                        </div>
+                        <div class="mh-member-code" data-action="mh-show-member-code">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 3h8v8H3V3zm2 2v4h4V5H5zm8-2h8v8h-8V3zm2 2v4h4V5h-4zM3 13h8v8H3v-8zm2 2v4h4v-4H5zm10-2h2v2h-2v-2zm4 0h2v2h-2v-2zm-4 4h2v2h-2v-2zm4 0h2v2h-2v-2zm-4 4h2v2h-2v-2zm4 0h2v2h-2v-2z" fill="#1D1D1D"/></svg>
+                            <span class="mh-member-code-label">会员码</span>
+                        </div>
+                    </div>`;
+                };
+                const applyHomeState = (state) => {
+                    if (!stateArea) return;
+                    // 仅替换状态卡（搜索/Banner/分类入口/功能入口为静态结构，不随状态重渲染）
+                    stateArea.innerHTML = renderMemberArea(state);
+                    // 扫码进入渲染未登录态访客卡，但视为未登录（拦截入口跳登录页）；member 为已登录态
+                    if (pageEl) pageEl.dataset.pageState = (state === 'member') ? 'member' : 'guest';
+                    // 登录引导弹窗：扫码进入未登录态时自动弹出
+                    if (loginDialog) loginDialog.style.display = (state === 'scan') ? 'flex' : 'none';
+                    bindStateAreaEvents(state === 'member' ? 'member' : 'guest');
+                };
+                // 状态卡交互事件（每次切换后重新绑定）
+                const bindStateAreaEvents = (state) => {
+                    const root = document.querySelector('#mobile-content #mh-state-area');
+                    if (!root) return;
+                    // 未登录：点击"成为会员" → 跳转登录页
+                    const becomeBtn = root.querySelector('[data-action="mh-become-member"]');
+                    if (becomeBtn) {
+                        becomeBtn.addEventListener('click', () => {
+                            switchPage('shop-login');
+                        });
+                    }
+                    // 已登录：点击"会员码" → 跳转会员码页
+                    const codeBtn = root.querySelector('[data-action="mh-show-member-code"]');
+                    if (codeBtn) {
+                        codeBtn.addEventListener('click', () => {
+                            switchPage('shop-member-code');
+                        });
+                    }
+                };
+                // 当前是否未登录态（用于静态入口的拦截判断）
+                const isGuest = () => pageEl && pageEl.dataset.pageState === 'guest';
+                // 静态入口拦截：未登录 → 直接跳转登录页；已登录/扫码 → Toast
+                const guardOrToast = (toastMsg) => {
+                    if (isGuest()) {
+                        switchPage('shop-login');
+                    } else {
+                        showToast(toastMsg);
+                    }
+                };
+                // 静态入口拦截：未登录 → 直接跳转登录页；已登录/扫码 → 跳转页面
+                const guardOrPage = (pageId) => {
+                    if (isGuest()) {
+                        switchPage('shop-login');
+                    } else {
+                        switchPage(pageId);
+                    }
+                };
+                // 分类入口：新鲜零食（可进入浏览）/ 生鲜超市（敬请期待）—— 浏览无需登录
+                const catSnack = document.querySelector('#mobile-content [data-action="mh-cat-snack"]');
+                const catFresh = document.querySelector('#mobile-content [data-action="mh-cat-fresh"]');
+                if (catSnack) catSnack.addEventListener('click', () => switchPage('shop-category'));
+                if (catFresh) catFresh.addEventListener('click', () => showToast('生鲜超市 · 敬请期待'));
+                // 功能入口：储值有礼（需登录→我的购物金页）；添加企微（无需登录→添加企微页）
+                document.querySelectorAll('#mobile-content .mh-func-row .mh-func-card').forEach(card => {
+                    if (card.dataset.action === 'mh-func-stored') {
+                        card.addEventListener('click', () => guardOrPage('profile-shopping-all'));
+                    } else if (card.dataset.action === 'mh-func-wecom') {
+                        card.addEventListener('click', () => switchPage('shop-wecom'));
+                    }
+                });
+                // 购物车悬浮钮（需登录）
+                const cartFab = document.querySelector('#mobile-content [data-action="mh-cart"]');
+                if (cartFab) cartFab.addEventListener('click', () => guardOrToast('购物车（演示）'));
+                // 搜索行：点击搜索框跳转搜索页；客服图标 Toast
+                const searchBar = document.querySelector('#mobile-content .mh-search-bar');
+                if (searchBar) searchBar.addEventListener('click', () => switchPage('shop-search'));
+                const csBtn = document.querySelector('#mobile-content .mh-cs-icon');
+                if (csBtn) csBtn.addEventListener('click', () => showToast('在线客服（演示）'));
+                // 弹窗按钮 + 遮罩点击关闭
+                if (loginDialog) {
+                    const cancelBtn = loginDialog.querySelector('[data-action="mh-login-dismiss"]');
+                    const goBtn = loginDialog.querySelector('[data-action="mh-login-go"]');
+                    if (cancelBtn) cancelBtn.addEventListener('click', () => { loginDialog.style.display = 'none'; });
+                    loginDialog.addEventListener('click', (e) => {
+                        if (e.target === loginDialog) loginDialog.style.display = 'none';
+                    });
+                    if (goBtn) goBtn.addEventListener('click', () => {
+                        loginDialog.style.display = 'none';
+                        // 跳转登录页
+                        switchPage('shop-login');
+                    });
+                }
+                // 初始绑定（默认未登录态；若已通过登录页登录则恢复已登录态）
+
+                // ====== 场景控制器：未登录 / 已登录 / 扫码登录 ======
+                const frame = document.querySelector('.mobile-frame');
+                let ctrl = document.getElementById('scene-control-home');
+                if (ctrl) ctrl.remove();
+                if (frame) {
+                    ctrl = document.createElement('div');
+                    ctrl.id = 'scene-control-home';
+                    ctrl.className = 'state-controller';
+                    ctrl.innerHTML = `
+                        <div class="state-controller-header">
+                            <span class="state-controller-demo-tag">DEMO</span>
+                            <span class="state-controller-title">场景控制（用于演示不同登录状态）</span>
+                        </div>
+                        <span class="state-controller-label">登录状态：</span>
+                        <div class="state-tab active" data-scene="guest">未登录</div>
+                        <div class="state-tab" data-scene="member">已登录</div>
+                        <div class="state-tab" data-scene="scan">扫码进入</div>
+                    `;
+                    frame.parentNode.insertBefore(ctrl, frame.nextSibling);
+                    ctrl.querySelectorAll('.state-tab').forEach(tab => {
+                        tab.addEventListener('click', () => {
+                            ctrl.querySelectorAll('.state-tab').forEach(t => t.classList.remove('active'));
+                            tab.classList.add('active');
+                            applyHomeState(tab.dataset.scene);
+                            // 同步全局登录状态（登录页返回时按此状态恢复首页）
+                            window.__shopLoginState = tab.dataset.scene;
+                        });
+                    });
+                }
+                // 初始状态：按全局登录状态恢复（登录页返回/登录成功后回到首页时生效），默认未登录态
+                if (window.__shopLoginState && window.__shopLoginState !== 'guest') {
+                    applyHomeState(window.__shopLoginState);
+                    if (ctrl) ctrl.querySelectorAll('.state-tab').forEach(t => t.classList.toggle('active', t.dataset.scene === window.__shopLoginState));
+                } else {
+                    bindStateAreaEvents('guest');
+                }
+            }
+            if (pageId === 'shop-login') {
+                // 登录页：协议勾选 + 手机号快捷登录 + 返回
+                let agreed = false;
+                const agreeIcon = document.querySelector('#mobile-content #lg-agree-icon');
+                const setAgreed = (v) => {
+                    agreed = v;
+                    if (agreeIcon) agreeIcon.src = agreed ? 'figma-images/icon-checkbox-checked.svg' : 'figma-images/icon-checkbox-blank.svg';
+                };
+                // 勾选/取消勾选协议
+                document.querySelectorAll('#mobile-content [data-action="lg-toggle-agree"]').forEach(el => {
+                    el.addEventListener('click', () => setAgreed(!agreed));
+                });
+                // 协议链接
+                document.querySelectorAll('#mobile-content [data-action="lg-link"]').forEach(el => {
+                    el.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        showToast('打开' + el.textContent.trim() + '（演示）');
+                    });
+                });
+                // 手机号快捷登录：未勾选协议 → Toast；已勾选 → 模拟登录成功返回首页（已登录态）
+                const loginBtn = document.querySelector('#mobile-content [data-action="lg-login"]');
+                if (loginBtn) loginBtn.addEventListener('click', () => {
+                    if (!agreed) {
+                        showToast('请先阅读并同意用户服务协议和隐私政策');
+                        return;
+                    }
+                    window.__shopLoginState = 'member';
+                    showToast('登录成功');
+                    switchPage('shop-home');
+                });
+                // 返回：回到商城首页，保持未登录态
+                const backBtn = document.querySelector('#mobile-content [data-action="lg-back"]');
+                if (backBtn) backBtn.addEventListener('click', () => switchPage('shop-home'));
+            }
+            if (pageId === 'shop-member-code') {
+                // 会员码页：资产概览点击跳转对应资产页
+                document.querySelectorAll('#mobile-content .mc-stat[data-target]').forEach(stat => {
+                    stat.addEventListener('click', () => switchPage(stat.dataset.target));
+                });
             }
             if (pageId === 'shop-checkout') {
                 // 商品总价（用于配送费满免判断及底部合计展示）
@@ -23078,9 +23889,9 @@
                 if (!window.__addrState) {
                     window.__addrState = {
                         savedAddresses: [
-                            { id: 1, name: '王女士', phone: '13241000182', tag: '家', street: '福建省泉州市石狮市湖滨街道', community: '狮城帝苑', house: '5幢2梯0502', dist: 5.2, stationName: '', serviceCommunity: false },
-                            { id: 2, name: '张先生', phone: '13800138000', tag: '公司', street: '福建省泉州市石狮市凤里街道', community: '百德汇峰广场', house: 'A座1801', dist: 2.1, stationName: '', serviceCommunity: false },
-                            { id: 3, name: '李小姐', phone: '13600136000', tag: '家', street: '福建省泉州市晋江市青阳街道', community: '万达华府', house: '3号楼1205', dist: 7.8, stationName: '', serviceCommunity: false }
+                            { id: 1, name: '王女士', phone: '13241000182', tag: '家', street: '福建省泉州市石狮市', community: '狮城帝苑', house: '5幢2梯0502', dist: 5.2, stationName: '', serviceCommunity: false },
+                            { id: 2, name: '张先生', phone: '13800138000', tag: '公司', street: '福建省泉州市石狮市', community: '百德汇峰广场', house: 'A座1801', dist: 2.1, stationName: '', serviceCommunity: false },
+                            { id: 3, name: '李小姐', phone: '13600136000', tag: '家', street: '福建省泉州市晋江市', community: '万达华府', house: '3号楼1205', dist: 7.8, stationName: '', serviceCommunity: false }
                         ],
                         formData: { name: '', phone: '', community: '', house: '', tag: '', stationName: '', street: '', serviceCommunity: false },
                         selectedAddrId: 1,     // 默认选中一个超范围地址，便于演示警告条+弹窗
@@ -23612,9 +24423,9 @@
                 if (!window.__addrState) {
                     window.__addrState = {
                         savedAddresses: [
-                            { id: 1, name: '王女士', phone: '13241000182', tag: '家', street: '福建省泉州市石狮市湖滨街道', community: '狮城帝苑', house: '5幢2梯0502', dist: 5.2, stationName: '', serviceCommunity: false },
-                            { id: 2, name: '张先生', phone: '13800138000', tag: '公司', street: '福建省泉州市石狮市凤里街道', community: '百德汇峰广场', house: 'A座1801', dist: 2.1, stationName: '', serviceCommunity: false },
-                            { id: 3, name: '李小姐', phone: '13600136000', tag: '家', street: '福建省泉州市晋江市青阳街道', community: '万达华府', house: '3号楼1205', dist: 7.8, stationName: '', serviceCommunity: false }
+                            { id: 1, name: '王女士', phone: '13241000182', tag: '家', street: '福建省泉州市石狮市', community: '狮城帝苑', house: '5幢2梯0502', dist: 5.2, stationName: '', serviceCommunity: false },
+                            { id: 2, name: '张先生', phone: '13800138000', tag: '公司', street: '福建省泉州市石狮市', community: '百德汇峰广场', house: 'A座1801', dist: 2.1, stationName: '', serviceCommunity: false },
+                            { id: 3, name: '李小姐', phone: '13600136000', tag: '家', street: '福建省泉州市晋江市', community: '万达华府', house: '3号楼1205', dist: 7.8, stationName: '', serviceCommunity: false }
                         ],
                         formData: { name: '', phone: '', community: '', house: '', tag: '', stationName: '', street: '', serviceCommunity: false },
                         selectedAddrId: 1,     // 默认选中一个超范围地址，便于演示警告条+弹窗
@@ -24243,7 +25054,7 @@
                     item.addEventListener('click', () => {
                         const poi = JSON.parse(item.dataset.poi);
                         state.formData.community = poi.name;
-                        state.formData.street = ''; // 极速达无街道信息时留空
+                        state.formData.street = ''; // 地址精确到省市区，不显示街道
                         state.formData.dist = poi.dist;
                         state.formData.serviceCommunity = false;
                         state.formData.stationName = '';
@@ -25484,6 +26295,21 @@
                 </table>
             `;
         }
+        // ====== 全局 Toast（商城首页/登录页等无内置 Toast 的页面） ======
+        function showToast(msg) {
+            const frame = document.querySelector('.mobile-frame');
+            if (!frame) return;
+            let toast = frame.querySelector('.gt-toast');
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.className = 'gt-toast';
+                frame.appendChild(toast);
+            }
+            toast.textContent = msg;
+            toast.classList.add('show');
+            clearTimeout(showToast._timer);
+            showToast._timer = setTimeout(() => toast.classList.remove('show'), 2000);
+        }
         // ====== 切换页面 ======
         function switchPage(pageId) {
             const page = pages[pageId];
@@ -25574,19 +26400,26 @@
                 page.mainNav === 'access' ? '通行页' : '我的页';
             document.getElementById('breadcrumb-sub').textContent = page.title;
             document.getElementById('mobile-title').textContent = page.title;
+            // 登录页：导航栏无标题（设计稿仅保留右侧胶囊按钮）
+            if (pageId === 'shop-login') document.getElementById('mobile-title').textContent = '';
             document.getElementById('panel-title').textContent = page.title;
             // 个人中心无标准导航栏（顶部直接是背景图）；确认订单页自带导航栏也需隐藏默认 header
             document.querySelector('.mobile-header').style.display = (pageId === 'profile-home' || pageId === 'shop-checkout' || pageId === 'shop-checkout-v2' || pageId === 'shop-address-add' || pageId === 'shop-address-map' || pageId === 'shop-address-station' || pageId === 'shop-city-select') ? 'none' : 'flex';
+            // 商城首页为一级页面：隐藏导航栏左侧返回按钮（设计稿仅保留右侧胶囊按钮）；登录页同理
+            document.querySelector('.mobile-header-back').style.visibility = (pageId === 'shop-home' || pageId === 'shop-login') ? 'hidden' : 'visible';
             // 个人中心：状态栏叠加在背景图上（透明背景、白色文字）
             document.querySelector('.mobile-status-bar').classList.toggle('profile', pageId === 'profile-home');
             // 子页面（物业缴费列表、物业缴费详情、设置、订单相关页面等）隐藏底部Tab导航
             const _orderSubPages = ['shop-orders', 'shop-orders-v2', 'shop-order-detail-home-pay', 'shop-order-detail-home-ship', 'shop-order-detail-home-receive', 'shop-order-detail-home-done', 'shop-order-detail-pickup-pay', 'shop-order-detail-pickup-ship', 'shop-order-detail-pickup-receive', 'shop-order-detail-pickup-done', 'shop-order-detail-gift-done'];
-            const isSubPage = (pageId === 'profile-payment-list' || pageId === 'profile-payment' || pageId === 'profile-settings' || pageId === 'property-bill' || pageId === 'bill-month-detail' || pageId === 'payment-records' || pageId === 'record-bill-detail' || pageId === 'record-month-detail' || pageId === 'profile-rebate-all' || pageId === 'profile-rebate-earned' || pageId === 'profile-rebate-deducted' || pageId === 'profile-shopping-all' || pageId === 'profile-shopping-detail' || pageId === 'profile-shopping-recharge' || pageId === 'profile-shopping-consume' || pageId === 'profile-coupon-all' || pageId === 'profile-coupon-used' || pageId === 'profile-coupon-expired' || pageId === 'profile-coupon-qrcode' || pageId === 'profile-coupon-center' || pageId === 'shop-checkout' || pageId === 'shop-checkout-v2' || pageId === 'shop-address-add' || pageId === 'shop-address-map' || pageId === 'shop-address-station' || pageId === 'shop-city-select' || _orderSubPages.indexOf(pageId) >= 0);
+            const isSubPage = (pageId === 'profile-payment-list' || pageId === 'profile-payment' || pageId === 'profile-settings' || pageId === 'property-bill' || pageId === 'bill-month-detail' || pageId === 'payment-records' || pageId === 'record-bill-detail' || pageId === 'record-month-detail' || pageId === 'profile-rebate-all' || pageId === 'profile-rebate-earned' || pageId === 'profile-rebate-deducted' || pageId === 'profile-shopping-all' || pageId === 'profile-shopping-detail' || pageId === 'profile-shopping-recharge' || pageId === 'profile-shopping-consume' || pageId === 'profile-coupon-all' || pageId === 'profile-coupon-used' || pageId === 'profile-coupon-expired' || pageId === 'profile-coupon-qrcode' || pageId === 'profile-coupon-center' || pageId === 'shop-login' || pageId === 'shop-member-code' || pageId === 'shop-wecom' || pageId === 'shop-checkout' || pageId === 'shop-checkout-v2' || pageId === 'shop-address-add' || pageId === 'shop-address-map' || pageId === 'shop-address-station' || pageId === 'shop-city-select' || _orderSubPages.indexOf(pageId) >= 0);
             const needFixedLayout = (pageId === 'profile-payment' || pageId === 'property-bill' || pageId === 'bill-month-detail' || pageId === 'shop-checkout' || pageId === 'shop-checkout-v2' || pageId === 'profile-shopping-all');
             document.querySelector('.mobile-bottom-nav').style.display = isSubPage ? 'none' : 'block';
             // 离开确认订单页V1时移除场景控制器
             const _oldSceneCtrl = document.getElementById('scene-control-v1');
             if (_oldSceneCtrl && pageId !== 'shop-checkout') _oldSceneCtrl.remove();
+            // 离开商城首页时移除场景控制器
+            const _oldHomeSceneCtrl = document.getElementById('scene-control-home');
+            if (_oldHomeSceneCtrl && pageId !== 'shop-home') _oldHomeSceneCtrl.remove();
             // 右侧更多按钮：设计稿中各缴费页面导航栏均含此按钮（83x30）；仅个人中心首页（无导航栏）与设置页不显示
             const moreBtn = document.querySelector('.mobile-header-more');
             if (moreBtn) {
@@ -25608,6 +26441,10 @@
                 contentEl.style.alignItems = 'stretch';
                 contentEl.style.justifyContent = 'flex-start';
                 contentEl.style.padding = '0';
+            }
+            // 会员码页/添加企微页：整页静止，禁止滚动
+            if (pageId === 'shop-member-code' || pageId === 'shop-wecom') {
+                contentEl.style.overflow = 'hidden';
             }
             // 优先使用自定义渲染函数，否则使用 placeholder
             const renderFn = pageRenderers[page.render];
@@ -25664,7 +26501,7 @@
             backBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 const cur = getPageIdFromHash();
-                const backMap = { 'profile-payment-list': 'profile-home', 'profile-payment': 'profile-payment-list', 'profile-settings': 'profile-home', 'property-bill': 'profile-payment-list', 'bill-month-detail': 'property-bill', 'payment-records': 'profile-payment-list', 'record-bill-detail': 'payment-records', 'record-month-detail': 'record-bill-detail', 'profile-rebate-all': 'profile-home', 'profile-rebate-earned': 'profile-home', 'profile-rebate-deducted': 'profile-home', 'profile-shopping-all': 'profile-home', 'profile-shopping-detail': 'profile-shopping-all', 'profile-shopping-recharge': 'profile-shopping-all', 'profile-shopping-consume': 'profile-shopping-all', 'profile-coupon-all': 'profile-home', 'profile-coupon-used': 'profile-home', 'profile-coupon-expired': 'profile-home', 'profile-coupon-qrcode': 'profile-coupon-all', 'profile-coupon-center': 'profile-coupon-all', 'shop-orders': 'profile-home', 'shop-orders-v2': 'profile-home', 'shop-order-detail-home-pay': 'shop-orders', 'shop-order-detail-home-ship': 'shop-orders', 'shop-order-detail-home-receive': 'shop-orders', 'shop-order-detail-home-done': 'shop-orders', 'shop-order-detail-pickup-pay': 'shop-orders', 'shop-order-detail-pickup-ship': 'shop-orders', 'shop-order-detail-pickup-receive': 'shop-orders', 'shop-order-detail-pickup-done': 'shop-orders', 'shop-order-detail-gift-done': 'shop-orders' };
+                const backMap = { 'profile-payment-list': 'profile-home', 'profile-payment': 'profile-payment-list', 'profile-settings': 'profile-home', 'property-bill': 'profile-payment-list', 'bill-month-detail': 'property-bill', 'payment-records': 'profile-payment-list', 'record-bill-detail': 'payment-records', 'record-month-detail': 'record-bill-detail', 'profile-rebate-all': 'profile-home', 'profile-rebate-earned': 'profile-home', 'profile-rebate-deducted': 'profile-home', 'profile-shopping-all': 'profile-home', 'profile-shopping-detail': 'profile-shopping-all', 'profile-shopping-recharge': 'profile-shopping-all', 'profile-shopping-consume': 'profile-shopping-all', 'profile-coupon-all': 'profile-home', 'profile-coupon-used': 'profile-home', 'profile-coupon-expired': 'profile-home', 'profile-coupon-qrcode': 'profile-coupon-all', 'profile-coupon-center': 'profile-coupon-all', 'shop-login': 'shop-home', 'shop-member-code': 'shop-home', 'shop-wecom': 'shop-home', 'shop-orders': 'profile-home', 'shop-orders-v2': 'profile-home', 'shop-order-detail-home-pay': 'shop-orders', 'shop-order-detail-home-ship': 'shop-orders', 'shop-order-detail-home-receive': 'shop-orders', 'shop-order-detail-home-done': 'shop-orders', 'shop-order-detail-pickup-pay': 'shop-orders', 'shop-order-detail-pickup-ship': 'shop-orders', 'shop-order-detail-pickup-receive': 'shop-orders', 'shop-order-detail-pickup-done': 'shop-orders', 'shop-order-detail-gift-done': 'shop-orders' };
                 if (backMap[cur]) {
                     switchPage(backMap[cur]);
                 }
