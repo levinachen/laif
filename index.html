@@ -1046,6 +1046,39 @@
             background: transparent;
             margin-top: auto;
         }
+        /* ====== 微信原生长按半屏弹窗（企微码场景）====== */
+        .wc-sheet-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.5); z-index: 9998; display: none; }
+        .wc-sheet-overlay.show { display: block; }
+        .wc-sheet {
+            position: absolute; left: 0; right: 0; bottom: 0;
+            background: #F7F7F7;
+            border-radius: 12px 12px 0 0;
+            padding: 8px;
+            padding-bottom: calc(8px + env(safe-area-inset-bottom));
+            transform: translateY(100%);
+            transition: transform 0.28s ease;
+        }
+        .wc-sheet-overlay.show .wc-sheet { transform: translateY(0); }
+        .wc-sheet-group { background: #FFFFFF; border-radius: 10px; overflow: hidden; margin-bottom: 8px; }
+        .wc-sheet-item {
+            height: 52px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            font-size: 16px; color: #1D1D1D; line-height: 22px;
+            cursor: pointer; user-select: none;
+            position: relative;
+        }
+        .wc-sheet-item:active { background: #F5F5F5; }
+        .wc-sheet-item:not(:last-child)::after {
+            content: ''; position: absolute; left: 0; right: 0; bottom: 0;
+            height: 0.5px; background: #E5E5E5;
+        }
+        .wc-sheet-item-desc { font-size: 12px; color: #828282; line-height: 18px; }
+        .wc-sheet-cancel {
+            background: #FFFFFF; border-radius: 10px; padding: 14px 0;
+            font-size: 16px; color: #1D1D1D; text-align: center;
+            cursor: pointer; user-select: none;
+        }
+        .wc-sheet-cancel:active { background: #F5F5F5; }
         /* ====== 确认订单页专用样式 ====== */
         .co-page {
             background: #F9F9F9;
@@ -2148,16 +2181,33 @@
             font-family: inherit;
         }
         .addr-form-input::placeholder { color: #BDBDBD; }
-        .addr-form-value {
+        .addr-form-value-wrap {
             flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 2px;
+            cursor: pointer;
+            min-height: 28px;
+        }
+        .addr-form-value {
             font-size: 14px;
             color: #BDBDBD;
-            cursor: pointer;
+            line-height: 20px;
         }
         .addr-form-value.filled { color: #333333; }
+        .addr-form-region {
+            font-size: 12px;
+            color: #999999;
+            line-height: 16px;
+            display: none;
+        }
+        .addr-form-region.show { display: block; }
         .addr-form-arrow {
             color: #BDBDBD;
             font-size: 14px;
+            align-self: center;
+            margin-left: 8px;
         }
         /* 表单校验错误态 */
         .addr-form-row.invalid { border-bottom-color: #F24333; }
@@ -19599,7 +19649,7 @@
         // ====== 页面数据：交互注释 + 需求文档 + 状态清单 ======
         const pages = {
             'shop-home': {
-                title: '徕芙会员超市',
+                title: '徕芙会员优选',
                 mainNav: 'shop',
                 render: 'shopHome',
                 interactionNotes: [
@@ -19702,6 +19752,8 @@
                 interactionNotes: [
                     { id: 1, title: '进入方式', type: 'interaction', target: '[data-action="mh-func-wecom"]', content: '商城首页（任意登录状态）点击"添加企微"功能卡 → 跳转添加企微页（无需登录）' },
                     { id: 2, title: '返回', type: 'interaction', target: '.mobile-header-back', content: '点击导航栏左侧返回按钮 → 返回商城首页' },
+                    { id: 3, title: '长按二维码', type: 'interaction', target: '[data-action="long-press-qr"]', content: '用户长按企微二维码（≥500ms）→ 从底部弹出微信原生半屏操作面板（Action Sheet），遮罩层半透明黑底，点击遮罩或"取消"关闭。面板分组展示：①转发给朋友、②收藏、③保存图片；④下方灰色小字"打开对方的企业微信名片"+ 主行"徕芙会员优选"。点击任一项执行对应操作后自动关闭面板。' },
+                    { id: 4, title: '面板选项', type: 'state', target: '.wc-sheet-group', content: '面板项自上而下：转发给朋友（唤起微信转发面板）、收藏（收藏当前二维码图片）、保存图片（保存至相册）、打开对方的企业微信名片（主行文案"徕芙会员优选"，点击打开企微名片完成添加）。面板项均无图标，纯文字居中。' }
                 ],
                 requirementDoc: {
                     title: '添加企微页需求文档',
@@ -19710,10 +19762,18 @@
                         { title: '1.0 需求背景', paragraphs: ['引导会员添加企微福利官，沉淀私域流量，便于后续福利触达与运营。'] },
                         { title: '2.0 页面入口', paragraphs: ['商城首页（任意登录状态）"添加企微"功能卡（无需登录）'] },
                         { title: '3.0 页面结构', paragraphs: ['福利官卡片：标题"徕芙会员福利官" + 副文案"添加解锁更多福利" + 品牌 Logo', '企微二维码（170×170）', '引导文案"请长按识别或微信扫码二维码去添加"'] },
-                        { title: '4.0 交互说明', paragraphs: ['页面为静态展示，用户长按识别或扫码二维码完成添加', '点击导航栏返回 → 返回商城首页'] }
+                        { title: '4.0 交互说明', paragraphs: ['页面为静态展示，用户可长按或扫码二维码完成添加', '点击导航栏返回 → 返回商城首页', '用户长按企微二维码（≥500ms）触发微信原生半屏弹窗（Action Sheet），弹窗自下而上滑入，遮罩层半透明黑底可点击关闭。弹窗选项分组：第一组依次为「转发给朋友」「收藏」「保存图片」；第二组为「打开对方的企业微信名片」灰色说明 + 主行「徕芙会员优选」；底部独立「取消」按钮。点击任一选项执行对应操作后弹窗自动关闭。'] }
                     ]
                 },
-                statusList: []
+                statusList: [
+                    { block: '企微二维码', state: '默认展示', trigger: '页面加载', ui: '静态展示二维码 + 引导文案"请长按识别或微信扫码二维码去添加"' },
+                    { block: '长按二维码', state: '触发面板', trigger: '长按二维码 ≥500ms', ui: '从底部弹出微信原生半屏 Action Sheet（遮罩半透明，自下而上滑入）' },
+                    { block: '操作面板', state: '转发给朋友', trigger: '点击"转发给朋友"', ui: '关闭面板，唤起微信原生转发面板' },
+                    { block: '操作面板', state: '收藏', trigger: '点击"收藏"', ui: '关闭面板，收藏当前二维码图片' },
+                    { block: '操作面板', state: '保存图片', trigger: '点击"保存图片"', ui: '关闭面板，二维码保存至相册' },
+                    { block: '操作面板', state: '打开企微名片', trigger: '点击"徕芙会员优选"', ui: '关闭面板，打开对方企业微信名片完成添加' },
+                    { block: '操作面板', state: '关闭', trigger: '点击遮罩或"取消"', ui: '面板自下而上滑出消失' }
+                ]
             },
             'shop-search': {
                 title: '搜索商品',
@@ -19954,12 +20014,15 @@
                 render: 'shopAddressAdd',
                 placeholder: { icon: 'fa fa-map-marker', title: '新增收货地址', desc: '填写收货人、手机号、收货地址等信息' },
                 interactionNotes: [
-                    { id: 1, title: '表单字段', type: 'state', content: '收货人（文本输入）、手机号（11位数字）、收货地址（点击跳转地图选点）、门牌号（文本输入）、标签（家/家人/朋友，默认选中"家"）。' },
+                    { id: 1, title: '表单字段', type: 'state', content: '收货人（文本输入）、手机号（11位数字）、收货地址（点击跳转地图选点；选点回填后双行展示：第一行 POI 名称黑色，第二行省市区灰色，不显示街道）、门牌号（文本输入）、标签（家/家人/朋友，默认选中"家"）。' },
                     { id: 2, title: '保存按钮', type: 'interaction', content: '收货人、手机号、收货地址、门牌号均填写后，"保存地址"按钮由灰色禁用态变为深灰可点击态。点击保存后返回地址选择弹窗并展示新增地址。' },
-                    { id: 3, title: '收货地址选点', type: 'interaction', content: '点击"收货地址"行跳转至地图选点页，选择附近 POI 后回填小区/大厦名称。' }
+                    { id: 3, title: '收货地址选点', type: 'interaction', content: '点击"收货地址"行跳转至地图选点页，选择附近 POI 后回填至新增收货地址页：收货地址行以双行展示，第一行为 POI 名称（黑色），第二行为省市区（灰色，不显示街道）。' }
                 ],
                 requirementDoc: null,
-                statusList: []
+                statusList: [
+                    { block: '收货地址', state: '未选择', trigger: '页面加载', ui: '收货地址行单行显示占位文案"选择收货地址"（灰色）' },
+                    { block: '收货地址', state: '已选择', trigger: '地图选点返回', ui: '收货地址行双行展示：第一行 POI 名称（黑色），第二行省市区（灰色，不显示街道）' }
+                ]
             },
             'shop-address-map': {
                 title: '选择收货地址',
@@ -19970,7 +20033,7 @@
                     { id: 1, title: '地图定位', type: 'state', content: '地图默认显示用户当前定位的位置，中心点为蓝色定位光标，用户可在地图上拖动调整选点。' },
                     { id: 2, title: '城市切换', type: 'interaction', content: '点击左上角城市（泉州市 ▼）跳转城市选择页，可切换当前支持配送的城市。切换后地图中心移至所选城市。' },
                     { id: 3, title: '搜索地址', type: 'interaction', content: '点击顶部搜索框进入地址搜索，输入关键字后展示匹配的 POI 结果，点击结果项定位至对应地图位置。' },
-                    { id: 4, title: '附近地址', type: 'interaction', content: '底部弹层展示当前定位附近的 POI 列表，每项含名称、地址。点击 POI 项回填至新增收货地址页的收货地址字段。' }
+                    { id: 4, title: '附近地址', type: 'interaction', content: '底部弹层展示当前定位附近的 POI 列表，每项含名称、地址。点击 POI 项回填至新增收货地址页的收货地址行，以双行展示（POI 名称 + 省市区，不显示街道）。' }
                 ],
                 requirementDoc: {
                     title: '选择收货地址需求文档',
@@ -19987,7 +20050,7 @@
                     { block: '地图', state: '拖动调整', trigger: '拖动地图', ui: '选点位置更新，附近 POI 列表同步刷新' },
                     { block: '搜索', state: '输入关键字', trigger: '点击搜索框输入', ui: '展示匹配 POI 结果列表' },
                     { block: '城市切换', state: '选择城市', trigger: '点击左上角城市入口', ui: '跳转城市选择页，选择后地图移至所选城市' },
-                    { block: '附近地址', state: '选择 POI', trigger: '点击 POI 列表项', ui: '回填收货地址字段并返回新增地址页' }
+                    { block: '附近地址', state: '选择 POI', trigger: '点击 POI 列表项', ui: '回填至新增收货地址页，收货地址行双行展示（POI 名称 + 省市区，不显示街道）' }
                 ]
             },
             'shop-city-select': {
@@ -21706,7 +21769,7 @@
                         <!-- 登录引导弹窗（扫码进入未登录态触发） -->
                         <div class="mh-login-mask" id="mh-login-dialog" style="display:none;">
                             <div class="mh-login-dialog">
-                                <div class="mh-login-dialog-body">欢迎登录徕芙会员超市，登录后解锁更多优惠</div>
+                                <div class="mh-login-dialog-body">欢迎登录徕芙会员，登录后解锁更多优惠</div>
                                 <div class="mh-login-dialog-btns">
                                     <button class="mh-login-dialog-btn mh-cancel" data-action="mh-login-dismiss">暂不登录</button>
                                     <button class="mh-login-dialog-btn mh-confirm" data-action="mh-login-go">去登录</button>
@@ -21776,10 +21839,25 @@
                                 </div>
                                 <img class="wc-logo" src="figma-images/wecom-logo.png" alt="Logo">
                             </div>
-                            <img class="wc-qr" src="figma-images/qr-wecom-member.png" alt="企微二维码" data-block="wc-qr">
+                            <img class="wc-qr" src="figma-images/qr-wecom-member.png" alt="企微二维码" data-block="wc-qr" data-action="long-press-qr">
                             <div class="wc-tip">请长按识别或微信扫码二维码去添加</div>
                         </div>
                         <div class="nav-home-indicator"><div class="ios-home-indicator"></div></div>
+                        <!-- 微信原生长按半屏弹窗 -->
+                        <div class="wc-sheet-overlay" data-role="wc-sheet-overlay">
+                            <div class="wc-sheet">
+                                <div class="wc-sheet-group">
+                                    <div class="wc-sheet-item" data-wc-action="forward">转发给朋友</div>
+                                    <div class="wc-sheet-item" data-wc-action="favorite">收藏</div>
+                                    <div class="wc-sheet-item" data-wc-action="save-image">保存图片</div>
+                                    <div class="wc-sheet-item" data-wc-action="open-wecom">
+                                        <span class="wc-sheet-item-desc">打开对方的企业微信名片</span>
+                                        <span>徕芙会员优选</span>
+                                    </div>
+                                </div>
+                                <div class="wc-sheet-cancel" data-wc-action="cancel">取消</div>
+                            </div>
+                        </div>
                     </div>
                 `;
             },
@@ -22349,7 +22427,10 @@
                             <div class="addr-form-error" data-error-for="phone"></div>
                             <div class="addr-form-row" data-action="pick-community">
                                 <span class="addr-form-label">收货地址</span>
-                                <span class="addr-form-value" data-role="community-text">选择收货地址</span>
+                                <div class="addr-form-value-wrap">
+                                    <span class="addr-form-value" data-role="community-text">选择收货地址</span>
+                                    <span class="addr-form-region" data-role="community-region"></span>
+                                </div>
                                 <span class="addr-form-arrow">›</span>
                             </div>
                             <div class="addr-form-error" data-error-for="community"></div>
@@ -22379,10 +22460,10 @@
             shopAddressMap: function() {
                 // 模拟附近 POI 列表（含距门店距离，用于判断3km配送支持）
                 const nearbyList = [
-                    { name: '狮城帝苑5幢', addr: '泉州市晋江市梅岭街道狮城帝苑5幢2梯0502', dist: 1.2 },
-                    { name: '中骏·四季花城A区', addr: '泉州市晋江市青阳街道中骏·四季花城A区3栋', dist: 2.5 },
-                    { name: '万达广场(晋江店)', addr: '泉州市晋江市青阳街道世纪大道999号万达广场', dist: 3.8 },
-                    { name: '宝龙广场写字楼', addr: '泉州市晋江市梅岭街道宝龙广场1号楼18层', dist: 0.8 }
+                    { name: '时代商务中心', addr: '灵秀镇华山工业区石泉路', region: '福建省泉州市石狮市', dist: 0.1 },
+                    { name: '石狮恒信空压机电总汇永磁变频电动叉车', addr: '石泉路487-489号', region: '福建省泉州市石狮市', dist: 0.3 },
+                    { name: '福诚(中国)有限公司', addr: '恒宇商贸中心西门旁', region: '福建省泉州市石狮市', dist: 0.4 },
+                    { name: '恒宇商贸中心', addr: '灵秀镇石泉路蔡衍羽大厦', region: '福建省泉州市石狮市', dist: 0.5 }
                 ];
                 const mapSvg = `<svg class="addr-map-svg" viewBox="0 0 375 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
                     <rect width="375" height="300" fill="#E8EAED"/>
@@ -22463,10 +22544,10 @@
             shopAddressStation: function() {
                 // 模拟履约站关联的已开通服务小区列表
                 const stationList = [
-                    { name: '狮城帝苑', stationName: '狮城帝苑站', addr: '石狮市子芳路974号', dist: '353m' },
-                    { name: '千聪华庭', stationName: '千聪华庭站', addr: '地址地址地址地址地址', dist: '8.1km' },
-                    { name: '尚德小区', stationName: '尚德小区站', addr: '地址地址地址地址', dist: '9.5km' },
-                    { name: '高阳华庭', stationName: '高阳华庭站', addr: '地址地址地址地址', dist: '9.5km' }
+                    { name: '狮城帝苑', stationName: '狮城帝苑站', addr: '石狮市子芳路974号', region: '福建省泉州市石狮市', dist: '353m' },
+                    { name: '千聪华庭', stationName: '千聪华庭站', addr: '地址地址地址地址地址', region: '福建省泉州市晋江市', dist: '8.1km' },
+                    { name: '尚德小区', stationName: '尚德小区站', addr: '地址地址地址地址', region: '福建省泉州市晋江市', dist: '9.5km' },
+                    { name: '高阳华庭', stationName: '高阳华庭站', addr: '地址地址地址地址', region: '福建省泉州市晋江市', dist: '9.5km' }
                 ];
                 const items = stationList.map(s => `
                     <div class="station-item" data-station='${JSON.stringify(s)}'>
@@ -23881,6 +23962,60 @@
                     stat.addEventListener('click', () => switchPage(stat.dataset.target));
                 });
             }
+            if (pageId === 'shop-wecom') {
+                // ====== 添加企微页：长按二维码弹出微信原生半屏弹窗 ======
+                const qrEl = document.querySelector('#mobile-content [data-action="long-press-qr"]');
+                const overlay = document.querySelector('#mobile-content [data-role="wc-sheet-overlay"]');
+                const toastEl = document.querySelector('#mobile-content [data-role="addr-toast"]') || document.querySelector('#mobile-content .co-toast');
+                let toastTimer = null;
+                const showWcToast = (msg) => {
+                    let el = toastEl;
+                    if (!el) {
+                        el = document.createElement('div');
+                        el.className = 'co-toast';
+                        el.setAttribute('data-role', 'addr-toast');
+                        document.querySelector('#mobile-content .wc-page').appendChild(el);
+                    }
+                    el.textContent = msg;
+                    el.classList.add('show');
+                    clearTimeout(toastTimer);
+                    toastTimer = setTimeout(() => el.classList.remove('show'), 1600);
+                };
+                const showSheet = () => overlay && overlay.classList.add('show');
+                const hideSheet = () => overlay && overlay.classList.remove('show');
+                if (qrEl && overlay) {
+                    // 长按触发（兼容桌面与移动端）
+                    let pressTimer = null;
+                    const startPress = () => {
+                        clearTimeout(pressTimer);
+                        pressTimer = setTimeout(showSheet, 500);
+                    };
+                    const cancelPress = () => clearTimeout(pressTimer);
+                    qrEl.addEventListener('mousedown', startPress);
+                    qrEl.addEventListener('mouseup', cancelPress);
+                    qrEl.addEventListener('mouseleave', cancelPress);
+                    qrEl.addEventListener('touchstart', startPress, { passive: true });
+                    qrEl.addEventListener('touchend', cancelPress);
+                    qrEl.addEventListener('touchmove', cancelPress);
+                    qrEl.addEventListener('contextmenu', (e) => { e.preventDefault(); showSheet(); });
+                }
+                // 点击遮罩关闭
+                if (overlay) overlay.addEventListener('click', (e) => { if (e.target === overlay) hideSheet(); });
+                // 弹窗选项
+                document.querySelectorAll('#mobile-content [data-wc-action]').forEach(item => {
+                    item.addEventListener('click', () => {
+                        const action = item.dataset.wcAction;
+                        hideSheet();
+                        switch (action) {
+                            case 'forward': showWcToast('已唤起微信转发面板'); break;
+                            case 'favorite': showWcToast('已收藏'); break;
+                            case 'save-image': showWcToast('图片已保存至相册'); break;
+                            case 'open-wecom': showWcToast('已打开企业微信名片'); break;
+                            case 'cancel': break;
+                        }
+                    });
+                });
+            }
             if (pageId === 'shop-checkout') {
                 // 商品总价（用于配送费满免判断及底部合计展示）
                 const productTotalForCheckout = 39.5;
@@ -24914,6 +25049,7 @@
                 const phoneInput = form.querySelector('[data-field="phone"]');
                 const houseInput = form.querySelector('[data-field="house"]');
                 const communityText = form.querySelector('[data-role="community-text"]');
+                const regionEl = form.querySelector('[data-role="community-region"]');
                 const saveBtn = document.querySelector('#mobile-content [data-action="save-addr"]');
                 const toastEl = document.querySelector('#mobile-content [data-role="addr-toast"]');
                 let toastTimer = null;
@@ -24961,6 +25097,13 @@
                 if (state.formData.community) {
                     communityText.textContent = state.formData.community;
                     communityText.classList.add('filled');
+                    if (regionEl && state.formData.region) {
+                        regionEl.textContent = state.formData.region;
+                        regionEl.classList.add('show');
+                    }
+                } else if (regionEl) {
+                    regionEl.textContent = '';
+                    regionEl.classList.remove('show');
                 }
                 if (state.formData.tag) {
                     form.querySelectorAll('.addr-tag').forEach(t => {
@@ -25054,6 +25197,7 @@
                     item.addEventListener('click', () => {
                         const poi = JSON.parse(item.dataset.poi);
                         state.formData.community = poi.name;
+                        state.formData.region = poi.region || ''; // 省市区（不显示街道）
                         state.formData.street = ''; // 地址精确到省市区，不显示街道
                         state.formData.dist = poi.dist;
                         state.formData.serviceCommunity = false;
@@ -25098,6 +25242,7 @@
                     item.addEventListener('click', () => {
                         const s = JSON.parse(item.dataset.station);
                         state.formData.community = s.name;
+                        state.formData.region = s.region || ''; // 省市区（不显示街道）
                         state.formData.stationName = s.stationName || (s.name + '站');
                         state.formData.street = s.addr || ''; // 履约站关联的街道地址
                         // 距离统一换算为公里（353m → 0.353，8.1km → 8.1）
