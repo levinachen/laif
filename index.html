@@ -3746,6 +3746,8 @@
         .order-more-pop .order-more-item:active { background: #F5F5F5; }
         /* 订单卡片置灰按钮（超售后期的申请售后 / 配送中的取消订单） */
         .orders-page.v1 .order-btn.disabled { border: 1px solid #E0E0E0; color: #BDBDBD; background: #F7F7F7; cursor: not-allowed; }
+        /* 订单详情页置灰按钮（配送中的取消订单） */
+        .order-detail-page .order-btn.disabled { border: 1px solid #E0E0E0; color: #BDBDBD; background: #F7F7F7; cursor: not-allowed; }
         /* 赠品兑换卡片 - 统一 */
         .orders-page.v1 .gift-card .gift-product-row { display: flex; align-items: center; gap: 8px; }
         .orders-page.v1 .gift-card .gift-product-img { width: 72px; height: 72px; border-radius: 8px; background: #E0E0E0; overflow: hidden; flex-shrink: 0; }
@@ -21100,7 +21102,7 @@
                     { block: '状态Tab', state: '待评价', trigger: '点击「待评价」Tab', ui: '无订单，展示空状态+「逛一逛」按钮' },
                     { block: '骑手履约', state: '骑手正赶往门店', trigger: '骑手已接单未取到货', ui: '状态标签「骑手正赶往门店」，按钮：取消订单 / 确认收货' },
                     { block: '骑手履约', state: '配送中', trigger: '骑手取到货开始配送', ui: '状态标签「配送中」，取消订单按钮置灰（点击弹窗提示无法取消），确认收货可用' },
-                    { block: '卡片操作', state: '订单详情', trigger: '点击订单卡片', ui: '跳转对应订单详情页' },
+                    { block: '卡片操作', state: '订单详情', trigger: '点击订单卡片', ui: '跳转对应订单详情页；待收货订单详情页状态标题同步展示骑手履约子状态（骑手正赶往门店 / 配送中），底部含取消订单按钮（配送中置灰）' },
                     { block: '卡片操作', state: '立即支付', trigger: '点击立即支付按钮', ui: 'Toast提示「调用微信支付」' },
                     { block: '卡片操作', state: '再买一单', trigger: '点击再买一单按钮', ui: '弹出再买一单弹窗，可加入购物车' },
                     { block: '卡片操作', state: '申请售后（有效期内）', trigger: '点击已完成订单「申请售后」按钮', ui: '跳转申请售后页' },
@@ -21193,14 +21195,19 @@
                 mainNav: 'shop',
                 render: 'shopOrderDetailHomeReceive',
                 interactionNotes: [
-                    { id: 1, title: '状态头部', type: 'state', target: '.od-status-bar', content: '展示「待收货」，提示商品在路上了' },
+                    { id: 1, title: '状态头部', type: 'state', target: '.od-status-bar', content: '待收货订单按骑手履约子状态展示标题：\n骑手正赶往门店：副文案「商品在路上了」\n配送中：副文案「商品在路上了」\n（从订单列表对应状态的卡片进入详情页，展示对应子状态文案）' },
                     { id: 2, title: '配送信息', type: 'state', target: '.od-card:nth-child(1)', content: '展示收货人、联系电话、收货地址' },
                     { id: 3, title: '商品与价格明细', type: 'state', target: '.od-card:nth-child(2)', content: '商品信息：单商品展示商品图+名称+规格+「共N件 ›」；多商品展示商品图册+「共N件 ›」\n价格明细：商品总价 + 配送费¥0.00 - 回馈金抵扣¥2.00 - 购物金抵扣¥6.00 = 实付¥31.50' },
                     { id: 4, title: '订单信息', type: 'state', target: '.od-card:nth-child(3)', content: '订单号（点击「复制」可复制，按钮短暂变为「已复制」）、下单时间、支付时间、发货时间、支付方式（微信支付）、订单备注\n注：待收货状态不显示完成时间' },
-                    { id: 5, title: '底部操作', type: 'interaction', target: '.od-bottom-bar', content: '左侧「客服」按钮 → 跳转客服功能\n「确认收货」按钮 → 弹出确认弹窗「请确认已收到商品」，确认后跳转已完成订单详情页' }
+                    { id: 5, title: '底部操作', type: 'interaction', target: '.od-bottom-bar', content: '左侧「客服」按钮 → 跳转客服功能\n「取消订单」按钮：骑手正赶往门店（骑手未取到货）可点击，弹出确认弹窗取消订单；配送中（骑手已取到货）按钮置灰，点击弹窗「无法取消订单：骑手配送中，暂无法取消订单。收货后如有问题可申请售后或联系在线客服。」\n「确认收货」按钮 → 弹出确认弹窗「请确认已收到商品」，确认后跳转已完成订单详情页' }
                 ],
                 statusList: [
-                    { block: '底部按钮', state: '待收货', trigger: '页面加载', ui: '客服 + 确认收货' },
+                    { block: '状态头部', state: '骑手正赶往门店', trigger: '从「骑手正赶往门店」订单卡片进入', ui: '标题「骑手正赶往门店」，副文案「商品在路上了」' },
+                    { block: '状态头部', state: '配送中', trigger: '从「配送中」订单卡片进入', ui: '标题「配送中」，副文案「商品在路上了」' },
+                    { block: '底部按钮', state: '骑手正赶往门店', trigger: '页面加载', ui: '客服 + 取消订单（可点击）+ 确认收货' },
+                    { block: '底部按钮', state: '配送中', trigger: '页面加载', ui: '客服 + 取消订单（置灰）+ 确认收货' },
+                    { block: '取消订单', state: '骑手正赶往门店', trigger: '点击「取消订单」并确认', ui: '弹窗确认后订单取消，返回订单列表' },
+                    { block: '取消订单', state: '配送中置灰', trigger: '点击置灰「取消订单」', ui: '弹窗「无法取消订单：骑手配送中…」，按钮：取消 / 联系客服' },
                     { block: '确认收货', state: '已收货', trigger: '点击「确认收货」并确认', ui: '跳转已完成订单详情页' },
                     { block: '复制订单号', state: '已复制', trigger: '点击「复制」', ui: '按钮文案短暂变为「已复制」，1.5秒后恢复' }
                 ]
@@ -26076,8 +26083,8 @@
                 const ordersData = [
                     { id: 'P001', typeText: '极速达', status: 'pay', statusText: '待付款', countdown: '23:58:12', timeLabel: '下单时间', time: '2026-05-22 16:41:35', title: '迷你手持风扇', count: 6, total: 39.90, priceLabel: '实付', img: productImg, detailPage: 'shop-order-detail-home-pay', actions: [{ text: '取消订单', cls: 'order-btn-outline', action: 'cancel-order' }, { text: '立即支付', cls: 'order-btn-primary', action: 'pay-now' }] },
                     { id: 'S001', typeText: '极速达', status: 'ship', statusText: '待发货', timeLabel: '下单时间', time: '2026-05-22 16:41:35', title: '迷你手持风扇', count: 2, total: 39.90, priceLabel: '实付', img: productImg, detailPage: 'shop-order-detail-home-ship', actions: [{ text: '取消订单', cls: 'order-btn-outline', action: 'cancel-order' }, { text: '再买一单', cls: 'order-btn-primary', action: 'buy-again' }] },
-                    { id: 'R001', typeText: '极速达', status: 'receive', statusText: '骑手正赶往门店', timeLabel: '下单时间', time: '2026-05-22 16:41:35', title: '迷你手持风扇', count: 2, total: 39.90, priceLabel: '实付', img: productImg, detailPage: 'shop-order-detail-home-receive', actions: [{ text: '取消订单', cls: 'order-btn-outline', action: 'cancel-order' }, { text: '确认收货', cls: 'order-btn-primary', action: 'confirm-receive' }] },
-                    { id: 'R002', typeText: '极速达', status: 'receive', statusText: '配送中', timeLabel: '下单时间', time: '2026-05-22 16:41:35', title: '迷你手持风扇', count: 2, total: 39.90, priceLabel: '实付', img: productImg, detailPage: 'shop-order-detail-home-receive', actions: [{ text: '取消订单', cls: 'order-btn-outline disabled', action: 'cancel-disallowed' }, { text: '确认收货', cls: 'order-btn-primary', action: 'confirm-receive' }] },
+                    { id: 'R001', typeText: '极速达', status: 'receive', statusText: '骑手正赶往门店', timeLabel: '下单时间', time: '2026-05-22 16:41:35', title: '迷你手持风扇', count: 2, total: 39.90, priceLabel: '实付', img: productImg, detailPage: 'shop-order-detail-home-receive', stage: 'going', actions: [{ text: '取消订单', cls: 'order-btn-outline', action: 'cancel-order' }, { text: '确认收货', cls: 'order-btn-primary', action: 'confirm-receive' }] },
+                    { id: 'R002', typeText: '极速达', status: 'receive', statusText: '配送中', timeLabel: '下单时间', time: '2026-05-22 16:41:35', title: '迷你手持风扇', count: 2, total: 39.90, priceLabel: '实付', img: productImg, detailPage: 'shop-order-detail-home-receive', stage: 'delivering', actions: [{ text: '取消订单', cls: 'order-btn-outline disabled', action: 'cancel-disallowed' }, { text: '确认收货', cls: 'order-btn-primary', action: 'confirm-receive' }] },
                     { id: 'E001', typeText: '极速达', status: 'evaluate', statusText: '已完成', timeLabel: '下单时间', time: '2026-05-22 16:41:35', title: '迷你手持风扇', count: 6, total: 39.90, priceLabel: '实付', img: productImg, detailPage: 'shop-order-detail-home-done', actions: [{ text: '更多', cls: 'order-btn-plain', action: 'more-actions' }, { text: '申请售后', cls: 'order-btn-outline', action: 'apply-after-sale' }, { text: '再买一单', cls: 'order-btn-primary', action: 'buy-again' }] },
                     { id: 'C001', typeText: '极速达', status: 'cancel', statusText: '已取消', timeLabel: '下单时间', time: '2026-05-22 16:41:35', title: '迷你手持风扇', count: 6, total: 39.90, priceLabel: '总额', img: productImg, detailPage: 'shop-order-detail-home-pay', actions: [{ text: '删除订单', cls: 'order-btn-outline', action: 'delete-order' }, { text: '再买一单', cls: 'order-btn-primary', action: 'buy-again' }] },
                     { id: 'C002', typeText: '极速达', status: 'done', statusText: '已完成', timeLabel: '下单时间', time: '2026-05-22 16:41:35', title: '迷你手持风扇', count: 3, total: 31.50, priceLabel: '实付', img: productImg, detailPage: 'shop-order-detail-home-coupon', actions: [{ text: '更多', cls: 'order-btn-plain', action: 'more-actions' }, { text: '申请售后', cls: 'order-btn-outline disabled', action: 'after-sale-expired' }, { text: '再买一单', cls: 'order-btn-primary', action: 'buy-again' }] },
@@ -26152,7 +26159,7 @@
                         </div>`;
                     }
                     return `
-                    <div class="order-card" data-detail="${order.detailPage}" data-id="${order.id}" data-status="${order.status}" data-type="${order.typeText || ''}">
+                    <div class="order-card" data-detail="${order.detailPage}" data-id="${order.id}" data-status="${order.status}" data-type="${order.typeText || ''}"${order.stage ? ` data-stage="${order.stage}"` : ''}>
                         <div class="order-card-header">
                             ${typeTag}
                             <div class="order-card-header-right">
@@ -26288,7 +26295,7 @@
             // ====== 订单详情通用渲染函数 ======
             shopOrderDetailHomePay: function() { return renderShopOrderDetail('home', 'pay'); },
             shopOrderDetailHomeShip: function() { return renderShopOrderDetail('home', 'ship'); },
-            shopOrderDetailHomeReceive: function() { return renderShopOrderDetail('home', 'receive'); },
+            shopOrderDetailHomeReceive: function() { return renderShopOrderDetail('home', 'receive', { receiveStage: window.__orderReceiveStage }); },
             shopOrderDetailHomeDone: function() { return renderShopOrderDetail('home', 'done'); },
             shopOrderDetailHomeCoupon: function() { return renderShopOrderDetail('home', 'done', { coupon: true }); },
             shopOrderDetailPickupPay: function() { return renderShopOrderDetail('pickup', 'pay'); },
@@ -26730,6 +26737,8 @@
         function renderShopOrderDetail(type, status, opts) {
             opts = opts || {};
             const hasCoupon = opts.coupon === true;
+            // 待收货（配送到家）骑手履约子状态：going=骑手正赶往门店（可取消）；delivering=配送中（取消按钮置灰）
+            const receiveStage = opts.receiveStage === 'delivering' ? 'delivering' : 'going';
             const productImg = AI_IMG_MINI_FAN; // 迷你手持电风扇 - AI生成图片，订单页专用，无额外交互
             const serviceSvg = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2a6 6 0 0 0-6 6v3H5a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h2a2 2 0 0 0 2-2v-6h1v6a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-6h1v6a2 2 0 0 0 2 2h2a1 1 0 0 0 1-1v-7a1 1 0 0 0-1-1h-1V8a6 6 0 0 0-6-6zm-4 9V8a4 4 0 1 1 8 0v3H8z" fill="#828282"/></svg>';
             const rightArrow = '<svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="#BDBDBD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
@@ -26752,7 +26761,12 @@
                 statusBarHtml = `<div class="od-status-bar"><div class="od-status-title">待发货</div><div class="od-status-desc">商品准备中，请耐心等待</div></div>`;
             } else if (status === 'receive') {
                 if (isHome) {
-                    statusBarHtml = `<div class="od-status-bar"><div class="od-status-title">待收货</div><div class="od-status-desc">商品在路上了</div></div>`;
+                    // 待收货按骑手履约子状态区分文案：骑手正赶往门店 / 配送中
+                    if (receiveStage === 'delivering') {
+                        statusBarHtml = `<div class="od-status-bar"><div class="od-status-title">配送中</div><div class="od-status-desc">商品在路上了</div></div>`;
+                    } else {
+                        statusBarHtml = `<div class="od-status-bar"><div class="od-status-title">骑手正赶往门店</div><div class="od-status-desc">商品在路上了</div></div>`;
+                    }
                 } else {
                     statusBarHtml = `<div class="od-status-bar"><div class="od-status-title">待自提</div><div class="od-status-desc">商品已到自提点，请及时到站点自提</div></div>`;
                 }
@@ -26775,7 +26789,15 @@
             } else if (status === 'ship') {
                 bottomActions = `<button class="order-btn order-btn-primary" data-action="buy-again">再买一单</button>`;
             } else if (status === 'receive') {
-                bottomActions = `<button class="order-btn order-btn-primary" data-action="confirm-receive">${isHome ? '确认收货' : '确认自提'}</button>`;
+                if (isHome) {
+                    // 配送到家：骑手正赶往门店可取消；配送中取消按钮置灰（骑手取到货后不可取消）
+                    const cancelBtn = receiveStage === 'delivering'
+                        ? `<button class="order-btn order-btn-outline disabled" data-action="cancel-disallowed">取消订单</button>`
+                        : `<button class="order-btn order-btn-outline" data-action="cancel-order">取消订单</button>`;
+                    bottomActions = `${cancelBtn}<button class="order-btn order-btn-primary" data-action="confirm-receive">确认收货</button>`;
+                } else {
+                    bottomActions = `<button class="order-btn order-btn-primary" data-action="confirm-receive">确认自提</button>`;
+                }
             } else if (status === 'done') {
                 bottomActions = `<button class="order-btn order-btn-outline" data-action="delete-order">删除订单</button><button class="order-btn order-btn-primary" data-action="buy-again">再买一单</button>`;
             }
@@ -28906,8 +28928,8 @@
                 const ordersData = [
                     { id: 'P001', typeText: '极速达', status: 'pay', statusText: '待付款', countdown: '23:58:12', timeLabel: '下单时间', time: '2026-05-22 16:41:35', title: '迷你手持风扇', count: 6, total: 39.90, priceLabel: '实付', img: productImg, detailPage: 'shop-order-detail-home-pay', actions: [{ text: '取消订单', cls: 'order-btn-outline', action: 'cancel-order' }, { text: '立即支付', cls: 'order-btn-primary', action: 'pay-now' }] },
                     { id: 'S001', typeText: '极速达', status: 'ship', statusText: '待发货', timeLabel: '下单时间', time: '2026-05-22 16:41:35', title: '迷你手持风扇', count: 2, total: 39.90, priceLabel: '实付', img: productImg, detailPage: 'shop-order-detail-home-ship', actions: [{ text: '取消订单', cls: 'order-btn-outline', action: 'cancel-order' }, { text: '再买一单', cls: 'order-btn-primary', action: 'buy-again' }] },
-                    { id: 'R001', typeText: '极速达', status: 'receive', statusText: '骑手正赶往门店', timeLabel: '下单时间', time: '2026-05-22 16:41:35', title: '迷你手持风扇', count: 2, total: 39.90, priceLabel: '实付', img: productImg, detailPage: 'shop-order-detail-home-receive', actions: [{ text: '取消订单', cls: 'order-btn-outline', action: 'cancel-order' }, { text: '确认收货', cls: 'order-btn-primary', action: 'confirm-receive' }] },
-                    { id: 'R002', typeText: '极速达', status: 'receive', statusText: '配送中', timeLabel: '下单时间', time: '2026-05-22 16:41:35', title: '迷你手持风扇', count: 2, total: 39.90, priceLabel: '实付', img: productImg, detailPage: 'shop-order-detail-home-receive', actions: [{ text: '取消订单', cls: 'order-btn-outline disabled', action: 'cancel-disallowed' }, { text: '确认收货', cls: 'order-btn-primary', action: 'confirm-receive' }] },
+                    { id: 'R001', typeText: '极速达', status: 'receive', statusText: '骑手正赶往门店', timeLabel: '下单时间', time: '2026-05-22 16:41:35', title: '迷你手持风扇', count: 2, total: 39.90, priceLabel: '实付', img: productImg, detailPage: 'shop-order-detail-home-receive', stage: 'going', actions: [{ text: '取消订单', cls: 'order-btn-outline', action: 'cancel-order' }, { text: '确认收货', cls: 'order-btn-primary', action: 'confirm-receive' }] },
+                    { id: 'R002', typeText: '极速达', status: 'receive', statusText: '配送中', timeLabel: '下单时间', time: '2026-05-22 16:41:35', title: '迷你手持风扇', count: 2, total: 39.90, priceLabel: '实付', img: productImg, detailPage: 'shop-order-detail-home-receive', stage: 'delivering', actions: [{ text: '取消订单', cls: 'order-btn-outline disabled', action: 'cancel-disallowed' }, { text: '确认收货', cls: 'order-btn-primary', action: 'confirm-receive' }] },
                     { id: 'E001', typeText: '极速达', status: 'evaluate', statusText: '已完成', timeLabel: '下单时间', time: '2026-05-22 16:41:35', title: '迷你手持风扇', count: 6, total: 39.90, priceLabel: '实付', img: productImg, detailPage: 'shop-order-detail-home-done', actions: [{ text: '更多', cls: 'order-btn-plain', action: 'more-actions' }, { text: '申请售后', cls: 'order-btn-outline', action: 'apply-after-sale' }, { text: '再买一单', cls: 'order-btn-primary', action: 'buy-again' }] },
                     { id: 'C001', typeText: '极速达', status: 'cancel', statusText: '已取消', timeLabel: '下单时间', time: '2026-05-22 16:41:35', title: '迷你手持风扇', count: 6, total: 39.90, priceLabel: '总额', img: productImg, detailPage: 'shop-order-detail-home-pay', actions: [{ text: '删除订单', cls: 'order-btn-outline', action: 'delete-order' }, { text: '再买一单', cls: 'order-btn-primary', action: 'buy-again' }] },
                     { id: 'C002', typeText: '极速达', status: 'done', statusText: '已完成', timeLabel: '下单时间', time: '2026-05-22 16:41:35', title: '迷你手持风扇', count: 3, total: 31.50, priceLabel: '实付', img: productImg, detailPage: 'shop-order-detail-home-coupon', actions: [{ text: '更多', cls: 'order-btn-plain', action: 'more-actions' }, { text: '申请售后', cls: 'order-btn-outline disabled', action: 'after-sale-expired' }, { text: '再买一单', cls: 'order-btn-primary', action: 'buy-again' }] },
@@ -28966,7 +28988,7 @@
                         </div>`;
                     }
                     return `
-                    <div class="order-card" data-detail="${order.detailPage}" data-id="${order.id}" data-status="${order.status}" data-type="${order.typeText || ''}">
+                    <div class="order-card" data-detail="${order.detailPage}" data-id="${order.id}" data-status="${order.status}" data-type="${order.typeText || ''}"${order.stage ? ` data-stage="${order.stage}"` : ''}>
                         <div class="order-card-header">
                             ${typeTag}
                             <div class="order-card-header-right">
@@ -29014,6 +29036,10 @@
                     document.querySelectorAll('#orders-list .order-card').forEach(card => {
                         card.addEventListener('click', (e) => {
                             if (e.target.closest('button')) return;
+                            // 待收货订单：传递骑手履约子状态（骑手正赶往门店 / 配送中）至详情页
+                            if (card.dataset.detail === 'shop-order-detail-home-receive') {
+                                window.__orderReceiveStage = card.dataset.stage || 'going';
+                            }
                             switchPage(card.dataset.detail);
                         });
                     });
@@ -29237,6 +29263,16 @@
                 if (buyAgainBtn) buyAgainBtn.addEventListener('click', () => showBuyAgainPopup());
                 const cancelBtn = document.querySelector('#mobile-content [data-action="cancel-order"]');
                 if (cancelBtn) cancelBtn.addEventListener('click', () => handleOrderAction('cancel-order', cancelBtn));
+                // 配送中订单的置灰「取消订单」按钮 → 弹窗提示（骑手取到货后不可取消）
+                const cancelDisallowedBtn = document.querySelector('#mobile-content [data-action="cancel-disallowed"]');
+                if (cancelDisallowedBtn) cancelDisallowedBtn.addEventListener('click', () => {
+                    showOrderConfirmPopup({
+                        title: '无法取消订单',
+                        message: '骑手配送中，暂无法取消订单。收货后如有问题可申请售后或联系在线客服。',
+                        confirmText: '联系客服',
+                        onConfirm: () => showOrderToast('转接在线客服（演示）')
+                    });
+                });
                 const deleteBtn = document.querySelector('#mobile-content [data-action="delete-order"]');
                 if (deleteBtn) deleteBtn.addEventListener('click', () => {
                     showOrderConfirmPopup({
