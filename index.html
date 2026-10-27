@@ -20498,6 +20498,7 @@
                         { title: '1.3 本期范围（V1.1 评审确认，V1.3 更新）', list: [
                             '仅做「仅退款」，不做退货退款（不支持上门取退/到店退回），不做换货',
                             '仅对<b>已完成订单</b>开放自助售后；待发货走现有「取消订单」，待收货按骑手配送状态判定可否取消（见 5.1）',
+                            '<b>部分退款后再次申请剩余商品退款：本期暂不做</b>（评审决议）。相关时效（首单已退款终态 + 48 小时，见 5.2）、终态解锁与整单锁定规则（见 7）、行级剩余快照等说明保留为后续开放口径；原型中的相关展示仅作演示，上线时按单次申请（整单锁定）执行',
                             '退款一律不退优惠券、不退配送费（V1.3 确认）',
                             '不接入微信订阅消息，通知仅通过小程序内个人中心消息推送'
                         ]}
@@ -20534,14 +20535,14 @@
                             ['待付款', '不可', '走现有「取消订单」即可'],
                             ['待发货', '可（仅退款，整单）', '衔接现有待发货「取消订单」：已支付订单取消即触发整单退款流程，无需单独申请售后'],
                             ['待收货', '不可申请售后（可「取消订单」）', '根据骑手配送状态判断是否允许用户取消订单，骑手取到货（开始配送）后不能再取消；不开放仅退款售后，确认收货后按已完成流程申请；取消订单不发放积分与回馈金返利（权益未产生）'],
-                            ['已完成', '可（仅退款）', '支持整单或按商品勾选申请；须在签收后 48 小时内；部分退款后的剩余商品，须在首次售后单「已退款」后 48 小时内再次申请'],
+                            ['已完成', '可（仅退款）', '支持整单或按商品勾选申请；须在签收后 48 小时内；部分退款后的剩余商品，须在首次售后单「已退款」后 48 小时内再次申请（本期暂不做，预留口径，见 1.3）'],
                             ['已取消', '不可', '—'],
                             ['已兑换赠品', '不可', '走在线客服']
                         ]}},
                         { title: '5.2 其他限制', list: [
                             '<b>时限（评审确认）：</b>全品类统一，订单完成后（签收后）48 小时以内可申请；超时后订单不再出现在售后申请列表，订单卡片上的「申请售后」按钮置灰，点击提示「已超过售后期，如有问题请联系在线客服」',
-                            '<b>部分退款后二次申请时效：</b>首次售后单退款到账需 1-7 天，若沿用签收后 48 小时口径，二次申请解锁时窗口几乎必然已过；因此二次申请时效独立起算——以首次售后单到达<b>「已退款」终态时间 + 48 小时</b>为窗口（处理中/退款中订单整体锁定，不占用也不计时二次窗口）；超时后剩余商品不可自助申请，引导在线客服',
-                            '<b>次数：</b>同一订单的同一商品，售后未关闭前不可重复申请；用户撤销后可再次申请，同一订单最多 1 次（防滥用）；商家拒绝后不可再次申请，如有问题只能联系在线客服；部分退款后（已退款终态）可对<b>剩余商品/剩余数量</b>发起新售后单，新单独立编号、独立审核，每件商品只能退款一次（不与撤销/拒绝的重试次数混同）',
+                            '<b>部分退款后二次申请时效（本期暂不做，预留口径，见 1.3）：</b>首次售后单退款到账需 1-7 天，若沿用签收后 48 小时口径，二次申请解锁时窗口几乎必然已过；因此二次申请时效独立起算——以首次售后单到达<b>「已退款」终态时间 + 48 小时</b>为窗口（处理中/退款中订单整体锁定，不占用也不计时二次窗口）；超时后剩余商品不可自助申请，引导在线客服',
+                            '<b>次数：</b>同一订单的同一商品，售后未关闭前不可重复申请；用户撤销后可再次申请，同一订单最多 1 次（防滥用）；商家拒绝后不可再次申请，如有问题只能联系在线客服；部分退款后（已退款终态）可对<b>剩余商品/剩余数量</b>发起新售后单（本期暂不做，预留口径，见 1.3），新单独立编号、独立审核，每件商品只能退款一次（不与撤销/拒绝的重试次数混同）',
                             '<b>互斥：</b>售后处理中的订单，不可操作「确认收货」「删除订单」「再买一单」中与售后冲突的动作；待付款倒计时不受影响（该状态无售后）'
                         ]}
                     ]
@@ -20557,12 +20558,12 @@
                 },
                 {
                     title: '7 售后状态流转',
-                    code: '用户提交申请\n    ↓\n[待商家审核] ← 处理中：订单整体锁定\n    ↓ 商家同意            ↓ 商家拒绝            ↓ 用户撤销\n[退款中] ← 订单继续锁定   [售后关闭]              [售后关闭]\n    ↓                    → 不可再次申请，         → 可再次申请\n[已退款]（去向明细）       只能联系在线客服        （限 1 次）或联系客服\n    ↓ 部分退款时（终态）\n[订单解锁] → 剩余商品可再次申请\n    → 生成新售后单（独立编号、独立审核）\n    → 时效 = 首单「已退款」终态时间 + 48 小时（见 5.2）\n    → 全部退完后订单移出「售后申请」Tab',
+                    code: '用户提交申请\n    ↓\n[待商家审核] ← 处理中：订单整体锁定\n    ↓ 商家同意            ↓ 商家拒绝            ↓ 用户撤销\n[退款中] ← 订单继续锁定   [售后关闭]              [售后关闭]\n    ↓                    → 不可再次申请，         → 可再次申请\n[已退款]（去向明细）       只能联系在线客服        （限 1 次）或联系客服\n    ↓ 部分退款时（终态）——本期暂不做，预留口径（见 1.3）\n[订单解锁] → 剩余商品可再次申请\n    → 生成新售后单（独立编号、独立审核）\n    → 时效 = 首单「已退款」终态时间 + 48 小时（见 5.2）\n    → 全部退完后订单移出「售后申请」Tab',
                     list: [
                         '全流程无退货环节（待退货/待验收状态不存在）',
                         '<b>处理中订单整体锁定：</b>售后单处于「待商家审核 / 退款中」期间，<b>整个订单锁定</b>——不允许对该订单的剩余商品/数量发起第二个售后单（原因：二次退款的金额计算依赖首单结果的守恒口径，且并发会造成在途金额口径混乱）；锁定期间订单同时从「售后申请」Tab 移出展示',
-                        '<b>终态解锁规则：</b>售后单到达终态后订单解锁——\n· 已退款：部分退款的订单回到「售后申请」Tab（「部分已退款」标记），仅剩余商品/数量可勾选，二次申请生成<b>新售后单</b>（独立编号、独立审核，每件商品只能退款一次；时效 = 首单已退款终态 + 48 小时，见 5.2）；\n· 售后关闭（商家拒绝）：订单解锁但不可再次申请，只能联系在线客服；\n· 售后关闭（用户撤销）：订单解锁，可再次申请（同一订单限 1 次）。\n注意：撤销/拒绝的「再次申请」是<b>同一单重来</b>（重新全量勾选），与部分退款的「二次申请新单退剩余」是两条独立规则，勿混同实现',
-                        '<b>守恒校验：</b>无扣回项时，同一订单多次售后单的累计退款恒等于 实付 − 配送费；剩余商品全部退完后订单移出「售后申请」Tab',
+                        '<b>终态解锁规则：</b>售后单到达终态后订单解锁——\n· 已退款（本期暂不做，预留口径，见 1.3）：部分退款的订单回到「售后申请」Tab（「部分已退款」标记），仅剩余商品/数量可勾选，二次申请生成<b>新售后单</b>（独立编号、独立审核，每件商品只能退款一次；时效 = 首单已退款终态 + 48 小时，见 5.2）；\n· 售后关闭（商家拒绝）：订单解锁但不可再次申请，只能联系在线客服；\n· 售后关闭（用户撤销）：订单解锁，可再次申请（同一订单限 1 次）。\n注意：撤销/拒绝的「再次申请」是<b>同一单重来</b>（重新全量勾选），与部分退款的「二次申请新单退剩余」是两条独立规则，勿混同实现',
+                        '<b>守恒校验：</b>无扣回项时，同一订单多次售后单的累计退款恒等于 实付 − 配送费；剩余商品全部退完后订单移出「售后申请」Tab（多次售后单场景本期暂不做，预留口径，见 1.3）',
                         '<b>退款时效承诺（对外展示）：</b>商家同意后 1 个工作日内发起退款，微信支付/云闪付原路退回到账时间以支付渠道为准（1-7 天）',
                         '<b>商家超时处理（评审确认）：</b>后台提供「商家超时未审核自动同意退款」配置项，本期设置为关闭——即商家超 48 小时未审核不自动同意，售后单停留在「待商家审核」，用户侧展示「商家处理中」并提示可联系客服催促'
                     ]
@@ -20593,7 +20594,7 @@
                     title: '10 边界与异常场景',
                     table: { headers: ['场景', '处理'], rows: [
                         ['售后处理中用户申请注销/退出登录', '售后流程不受影响，按账号继续处理'],
-                        ['部分退款后再次申请剩余商品退款', '需等首次售后单到达「已退款」终态解锁（处理中/退款中订单整体锁定），时效窗口 = 已退款终态时间 + 48 小时（见 5.2）；金额按行级剩余快照计算（剩余实付 − 已退部分），券不退回规则不变（计算详见退款金额计算规则Tab）。<b>原型演示：</b>售后申请Tab「部分已退款」订单卡片（已退款/剩余可退两行金额）→ 申请页仅剩余商品可勾选（已退完行置灰）→ 提交生成二次售后单（详情页展示「该订单此前已退款」）；全部退完后订单移出申请列表'],
+                        ['部分退款后再次申请剩余商品退款（本期暂不做，预留口径，见 1.3）', '需等首次售后单到达「已退款」终态解锁（处理中/退款中订单整体锁定），时效窗口 = 已退款终态时间 + 48 小时（见 5.2）；金额按行级剩余快照计算（剩余实付 − 已退部分），券不退回规则不变（计算详见退款金额计算规则Tab）。<b>原型演示：</b>售后申请Tab「部分已退款」订单卡片（已退款/剩余可退两行金额）→ 申请页仅剩余商品可勾选（已退完行置灰）→ 提交生成二次售后单（详情页展示「该订单此前已退款」）；全部退完后订单移出申请列表'],
                         ['待付款超时自动关闭 vs 用户同时发起取消', '待付款无售后，不冲突'],
                         ['退款时支付渠道退款失败', '状态回退到「退款中」并告警商家端，客服介入'],
                         ['0 元实付订单（余额全额结清）', '正常走退款流程，支付渠道退 ¥0，回馈金部分原额退回余额，购物金部分退回本金消耗部分（赠储不退）']
@@ -22107,7 +22108,7 @@
                     { id: 2, title: 'Tab结构', type: 'interaction', target: '[data-block="as-tabs"]', content: '「售后申请 / 处理中 / 已完成」三个Tab，点击切换列表\n售后申请：仅展示售后有效期内的可申请订单（超期订单不在列表展示）\n处理中：展示待商家审核、退款中的售后单\n已完成：展示已退款、售后关闭的售后单\n当前Tab无数据时展示空状态（售后申请空态文案：仅48小时内签收的订单支持退款）' },
                     { id: 3, title: '售后申请·订单卡片', type: 'interaction', target: '[data-block="as-order-card"]', content: '卡片结构：订单类型标签（极速达/站点配送）+ 送达时间\n商品图册（最多3张）+ 共N件 ›，实付金额\n点击「售后/退款」按钮 → 跳转申请售后页（列表内订单均在有效期内）\n点击卡片（非按钮区域）→ 跳转对应订单详情页\n超期订单不进入本列表：在「我的订单」已完成订单卡片保留置灰的「申请售后」按钮，点击弹窗「已超过售后有效期：抱歉，订单自助售后申请时效已过，如有疑问，请联系在线客服」（取消 / 联系客服）\n\n部分退款后二次申请（方案A）：存在已退款终态部分退款售后单的订单——\n订单类型标签旁展示「部分已退款」小标签（蓝字浅底）；金额区改为两行：已退款 ¥xx.xx（灰字）+ 剩余可退 ¥xx.xx（黑字加粗）\n卡片仍可点击「售后/退款」进入申请页，仅剩余商品/数量可勾选；剩余可退为 0（全部退完）的订单不再展示\n二次申请时效 = 首次售后单已退款终态时间 + 48 小时（规则见需求文档 5.2）' },
                     { id: 4, title: '处理中/已完成·售后单卡片', type: 'interaction', target: '[data-block="as-record-card"]', content: '聚合模式卡片（与售后申请Tab订单卡片结构完全一致）：头部 = 配送方式（极速达/站点配送）+ 申请时间（灰字）左、状态标签（待商家审核-橙 / 退款中-蓝 / 已退款-绿 / 售后关闭-灰）右\n商品图册（最多3张）+ 共N件 ›\n底部行（分隔线上方）= 退款总额（左下角，与申请卡片实付金额同构）+ 「查看详情」按钮（右）\n售后关闭的售后单在底部行下方展示拒绝原因（商家拒绝）或撤销说明（用户撤销）\n单项退款金额及分摊明细、售后单号在详情页查看核对（单号支持复制）\n点击卡片或「查看详情」按钮 → 跳转售后单详情页' },
-                    { id: 5, title: '可申请订单范围', type: 'state', target: '[data-block="as-order-card"]', content: '售后申请Tab仅展示售后有效期内的已完成订单（全品类自助售后申请时限为订单完成后48小时内）\n已超过售后有效期（订单完成后超48小时）的订单不进入该列表，在「我的订单」卡片保留置灰按钮，点击弹窗引导联系客服\n待收货订单不开放自助售后：骑手取到货前可「取消订单」整单退款（详见需求文档5.1/5.3），或确认收货后按已完成流程申请；待发货订单走「取消订单」触发整单退款，不进入该列表；待付款/已取消/赠品兑换订单不可申请售后\n同一订单存在进行中（待商家审核/退款中）售后单时，该订单不在列表中重复展示（售后未关闭前不可重复申请）' }
+                    { id: 5, title: '可申请订单范围', type: 'state', target: '[data-block="as-order-card"]', content: '售后申请Tab仅展示售后有效期内的已完成订单（全品类自助售后申请时限为订单完成后48小时内）\n已超过售后有效期（订单完成后超48小时）的订单不进入该列表，在「我的订单」卡片保留置灰按钮，点击弹窗引导联系客服\n待收货订单不开放自助售后：骑手取到货前可「取消订单」整单退款（详见需求文档5.1/5.3），或确认收货后按已完成流程申请；待发货订单走「取消订单」触发整单退款，不进入该列表；待付款/已取消/赠品兑换订单不可申请售后\n同一订单存在进行中（待商家审核/退款中）售后单时，该订单不在列表中重复展示（售后未关闭前不可重复申请）\n\n本期口径（演示对照）：已申请过售后且部分退款（reapplyEnabled: false，如西瓜单）的订单，已退款终态后不回流本Tab——在「我的订单」卡片「申请售后」按钮置灰，点击弹窗「无法申请售后：该订单已申请过售后，剩余商品暂不支持自助申请，如有问题请联系在线客服」；风扇单（reapplyEnabled: true）保留二次申请回流展示，作为后续开放口径预演（见需求文档 1.3）' }
                 ],
                 // 需求文档：退款/售后需求文档（V1.4 简化版，售后三页共用）
                 requirementDoc: afterSaleDoc,
@@ -22122,7 +22123,8 @@
                     { block: '订单卡片', state: '售后有效期内', trigger: '订单完成后48小时内', ui: '「售后/退款」按钮可点击，跳转申请售后页' },
                     { block: '订单卡片', state: '已超过售后有效期', trigger: '订单完成后超48小时', ui: '不进入售后申请Tab；在我的订单卡片置灰「申请售后」按钮，点击弹窗「已超过售后有效期」（取消 / 联系客服）' },
                     { block: '订单卡片', state: '售后处理中', trigger: '该订单存在进行中售后单', ui: '订单不在售后申请Tab重复展示（整体锁定）' },
-                    { block: '订单卡片', state: '部分已退款', trigger: '该订单存在已退款终态的部分退款售后单', ui: '「部分已退款」小标签 + 金额区两行（已退款 ¥xx.xx 灰 / 剩余可退 ¥xx.xx 黑），可再次申请剩余商品（时效 = 已退款终态 + 48h）' },
+                    { block: '订单卡片', state: '部分已退款', trigger: '该订单存在已退款终态的部分退款售后单（reapplyEnabled: true 演示单）', ui: '「部分已退款」小标签 + 金额区两行（已退款 ¥xx.xx 灰 / 剩余可退 ¥xx.xx 黑），可再次申请剩余商品（时效 = 已退款终态 + 48h）——后续开放口径演示' },
+                    { block: '订单卡片', state: '部分已退款（本期口径）', trigger: '已申请过售后的订单（reapplyEnabled: false，如西瓜单）', ui: '已退款终态后不回流售后申请Tab；在我的订单卡片「申请售后」按钮置灰，点击弹窗「无法申请售后：该订单已申请过售后，剩余商品暂不支持自助申请，如有问题请联系在线客服。」（取消 / 联系客服）' },
                     { block: '订单卡片', state: '剩余可退为0', trigger: '该订单全部商品已退完', ui: '订单移出售后申请Tab' },
                     { block: '售后单卡片', state: '待商家审核/退款中', trigger: '展示于处理中Tab', ui: '与申请卡片同构：头部（配送方式+申请时间 | 状态标签）、商品图册+共N件、底部行（退款总额左下角 + 查看详情按钮）' },
                     { block: '售后单卡片', state: '已退款/售后关闭', trigger: '展示于已完成Tab', ui: '同上结构；售后关闭在底部行下方展示拒绝原因（商家拒绝）或撤销说明（用户撤销）' }
@@ -24116,20 +24118,22 @@
         // 售后申请 Tab：可申请售后的订单（V1.3 仅已完成订单，待收货本期不开放；待发货走「取消订单」整单退款，不进入该列表）
         const afterSaleOrders = [
             {
-                // 普通可申请订单（无部分退款记录）：申请Tab常规卡片（实付金额单行）
+                // 本期口径演示单：部分退款仅单次（reapplyEnabled: false）
+                // 首单部分退款后：处理中整单锁定；已退款终态后不回流申请Tab（剩余商品引导在线客服）
+                // 与风扇单（reapplyEnabled: true，二次申请预留口径演示）形成对照
                 orderNo: '0304104855000015', typeText: '极速达', statusText: '已完成',
                 time: '2026-10-24 20:05:12', doneTime: '2026-10-25 08:40:00', expired: false,
-                title: '奶油西瓜 单果约4.5kg', count: 1, pay: 34.90, img: AI_IMG_WATERMELON,
-                detailPage: 'shop-order-detail-home-coupon',
+                title: '奶油西瓜 单果约4.5kg', count: 2, pay: 74.80, img: AI_IMG_WATERMELON,
+                detailPage: 'shop-order-detail-home-coupon', reapplyEnabled: false,
                 items: [
-                    { id: 'wm', title: '奶油西瓜 单果约4.5kg', spec: '规格：4.5kg/个', price: 39.90, count: 1 }
+                    { id: 'wm', title: '奶油西瓜 单果约4.5kg', spec: '规格：4.5kg/个', price: 39.90, count: 2 }
                 ],
                 couponDeduct: 5.00, rebateDeduct: 0.00, shoppingDeduct: 0.00, deliveryFee: 0.00, payChannel: '微信支付'
             },
             {
                 orderNo: '0304104855000008', typeText: '极速达', statusText: '已完成',
                 time: '2026-09-27 09:12:40', doneTime: '2026-09-28 21:30:00', expired: false,
-                title: '徕芙 迷你手持电风扇 便携充电款', count: 3, pay: 102.50, img: AI_IMG_MINI_FAN,
+                title: '徕芙 迷你手持电风扇 便携充电款', count: 3, pay: 102.50, img: AI_IMG_MINI_FAN, reapplyEnabled: true,
                 detailPage: 'shop-order-detail-home-coupon',
                 items: [
                     { id: 'w', title: '徕芙 迷你手持电风扇 便携充电款', spec: '颜色：白色', price: 39.50, count: 2 },
@@ -24274,7 +24278,8 @@
             if (tab === 'apply') {
                 // 仅展示售后有效期内的订单：超期订单不在列表展示（在「我的订单」卡片保留置灰的申请售后按钮 + 客服提示）
                 // 部分退款订单（首单已退款终态）保留展示，仅剩余可退商品可申请；剩余可退为 0（全部退完）的订单不再展示
-                const list = afterSaleOrders.filter(o => !o.expired && !afterSaleRecords.some(r => r.orderNo === o.orderNo && (r.status === 'reviewing' || r.status === 'refunding')) && asRemainingC(o) > 0);
+                // reapplyEnabled: false 的订单（本期口径）：已发生部分退款（终态）后不回流，剩余商品引导在线客服（1.3 本期暂不做二次申请）
+                const list = afterSaleOrders.filter(o => !o.expired && !afterSaleRecords.some(r => r.orderNo === o.orderNo && (r.status === 'reviewing' || r.status === 'refunding')) && asRemainingC(o) > 0 && (o.reapplyEnabled !== false || !(o.alreadyRefundedC > 0)));
                 if (list.length === 0) return emptyHTML('仅48小时内签收的订单支持退款');
                 return list.map(o => {
                     const imgCount = Math.min(o.count, 3);
@@ -26281,7 +26286,8 @@
                     { id: 'S001', typeText: '极速达', status: 'ship', statusText: '待发货', timeLabel: '下单时间', time: '2026-05-22 16:41:35', title: '迷你手持风扇', count: 2, total: 39.90, priceLabel: '实付', img: productImg, detailPage: 'shop-order-detail-home-ship', actions: [{ text: '取消订单', cls: 'order-btn-outline', action: 'cancel-order' }, { text: '再买一单', cls: 'order-btn-primary', action: 'buy-again' }] },
                     { id: 'R001', typeText: '极速达', status: 'receive', statusText: '骑手正赶往门店', timeLabel: '下单时间', time: '2026-05-22 16:41:35', title: '迷你手持风扇', count: 2, total: 39.90, priceLabel: '实付', img: productImg, detailPage: 'shop-order-detail-home-receive', stage: 'going', actions: [{ text: '取消订单', cls: 'order-btn-outline', action: 'cancel-order' }, { text: '确认收货', cls: 'order-btn-primary', action: 'confirm-receive' }] },
                     { id: 'R002', typeText: '极速达', status: 'receive', statusText: '配送中', timeLabel: '下单时间', time: '2026-05-22 16:41:35', title: '迷你手持风扇', count: 2, total: 39.90, priceLabel: '实付', img: productImg, detailPage: 'shop-order-detail-home-receive', stage: 'delivering', actions: [{ text: '取消订单', cls: 'order-btn-outline disabled', action: 'cancel-disallowed' }, { text: '确认收货', cls: 'order-btn-primary', action: 'confirm-receive' }] },
-                    { id: 'E001', typeText: '极速达', status: 'evaluate', statusText: '已完成', timeLabel: '下单时间', time: '2026-05-22 16:41:35', title: '迷你手持风扇', count: 6, total: 39.90, priceLabel: '实付', img: productImg, detailPage: 'shop-order-detail-home-done', actions: [{ text: '更多', cls: 'order-btn-plain', action: 'more-actions' }, { text: '申请售后', cls: 'order-btn-outline', action: 'apply-after-sale' }, { text: '再买一单', cls: 'order-btn-primary', action: 'buy-again' }] },
+                    { id: 'E001', typeText: '极速达', status: 'evaluate', statusText: '已完成', timeLabel: '下单时间', time: '2026-05-22 16:41:35', title: '奶油西瓜', count: 6, total: 39.90, priceLabel: '实付', img: AI_IMG_WATERMELON, detailPage: 'shop-order-detail-home-done', afterSaleOrderNo: '0304104855000015', actions: [{ text: '更多', cls: 'order-btn-plain', action: 'more-actions' }, { text: '申请售后', cls: 'order-btn-outline', action: 'apply-after-sale' }, { text: '再买一单', cls: 'order-btn-primary', action: 'buy-again' }] },
+                    { id: 'E002', typeText: '极速达', status: 'evaluate', statusText: '已完成', timeLabel: '下单时间', time: '2026-05-22 16:41:35', title: '奶油西瓜', count: 2, total: 74.80, priceLabel: '实付', img: AI_IMG_WATERMELON, detailPage: 'shop-order-detail-home-done', afterSaleOrderNo: '0304104855000015', actions: [{ text: '更多', cls: 'order-btn-plain', action: 'more-actions' }, { text: '申请售后', cls: 'order-btn-outline disabled', action: 'after-sale-applied' }, { text: '再买一单', cls: 'order-btn-primary', action: 'buy-again' }] },
                     { id: 'C001', typeText: '极速达', status: 'cancel', statusText: '已取消', timeLabel: '下单时间', time: '2026-05-22 16:41:35', title: '迷你手持风扇', count: 6, total: 39.90, priceLabel: '总额', img: productImg, detailPage: 'shop-order-detail-home-pay', actions: [{ text: '删除订单', cls: 'order-btn-outline', action: 'delete-order' }, { text: '再买一单', cls: 'order-btn-primary', action: 'buy-again' }] },
                     { id: 'C002', typeText: '极速达', status: 'done', statusText: '已完成', timeLabel: '下单时间', time: '2026-05-22 16:41:35', title: '迷你手持风扇', count: 3, total: 31.50, priceLabel: '实付', img: productImg, detailPage: 'shop-order-detail-home-coupon', actions: [{ text: '更多', cls: 'order-btn-plain', action: 'more-actions' }, { text: '申请售后', cls: 'order-btn-outline disabled', action: 'after-sale-expired' }, { text: '再买一单', cls: 'order-btn-primary', action: 'buy-again' }] },
                     { id: 'G001', typeText: '赠品兑换', status: 'gift', statusText: '已完成', timeLabel: '核销时间', time: '2026-05-22 16:41:35', title: '迷你手持风扇', spec: '规格：白色', count: 1, total: 0, priceLabel: '实付', img: productImg, detailPage: 'shop-order-detail-gift-done', actions: [{ text: '删除订单', cls: 'order-btn-outline', action: 'delete-order' }, { text: '详情', cls: 'order-btn-primary', action: 'claim-again' }] }
@@ -26355,7 +26361,7 @@
                         </div>`;
                     }
                     return `
-                    <div class="order-card" data-detail="${order.detailPage}" data-id="${order.id}" data-status="${order.status}" data-type="${order.typeText || ''}"${order.stage ? ` data-stage="${order.stage}"` : ''}>
+                    <div class="order-card" data-detail="${order.detailPage}" data-id="${order.id}" data-status="${order.status}" data-type="${order.typeText || ''}"${order.stage ? ` data-stage="${order.stage}"` : ''}${order.afterSaleOrderNo ? ` data-after-sale-order-no="${order.afterSaleOrderNo}"` : ''}>
                         <div class="order-card-header">
                             ${typeTag}
                             <div class="order-card-header-right">
@@ -29126,7 +29132,8 @@
                     { id: 'S001', typeText: '极速达', status: 'ship', statusText: '待发货', timeLabel: '下单时间', time: '2026-05-22 16:41:35', title: '迷你手持风扇', count: 2, total: 39.90, priceLabel: '实付', img: productImg, detailPage: 'shop-order-detail-home-ship', actions: [{ text: '取消订单', cls: 'order-btn-outline', action: 'cancel-order' }, { text: '再买一单', cls: 'order-btn-primary', action: 'buy-again' }] },
                     { id: 'R001', typeText: '极速达', status: 'receive', statusText: '骑手正赶往门店', timeLabel: '下单时间', time: '2026-05-22 16:41:35', title: '迷你手持风扇', count: 2, total: 39.90, priceLabel: '实付', img: productImg, detailPage: 'shop-order-detail-home-receive', stage: 'going', actions: [{ text: '取消订单', cls: 'order-btn-outline', action: 'cancel-order' }, { text: '确认收货', cls: 'order-btn-primary', action: 'confirm-receive' }] },
                     { id: 'R002', typeText: '极速达', status: 'receive', statusText: '配送中', timeLabel: '下单时间', time: '2026-05-22 16:41:35', title: '迷你手持风扇', count: 2, total: 39.90, priceLabel: '实付', img: productImg, detailPage: 'shop-order-detail-home-receive', stage: 'delivering', actions: [{ text: '取消订单', cls: 'order-btn-outline disabled', action: 'cancel-disallowed' }, { text: '确认收货', cls: 'order-btn-primary', action: 'confirm-receive' }] },
-                    { id: 'E001', typeText: '极速达', status: 'evaluate', statusText: '已完成', timeLabel: '下单时间', time: '2026-05-22 16:41:35', title: '迷你手持风扇', count: 6, total: 39.90, priceLabel: '实付', img: productImg, detailPage: 'shop-order-detail-home-done', actions: [{ text: '更多', cls: 'order-btn-plain', action: 'more-actions' }, { text: '申请售后', cls: 'order-btn-outline', action: 'apply-after-sale' }, { text: '再买一单', cls: 'order-btn-primary', action: 'buy-again' }] },
+                    { id: 'E001', typeText: '极速达', status: 'evaluate', statusText: '已完成', timeLabel: '下单时间', time: '2026-05-22 16:41:35', title: '奶油西瓜', count: 6, total: 39.90, priceLabel: '实付', img: AI_IMG_WATERMELON, detailPage: 'shop-order-detail-home-done', afterSaleOrderNo: '0304104855000015', actions: [{ text: '更多', cls: 'order-btn-plain', action: 'more-actions' }, { text: '申请售后', cls: 'order-btn-outline', action: 'apply-after-sale' }, { text: '再买一单', cls: 'order-btn-primary', action: 'buy-again' }] },
+                    { id: 'E002', typeText: '极速达', status: 'evaluate', statusText: '已完成', timeLabel: '下单时间', time: '2026-05-22 16:41:35', title: '奶油西瓜', count: 2, total: 74.80, priceLabel: '实付', img: AI_IMG_WATERMELON, detailPage: 'shop-order-detail-home-done', afterSaleOrderNo: '0304104855000015', actions: [{ text: '更多', cls: 'order-btn-plain', action: 'more-actions' }, { text: '申请售后', cls: 'order-btn-outline disabled', action: 'after-sale-applied' }, { text: '再买一单', cls: 'order-btn-primary', action: 'buy-again' }] },
                     { id: 'C001', typeText: '极速达', status: 'cancel', statusText: '已取消', timeLabel: '下单时间', time: '2026-05-22 16:41:35', title: '迷你手持风扇', count: 6, total: 39.90, priceLabel: '总额', img: productImg, detailPage: 'shop-order-detail-home-pay', actions: [{ text: '删除订单', cls: 'order-btn-outline', action: 'delete-order' }, { text: '再买一单', cls: 'order-btn-primary', action: 'buy-again' }] },
                     { id: 'C002', typeText: '极速达', status: 'done', statusText: '已完成', timeLabel: '下单时间', time: '2026-05-22 16:41:35', title: '迷你手持风扇', count: 3, total: 31.50, priceLabel: '实付', img: productImg, detailPage: 'shop-order-detail-home-coupon', actions: [{ text: '更多', cls: 'order-btn-plain', action: 'more-actions' }, { text: '申请售后', cls: 'order-btn-outline disabled', action: 'after-sale-expired' }, { text: '再买一单', cls: 'order-btn-primary', action: 'buy-again' }] },
                     { id: 'G001', typeText: '赠品兑换', status: 'gift', statusText: '已完成', timeLabel: '核销时间', time: '2026-05-22 16:41:35', title: '迷你手持风扇', spec: '规格：白色', count: 1, total: 0, priceLabel: '实付', img: productImg, detailPage: 'shop-order-detail-gift-done', actions: [{ text: '删除订单', cls: 'order-btn-outline', action: 'delete-order' }, { text: '详情', cls: 'order-btn-primary', action: 'claim-again' }] }
@@ -29184,7 +29191,7 @@
                         </div>`;
                     }
                     return `
-                    <div class="order-card" data-detail="${order.detailPage}" data-id="${order.id}" data-status="${order.status}" data-type="${order.typeText || ''}"${order.stage ? ` data-stage="${order.stage}"` : ''}>
+                    <div class="order-card" data-detail="${order.detailPage}" data-id="${order.id}" data-status="${order.status}" data-type="${order.typeText || ''}"${order.stage ? ` data-stage="${order.stage}"` : ''}${order.afterSaleOrderNo ? ` data-after-sale-order-no="${order.afterSaleOrderNo}"` : ''}>
                         <div class="order-card-header">
                             ${typeTag}
                             <div class="order-card-header-right">
@@ -29270,6 +29277,18 @@
                             });
                         });
                     });
+                    // 已申请过售后的订单（本期口径：部分退款后不可再次申请）→ 置灰按钮弹窗引导客服
+                    document.querySelectorAll('#orders-list [data-action="after-sale-applied"]').forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            showOrderConfirmPopup({
+                                title: '无法申请售后',
+                                message: '该订单已申请过售后，剩余商品暂不支持自助申请，如有问题请联系在线客服。',
+                                confirmText: '联系客服',
+                                onConfirm: () => showOrderToast('转接在线客服（演示）')
+                            });
+                        });
+                    });
                     // 配送中订单的置灰「取消订单」按钮 → 弹窗提示（骑手取到货后不可取消）
                     document.querySelectorAll('#orders-list [data-action="cancel-disallowed"]').forEach(btn => {
                         btn.addEventListener('click', (e) => {
@@ -29282,9 +29301,14 @@
                             });
                         });
                     });
-                    // 已完成订单「申请售后」→ 跳转申请售后页
+                    // 已完成订单「申请售后」→ 跳转申请售后页（携带订单号，进入对应订单的申请表单）
                     document.querySelectorAll('#orders-list [data-action="apply-after-sale"]').forEach(btn => {
-                        btn.addEventListener('click', (e) => { e.stopPropagation(); switchPage('profile-after-sale-apply'); });
+                        btn.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            const card = btn.closest('.order-card');
+                            if (card && card.dataset.afterSaleOrderNo) window.__afterSaleApplyOrderNo = card.dataset.afterSaleOrderNo;
+                            switchPage('profile-after-sale-apply');
+                        });
                     });
                     // 已完成订单「更多」→ 展开/收起浮层菜单（删除订单）
                     document.querySelectorAll('#orders-list [data-action="more-actions"]').forEach(btn => {
