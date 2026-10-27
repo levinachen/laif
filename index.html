@@ -3830,6 +3830,12 @@
         .as-order-price { font-size: 13px; color: #333333; }
         .as-order-price b { font-size: 16px; font-weight: 600; margin-left: 2px; }
         .as-apply-btn.disabled { color: #BDBDBD; border-color: #E5E5E5; cursor: not-allowed; }
+        /* 部分退款后二次申请（方案A）：申请Tab卡片「部分已退款」标签 + 金额区两行（已退款灰 / 剩余可退黑） */
+        .as-partial-badge { font-size: 11px; color: #254EDB; background: rgba(37,78,219,0.08); border-radius: 4px; padding: 1px 6px; margin-left: 6px; vertical-align: 1px; }
+        .as-order-price.price-remain { display: flex; flex-direction: column; gap: 2px; }
+        .as-order-price.price-remain .as-refunded-line { font-size: 12px; color: #828282; }
+        .as-order-price.price-remain .as-remain-line { font-size: 13px; color: #333333; }
+        .as-order-price.price-remain .as-remain-line b { font-size: 16px; font-weight: 600; margin-left: 2px; }
         /* 处理中 / 已完成 Tab：售后单卡片（聚合模式，复用售后申请Tab订单卡片结构） */
         .as-record-card { background: #FFFFFF; border-radius: 12px; margin: 12px; padding: 0 16px 16px; cursor: pointer; }
         .as-status-chip { font-size: 13px; font-weight: 500; flex-shrink: 0; }
@@ -3844,6 +3850,12 @@
         .as-sec-title { font-size: 16px; font-weight: 500; color: #333333; line-height: 24px; }
         .as-item-row { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid #F7F7F7; cursor: pointer; }
         .as-item-row:last-child { border-bottom: none; }
+        /* 部分退款后二次申请：已退完商品行置灰不可勾选；部分已退行展示「已退N件」标签；提示条 */
+        .as-item-row.refunded { cursor: not-allowed; opacity: 0.55; }
+        .as-item-row.refunded .as-check { border-color: #E0E0E0; background: #F5F5F5; }
+        .as-refunded-tag { font-size: 11px; color: #828282; background: #F5F5F5; border-radius: 4px; padding: 1px 6px; margin-left: 6px; white-space: nowrap; }
+        .as-item-row.refunded .as-item-title { color: #828282; }
+        .as-remain-tip { font-size: 12px; color: #4F4F4F; background: rgba(37,78,219,0.06); border-radius: 8px; padding: 8px 10px; margin-bottom: 4px; line-height: 18px; }
         .as-check { width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid #D9D9D9; flex-shrink: 0; display: flex; align-items: center; justify-content: center; box-sizing: border-box; }
         .as-check.checked { background: #254EDB; border-color: #254EDB; }
         .as-check.checked::after { content: ''; width: 4px; height: 8px; border: solid #FFFFFF; border-width: 0 1.5px 1.5px 0; transform: rotate(45deg); margin-top: -2px; }
@@ -4378,7 +4390,7 @@
         .calc-subsection-title { font-size: 13px; font-weight: 600; color: #333; margin: 0 0 6px 0; }
         .calc-section p { margin: 4px 0; color: #444; }
         .calc-section ul { margin: 4px 0; padding-left: 20px; }
-        .calc-section li { margin: 2px 0; color: #444; }
+        .calc-section li { margin: 2px 0; color: #444; white-space: pre-line; }
         .calc-example {
             background: #F8F9FA;
             border: 1px solid #E9ECEF;
@@ -20522,13 +20534,14 @@
                             ['待付款', '不可', '走现有「取消订单」即可'],
                             ['待发货', '可（仅退款，整单）', '衔接现有待发货「取消订单」：已支付订单取消即触发整单退款流程，无需单独申请售后'],
                             ['待收货', '不可申请售后（可「取消订单」）', '根据骑手配送状态判断是否允许用户取消订单，骑手取到货（开始配送）后不能再取消；不开放仅退款售后，确认收货后按已完成流程申请；取消订单不发放积分与回馈金返利（权益未产生）'],
-                            ['已完成', '可（仅退款）', '支持整单或按商品勾选申请；须在签收后 48 小时内'],
+                            ['已完成', '可（仅退款）', '支持整单或按商品勾选申请；须在签收后 48 小时内；部分退款后的剩余商品，须在首次售后单「已退款」后 48 小时内再次申请'],
                             ['已取消', '不可', '—'],
                             ['已兑换赠品', '不可', '走在线客服']
                         ]}},
                         { title: '5.2 其他限制', list: [
                             '<b>时限（评审确认）：</b>全品类统一，订单完成后（签收后）48 小时以内可申请；超时后订单不再出现在售后申请列表，订单卡片上的「申请售后」按钮置灰，点击提示「已超过售后期，如有问题请联系在线客服」',
-                            '<b>次数：</b>同一订单的同一商品，售后未关闭前不可重复申请；用户撤销后可再次申请，同一订单最多 1 次（防滥用）；商家拒绝后不可再次申请，如有问题只能联系在线客服',
+                            '<b>部分退款后二次申请时效：</b>首次售后单退款到账需 1-7 天，若沿用签收后 48 小时口径，二次申请解锁时窗口几乎必然已过；因此二次申请时效独立起算——以首次售后单到达<b>「已退款」终态时间 + 48 小时</b>为窗口（处理中/退款中订单整体锁定，不占用也不计时二次窗口）；超时后剩余商品不可自助申请，引导在线客服',
+                            '<b>次数：</b>同一订单的同一商品，售后未关闭前不可重复申请；用户撤销后可再次申请，同一订单最多 1 次（防滥用）；商家拒绝后不可再次申请，如有问题只能联系在线客服；部分退款后（已退款终态）可对<b>剩余商品/剩余数量</b>发起新售后单，新单独立编号、独立审核，每件商品只能退款一次（不与撤销/拒绝的重试次数混同）',
                             '<b>互斥：</b>售后处理中的订单，不可操作「确认收货」「删除订单」「再买一单」中与售后冲突的动作；待付款倒计时不受影响（该状态无售后）'
                         ]}
                     ]
@@ -20544,9 +20557,12 @@
                 },
                 {
                     title: '7 售后状态流转',
-                    code: '用户提交申请\n    ↓\n[待商家审核]\n    ↓ 商家同意            ↓ 商家拒绝            ↓ 用户撤销\n[退款中]              [售后关闭]              [售后关闭]\n    ↓                    → 不可再次申请，         → 可再次申请\n[已退款]（去向明细）       只能联系在线客服        （限 1 次）或联系客服',
+                    code: '用户提交申请\n    ↓\n[待商家审核] ← 处理中：订单整体锁定\n    ↓ 商家同意            ↓ 商家拒绝            ↓ 用户撤销\n[退款中] ← 订单继续锁定   [售后关闭]              [售后关闭]\n    ↓                    → 不可再次申请，         → 可再次申请\n[已退款]（去向明细）       只能联系在线客服        （限 1 次）或联系客服\n    ↓ 部分退款时（终态）\n[订单解锁] → 剩余商品可再次申请\n    → 生成新售后单（独立编号、独立审核）\n    → 时效 = 首单「已退款」终态时间 + 48 小时（见 5.2）\n    → 全部退完后订单移出「售后申请」Tab',
                     list: [
                         '全流程无退货环节（待退货/待验收状态不存在）',
+                        '<b>处理中订单整体锁定：</b>售后单处于「待商家审核 / 退款中」期间，<b>整个订单锁定</b>——不允许对该订单的剩余商品/数量发起第二个售后单（原因：二次退款的金额计算依赖首单结果的守恒口径，且并发会造成在途金额口径混乱）；锁定期间订单同时从「售后申请」Tab 移出展示',
+                        '<b>终态解锁规则：</b>售后单到达终态后订单解锁——\n· 已退款：部分退款的订单回到「售后申请」Tab（「部分已退款」标记），仅剩余商品/数量可勾选，二次申请生成<b>新售后单</b>（独立编号、独立审核，每件商品只能退款一次；时效 = 首单已退款终态 + 48 小时，见 5.2）；\n· 售后关闭（商家拒绝）：订单解锁但不可再次申请，只能联系在线客服；\n· 售后关闭（用户撤销）：订单解锁，可再次申请（同一订单限 1 次）。\n注意：撤销/拒绝的「再次申请」是<b>同一单重来</b>（重新全量勾选），与部分退款的「二次申请新单退剩余」是两条独立规则，勿混同实现',
+                        '<b>守恒校验：</b>无扣回项时，同一订单多次售后单的累计退款恒等于 实付 − 配送费；剩余商品全部退完后订单移出「售后申请」Tab',
                         '<b>退款时效承诺（对外展示）：</b>商家同意后 1 个工作日内发起退款，微信支付/云闪付原路退回到账时间以支付渠道为准（1-7 天）',
                         '<b>商家超时处理（评审确认）：</b>后台提供「商家超时未审核自动同意退款」配置项，本期设置为关闭——即商家超 48 小时未审核不自动同意，售后单停留在「待商家审核」，用户侧展示「商家处理中」并提示可联系客服催促'
                     ]
@@ -20577,7 +20593,7 @@
                     title: '10 边界与异常场景',
                     table: { headers: ['场景', '处理'], rows: [
                         ['售后处理中用户申请注销/退出登录', '售后流程不受影响，按账号继续处理'],
-                        ['部分退款后再次申请剩余商品退款', '可申请，按行级剩余快照计算（剩余实付 − 已退部分），券不退回规则不变（计算详见退款金额计算规则Tab）'],
+                        ['部分退款后再次申请剩余商品退款', '需等首次售后单到达「已退款」终态解锁（处理中/退款中订单整体锁定），时效窗口 = 已退款终态时间 + 48 小时（见 5.2）；金额按行级剩余快照计算（剩余实付 − 已退部分），券不退回规则不变（计算详见退款金额计算规则Tab）。<b>原型演示：</b>售后申请Tab「部分已退款」订单卡片（已退款/剩余可退两行金额）→ 申请页仅剩余商品可勾选（已退完行置灰）→ 提交生成二次售后单（详情页展示「该订单此前已退款」）；全部退完后订单移出申请列表'],
                         ['待付款超时自动关闭 vs 用户同时发起取消', '待付款无售后，不冲突'],
                         ['退款时支付渠道退款失败', '状态回退到「退款中」并告警商家端，客服介入'],
                         ['0 元实付订单（余额全额结清）', '正常走退款流程，支付渠道退 ¥0，回馈金部分原额退回余额，购物金部分退回本金消耗部分（赠储不退）']
@@ -22089,7 +22105,7 @@
                 interactionNotes: [
                     { id: 1, title: '导航栏', type: 'interaction', target: '.mobile-header', content: '左侧返回按钮 ‹ + 标题「售后」（靠左，紧随返回按钮）\n右侧：独立客服圆钮（耳机图标）+ 胶囊按钮（···更多 | 同心圆图标）；点击客服圆钮 → Toast「转接在线客服（演示）」（企微会话入口）\n返回按钮 → 返回「我的」页' },
                     { id: 2, title: 'Tab结构', type: 'interaction', target: '[data-block="as-tabs"]', content: '「售后申请 / 处理中 / 已完成」三个Tab，点击切换列表\n售后申请：仅展示售后有效期内的可申请订单（超期订单不在列表展示）\n处理中：展示待商家审核、退款中的售后单\n已完成：展示已退款、售后关闭的售后单\n当前Tab无数据时展示空状态（售后申请空态文案：仅48小时内签收的订单支持退款）' },
-                    { id: 3, title: '售后申请·订单卡片', type: 'interaction', target: '[data-block="as-order-card"]', content: '卡片结构：订单类型标签（极速达/站点配送）+ 送达时间\n商品图册（最多3张）+ 共N件 ›，实付金额\n点击「售后/退款」按钮 → 跳转申请售后页（列表内订单均在有效期内）\n点击卡片（非按钮区域）→ 跳转对应订单详情页\n超期订单不进入本列表：在「我的订单」已完成订单卡片保留置灰的「申请售后」按钮，点击弹窗「已超过售后有效期：抱歉，订单自助售后申请时效已过，如有疑问，请联系在线客服」（取消 / 联系客服）' },
+                    { id: 3, title: '售后申请·订单卡片', type: 'interaction', target: '[data-block="as-order-card"]', content: '卡片结构：订单类型标签（极速达/站点配送）+ 送达时间\n商品图册（最多3张）+ 共N件 ›，实付金额\n点击「售后/退款」按钮 → 跳转申请售后页（列表内订单均在有效期内）\n点击卡片（非按钮区域）→ 跳转对应订单详情页\n超期订单不进入本列表：在「我的订单」已完成订单卡片保留置灰的「申请售后」按钮，点击弹窗「已超过售后有效期：抱歉，订单自助售后申请时效已过，如有疑问，请联系在线客服」（取消 / 联系客服）\n\n部分退款后二次申请（方案A）：存在已退款终态部分退款售后单的订单——\n订单类型标签旁展示「部分已退款」小标签（蓝字浅底）；金额区改为两行：已退款 ¥xx.xx（灰字）+ 剩余可退 ¥xx.xx（黑字加粗）\n卡片仍可点击「售后/退款」进入申请页，仅剩余商品/数量可勾选；剩余可退为 0（全部退完）的订单不再展示\n二次申请时效 = 首次售后单已退款终态时间 + 48 小时（规则见需求文档 5.2）' },
                     { id: 4, title: '处理中/已完成·售后单卡片', type: 'interaction', target: '[data-block="as-record-card"]', content: '聚合模式卡片（与售后申请Tab订单卡片结构完全一致）：头部 = 配送方式（极速达/站点配送）+ 申请时间（灰字）左、状态标签（待商家审核-橙 / 退款中-蓝 / 已退款-绿 / 售后关闭-灰）右\n商品图册（最多3张）+ 共N件 ›\n底部行（分隔线上方）= 退款总额（左下角，与申请卡片实付金额同构）+ 「查看详情」按钮（右）\n售后关闭的售后单在底部行下方展示拒绝原因（商家拒绝）或撤销说明（用户撤销）\n单项退款金额及分摊明细、售后单号在详情页查看核对（单号支持复制）\n点击卡片或「查看详情」按钮 → 跳转售后单详情页' },
                     { id: 5, title: '可申请订单范围', type: 'state', target: '[data-block="as-order-card"]', content: '售后申请Tab仅展示售后有效期内的已完成订单（全品类自助售后申请时限为订单完成后48小时内）\n已超过售后有效期（订单完成后超48小时）的订单不进入该列表，在「我的订单」卡片保留置灰按钮，点击弹窗引导联系客服\n待收货订单不开放自助售后：骑手取到货前可「取消订单」整单退款（详见需求文档5.1/5.3），或确认收货后按已完成流程申请；待发货订单走「取消订单」触发整单退款，不进入该列表；待付款/已取消/赠品兑换订单不可申请售后\n同一订单存在进行中（待商家审核/退款中）售后单时，该订单不在列表中重复展示（售后未关闭前不可重复申请）' }
                 ],
@@ -22105,7 +22121,9 @@
                     { block: 'Tab', state: '空状态', trigger: '无可申请订单', ui: '空态文案「仅48小时内签收的订单支持退款」' },
                     { block: '订单卡片', state: '售后有效期内', trigger: '订单完成后48小时内', ui: '「售后/退款」按钮可点击，跳转申请售后页' },
                     { block: '订单卡片', state: '已超过售后有效期', trigger: '订单完成后超48小时', ui: '不进入售后申请Tab；在我的订单卡片置灰「申请售后」按钮，点击弹窗「已超过售后有效期」（取消 / 联系客服）' },
-                    { block: '订单卡片', state: '售后处理中', trigger: '该订单存在进行中售后单', ui: '订单不在售后申请Tab重复展示' },
+                    { block: '订单卡片', state: '售后处理中', trigger: '该订单存在进行中售后单', ui: '订单不在售后申请Tab重复展示（整体锁定）' },
+                    { block: '订单卡片', state: '部分已退款', trigger: '该订单存在已退款终态的部分退款售后单', ui: '「部分已退款」小标签 + 金额区两行（已退款 ¥xx.xx 灰 / 剩余可退 ¥xx.xx 黑），可再次申请剩余商品（时效 = 已退款终态 + 48h）' },
+                    { block: '订单卡片', state: '剩余可退为0', trigger: '该订单全部商品已退完', ui: '订单移出售后申请Tab' },
                     { block: '售后单卡片', state: '待商家审核/退款中', trigger: '展示于处理中Tab', ui: '与申请卡片同构：头部（配送方式+申请时间 | 状态标签）、商品图册+共N件、底部行（退款总额左下角 + 查看详情按钮）' },
                     { block: '售后单卡片', state: '已退款/售后关闭', trigger: '展示于已完成Tab', ui: '同上结构；售后关闭在底部行下方展示拒绝原因（商家拒绝）或撤销说明（用户撤销）' }
                 ]
@@ -22120,7 +22138,7 @@
                     { id: 3, title: '退款原因（半屏弹窗选择）', type: 'interaction', target: '[data-block="as-reasons"]', content: '必填（红色*标识），下拉框占位「请选择退款原因（必选）」，点击从底部弹出半屏弹窗「选择退款原因」：标题居中 + 右上角×关闭 + 单选列表（选中项右侧实心圆点）\n选项（演示数据，可由商城后台配置）：订单取消失败，重新申请售后 / 未收到货 / 商品质量问题 / 商品与预期不符/商品有错误 / 其他\n点击选项：回显至下拉框并关闭弹窗；点击×或蒙层：直接关闭不改变已选值\n退款原因选项由商城后台「售后设置」配置维护，前端拉取展示' },
                     { id: 4, title: '问题描述', type: 'interaction', target: '[data-block="as-desc"]', content: '灰色底输入框，选填，最多50字，实时字数统计（右下角 n/50）\n占位文案「描述问题有助于我们更好的为您提供售后服务（选填）」' },
                     { id: 5, title: '上传图片/视频', type: 'interaction', target: '[data-block="as-proof"]', content: '93×93虚线边框上传格（相机图标+「上传图片/视频」），点击弹出微信原生 ActionSheet 操作菜单（深色背景、白色文字居中）：拍摄图片 / 拍摄视频 + 底部独立「取消」按钮（对应 wx.chooseMedia mediaType 图片+视频、sourceType 拍摄；演示：选择后模拟添加一格）\n数量限制：最多上传9个文件，其中视频最多1个，超限 Toast 提示\n必填：需至少上传1张凭证（图片或视频均可），否则提交按钮置灰\n格式与大小：图片大小不超过2M；视频仅支持 mp4、mov 格式且大小不超过20M\n达到数量上限（9个文件）后，隐藏「上传图片/视频」上传格\n提示文案展示于上传格下方\n点击已上传的凭证格 → 全屏预览（wx.previewMedia）：图片展示原图可左右切换（左上角 n/N 指示），视频点击播放/暂停，点击空白处关闭' },
-                    { id: 6, title: '商品选择', type: 'interaction', target: '[data-block="as-items"]', content: '列出订单内商品（图/名称/规格），点击行勾选/取消勾选，可多选\n按数量部分退款：勾选购买数量>1的商品后展示「退款数量」步进器，可增减退款数量（1 ≤ 数量 ≤ 购买数量，勾选时默认全选数量）\n「全选（对所有商品发起售后申请）」：一键勾选/取消全部商品，勾选时数量取购买数量\n按勾选商品及所选数量、以下单时固化的单品实付金额（各项抵扣已分摊到商品行）计算退款金额；全部商品且数量全选视为整单退款\n卡片底部为灰底价格明细块' },
+                    { id: 6, title: '商品选择', type: 'interaction', target: '[data-block="as-items"]', content: '列出订单内商品（图/名称/规格），点击行勾选/取消勾选，可多选\n按数量部分退款：勾选购买数量>1的商品后展示「退款数量」步进器，可增减退款数量（1 ≤ 数量 ≤ 购买数量，勾选时默认全选数量）\n「全选（对所有商品发起售后申请）」：一键勾选/取消全部商品，勾选时数量取购买数量\n按勾选商品及所选数量、以下单时固化的单品实付金额（各项抵扣已分摊到商品行）计算退款金额；全部商品且数量全选视为整单退款\n卡片底部为灰底价格明细块\n\n部分退款后二次申请（方案A）：订单存在已退款终态的部分退款售后单时——\n标题下方展示提示条「该订单已退款 ¥xx.xx（首次售后单已退款终态），本次仅可对剩余商品/数量发起二次申请」\n已退完全部数量的商品行置灰（浅色+「已退款」标签），不可勾选；退了部分数量的商品行展示「已退 N 件」标签\n勾选/步进器/全选的数量基数均为剩余可退件数（购买数 − 已退数）；退款金额按行级剩余快照计算，与已退部分合计守恒\n提交后本次件数/金额写回订单已退快照；全部退完后订单移出售后申请Tab（时效：首次售后单已退款终态时间 + 48小时，规则见需求文档 5.2）' },
                     { id: 7, title: '价格明细', type: 'state', target: '[data-block="as-price-detail"]', content: '商品选择卡片内的灰底明细块：商品总价 / 配送费 / 优惠券 / 回馈金抵扣 / 购物金抵扣 / 实付款\n退款计算规则不在页面展示说明文案，口径见需求文档第 6 章（按下单时固化的行级分摊快照计算；优惠券与配送费不退回）' },
                     { id: 8, title: '预计退款（底部固定）', type: 'state', target: '[data-block="as-amount"]', content: '固定于页面底部（与提交按钮同为固定栏，不随内容滚动）：浅黄底明细条\n随勾选商品及所选数量实时计算：预计退款总额（红色）+ 预计退回去向（支付渠道原路退回 / 回馈金退回余额 / 购物金退回余额）\n优惠券不退回、不恢复；配送费不退回（整单/部分退款均不退，规则见需求文档 6 章）' },
                     { id: 9, title: '提交申请（底部固定）', type: 'interaction', target: '[data-block="as-submit"]', content: '底部固定栏主色按钮（全宽）\n校验：至少勾选1件商品 + 已选择退款原因 + 至少上传1张凭证（图片或视频均可，问题描述选填），否则按钮置灰\n点击「提交申请」→ Toast「申请已提交，请等待商家审核」→ 跳转售后单详情页（待商家审核），问题描述随申请一并提交' }
@@ -22141,6 +22159,8 @@
                     { block: '商品选择', state: '勾选部分商品', trigger: '点击商品行', ui: '底部固定栏按部分退款规则实时计算预计退款去向' },
                     { block: '商品选择', state: '选择退款数量', trigger: '勾选购买数量>1的商品', ui: '展示「退款数量」步进器（默认全选，可减至1），按所选数量实时计算退款金额' },
                     { block: '商品选择', state: '全选', trigger: '点击「全选」或勾选全部商品且数量全选', ui: '全选复选框勾选，按整单退款规则计算（退款总额=实付−配送费），优惠券与配送费不退回' },
+                    { block: '商品选择', state: '部分退款后二次申请', trigger: '订单存在已退款终态的部分退款售后单', ui: '提示条「该订单已退款 ¥xx.xx…」；已退完行置灰+「已退款」标签不可勾选，部分已退行「已退 N 件」标签；数量基数为剩余可退件数' },
+                    { block: '商品选择', state: '剩余全部退完', trigger: '提交二次申请勾选全部剩余商品', ui: '售后单生成，订单已退快照写回；全部退完后订单移出售后申请Tab' },
                     { block: '底部固定栏', state: '固定展示', trigger: '页面加载/滚动', ui: '预计退款明细条+提交按钮固定于底部，不随内容滚动' },
                     { block: '上传凭证', state: '必传校验', trigger: '页面加载', ui: '需至少上传1张凭证（图片或视频均可），否则提交按钮置灰' },
                     { block: '上传凭证', state: '选择媒体', trigger: '点击上传格', ui: '弹出微信原生 ActionSheet：拍摄图片 / 拍摄视频 + 底部独立「取消」按钮（对应 wx.chooseMedia sourceType 拍摄）' },
@@ -22158,7 +22178,7 @@
                 render: 'profileAfterSaleDetail',
                 interactionNotes: [
                     { id: 1, title: '状态头', type: 'state', target: '[data-block="as-status"]', content: '浅蓝背景状态区，按售后单状态展示标题+副文案：\n待商家审核：商家正在处理您的申请，请耐心等待\n退款中：商家已同意退款，退款将原路退回，预计1-7天到账\n已退款：退款已原路退回，请留意查收\n售后关闭（商家拒绝）：红色警示文案「商家拒绝了您的申请，如有疑问请联系在线客服。」+ 灰色「拒绝原因：xxx」双层结构\n售后关闭（用户撤销）：灰色文案「您已撤销本次售后申请，如有问题可再次申请或联系客服。」' },
-                    { id: 2, title: '退款信息', type: 'state', target: '.od-card:nth-child(1)', content: '字段顺序：退款总额（红色）→ 支付渠道原路退回 → 回馈金退回余额 → 购物金退回余额 → 售后原因 → 问题描述（未填写时灰色「暂无描述」）→ 售后单号（点击「复制」短暂变为「已复制」）→ 申请时间\n优惠券不退回（不在卡片中逐行展示，规则见需求文档6.1/6.2）' },
+                    { id: 2, title: '退款信息', type: 'state', target: '.od-card:nth-child(1)', content: '字段顺序：退款总额（红色）→ [二次申请单额外展示：该订单此前已退款 ¥xx.xx（剩余商品二次申请）] → 支付渠道原路退回 → 回馈金退回余额 → 购物金退回余额 → 售后原因 → 问题描述（未填写时灰色「暂无描述」）→ 售后单号（点击「复制」短暂变为「已复制」）→ 申请时间\n优惠券不退回（不在卡片中逐行展示，规则见需求文档6.1/6.2）\n部分退款后的二次申请单（首单已退款终态后提交）在退款总额下方展示「该订单此前已退款」关联行，便于核对累计退款与剩余快照（守恒：已退 + 本次 = 实付 − 配送费）' },
                     { id: 3, title: '商品与凭证', type: 'state', target: '.od-card:nth-child(2)', content: '商品行：图 + 名称（最多两行截断）+ 规格 + 底部行（退款数量 xN 左 / 申请退款 ¥xx.xx 右，单项金额按行级分摊快照计算，与退款总额守恒）\n异常凭证：申请时上传的凭证（最多9个文件，其中视频最多1个，展示为图片格+视频格（mp4标识），无凭证时不展示该卡片）\n点击凭证格 → 全屏预览（wx.previewMedia）：图片展示原图可左右切换（左上角 n/N 指示），视频点击播放/暂停，点击空白处关闭' },
                     { id: 4, title: '底部操作', type: 'interaction', target: '.as-bottom-bar', content: '全部状态均提供「联系客服」按钮（黑底白字+耳机图标，同退款中样式）：\n待商家审核：撤销申请（白底描边，确认弹窗，撤销后售后单关闭）+ 联系客服\n退款中 / 已退款 / 售后关闭（商家拒绝）：联系客服\n售后关闭（用户撤销）：再次申请（同一订单最多1次）+ 联系客服\n商家拒绝后不可再次申请，只能联系在线客服' },
                     { id: 5, title: '场景控制器·售后状态流转', type: 'interaction', target: '#scene-control-after-sale', content: '手机预览区下方DEMO场景控制器，模拟商家侧动作驱动的售后单状态流转：待商家审核 / 退款中 / 已退款 / 售后关闭·商家拒绝 / 售后关闭·用户撤销\n点击任一状态：当前售后单立即切换至该状态，状态头、底部操作随之联动\n用户主动操作（撤销申请等）后控制器同步高亮对应状态；切换支持反复进行' }
@@ -22173,6 +22193,7 @@
                     { block: '状态', state: '售后关闭（拒绝）', trigger: '商家拒绝', ui: '红色警示文案+拒绝原因双层结构，底部：联系客服（不可再次申请）' },
                     { block: '状态', state: '售后关闭（撤销）', trigger: '用户撤销申请', ui: '状态区展示撤销说明，底部：再次申请（同一订单最多1次） + 联系客服' },
                     { block: '退款信息', state: '问题描述未填写', trigger: '申请时未输入描述', ui: '问题描述字段展示灰色「暂无描述」' },
+                    { block: '退款信息', state: '二次申请单', trigger: '订单存在此前已退款的部分退款售后单', ui: '退款总额下方展示「该订单此前已退款 ¥xx.xx（剩余商品二次申请）」关联行' },
                     { block: '商品信息', state: '行级退款金额', trigger: '页面加载', ui: '每商品行展示「退款数量 xN」+「申请退款 ¥xx.xx」（行级分摊快照，合计=退款总额）' },
                     { block: '异常凭证', state: '无凭证', trigger: '申请时未上传', ui: '不展示异常凭证卡片' },
                     { block: '异常凭证', state: '点击预览', trigger: '点击任一凭证格', ui: '全屏预览（wx.previewMedia）：图片左右切换，视频播放/暂停，点击空白处关闭' },
@@ -24095,6 +24116,17 @@
         // 售后申请 Tab：可申请售后的订单（V1.3 仅已完成订单，待收货本期不开放；待发货走「取消订单」整单退款，不进入该列表）
         const afterSaleOrders = [
             {
+                // 普通可申请订单（无部分退款记录）：申请Tab常规卡片（实付金额单行）
+                orderNo: '0304104855000015', typeText: '极速达', statusText: '已完成',
+                time: '2026-10-24 20:05:12', doneTime: '2026-10-25 08:40:00', expired: false,
+                title: '奶油西瓜 单果约4.5kg', count: 1, pay: 34.90, img: AI_IMG_WATERMELON,
+                detailPage: 'shop-order-detail-home-coupon',
+                items: [
+                    { id: 'wm', title: '奶油西瓜 单果约4.5kg', spec: '规格：4.5kg/个', price: 39.90, count: 1 }
+                ],
+                couponDeduct: 5.00, rebateDeduct: 0.00, shoppingDeduct: 0.00, deliveryFee: 0.00, payChannel: '微信支付'
+            },
+            {
                 orderNo: '0304104855000008', typeText: '极速达', statusText: '已完成',
                 time: '2026-09-27 09:12:40', doneTime: '2026-09-28 21:30:00', expired: false,
                 title: '徕芙 迷你手持电风扇 便携充电款', count: 3, pay: 102.50, img: AI_IMG_MINI_FAN,
@@ -24103,7 +24135,10 @@
                     { id: 'w', title: '徕芙 迷你手持电风扇 便携充电款', spec: '颜色：白色', price: 39.50, count: 2 },
                     { id: 'b', title: '徕芙 迷你手持电风扇 便携充电款', spec: '颜色：蓝色', price: 39.50, count: 1 }
                 ],
-                couponDeduct: 8.00, rebateDeduct: 2.00, shoppingDeduct: 6.00, deliveryFee: 0.00, payChannel: '微信支付'
+                couponDeduct: 8.00, rebateDeduct: 2.00, shoppingDeduct: 6.00, deliveryFee: 0.00, payChannel: '微信支付',
+                // 部分退款后可再次申请（方案A）：行级已退件数快照 + 已退金额，首次售后单已退款终态后解锁剩余商品二次申请（时效 = 已退款终态时间 + 48h）
+                refundedItems: { w: 1 },   // 白色已退 1 件（对应下方 AS202610200006 已退款售后单）
+                alreadyRefundedC: 3417     // 已退金额（分）= ¥34.17
             },
             {
                 orderNo: '0304104855000006', typeText: '站点自提', statusText: '已完成',
@@ -24113,7 +24148,7 @@
             }
         ];
         // 售后单记录（处理中 / 已完成 Tab 数据源）
-        let afterSaleSeq = 6; // 新建售后单编号自增（演示）
+        let afterSaleSeq = 7; // 新建售后单编号自增（演示）
         let afterSaleRecords = [
             {
                 id: 'AS202609280001', orderNo: '0304104855000012', status: 'reviewing', statusText: '待商家审核',
@@ -24121,6 +24156,14 @@
                 items: [{ title: '徕芙 迷你手持电风扇 便携充电款', spec: '颜色：白色', count: 1, refundAmount: 34.17 }],
                 refundTotal: 34.17, breakdown: { pay: 31.51, rebate: 0.66, shopping: 2.00 },
                 proofCount: 2, proofVideo: 1, applyTime: '2026-09-28 10:23:45'
+            },
+            {
+                // 部分退款后已退款终态（方案A演示）：白色 1 件已退款 ¥34.17，剩余商品解锁二次申请（时效 = 本单已退款终态 + 48h）
+                id: 'AS202610200006', orderNo: '0304104855000008', status: 'refunded', statusText: '已退款',
+                reason: '商品质量问题', desc: '其中一台风扇通电后不转，申请退款',
+                items: [{ title: '徕芙 迷你手持电风扇 便携充电款', spec: '颜色：白色', count: 1, refundAmount: 34.17 }],
+                refundTotal: 34.17, breakdown: { pay: 31.51, rebate: 0.66, shopping: 2.00 },
+                proofCount: 1, applyTime: '2026-10-20 09:15:33', refundedTime: '2026-10-20 15:02:18'
             },
             {
                 id: 'AS202609270002', orderNo: '0304104855000010', status: 'refunding', statusText: '退款中',
@@ -24213,20 +24256,40 @@
             return { isFull, refundC: refundTotal, payC: payT, rebateC: rebateT, shoppingC: shoppingT, lineRefunds };
         }
         // 售后列表：按Tab生成列表HTML（tab: apply / pending / done）
+        // 部分退款后二次申请（方案A）辅助：
+        // asRemainOf 计算商品行剩余可退件数（购买数 − 已退件数）；asRemainingC 计算订单剩余可退金额（分，按行级剩余快照求和）
+        function asRemainOf(order, itemId) {
+            const item = (order.items || []).find(i => i.id === itemId);
+            if (!item) return 0;
+            return Math.max(0, item.count - ((order.refundedItems || {})[itemId] || 0));
+        }
+        function asRemainingC(order) {
+            if (!order.refundedItems || Object.keys(order.refundedItems).length === 0) return Math.round(order.pay * 100) - Math.round((order.deliveryFee || 0) * 100);
+            const sel = {};
+            (order.items || []).forEach(i => { const rem = asRemainOf(order, i.id); if (rem > 0) sel[i.id] = rem; });
+            return asCalcRefund(order, sel).refundC;
+        }
         function asRenderListHTML(tab) {
             const emptyHTML = (text) => `<div class="cp-empty"><div class="cp-empty-icon"><svg width="80" height="80" viewBox="0 0 80 80" fill="none"><rect x="20" y="15" width="40" height="50" rx="4" stroke="#D9D9D9" stroke-width="2"/><path d="M26 25h28M26 35h28M26 45h20" stroke="#D9D9D9" stroke-width="2" stroke-linecap="round"/></svg></div><div class="cp-empty-text">${text}</div></div>`;
             if (tab === 'apply') {
                 // 仅展示售后有效期内的订单：超期订单不在列表展示（在「我的订单」卡片保留置灰的申请售后按钮 + 客服提示）
-                const list = afterSaleOrders.filter(o => !o.expired && !afterSaleRecords.some(r => r.orderNo === o.orderNo && (r.status === 'reviewing' || r.status === 'refunding')));
+                // 部分退款订单（首单已退款终态）保留展示，仅剩余可退商品可申请；剩余可退为 0（全部退完）的订单不再展示
+                const list = afterSaleOrders.filter(o => !o.expired && !afterSaleRecords.some(r => r.orderNo === o.orderNo && (r.status === 'reviewing' || r.status === 'refunding')) && asRemainingC(o) > 0);
                 if (list.length === 0) return emptyHTML('仅48小时内签收的订单支持退款');
                 return list.map(o => {
                     const imgCount = Math.min(o.count, 3);
                     const imgs = Array(imgCount).fill(0).map(() => `<div class="as-order-gallery-item">${productImgTag(o.img)}</div>`).join('');
+                    const refundedC = o.alreadyRefundedC || 0;
+                    const isPartial = refundedC > 0;
+                    const remainC = asRemainingC(o);
+                    const priceHTML = isPartial
+                        ? `<div class="as-order-price price-remain"><div class="as-refunded-line">已退款 ¥${(refundedC / 100).toFixed(2)}</div><div class="as-remain-line">剩余可退<b>¥${(remainC / 100).toFixed(2)}</b></div></div>`
+                        : `<div class="as-order-price">实付<b>¥${o.pay.toFixed(2)}</b></div>`;
                     return `
                         <div class="as-order-card" data-detail="${o.detailPage}" data-block="as-order-card">
                             <div class="as-order-header">
                                 <div>
-                                    <div class="as-order-type">${o.typeText}</div>
+                                    <div class="as-order-type">${o.typeText}${isPartial ? '<span class="as-partial-badge">部分已退款</span>' : ''}</div>
                                     <div class="as-order-time">送达时间：${o.doneTime || o.time}</div>
                                 </div>
                             </div>
@@ -24235,7 +24298,7 @@
                                 <div class="as-order-count">共${o.count}件 <span class="arrow">›</span></div>
                             </div>
                             <div class="as-order-footer">
-                                <div class="as-order-price">实付<b>¥${o.pay.toFixed(2)}</b></div>
+                                ${priceHTML}
                                 <button class="order-btn order-btn-outline as-apply-btn" data-apply-order="${o.orderNo}">售后/退款</button>
                             </div>
                         </div>`;
@@ -24246,8 +24309,10 @@
             if (list.length === 0) return emptyHTML(isPending ? '暂无处理中的售后单' : '暂无已完成的售后单');
             return list.map(r => {
                 const totalQty = r.items.reduce((s, i) => s + i.count, 0);
-                const typeText = (afterSaleOrders.find(o => o.orderNo === r.orderNo) || {}).typeText || '极速达';
-                const imgs = Array(Math.min(totalQty, 3)).fill(0).map(() => `<div class="as-order-gallery-item">${productImgTag(AI_IMG_MINI_FAN)}</div>`).join('');
+                const ord = afterSaleOrders.find(o => o.orderNo === r.orderNo) || {};
+                const typeText = ord.typeText || '极速达';
+                const recordImg = ord.img || AI_IMG_MINI_FAN;
+                const imgs = Array(Math.min(totalQty, 3)).fill(0).map(() => `<div class="as-order-gallery-item">${productImgTag(recordImg)}</div>`).join('');
                 return `
                     <div class="as-record-card" data-record="${r.id}" data-block="as-record-card">
                         <div class="as-order-header">
@@ -24315,14 +24380,37 @@
             const reasons = ['订单取消失败，重新申请售后', '未收到货', '商品质量问题', '商品与预期不符/商品有错误', '其他'];
             const goodsTotal = order.items.reduce((s, i) => s + i.price * i.count, 0);
             const cameraIcon = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 8h3l1.6-2h6.8L17 8h3v11H4V8z" stroke="#666666" stroke-width="1.5" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.2" stroke="#666666" stroke-width="1.5"/></svg>';
-            const itemRows = order.items.map(i => `
+            // 部分退款后二次申请：已退件数快照 → 剩余可退件数；已退完的行置灰不可勾选
+            const refundedMap = order.refundedItems || {};
+            const hasRefunded = (order.alreadyRefundedC || 0) > 0;
+            const remainTipHTML = hasRefunded ? `<div class="as-remain-tip" data-block="as-remain-tip">该订单已退款 ¥${((order.alreadyRefundedC || 0) / 100).toFixed(2)}（首次售后单已退款终态），本次仅可对剩余商品/数量发起二次申请</div>` : '';
+            const itemRows = order.items.map(i => {
+                const refundedN = refundedMap[i.id] || 0;
+                const remainN = Math.max(0, i.count - refundedN);
+                if (remainN <= 0) {
+                    // 该商品行已全部退完：置灰 +「已退款」标签，不可勾选
+                    return `
+                        <div class="as-item-row refunded" data-item-id="${i.id}">
+                            <div class="as-check"></div>
+                            <div class="as-item-img">${productImgTag(i.img || order.img)}</div>
+                            <div class="as-item-main">
+                                <div class="as-item-line">
+                                    <div class="as-item-info">
+                                        <div class="as-item-title">${i.title}<span class="as-refunded-tag">已退款</span></div>
+                                        <div class="as-item-spec">${i.spec}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`;
+                }
+                return `
                 <div class="as-item-row" data-item-id="${i.id}">
                     <div class="as-check"></div>
-                    <div class="as-item-img">${productImgTag(AI_IMG_MINI_FAN)}</div>
+                    <div class="as-item-img">${productImgTag(i.img || order.img)}</div>
                     <div class="as-item-main">
                         <div class="as-item-line">
                             <div class="as-item-info">
-                                <div class="as-item-title">${i.title}</div>
+                                <div class="as-item-title">${i.title}${refundedN > 0 ? `<span class="as-refunded-tag">已退 ${refundedN} 件</span>` : ''}</div>
                                 <div class="as-item-spec">${i.spec}</div>
                             </div>
                         </div>
@@ -24330,11 +24418,12 @@
                         <div class="as-qty-stepper">
                             <span class="as-qty-label">退款数量</span>
                             <span class="as-qty-btn as-qty-minus">−</span>
-                            <span class="as-qty-num">${i.count}</span>
+                            <span class="as-qty-num">${remainN}</span>
                             <span class="as-qty-btn as-qty-plus">+</span>
                         </div>` : ''}
                     </div>
-                </div>`).join('');
+                </div>`;
+            }).join('');
             const reasonRows = reasons.map(r => `
                 <div class="as-reason-row" data-reason="${r}">
                     <span>${r}</span>
@@ -24369,6 +24458,7 @@
                         </div>
                         <div class="as-apply-section" data-block="as-items">
                             <div class="as-sec-title">选择退款商品</div>
+                            ${remainTipHTML}
                             ${itemRows}
                             <div class="as-select-all" id="as-select-all">
                                 <div class="as-check"></div>
@@ -24434,12 +24524,14 @@
             } else {
                 statusDescHTML = `<div class="od-status-desc">${statusDescMap[r.status]}</div>`;
             }
-            const payChannel = (afterSaleOrders.find(o => o.orderNo === r.orderNo) || afterSaleOrders[0]).payChannel || '微信支付';
+            const asDetailOrd = afterSaleOrders.find(o => o.orderNo === r.orderNo) || {};
+            const payChannel = asDetailOrd.payChannel || '微信支付';
+            const asDetailImg = asDetailOrd.img || AI_IMG_MINI_FAN;
             const proofCells = Array(Math.min(r.proofCount || 0, 9)).fill(0).map(() => ({ type: 'image' }));
             if (r.proofVideo) proofCells.push({ type: 'video' });
             const proofImgs = proofCells.map((p, i) => p.type === 'video'
                 ? `<div class="as-proof-img-lg as-proof-video" data-proof-idx="${i}" data-proof-type="video"><i class="fa fa-play-circle vid-play"></i><span class="vid-tag">mp4</span></div>`
-                : `<div class="as-proof-img-lg" data-proof-idx="${i}" data-proof-type="image">${productImgTag(AI_IMG_MINI_FAN)}</div>`).join('');
+                : `<div class="as-proof-img-lg" data-proof-idx="${i}" data-proof-type="image">${productImgTag(asDetailImg)}</div>`).join('');
             // 底部操作：全部状态提供「联系客服」（退款中样式）；用户撤销额外提供「再次申请」，待审核额外提供「撤销申请」
             let bottomActions = '';
             const contactBtn = `<button class="order-btn order-btn-primary" data-action="as-contact"><i class="fa fa-headphones" style="margin-right:4px;"></i>联系客服</button>`;
@@ -24457,7 +24549,7 @@
             }
             const itemRows = r.items.map(i => `
                 <div class="as-item-row" style="cursor:default;">
-                    <div class="as-item-img">${productImgTag(AI_IMG_MINI_FAN)}</div>
+                    <div class="as-item-img">${productImgTag(i.img || asDetailImg)}</div>
                     <div class="as-item-info">
                         <div class="as-item-title two-line">${i.title}</div>
                         <div class="as-item-spec">${i.spec}</div>
@@ -24483,6 +24575,7 @@
                                 <span class="as-refund-total-label">退款总额</span>
                                 <span class="as-refund-total-value">¥${r.refundTotal.toFixed(2)}</span>
                             </div>
+                            ${r.prevRefundedC > 0 ? `<div class="od-order-info-row"><span class="od-order-label">该订单此前已退款</span><span class="od-order-value">¥${(r.prevRefundedC / 100).toFixed(2)}（剩余商品二次申请）</span></div>` : ''}
                             <div class="od-order-info-row"><span class="od-order-label">${payChannel}原路退回</span><span class="od-order-value">¥${r.breakdown.pay.toFixed(2)}</span></div>
                             <div class="od-order-info-row"><span class="od-order-label">回馈金退回余额</span><span class="od-order-value">¥${r.breakdown.rebate.toFixed(2)}</span></div>
                             <div class="od-order-info-row"><span class="od-order-label">购物金退回余额</span><span class="od-order-value">¥${r.breakdown.shopping.toFixed(2)}</span></div>
@@ -29570,37 +29663,43 @@
                     const valid = selected.size > 0 && !!curReason && (proofImgCount + proofVideoCount) > 0;
                     btn.classList.toggle('disabled', !valid);
                 };
-                // 商品勾选（可多选；勾选时默认全选数量）与退款数量步进器（1 ≤ 数量 ≤ 购买数量）
+                // 商品勾选（可多选；勾选时默认全选数量）与退款数量步进器（1 ≤ 数量 ≤ 剩余可退数量）
+                // 部分退款后二次申请：数量基数改为剩余可退件数（购买数 − 已退数），已退完的行不可勾选
+                const remainOf = (id) => asRemainOf(order, id);
                 const syncStepper = (row) => {
                     const id = row.dataset.itemId;
                     const item = order.items.find(i => i.id === id);
                     if (!item || item.count <= 1) return;
-                    const qty = selected.get(id) || item.count;
+                    const rem = remainOf(id);
+                    if (rem <= 0) return;
+                    const qty = selected.get(id) || rem;
                     const num = row.querySelector('.as-qty-num');
                     const minus = row.querySelector('.as-qty-minus');
                     const plus = row.querySelector('.as-qty-plus');
                     if (num) num.textContent = String(qty);
                     if (minus) minus.classList.toggle('disabled', qty <= 1);
-                    if (plus) plus.classList.toggle('disabled', qty >= item.count);
+                    if (plus) plus.classList.toggle('disabled', qty >= rem);
                 };
-                // 全选复选框联动：全部商品勾选且数量全选 → 勾选态
+                // 全选复选框联动：全部「可退」商品勾选且数量全选 → 勾选态（已退完的行不参与判定）
                 const syncSelectAll = () => {
                     const allEl = document.getElementById('as-select-all');
                     if (!allEl) return;
-                    const allChecked = order.items.length > 0 && order.items.every(i => selected.has(i.id) && selected.get(i.id) === i.count);
+                    const refundable = order.items.filter(i => remainOf(i.id) > 0);
+                    const allChecked = refundable.length > 0 && refundable.every(i => selected.has(i.id) && selected.get(i.id) === remainOf(i.id));
                     const chk = allEl.querySelector('.as-check');
                     if (chk) chk.classList.toggle('checked', allChecked);
                 };
                 document.querySelectorAll('#as-apply-root .as-item-row').forEach(row => {
                     row.addEventListener('click', () => {
                         const id = row.dataset.itemId;
+                        if (row.classList.contains('refunded')) return; // 已退完的行不可勾选
                         if (selected.has(id)) {
                             selected.delete(id);
                             row.classList.remove('checked');
                             const chk = row.querySelector('.as-check'); if (chk) chk.classList.remove('checked');
                         } else {
-                            const item = order.items.find(i => i.id === id) || { count: 1 };
-                            selected.set(id, item.count);
+                            const rem = remainOf(id) || 1;
+                            selected.set(id, rem);
                             row.classList.add('checked');
                             const chk = row.querySelector('.as-check'); if (chk) chk.classList.add('checked');
                             syncStepper(row);
@@ -29609,7 +29708,7 @@
                         updateAmount();
                         updateSubmit();
                     });
-                    // 步进器增减退款数量（不触发行的勾选切换）
+                    // 步进器增减退款数量（不触发行的勾选切换；上限 = 剩余可退数量）
                     row.querySelectorAll('.as-qty-btn').forEach(btn => {
                         btn.addEventListener('click', (e) => {
                             e.stopPropagation();
@@ -29617,7 +29716,7 @@
                             const item = order.items.find(i => i.id === id);
                             if (!item || !selected.has(id)) return;
                             const next = selected.get(id) + (btn.classList.contains('as-qty-minus') ? -1 : 1);
-                            if (next < 1 || next > item.count) return;
+                            if (next < 1 || next > remainOf(id)) return;
                             selected.set(id, next);
                             syncStepper(row);
                             syncSelectAll();
@@ -29625,22 +29724,25 @@
                         });
                     });
                 });
-                // 全选：一键勾选/取消全部商品（勾选时数量取购买数量）
+                // 全选：一键勾选/取消全部「可退」商品（勾选时数量取剩余可退数量，已退完的行跳过）
                 const selectAllEl = document.getElementById('as-select-all');
                 if (selectAllEl) {
                     selectAllEl.addEventListener('click', () => {
-                        const allChecked = order.items.length > 0 && order.items.every(i => selected.has(i.id) && selected.get(i.id) === i.count);
+                        const refundable = order.items.filter(i => remainOf(i.id) > 0);
+                        const allChecked = refundable.length > 0 && refundable.every(i => selected.has(i.id) && selected.get(i.id) === remainOf(i.id));
                         document.querySelectorAll('#as-apply-root .as-item-row').forEach(row => {
                             const id = row.dataset.itemId;
                             const item = order.items.find(i => i.id === id);
                             if (!item) return;
+                            const rem = remainOf(id);
+                            if (rem <= 0) return;
                             const chk = row.querySelector('.as-check');
                             if (allChecked) {
                                 selected.delete(id);
                                 row.classList.remove('checked');
                                 if (chk) chk.classList.remove('checked');
                             } else {
-                                selected.set(id, item.count);
+                                selected.set(id, rem);
                                 row.classList.add('checked');
                                 if (chk) chk.classList.add('checked');
                                 syncStepper(row);
@@ -29745,6 +29847,7 @@
                     });
                 }
                 // 提交申请：生成售后单（待商家审核）→ Toast → 跳转售后单详情
+                // 部分退款后二次申请：提交后将本次退款件数/金额写回订单已退快照（refundedItems / alreadyRefundedC），并记录此前已退金额
                 const submitBtn = document.getElementById('as-submit-btn');
                 if (submitBtn) {
                     submitBtn.addEventListener('click', () => {
@@ -29754,15 +29857,21 @@
                         const d = new Date();
                         const p = (n) => String(n).padStart(2, '0');
                         const id = 'AS' + d.getFullYear() + p(d.getMonth() + 1) + p(d.getDate()) + String(afterSaleSeq++).padStart(4, '0');
-                        const items = order.items.filter(i => selected.has(i.id)).map(i => ({ title: i.title, spec: i.spec, count: selected.get(i.id), refundAmount: (calc.lineRefunds[i.id] || 0) / 100 }));
+                        const items = order.items.filter(i => selected.has(i.id)).map(i => ({ title: i.title, spec: i.spec, count: selected.get(i.id), refundAmount: (calc.lineRefunds[i.id] || 0) / 100, img: i.img || order.img }));
                         const desc = descInput ? descInput.value.trim() : '';
+                        const prevRefundedC = order.alreadyRefundedC || 0;
                         afterSaleRecords.unshift({
                             id: id, orderNo: order.orderNo, status: 'reviewing', statusText: '待商家审核',
                             reason: curReason, desc: desc, items: items,
                             refundTotal: calc.refundC / 100,
                             breakdown: { pay: calc.payC / 100, rebate: calc.rebateC / 100, shopping: calc.shoppingC / 100 },
-                            proofCount: proofImgCount, proofVideo: proofVideoCount, applyTime: ts
+                            proofCount: proofImgCount, proofVideo: proofVideoCount, applyTime: ts,
+                            prevRefundedC: prevRefundedC
                         });
+                        // 写回订单已退快照（模拟：实际以商家同意退款落账；演示提前写回以展示剩余状态联动）
+                        if (!order.refundedItems) order.refundedItems = {};
+                        selected.forEach((qty, itemId) => { order.refundedItems[itemId] = (order.refundedItems[itemId] || 0) + qty; });
+                        order.alreadyRefundedC = (order.alreadyRefundedC || 0) + calc.refundC;
                         window.__afterSaleTab = 'pending';
                         window.__afterSaleDetailId = id;
                         switchPage('profile-after-sale-detail');
