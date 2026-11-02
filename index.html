@@ -21300,10 +21300,11 @@
                     { id: 2, title: '配送信息', type: 'state', target: '.od-card:nth-child(1)', content: '展示收货人、联系电话、收货地址' },
                     { id: 3, title: '商品与价格明细', type: 'state', target: '.od-card:nth-child(2)', content: '商品信息：单商品展示商品图+名称+规格+「共N件 ›」；多商品展示商品图册+「共N件 ›」\n价格明细：商品总价 + 配送费¥0.00 - 回馈金抵扣¥2.00 - 购物金抵扣¥6.00 = 实付¥31.50' },
                     { id: 4, title: '订单信息', type: 'state', target: '.od-card:nth-child(3)', content: '订单号（点击「复制」可复制，按钮短暂变为「已复制」）、下单时间、支付时间、支付方式（微信支付）、订单备注\n注：待发货状态不显示发货时间、完成时间' },
-                    { id: 5, title: '底部操作', type: 'interaction', target: '.od-bottom-bar', content: '左侧「客服」按钮 → 跳转客服功能\n「再买一单」按钮 → 弹出再买一单弹窗（商品清单，可加入购物车）' }
+                    { id: 5, title: '底部操作', type: 'interaction', target: '.od-bottom-bar', content: '左侧「客服」按钮 → 跳转客服功能\n「取消订单」按钮 → 弹出确认弹窗「确定要取消该订单吗？」，确认后Toast「订单已取消」（已支付未发货，取消即触发整单退款，见售后需求文档 5.1）\n「再买一单」按钮 → 弹出再买一单弹窗（商品清单，可加入购物车）' }
                 ],
                 statusList: [
-                    { block: '底部按钮', state: '待发货', trigger: '页面加载', ui: '客服 + 再买一单' },
+                    { block: '底部按钮', state: '待发货', trigger: '页面加载', ui: '客服 + 取消订单 + 再买一单' },
+                    { block: '取消订单', state: '已取消', trigger: '点击「取消订单」并确认', ui: 'Toast「订单已取消」' },
                     { block: '复制订单号', state: '已复制', trigger: '点击「复制」', ui: '按钮文案短暂变为「已复制」，1.5秒后恢复' }
                 ]
             },
@@ -21388,10 +21389,11 @@
                     { id: 2, title: '自提信息', type: 'state', target: '.od-card:nth-child(1)', content: '展示提货人、自提电话、自提地址（物业处）' },
                     { id: 3, title: '商品与价格明细', type: 'state', target: '.od-card:nth-child(2)', content: '商品信息：单商品展示商品图+名称+规格+「共N件 ›」；多商品展示商品图册+「共N件 ›」\n价格明细：商品总价¥39.50 - 回馈金抵扣¥2.00 - 购物金抵扣¥6.00 = 实付¥31.50\n注：站点自提无配送费、无包装费' },
                     { id: 4, title: '订单信息', type: 'state', target: '.od-card:nth-child(3)', content: '订单号（点击「复制」可复制，按钮短暂变为「已复制」）、下单时间、支付时间、支付方式（云闪付支付）、订单备注\n注：待发货状态不显示发货时间、完成时间' },
-                    { id: 5, title: '底部操作', type: 'interaction', target: '.od-bottom-bar', content: '左侧「客服」按钮 → 跳转客服功能\n「再买一单」按钮 → 弹出再买一单弹窗（商品清单，可加入购物车）' }
+                    { id: 5, title: '底部操作', type: 'interaction', target: '.od-bottom-bar', content: '左侧「客服」按钮 → 跳转客服功能\n「取消订单」按钮 → 弹出确认弹窗「确定要取消该订单吗？」，确认后Toast「订单已取消」（已支付未发货，取消即触发整单退款，见售后需求文档 5.1）\n「再买一单」按钮 → 弹出再买一单弹窗（商品清单，可加入购物车）' }
                 ],
                 statusList: [
-                    { block: '底部按钮', state: '待发货', trigger: '页面加载', ui: '客服 + 再买一单' },
+                    { block: '底部按钮', state: '待发货', trigger: '页面加载', ui: '客服 + 取消订单 + 再买一单' },
+                    { block: '取消订单', state: '已取消', trigger: '点击「取消订单」并确认', ui: 'Toast「订单已取消」' },
                     { block: '复制订单号', state: '已复制', trigger: '点击「复制」', ui: '按钮文案短暂变为「已复制」，1.5秒后恢复' }
                 ]
             },
@@ -26990,7 +26992,8 @@
             if (status === 'pay') {
                 bottomActions = `<button class="order-btn order-btn-outline" data-action="cancel-order">取消订单</button><button class="order-btn order-btn-primary" data-action="pay-now">立即支付</button>`;
             } else if (status === 'ship') {
-                bottomActions = `<button class="order-btn order-btn-primary" data-action="buy-again">再买一单</button>`;
+                // 待发货：已支付未发货，可取消订单（整单退款，见售后需求文档 5.1）
+                bottomActions = `<button class="order-btn order-btn-outline" data-action="cancel-order">取消订单</button><button class="order-btn order-btn-primary" data-action="buy-again">再买一单</button>`;
             } else if (status === 'receive') {
                 if (isHome) {
                     // 配送到家：骑手正赶往门店可取消；配送中取消按钮置灰（骑手取到货后不可取消）
