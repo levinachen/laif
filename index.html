@@ -4427,6 +4427,91 @@
         .calc-badge-gold { background: #FFF8E1; color: #F57F17; }
         .calc-badge-purple { background: #F3E5F5; color: #6A1B9A; }
         .calc-badge-blue { background: #E3F2FD; color: #1565C0; }
+        /* ====== 分类页（Figma 14:3164）====== */
+        .cat-page { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; background: #FFFFFF; position: relative; overflow: hidden; }
+        .cat-head { flex-shrink: 0; background: #F9F9F9; padding: 8px; display: flex; align-items: center; gap: 12px; }
+        .cat-back { width: 23px; height: 24px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+        .cat-search { flex: 1; min-width: 0; height: 32px; background: #FFFFFF; border: 1px solid #F5F5F5; border-radius: 24px; box-shadow: 0 0 2px rgba(0, 0, 0, 0.04); display: flex; align-items: center; gap: 4px; padding: 0 16px; }
+        .cat-search input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; font-family: inherit; font-size: 14px; line-height: 24px; color: #1D1D1D; padding: 0; }
+        .cat-search input::placeholder { color: #828282; }
+        .cat-capsule { flex-shrink: 0; width: 83px; height: 30px; background: #FFFFFF; border: 1px solid #EDEDED; border-radius: 24px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+        .cat-capsule-dots { display: flex; align-items: center; gap: 2.5px; }
+        .cat-capsule-dots i { width: 4px; height: 4px; border-radius: 50%; background: #1D1D1D; }
+        .cat-capsule-line { width: 1px; height: 14px; background: #EDEDED; margin: 0 10px; }
+        .cat-capsule-ring { width: 15px; height: 15px; border: 1.5px solid #1D1D1D; border-radius: 50%; position: relative; }
+        .cat-capsule-ring::after { content: ''; position: absolute; left: 50%; top: 50%; width: 5px; height: 5px; border: 1.5px solid #1D1D1D; border-radius: 50%; transform: translate(-50%, -50%); }
+        .cat-tabs-wrap { flex-shrink: 0; position: relative; background: #F9F9F9; padding: 0 8px; }
+        .cat-tabs { display: flex; overflow-x: auto; padding-right: 30px; scrollbar-width: none; }
+        .cat-tabs::-webkit-scrollbar { display: none; }
+        .cat-tab { flex-shrink: 0; width: 64px; height: 72px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; cursor: pointer; }
+        .cat-tab-icon { width: 40px; height: 40px; border-radius: 12px; background: linear-gradient(180deg, #E9F7FA 0%, #D6F0F6 100%); border: 1px solid #D2EFF5; display: flex; align-items: center; justify-content: center; color: #1CB2D4; font-size: 16px; }
+        .cat-tab.active .cat-tab-icon { background: linear-gradient(180deg, #D0F1F8 0%, #A2E2EE 100%); border-color: #1CB2D4; }
+        .cat-tab-label { max-width: 60px; font-size: 12px; font-weight: 500; line-height: 18px; color: #4F4F4F; padding: 0 4px; border-radius: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .cat-tab.active .cat-tab-label { background: #1CB2D4; color: #FFFFFF; }
+        .cat-expand { position: absolute; right: 8px; top: 0; width: 30px; height: 72px; background: #F9F9F9; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; z-index: 2; }
+        .cat-expand span { font-size: 12px; line-height: 16px; color: #333333; }
+        .cat-expand i { font-size: 11px; color: #333333; margin-top: 1px; }
+        /* 全部分类面板（展开态）：半屏浮层 + 遮罩 */
+        .cat-all-mask { position: absolute; inset: 0; background: rgba(0,0,0,.45); z-index: 55; opacity: 0; pointer-events: none; transition: opacity .2s ease; }
+        .cat-all-mask.show { opacity: 1; pointer-events: auto; }
+        .cat-all-panel { position: absolute; left: 0; right: 0; top: 0; max-height: 62%; background: #FFFFFF; z-index: 60; display: flex; flex-direction: column; border-radius: 0 0 16px 16px; box-shadow: 0 8px 24px rgba(0,0,0,.12); overflow: hidden; transform: translateY(-100%); opacity: 0; pointer-events: none; transition: transform .26s cubic-bezier(.22,.61,.36,1), opacity .2s ease; }
+        .cat-all-panel.show { transform: translateY(0); opacity: 1; pointer-events: auto; }
+        .cat-all-top { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px 4px 20px; flex-shrink: 0; }
+        .cat-all-title { font-size: 20px; line-height: 28px; font-weight: 600; color: #1D1D1D; }
+        .cat-all-body { flex: 1 1 auto; min-height: 0; overflow-y: auto; padding: 12px 16px 16px; scrollbar-width: none; }
+        .cat-all-body::-webkit-scrollbar { display: none; }
+        .cat-all-grid { display: grid; grid-template-columns: repeat(5, 1fr); row-gap: 22px; }
+        .cat-all-item { display: flex; flex-direction: column; align-items: center; cursor: pointer; }
+        .cat-all-icon { width: 52px; height: 52px; border-radius: 16px; background: linear-gradient(180deg, #F4FBFC 0%, #E6F6F9 100%); display: flex; align-items: center; justify-content: center; font-size: 22px; color: #1CB2D4; }
+        .cat-all-item.active .cat-all-icon { background: linear-gradient(180deg, #D0F1F8 0%, #A2E2EE 100%); border: 1px solid #1CB2D4; }
+        .cat-all-name { margin-top: 6px; font-size: 12px; line-height: 20px; color: #333333; padding: 0 4px; border-radius: 4px; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .cat-all-item.active .cat-all-name { background: #1CB2D4; color: #FFFFFF; }
+        .cat-all-foot { flex-shrink: 0; height: 52px; border-top: 1px solid #F0F0F0; display: flex; align-items: center; justify-content: center; gap: 4px; font-size: 13px; color: #333333; cursor: pointer; background: #FFFFFF; }
+        .cat-all-foot i { font-size: 12px; }
+        .cat-main { flex: 1 1 auto; min-height: 0; display: flex; overflow: hidden; }
+        .cat-aside { width: 80px; flex-shrink: 0; background: #F9F9F9; overflow-y: auto; scrollbar-width: none; }
+        .cat-aside::-webkit-scrollbar { display: none; }
+        .cat-nav-item { padding: 16px 6px; font-size: 12px; line-height: 20px; color: #333333; text-align: center; white-space: pre-line; cursor: pointer; word-break: break-all; }
+        .cat-nav-item.active { background: #FFFFFF; color: #1D1D1D; font-weight: 500; }
+        .cat-body { flex: 1 1 auto; min-width: 0; overflow-y: auto; background: #FFFFFF; position: relative; }
+        .cat-body::-webkit-scrollbar { width: 0; }
+        .cat-sort { position: sticky; top: 0; z-index: 3; background: #FFFFFF; display: flex; justify-content: flex-end; align-items: center; gap: 32px; padding: 12px 16px 12px 0; }
+        .cat-sort span { font-size: 14px; line-height: 20px; color: #333333; cursor: pointer; }
+        .cat-sort span.active { color: #1CB2D4; }
+        .cat-sort-price { display: flex; align-items: center; gap: 2px; }
+        .cat-arrows { display: flex; flex-direction: column; gap: 1px; }
+        .cat-arrow-up { width: 0; height: 0; border-left: 3px solid transparent; border-right: 3px solid transparent; border-bottom: 4px solid #BDBDBD; }
+        .cat-arrow-down { width: 0; height: 0; border-left: 3px solid transparent; border-right: 3px solid transparent; border-top: 4px solid #BDBDBD; }
+        .cat-sort-price.active .cat-arrow-up.on { border-bottom-color: #1CB2D4; }
+        .cat-sort-price.active .cat-arrow-down.on { border-top-color: #1CB2D4; }
+        .cat-sections { padding: 0 16px 96px 12px; display: flex; flex-direction: column; gap: 12px; }
+        .cat-sec-title { height: 24px; padding: 0 8px; border-radius: 4px; background: #F5F5F5; display: inline-flex; align-items: center; align-self: flex-start; font-size: 11px; line-height: 16px; color: #828282; }
+        .cat-products { display: flex; flex-direction: column; }
+        .cat-product { display: flex; align-items: center; gap: 12px; padding: 14px 0; }
+        .cat-product + .cat-product { border-top: 1px solid #F5F5F5; }
+        .cat-pimg { width: 80px; height: 80px; flex-shrink: 0; border-radius: 8px; background: #F9FAFB; object-fit: cover; }
+        .cat-pinfo { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+        .cat-pname { font-size: 14px; font-weight: 500; line-height: 20px; color: #333333; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .cat-ptag { align-self: flex-start; padding: 0 2px; border: 0.5px solid #AE7033; border-radius: 4px; background: #F7EEDD; font-size: 10px; line-height: 16px; color: #AE7033; }
+        .cat-pbottom { display: flex; align-items: center; justify-content: space-between; }
+        .cat-price { display: flex; align-items: flex-end; gap: 1px; color: #F24233; }
+        .cat-price .cur { font-size: 14px; font-weight: 500; line-height: 18px; }
+        .cat-price .num { font-family: 'DIN Alternate', 'DIN', 'PingFang SC', sans-serif; font-size: 20px; font-weight: 700; line-height: 22px; }
+        .cat-price .unit { font-size: 11px; line-height: 16px; color: #828282; margin-left: 2px; }
+        .cat-addwrap { position: relative; }
+        .cat-add { width: 24px; height: 24px; padding: 0; border: 0; border-radius: 50%; background: #1CB2D4; color: #FFFFFF; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+        .cat-add:active { opacity: 0.8; }
+        .cat-badge { position: absolute; top: -7px; right: -8px; min-width: 16px; height: 16px; padding: 0 3px; border-radius: 24px; background: #F24233; border: 1px solid #FFFFFF; color: #FFFFFF; font-size: 10px; line-height: 14px; text-align: center; box-sizing: border-box; }
+        .cat-empty { padding: 64px 0; text-align: center; font-size: 13px; color: #828282; }
+        .cat-cartbar { position: absolute; left: 16px; right: 16px; bottom: 16px; height: 54px; border-radius: 27px; background: #FFFFFF; box-shadow: 0 0 20px rgba(0, 0, 0, 0.08); display: flex; align-items: center; padding: 0 6px 0 14px; z-index: 6; }
+        .cat-bag { position: relative; width: 34px; height: 38px; flex-shrink: 0; display: flex; align-items: flex-end; justify-content: center; cursor: pointer; }
+        .cat-bag-badge { position: absolute; left: -3px; top: -1px; min-width: 16px; height: 16px; padding: 0 3px; box-sizing: border-box; border-radius: 24px; background: #F24233; border: 1px solid #FFFFFF; color: #FFFFFF; font-size: 10px; line-height: 14px; text-align: center; }
+        .cat-cart-total { margin-left: 12px; display: flex; align-items: center; gap: 2px; color: #1D1D1D; }
+        .cat-cart-total .lbl { font-size: 12px; line-height: 16px; color: #4F4F4F; margin-right: 1px; }
+        .cat-cart-total .cur { font-size: 12px; line-height: 16px; }
+        .cat-cart-total .num { font-family: 'DIN Alternate', 'DIN', 'PingFang SC', sans-serif; font-size: 18px; font-weight: 600; line-height: 22px; }
+        .cat-cart-btn { margin-left: auto; height: 40px; padding: 0 24px; border: 0; border-radius: 24px; font-family: inherit; font-size: 14px; font-weight: 500; line-height: 24px; color: #FFFFFF; background: #1D1D1D; cursor: pointer; }
+        .cat-cart-btn:active { opacity: .85; }
         @media (max-width: 1200px) {
             .description-panel {
                 width: 360px;
@@ -20869,10 +20954,39 @@
             'shop-category': {
                 title: '全部分类',
                 mainNav: 'shop',
+                render: 'shopCategory',
                 placeholder: { icon: 'fa fa-th-large', title: '分类页', desc: '展示商品分类列表，支持分类筛选和浏览' },
-                interactionNotes: [],
-                requirementDoc: null,
-                statusList: []
+                interactionNotes: [
+                    { id: 1, title: '顶部搜索栏', type: 'interaction', target: '.cat-search input', content: '输入关键字即时筛选当前一级分类下的商品：按商品名称匹配，自动隐藏无匹配商品的二级分类区块；全部无匹配时显示「暂无相关商品」空态。清空关键字恢复全部商品' },
+                    { id: 2, title: '一级分类', type: 'interaction', target: '.cat-tab', content: '横向滑动切换一级分类（新鲜零食 / 现烤烘焙 / 卤味熟食 / 果干蜜饯 / 坚果炒货 / 饮品乳品），选中项图标为深色渐变底 + 蓝色描边，名称标签填充品牌蓝；默认展示前 6 个，点击右侧「展开」从顶部滑下半屏「全部分类」浮层（底部圆角 + 灰色遮罩：标题 + 胶囊按钮、5 列宫格展示全部 9 个分类、底部「收起 ︿」），面板中选中项名称高亮为蓝色标签；点击面板内分类即切换并收起，点击「收起」或遮罩仅关闭面板、保留商品列表滚动位置。切换一级分类时左侧二级导航与右侧商品列表同步刷新' },
+                    { id: 3, title: '二级分类导航', type: 'interaction', target: '.cat-nav-item', content: '左侧二级分类固定宽度 80px，纵向可滚动。点击任一二级分类，右侧商品区平滑滚动定位到对应分类区块，并将该项置为选中态（白底 + 深色加粗）。当前选中项不在可视区域内时，导航自动滚动到可视位置' },
+                    { id: 4, title: '一页展示全部二级分类', type: 'state', target: '.cat-body', content: '当前一级分类下的所有二级分类商品在右侧同一页内连续展示，各二级分类以灰底小标题（如「现烤肉脯」「坚果炒货」）分隔，不做分页或切换' },
+                    { id: 5, title: '滚动联动定位', type: 'interaction', target: '.cat-body', content: '右侧商品区滚动时，左侧二级导航自动高亮当前可视的二级分类（滚动监听 + 节流），实现「商品滚到哪、导航定位到哪」' },
+                    { id: 6, title: '排序栏', type: 'interaction', target: '.cat-sort', content: '综合（默认）/ 销量 / 价格三种排序，作用于当前一级分类下各二级分类内部的商品。「价格」支持升降序切换：首次点击升序（箭头向上高亮），再次点击降序（箭头向下高亮）；选中项文字与箭头为品牌蓝' },
+                    { id: 7, title: '商品卡', type: 'state', target: '.cat-product', content: '商品图 80×80 圆角、名称单行省略、权益标签「赚N积分+X回馈金」（积分=价格向下取整，回馈金=价格×5%四舍五入到 1 位小数）、红色价格 + 圆形加购按钮' },
+                    { id: 8, title: '加入购物车', type: 'interaction', target: '.cat-add', content: '点击圆形「+」按钮将商品加入购物车，按钮右上角显示红色数量角标（同一商品累加）。加购不跳转页面，仅更新角标与底部购物车操作栏。加购写入商城购物车（与购物车页共用同一份数据），加购商品默认勾选，返回购物车页可见' },
+                    { id: 9, title: '底部购物车操作栏（始终显示）', type: 'state', target: '.cat-cartbar', content: '操作栏常驻显示：左侧购物袋图标 + 右侧「去购物车」按钮，中间为合计金额。三种状态：① 购物车内有选中商品——合计显示已选中商品的金额合计；② 购物车内有商品但均未选中——购物袋显示红色数量角标（全车商品总件数），合计显示 ¥0；③ 购物车内无商品——购物袋无角标，合计显示 ¥0。点击购物袋图标或「去购物车」按钮均跳转购物车页' },
+                    { id: 10, title: '返回', type: 'interaction', target: '.cat-back', content: '点击左上角返回箭头回到商城首页。分类页为二级页面，隐藏底部主导航' }
+                ],
+                requirementDoc: '<b>分类页（全部分类）</b><br>依据 Figma 设计稿 node 14-3164 实现，商品数据为模拟真实数据（以新鲜零食为主），一级 / 二级分类与商品图、商品名一一对应。<br><br><b>1. 页面结构</b><br>① 顶部：返回箭头 + 搜索框 + 右侧胶囊按钮；② 一级分类横向滑动条（含「展开」入口，展开为「全部分类」面板）；③ 主体左右分栏：左侧二级分类导航（80px，灰底）、右侧商品区（白底，含排序栏 + 多个二级分类区块）；④ 底部购物车操作栏（浮层，始终显示）；⑤「全部分类」半屏浮层（从顶部滑下 + 灰色遮罩，仅展开态显示）。<br><br><b>2. 分类层级</b><br>一级分类 9 个：新鲜零食、现烤烘焙、卤味熟食、果干蜜饯、坚果炒货、饮品乳品（默认展示 6 个）+ 酒类、休闲膨化、糖果巧克力（点击「展开」在「全部分类」面板中查看）。<br>以「新鲜零食」为例，二级分类 8 个：现烤肉脯、坚果炒货、果干蜜饯、烘焙糕点、卤味熟食、膨化零食、糖果巧克力、乳品饮料。<br><br><b>3. 关键交互</b><br>• 同一一级分类下的所有二级分类商品展示在同一页内，通过连续滚动浏览；<br>• 右侧滚动时，左侧二级导航自动高亮对应分类（滚动联动）；<br>• 点击左侧二级分类，右侧平滑滚动到对应区块；<br>• 点击一级分类右侧「展开」，从顶部滑下半屏「全部分类」浮层（底部圆角 + 灰色遮罩；标题 + 胶囊按钮、5 列宫格、底部「收起 ︿」），面板内选中项图标蓝描边 + 名称蓝色标签；点击分类即切换并收起面板；点击「收起」或遮罩仅关闭面板，商品列表滚动位置保持不变；<br>• 顶部搜索按商品名称即时筛选；排序支持综合 / 销量 / 价格（升降序）；<br>• 底部购物车操作栏始终显示：左侧购物袋（有商品时显示红色数量角标=全车商品总件数）+ 中间合计金额 + 右侧「去购物车」按钮；合计仅统计已选中商品（有选中商品时显示其金额合计，有商品但未选中、或无商品时均显示 ¥0）；点击购物袋或「去购物车」均跳转购物车页。<br><br><b>4. 演示说明</b><br>加购写入商城购物车，与购物车页共用同一份数据；点击购物袋图标或「去购物车」按钮跳到购物车页，可在购物车页勾选 / 取消勾选后返回查看合计变化。',
+                statusList: [
+                    { block: '页面框架', state: '一级页面入口', trigger: '商城首页分类入口 / 左侧菜单「分类页」', ui: '顶部返回 + 搜索 + 右侧胶囊按钮；隐藏底部主导航' },
+                    { block: '一级分类', state: '默认（前6个）', trigger: '首次进入', ui: '横向滑动：新鲜零食、现烤烘焙、卤味熟食、果干蜜饯、坚果炒货、饮品乳品' },
+                    { block: '一级分类', state: '选中', trigger: '点击某一级分类', ui: '图标深色渐变 + 蓝描边；名称标签品牌蓝底白字' },
+                    { block: '一级分类', state: '展开', trigger: '点击右侧「展开」', ui: '顶部滑下半屏白色浮层（底部圆角 + 灰色遮罩）：标题 + 胶囊按钮、9 个分类 5 列宫格、底部「收起 ︿」；选中项图标蓝描边 + 名称蓝色标签' },
+                    { block: '一级分类', state: '收起', trigger: '点击「收起 ︿」/ 点击灰色遮罩 / 点击已选中的分类', ui: '浮层上滑收起、遮罩淡出，回到原列表且商品滚动位置保持不变（不重渲染）' },
+                    { block: '二级分类', state: '默认选中首个', trigger: '进入 / 切换一级分类', ui: '白底 + 深色加粗，其余灰底常规字重' },
+                    { block: '二级分类', state: '滚动联动', trigger: '右侧商品区滚动', ui: '左侧导航自动高亮当前可视分类并滚动到可视区' },
+                    { block: '商品区', state: '正常', trigger: '进入分类', ui: '各二级分类以灰底小标题分隔，商品连续展示' },
+                    { block: '商品区', state: '搜索无结果', trigger: '关键字无匹配', ui: '显示「暂无相关商品」空态' },
+                    { block: '排序', state: '综合 / 销量 / 价格', trigger: '点击排序项', ui: '选中项品牌蓝；价格支持升序（上箭头亮）/ 降序（下箭头亮）' },
+                    { block: '商品卡', state: '未加购', trigger: '默认', ui: '仅显示圆形「+」按钮' },
+                    { block: '商品卡', state: '已加购', trigger: '点击「+」', ui: '按钮右上角红色数量角标，数量累加' },
+                    { block: '购物车栏', state: '有选中商品', trigger: '购物车内存在已勾选商品', ui: '购物袋显示红色数量角标（全车件数）；合计显示已选中商品金额合计；按钮「去购物车」可点击' },
+                    { block: '购物车栏', state: '有商品但未选中', trigger: '购物车内有商品且全部取消勾选', ui: '购物袋显示红色数量角标（全车件数）；合计显示 ¥0；按钮「去购物车」可点击' },
+                    { block: '购物车栏', state: '购物车为空', trigger: '购物车内无任何商品', ui: '购物袋无数量角标；合计显示 ¥0；按钮「去购物车」可点击' },
+                    { block: '购物车栏', state: '跳转购物车', trigger: '点击购物袋图标 / 「去购物车」按钮', ui: '跳转购物车页，展示当前购物车商品与勾选状态' }
+                ]
             },
             'shop-detail': {
                 title: '商品详情',
@@ -24730,8 +24844,503 @@
             }).filter(it => it && (window.__cartSelected ? !!window.__cartSelected[it.id] : true));
         }
 
+        // ====== 分类页数据（模拟真实：以新鲜零食为主）======
+        const catImg = (desc) => 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=' +
+            encodeURIComponent('E-commerce product photo of ' + desc + ', clean white background, centered composition, soft studio lighting, ultra realistic, no text, no watermark') +
+            '&image_size=square_hd';
+
+        const catData = [
+            {
+                name: '新鲜零食', icon: 'fa-leaf', subs: [
+                    { name: '现烤肉脯', items: [
+                        { name: '蜜汁猪肉脯 100g', price: 19.9, sales: 2860, img: catImg('honey glazed pork jerky slices arranged on a plate') },
+                        { name: '黑椒牛肉粒 80g', price: 25.9, sales: 1720, img: catImg('black pepper beef jerky cubes in a small bowl') },
+                        { name: '炭烤鸡胸肉丝 120g', price: 16.8, sales: 980, img: catImg('grilled shredded chicken breast jerky strips') }
+                    ]},
+                    { name: '坚果炒货', items: [
+                        { name: '每日坚果 25g×7袋', price: 29.9, sales: 5340, img: catImg('mixed daily nuts in small transparent bags') },
+                        { name: '手剥碧根果 200g', price: 24.8, sales: 2130, img: catImg('hand shelled pecan nuts pile') },
+                        { name: '原味腰果仁 180g', price: 27.5, sales: 1460, img: catImg('plain cashew nuts in a ceramic bowl') }
+                    ]},
+                    { name: '果干蜜饯', items: [
+                        { name: '冻干芒果干 100g', price: 15.9, sales: 3980, img: catImg('freeze dried mango slices golden yellow') },
+                        { name: '无核西梅干 200g', price: 18.8, sales: 2210, img: catImg('pitted dried prunes in a bowl') },
+                        { name: '蔓越莓干 150g', price: 12.9, sales: 1670, img: catImg('dried cranberries scattered on white surface') }
+                    ]},
+                    { name: '烘焙糕点', items: [
+                        { name: '现烤原味司康 4枚', price: 12.9, sales: 1230, img: catImg('freshly baked plain scones stacked') },
+                        { name: '海盐芝士麻薯 6枚', price: 16.8, sales: 2650, img: catImg('sea salt cheese mochi balls dusted with powder') },
+                        { name: '全麦贝果 2只', price: 9.9, sales: 890, img: catImg('whole wheat bagels on wooden board') }
+                    ]},
+                    { name: '卤味熟食', items: [
+                        { name: '现卤鸭翅中 200g', price: 22.9, sales: 3140, img: catImg('braised duck wing mid joints glazed') },
+                        { name: '卤香鸡爪 250g', price: 19.8, sales: 2870, img: catImg('braised chicken feet in a bowl') },
+                        { name: '五香卤豆干 200g', price: 9.9, sales: 1520, img: catImg('five spice braised tofu cubes') }
+                    ]},
+                    { name: '膨化零食', items: [
+                        { name: '海苔脆片 40g', price: 8.9, sales: 4360, img: catImg('crispy seaweed chips in a small pile') },
+                        { name: '玉米脆角 60g', price: 7.9, sales: 3120, img: catImg('corn snack cones in a bowl') },
+                        { name: '芝士圈 50g', price: 9.5, sales: 1880, img: catImg('cheese ring puffs snack') }
+                    ]},
+                    { name: '糖果巧克力', items: [
+                        { name: '黑巧克力脆球 80g', price: 14.9, sales: 1420, img: catImg('dark chocolate crunchy balls in a jar') },
+                        { name: '手工牛轧糖 150g', price: 19.9, sales: 960, img: catImg('handmade nougat candy pieces with nuts') }
+                    ]},
+                    { name: '乳品饮料', items: [
+                        { name: '低温鲜牛奶 950ml', price: 15.9, sales: 5210, img: catImg('fresh milk glass bottle with milk splash') },
+                        { name: '无糖酸奶 200g×3', price: 13.9, sales: 3780, img: catImg('sugar free yogurt cups plain white') }
+                    ]}
+                ]
+            },
+            {
+                name: '现烤烘焙', icon: 'fa-birthday-cake', subs: [
+                    { name: '现烤面包', items: [
+                        { name: '黄油牛角包 2只', price: 11.9, sales: 2460, img: catImg('butter croissants golden flaky') },
+                        { name: '丹麦酥 2只', price: 13.9, sales: 1340, img: catImg('danish pastry with layers') }
+                    ]},
+                    { name: '蛋糕甜点', items: [
+                        { name: '巴斯克芝士蛋糕 6寸', price: 49.9, sales: 860, img: catImg('basque burnt cheesecake whole') },
+                        { name: '提拉米苏杯 120g', price: 19.9, sales: 1920, img: catImg('tiramisu in a clear cup dusted cocoa') }
+                    ]},
+                    { name: '中式糕点', items: [
+                        { name: '现烤蛋黄酥 4枚', price: 22.9, sales: 2140, img: catImg('salted egg yolk pastry mooncake style') },
+                        { name: '绿豆糕 200g', price: 15.9, sales: 1080, img: catImg('mung bean cakes arranged neatly') }
+                    ]}
+                ]
+            },
+            {
+                name: '卤味熟食', icon: 'fa-cutlery', subs: [
+                    { name: '卤味鸭货', items: [
+                        { name: '香辣鸭脖 220g', price: 21.9, sales: 3260, img: catImg('spicy braised duck neck pieces') },
+                        { name: '卤鸭锁骨 200g', price: 18.8, sales: 1740, img: catImg('braised duck collarbone pieces in bowl') }
+                    ]},
+                    { name: '现拌凉菜', items: [
+                        { name: '手撕鸡拌菜 250g', price: 16.9, sales: 1260, img: catImg('shredded chicken cold dish with chili oil') },
+                        { name: '凉拌木耳 200g', price: 9.9, sales: 890, img: catImg('cold tossed black fungus salad') }
+                    ]}
+                ]
+            },
+            {
+                name: '果干蜜饯', icon: 'fa-apple', subs: [
+                    { name: '芒果干', items: [
+                        { name: '大块芒果干 120g', price: 17.9, sales: 2380, img: catImg('large dried mango chunks dried fruit') },
+                        { name: '芒果果脯 200g', price: 21.9, sales: 1120, img: catImg('candied mango preserves in a bowl') }
+                    ]},
+                    { name: '话梅蜜饯', items: [
+                        { name: '九制话梅 150g', price: 11.9, sales: 2650, img: catImg('preserved plums sweet and sour') },
+                        { name: '冰糖杨梅 180g', price: 13.8, sales: 1430, img: catImg('candied bayberry in a jar') }
+                    ]}
+                ]
+            },
+            {
+                name: '坚果炒货', icon: 'fa-pagelines', subs: [
+                    { name: '每日坚果', items: [
+                        { name: '混合每日坚果 25g×7', price: 29.9, sales: 5460, img: catImg('mixed nuts portions in sachets') },
+                        { name: '坚果果干礼盒 750g', price: 69.9, sales: 760, img: catImg('nuts and dried fruit gift box') }
+                    ]},
+                    { name: '瓜子花生', items: [
+                        { name: '原味葵花籽 500g', price: 15.9, sales: 3210, img: catImg('roasted sunflower seeds pile') },
+                        { name: '蒜香花生 400g', price: 12.9, sales: 1840, img: catImg('garlic flavored roasted peanuts') }
+                    ]}
+                ]
+            },
+            {
+                name: '饮品乳品', icon: 'fa-coffee', subs: [
+                    { name: '鲜牛奶', items: [
+                        { name: '巴氏鲜牛奶 950ml', price: 15.9, sales: 4980, img: catImg('pasteurized fresh milk bottle') },
+                        { name: '娟姗鲜奶 750ml', price: 25.9, sales: 1320, img: catImg('premium jersey fresh milk bottle') }
+                    ]},
+                    { name: '现制饮品', items: [
+                        { name: '冰美式 500ml', price: 12.9, sales: 2760, img: catImg('iced americano coffee in a cup') },
+                        { name: '冷泡乌龙茶 500ml', price: 9.9, sales: 1580, img: catImg('cold brewed oolong tea bottle') }
+                    ]}
+                ]
+            },
+            {
+                name: '酒类', icon: 'fa-glass', subs: [
+                    { name: '精酿啤酒', items: [
+                        { name: '小麦白啤 500ml', price: 15.9, sales: 940, img: catImg('craft wheat beer glass with foam') },
+                        { name: 'IPA 精酿 500ml', price: 18.9, sales: 720, img: catImg('india pale ale craft beer can') }
+                    ]},
+                    { name: '果酒', items: [
+                        { name: '蜜桃果酒 300ml', price: 29.9, sales: 460, img: catImg('peach fruit wine bottle') },
+                        { name: '青梅酒 300ml', price: 32.9, sales: 380, img: catImg('green plum wine bottle') }
+                    ]}
+                ]
+            },
+            {
+                name: '休闲膨化', icon: 'fa-fire', subs: [
+                    { name: '薯片薯条', items: [
+                        { name: '原切薯片 70g', price: 8.9, sales: 3860, img: catImg('original potato chips in a bowl') },
+                        { name: '厚切薯角 60g', price: 9.9, sales: 1640, img: catImg('thick cut potato wedges snack') }
+                    ]},
+                    { name: '海苔脆', items: [
+                        { name: '夹心海苔 36g', price: 12.9, sales: 2180, img: catImg('seaweed sandwich crisps') },
+                        { name: '芝麻海苔 40g', price: 10.9, sales: 1360, img: catImg('sesame seaweed sheets snack') }
+                    ]}
+                ]
+            },
+            {
+                name: '糖果巧克力', icon: 'fa-heart', subs: [
+                    { name: '巧克力', items: [
+                        { name: '70%黑巧克力 100g', price: 24.9, sales: 1280, img: catImg('dark chocolate bar 70 percent cocoa') },
+                        { name: '牛奶巧克力 100g', price: 19.9, sales: 1620, img: catImg('milk chocolate bar broken pieces') }
+                    ]},
+                    { name: '软糖', items: [
+                        { name: '果汁软糖 120g', price: 9.9, sales: 2340, img: catImg('fruit gummy candies colorful') },
+                        { name: '薄荷糖 50g', price: 7.9, sales: 960, img: catImg('mint candy drops in a tin') }
+                    ]}
+                ]
+            }
+        ];
+
+        // 商品 id / 索引
+        const catProductIndex = {};
+        catData.forEach((c, ci) => c.subs.forEach((s, si) => s.items.forEach((p, ii) => {
+            p.id = 'c' + ci + '-' + si + '-' + ii;
+            catProductIndex[p.id] = p;
+        })));
+
+        const catFmtPrice = (v) => (Math.round(v * 100) / 100).toString();
+        const catTagText = (price) => {
+            const pts = Math.floor(price);
+            const rebate = Math.round(price * 0.05 * 100) / 100;
+            return '赚' + pts + '积分+' + (Math.round(rebate * 10) / 10) + '回馈金';
+        };
+        // 购物车状态：角标 = 购物车内商品总件数；合计 = 已勾选商品金额（未勾选不计入）
+        const catCartState = () => {
+            const cart = window.__couponV2ScopeCart || [];
+            const selected = window.__cartSelected || {};
+            const qtyById = {};
+            let qty = 0, total = 0;
+            cart.forEach(it => {
+                let p = catProductIndex[it.productId];
+                if (!p && typeof couponV2AllProducts !== 'undefined') p = couponV2AllProducts.find(x => x.id === it.productId);
+                if (!p) return;
+                qty += it.quantity;
+                qtyById[it.productId] = it.quantity;
+                if (selected[it.productId]) total += p.price * it.quantity;
+            });
+            return { qty: qty, total: Math.round(total * 100) / 100, qtyById: qtyById };
+        };
+
+        function catCartBarHTML() {
+            const st = catCartState();
+            const badge = st.qty ? '<span class="cat-bag-badge">' + st.qty + '</span>' : '';
+            return '<div class="cat-cartbar" id="cat-cartbar">' +
+                '<div class="cat-bag" data-cat-goto-cart="1">' +
+                    '<svg width="30" height="34" viewBox="0 0 30 34" fill="none">' +
+                        '<path d="M4 10h22l-1.6 18.6A3.6 3.6 0 0 1 20.8 32H9.2a3.6 3.6 0 0 1-3.6-3.4L4 10z" fill="#8FD8EA"/>' +
+                        '<path d="M10 12V8.6a5 5 0 0 1 10 0V12" stroke="#1CB2D4" stroke-width="2.2" stroke-linecap="round"/>' +
+                    '</svg>' + badge +
+                '</div>' +
+                '<div class="cat-cart-total"><span class="lbl">合计</span><span class="cur">¥</span><span class="num">' + catFmtPrice(st.total) + '</span></div>' +
+                '<button class="cat-cart-btn" data-cat-goto-cart="1">去购物车</button>' +
+            '</div>';
+        }
+
+        function catProductCard(p, qtyById) {
+            const qty = (qtyById || {})[p.id] || 0;
+            return '<div class="cat-product" data-pname="' + p.name + '">' +
+                '<img class="cat-pimg" src="' + p.img + '" alt="' + p.name + '" loading="lazy">' +
+                '<div class="cat-pinfo">' +
+                    '<div class="cat-pname">' + p.name + '</div>' +
+                    '<div class="cat-ptag">' + catTagText(p.price) + '</div>' +
+                    '<div class="cat-pbottom">' +
+                        '<div class="cat-price"><span class="cur">¥</span><span class="num">' + catFmtPrice(p.price) + '</span></div>' +
+                        '<div class="cat-addwrap">' +
+                            '<button class="cat-add" data-cat-add="' + p.id + '" aria-label="加入购物车">' +
+                                '<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg>' +
+                            '</button>' +
+                            (qty ? '<span class="cat-badge" data-badge="' + p.id + '">' + qty + '</span>' : '') +
+                        '</div>' +
+                    '</div>' +
+                '</div>' +
+            '</div>';
+        }
+
+        function renderShopCategory() {
+            const st = window.__catState = window.__catState || { primary: 0, expanded: false, sort: 'default', priceAsc: true, keyword: '' };
+            window.__catCart = window.__catCart || {};
+            if (!catData[st.primary]) st.primary = 0;
+            const primary = catData[st.primary];
+
+            // 一级分类（默认展示前 6 个，全部通「展开」面板查看）
+            let visibleIdx = [0, 1, 2, 3, 4, 5];
+            if (visibleIdx.indexOf(st.primary) < 0) visibleIdx.push(st.primary);
+            visibleIdx.sort((a, b) => a - b);
+            const tabs = visibleIdx.map(i => {
+                const c = catData[i];
+                return '<div class="cat-tab' + (i === st.primary ? ' active' : '') + '" data-cat-primary="' + i + '">' +
+                    '<div class="cat-tab-icon"><i class="fa ' + c.icon + '"></i></div>' +
+                    '<div class="cat-tab-label">' + c.name + '</div>' +
+                '</div>';
+            }).join('');
+
+            // 二级分类
+            const navs = primary.subs.map((s, i) =>
+                '<div class="cat-nav-item' + (i === 0 ? ' active' : '') + '" data-cat-sub="' + i + '">' + s.name + '</div>'
+            ).join('');
+
+            // 商品区块（所有二级分类在一页内）
+            const cartQty = catCartState().qtyById;
+            const kw = (st.keyword || '').trim();
+            const secs = primary.subs.map((s, si) => {
+                let items = s.items.slice();
+                if (kw) items = items.filter(p => p.name.indexOf(kw) >= 0);
+                if (st.sort === 'sales') items.sort((a, b) => b.sales - a.sales);
+                else if (st.sort === 'price') items.sort((a, b) => st.priceAsc ? a.price - b.price : b.price - a.price);
+                if (!items.length) return '';
+                return '<div class="cat-section" data-sec="' + si + '">' +
+                    '<div class="cat-sec-title">' + s.name + '</div>' +
+                    '<div class="cat-products">' + items.map(p => catProductCard(p, cartQty)).join('') + '</div>' +
+                '</div>';
+            }).join('');
+
+            const sortItem = (k, label) =>
+                '<span class="' + (st.sort === k ? 'active' : '') + '" data-cat-sort="' + k + '">' + label + '</span>';
+            const priceSort = '<span class="cat-sort-price' + (st.sort === 'price' ? ' active' : '') + '" data-cat-sort="price">价格' +
+                '<span class="cat-arrows">' +
+                    '<span class="cat-arrow-up' + (st.sort === 'price' && st.priceAsc ? ' on' : '') + '"></span>' +
+                    '<span class="cat-arrow-down' + (st.sort === 'price' && !st.priceAsc ? ' on' : '') + '"></span>' +
+                '</span></span>';
+
+            return '<div class="cat-page">' +
+                '<div class="cat-head">' +
+                    '<div class="cat-back" data-cat-back="1">' +
+                        '<svg width="9" height="16" viewBox="0 0 9 16" fill="none"><path d="M8 1L1 8l7 7" stroke="#1D1D1D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+                    '</div>' +
+                    '<div class="cat-search">' +
+                        '<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5.2" stroke="#828282" stroke-width="1.4"/><path d="M11 11l3.2 3.2" stroke="#828282" stroke-width="1.4" stroke-linecap="round"/></svg>' +
+                        '<input type="text" placeholder="输入关键字搜索" value="' + (st.keyword || '').replace(/"/g, '&quot;') + '">' +
+                    '</div>' +
+                    '<div class="cat-capsule"><span class="cat-capsule-dots"><i></i><i></i><i></i></span><span class="cat-capsule-line"></span><span class="cat-capsule-ring"></span></div>' +
+                '</div>' +
+                '<div class="cat-tabs-wrap">' +
+                    '<div class="cat-tabs" id="cat-tabs">' + tabs + '</div>' +
+                    '<div class="cat-expand" data-cat-expand="1"><span>展开</span><i class="fa fa-angle-down"></i></div>' +
+                '</div>' +
+                '<div class="cat-main">' +
+                    '<div class="cat-aside" id="cat-aside">' + navs + '</div>' +
+                    '<div class="cat-body" id="cat-body">' +
+                        '<div class="cat-sort">' + sortItem('default', '综合') + sortItem('sales', '销量') + priceSort + '</div>' +
+                        '<div class="cat-sections" id="cat-sections">' + (secs || '<div class="cat-empty">暂无相关商品</div>') + '</div>' +
+                    '</div>' +
+                '</div>' +
+                '<div id="cat-cartbar-slot">' + catCartBarHTML() + '</div>' +
+                catAllPanelHTML() +
+            '</div>';
+        }
+
+        // 一级分类「全部分类」面板（展开态）
+        function catAllPanelHTML() {
+            const st = window.__catState;
+            const grid = catData.map((c, i) =>
+                '<div class="cat-all-item' + (i === st.primary ? ' active' : '') + '" data-cat-all="' + i + '">' +
+                    '<div class="cat-all-icon"><i class="fa ' + c.icon + '"></i></div>' +
+                    '<div class="cat-all-name">' + c.name + '</div>' +
+                '</div>'
+            ).join('');
+            return '<div class="cat-all-mask' + (st.expanded ? ' show' : '') + '" id="cat-all-mask"></div>' +
+                '<div class="cat-all-panel' + (st.expanded ? ' show' : '') + '" id="cat-all-panel">' +
+                '<div class="cat-all-top">' +
+                    '<div class="cat-all-title">全部分类</div>' +
+                    '<div class="cat-capsule"><span class="cat-capsule-dots"><i></i><i></i><i></i></span><span class="cat-capsule-line"></span><span class="cat-capsule-ring"></span></div>' +
+                '</div>' +
+                '<div class="cat-all-body"><div class="cat-all-grid">' + grid + '</div></div>' +
+                '<div class="cat-all-foot" data-cat-collapse="1"><span>收起</span><i class="fa fa-angle-up"></i></div>' +
+            '</div>';
+        }
+
+        function catApplyFilter() {
+            const st = window.__catState;
+            const kw = (st.keyword || '').trim();
+            const body = document.getElementById('cat-body');
+            if (!body) return;
+            let any = false;
+            body.querySelectorAll('.cat-section').forEach(sec => {
+                let visible = 0;
+                sec.querySelectorAll('.cat-product').forEach(p => {
+                    const hit = !kw || (p.dataset.pname || '').indexOf(kw) >= 0;
+                    p.style.display = hit ? '' : 'none';
+                    if (hit) visible++;
+                });
+                sec.style.display = visible ? '' : 'none';
+                if (visible) any = true;
+            });
+            const wrap = body.querySelector('.cat-sections');
+            let empty = wrap.querySelector('.cat-empty');
+            if (!any && !empty) {
+                empty = document.createElement('div');
+                empty.className = 'cat-empty';
+                empty.textContent = '暂无相关商品';
+                wrap.appendChild(empty);
+            } else if (any && empty) {
+                empty.remove();
+            }
+        }
+
+        function catRerender(keepScroll) {
+            const content = document.getElementById('mobile-content');
+            const oldBody = content.querySelector('#cat-body');
+            const prevTop = oldBody ? oldBody.scrollTop : 0;
+            content.innerHTML = renderShopCategory();
+            catBindEvents();
+            const newBody = content.querySelector('#cat-body');
+            if (keepScroll && newBody) newBody.scrollTop = prevTop;
+        }
+
+        function catBindEvents() {
+            const root = document.querySelector('#mobile-content .cat-page');
+            if (!root) return;
+            const st = window.__catState;
+            const body = root.querySelector('#cat-body');
+            const aside = root.querySelector('#cat-aside');
+
+            const setActiveNav = (idx, scrollAside) => {
+                root.querySelectorAll('.cat-nav-item').forEach(el => {
+                    const on = +el.dataset.catSub === idx;
+                    el.classList.toggle('active', on);
+                    if (on && scrollAside) {
+                        const top = el.offsetTop, bottom = top + el.offsetHeight;
+                        if (top < aside.scrollTop) aside.scrollTop = top;
+                        else if (bottom > aside.scrollTop + aside.clientHeight) aside.scrollTop = bottom - aside.clientHeight;
+                    }
+                });
+            };
+
+            // 返回
+            root.querySelector('[data-cat-back]').addEventListener('click', () => switchPage('shop-home'));
+
+            // 一级分类切换
+            root.querySelectorAll('[data-cat-primary]').forEach(el => {
+                el.addEventListener('click', () => {
+                    const idx = +el.dataset.catPrimary;
+                    if (idx === st.primary) return;
+                    st.primary = idx;
+                    st.keyword = '';
+                    catRerender(false);
+                });
+            });
+
+            // 展开：打开「全部分类」面板；收起：仅关闭面板（不重渲染，保留商品列表滚动位置）
+            const allPanel = root.querySelector('#cat-all-panel');
+            const allMask = root.querySelector('#cat-all-mask');
+            const allBody = allPanel.querySelector('.cat-all-body');
+            const openAllPanel = () => { st.expanded = true; allPanel.classList.add('show'); allMask.classList.add('show'); allBody.scrollTop = 0; };
+            const closeAllPanel = () => { st.expanded = false; allPanel.classList.remove('show'); allMask.classList.remove('show'); };
+            root.querySelector('[data-cat-expand]').addEventListener('click', openAllPanel);
+            allPanel.querySelector('[data-cat-collapse]').addEventListener('click', closeAllPanel);
+            allMask.addEventListener('click', closeAllPanel);
+            allPanel.querySelectorAll('[data-cat-all]').forEach(el => {
+                el.addEventListener('click', () => {
+                    const idx = +el.dataset.catAll;
+                    if (idx === st.primary) { closeAllPanel(); return; }
+                    st.primary = idx;
+                    st.keyword = '';
+                    st.expanded = false;
+                    catRerender(false);
+                });
+            });
+
+            // 二级分类 → 滚动定位
+            root.querySelectorAll('[data-cat-sub]').forEach(el => {
+                el.addEventListener('click', () => {
+                    const idx = +el.dataset.catSub;
+                    setActiveNav(idx, true);
+                    const sec = body.querySelector('.cat-section[data-sec="' + idx + '"]');
+                    if (sec) body.scrollTo({ top: sec.offsetTop - 44, behavior: 'smooth' });
+                });
+            });
+
+            // 滚动联动：右侧滚动 → 左侧二级导航自动定位
+            let ticking = false;
+            body.addEventListener('scroll', () => {
+                if (ticking) return;
+                ticking = true;
+                requestAnimationFrame(() => {
+                    const y = body.scrollTop + 60;
+                    let active = 0;
+                    body.querySelectorAll('.cat-section').forEach(sec => {
+                        if (sec.offsetTop <= y) active = +sec.dataset.sec;
+                    });
+                    setActiveNav(active, true);
+                    ticking = false;
+                });
+            });
+
+            // 加购（事件委托）：写入商城购物车（与购物车页共用数据，source=mall 表示非券适用商品）
+            body.addEventListener('click', (e) => {
+                const btn = e.target.closest('[data-cat-add]');
+                if (!btn) return;
+                const id = btn.dataset.catAdd;
+                const p = catProductIndex[id];
+                if (!p) return;
+                const cart = window.__couponV2ScopeCart = window.__couponV2ScopeCart || [];
+                const row = cart.find(it => it.productId === id);
+                if (row) row.quantity += 1;
+                else cart.push({ productId: id, quantity: 1, source: 'mall' });
+                // 保证购物车页 / 确认订单页可按 id 查到该商品
+                try {
+                    if (typeof couponV2AllProducts !== 'undefined' && !couponV2AllProducts.some(x => x.id === id)) {
+                        couponV2AllProducts.push({ id: p.id, name: p.name, price: p.price, img: p.img, originalPrice: null, tag: '' });
+                    }
+                } catch (err) {}
+                // 新加购商品默认勾选
+                window.__cartSelected = window.__cartSelected || {};
+                window.__cartKnownIds = window.__cartKnownIds || {};
+                window.__cartSelected[id] = true;
+                window.__cartKnownIds[id] = true;
+
+                const qty = catCartState().qtyById[id] || 0;
+                const wrap = btn.parentNode;
+                let badge = wrap.querySelector('.cat-badge');
+                if (qty) {
+                    if (!badge) {
+                        badge = document.createElement('span');
+                        badge.className = 'cat-badge';
+                        badge.setAttribute('data-badge', id);
+                        wrap.appendChild(badge);
+                    }
+                    badge.textContent = qty;
+                } else if (badge) {
+                    badge.remove();
+                }
+                document.getElementById('cat-cartbar-slot').innerHTML = catCartBarHTML();
+            });
+
+            // 搜索
+            const input = root.querySelector('.cat-search input');
+            input.addEventListener('input', () => {
+                st.keyword = input.value;
+                catApplyFilter();
+            });
+
+            // 排序
+            root.querySelectorAll('[data-cat-sort]').forEach(el => {
+                el.addEventListener('click', () => {
+                    const k = el.dataset.catSort;
+                    if (k === 'price') {
+                        if (st.sort === 'price') st.priceAsc = !st.priceAsc;
+                        else { st.sort = 'price'; st.priceAsc = true; }
+                    } else {
+                        st.sort = k;
+                    }
+                    catRerender(true);
+                });
+            });
+
+            // 购物车操作栏：点击购物袋或「去购物车」均跳转购物车页
+            root.addEventListener('click', (e) => {
+                const go = e.target.closest('[data-cat-goto-cart]');
+                if (!go) return;
+                switchPage('shop-cart');
+            });
+        }
+
         // ====== 页面渲染器（具体页面内容）======
         const pageRenderers = {
+            shopCategory: function() { return renderShopCategory(); },
             shopHome: function() {
                 // 商城首页：三种登录状态（guest=未登录 / member=已登录 / scan=线下扫码登录）
                 // 布局依据 Figma 设计稿（node 602:3037）：搜索行 → Banner → 状态卡 → 分类入口 → 功能入口
@@ -27350,6 +27959,7 @@
         }
         // ====== 渲染后事件绑定 ======
         function bindPageEvents(pageId) {
+            if (pageId === 'shop-category') { catBindEvents(); }
             if (pageId === 'shop-home') {
                 // 商城首页：三种登录状态切换 + 登录引导弹窗
                 const stateArea = document.querySelector('#mobile-content #mh-state-area');
@@ -31548,15 +32158,15 @@
             }
             document.getElementById('panel-title').textContent = page.title;
             // 个人中心无标准导航栏（顶部直接是背景图）；确认订单页自带导航栏也需隐藏默认 header
-            document.querySelector('.mobile-header').style.display = (pageId === 'profile-home' || pageId === 'shop-cart' || pageId === 'shop-checkout' || pageId === 'shop-checkout-v2' || pageId === 'shop-address-add' || pageId === 'shop-address-map' || pageId === 'shop-address-station' || pageId === 'shop-city-select') ? 'none' : 'flex';
+            document.querySelector('.mobile-header').style.display = (pageId === 'profile-home' || pageId === 'shop-cart' || pageId === 'shop-checkout' || pageId === 'shop-checkout-v2' || pageId === 'shop-address-add' || pageId === 'shop-address-map' || pageId === 'shop-address-station' || pageId === 'shop-city-select' || pageId === 'shop-category') ? 'none' : 'flex';
             // 商城首页为一级页面：隐藏导航栏左侧返回按钮（设计稿仅保留右侧胶囊按钮）；登录页同理
             document.querySelector('.mobile-header-back').style.visibility = (pageId === 'shop-home' || pageId === 'shop-login') ? 'hidden' : 'visible';
             // 个人中心：状态栏叠加在背景图上（透明背景、白色文字）
             document.querySelector('.mobile-status-bar').classList.toggle('profile', pageId === 'profile-home');
             // 子页面（物业缴费列表、物业缴费详情、设置、订单相关页面等）隐藏底部Tab导航
             const _orderSubPages = ['shop-orders', 'shop-orders-v2', 'shop-order-detail-home-pay', 'shop-order-detail-home-ship', 'shop-order-detail-home-receive', 'shop-order-detail-home-done', 'shop-order-detail-home-coupon', 'shop-order-detail-pickup-pay', 'shop-order-detail-pickup-ship', 'shop-order-detail-pickup-receive', 'shop-order-detail-pickup-done', 'shop-order-detail-gift-done'];
-            const isSubPage = (pageId === 'profile-payment-list' || pageId === 'profile-payment' || pageId === 'profile-settings' || pageId === 'property-bill' || pageId === 'bill-month-detail' || pageId === 'payment-records' || pageId === 'record-bill-detail' || pageId === 'record-month-detail' || pageId === 'profile-rebate-all' || pageId === 'profile-rebate-earned' || pageId === 'profile-rebate-deducted' || pageId === 'profile-shopping-all' || pageId === 'profile-shopping-detail' || pageId === 'profile-shopping-recharge' || pageId === 'profile-shopping-consume' || pageId === 'profile-coupon-all' || pageId === 'profile-coupon-used' || pageId === 'profile-coupon-expired' || pageId === 'profile-coupon-qrcode' || pageId === 'profile-coupon-center' || pageId === 'profile-coupon-v2-all' || pageId === 'profile-coupon-v2-coupon' || pageId === 'profile-coupon-v2-gift' || pageId === 'profile-coupon-v2-qrcode' || pageId === 'profile-coupon-v2-center' || pageId === 'profile-coupon-v2-scope' || pageId === 'profile-coupon-v2-history-used' || pageId === 'profile-coupon-v2-history-expired' || pageId === 'profile-after-sale-list' || pageId === 'profile-after-sale-apply' || pageId === 'profile-after-sale-detail' || pageId === 'profile-messages' || pageId === 'shop-login' || pageId === 'shop-member-code' || pageId === 'shop-wecom' || pageId === 'shop-cart' || pageId === 'shop-checkout' || pageId === 'shop-checkout-v2' || pageId === 'shop-address-add' || pageId === 'shop-address-map' || pageId === 'shop-address-station' || pageId === 'shop-city-select' || _orderSubPages.indexOf(pageId) >= 0);
-            const needFixedLayout = (pageId === 'profile-payment' || pageId === 'property-bill' || pageId === 'bill-month-detail' || pageId === 'shop-checkout' || pageId === 'shop-checkout-v2' || pageId === 'profile-shopping-all');
+            const isSubPage = (pageId === 'profile-payment-list' || pageId === 'profile-payment' || pageId === 'profile-settings' || pageId === 'property-bill' || pageId === 'bill-month-detail' || pageId === 'payment-records' || pageId === 'record-bill-detail' || pageId === 'record-month-detail' || pageId === 'profile-rebate-all' || pageId === 'profile-rebate-earned' || pageId === 'profile-rebate-deducted' || pageId === 'profile-shopping-all' || pageId === 'profile-shopping-detail' || pageId === 'profile-shopping-recharge' || pageId === 'profile-shopping-consume' || pageId === 'profile-coupon-all' || pageId === 'profile-coupon-used' || pageId === 'profile-coupon-expired' || pageId === 'profile-coupon-qrcode' || pageId === 'profile-coupon-center' || pageId === 'profile-coupon-v2-all' || pageId === 'profile-coupon-v2-coupon' || pageId === 'profile-coupon-v2-gift' || pageId === 'profile-coupon-v2-qrcode' || pageId === 'profile-coupon-v2-center' || pageId === 'profile-coupon-v2-scope' || pageId === 'profile-coupon-v2-history-used' || pageId === 'profile-coupon-v2-history-expired' || pageId === 'profile-after-sale-list' || pageId === 'profile-after-sale-apply' || pageId === 'profile-after-sale-detail' || pageId === 'profile-messages' || pageId === 'shop-login' || pageId === 'shop-member-code' || pageId === 'shop-wecom' || pageId === 'shop-cart' || pageId === 'shop-checkout' || pageId === 'shop-checkout-v2' || pageId === 'shop-address-add' || pageId === 'shop-address-map' || pageId === 'shop-address-station' || pageId === 'shop-city-select' || _orderSubPages.indexOf(pageId) >= 0 || pageId === 'shop-category');
+            const needFixedLayout = (pageId === 'profile-payment' || pageId === 'property-bill' || pageId === 'bill-month-detail' || pageId === 'shop-checkout' || pageId === 'shop-checkout-v2' || pageId === 'profile-shopping-all' || pageId === 'shop-category');
             document.querySelector('.mobile-bottom-nav').style.display = isSubPage ? 'none' : 'block';
             // 离开确认订单页V1时移除场景控制器
             const _oldSceneCtrl = document.getElementById('scene-control-v1');
