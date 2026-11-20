@@ -4512,6 +4512,83 @@
         .cat-cart-total .num { font-family: 'DIN Alternate', 'DIN', 'PingFang SC', sans-serif; font-size: 18px; font-weight: 600; line-height: 22px; }
         .cat-cart-btn { margin-left: auto; height: 40px; padding: 0 24px; border: 0; border-radius: 24px; font-family: inherit; font-size: 14px; font-weight: 500; line-height: 24px; color: #FFFFFF; background: #1D1D1D; cursor: pointer; }
         .cat-cart-btn:active { opacity: .85; }
+        /* ===== 搜索商品页 ===== */
+        .sp-page { position: relative; height: 100%; display: flex; flex-direction: column; background: #FFFFFF; overflow: hidden; }
+        .sp-nav { flex-shrink: 0; height: 44px; display: flex; align-items: center; padding: 0 12px; }
+        .sp-back { width: 30px; height: 30px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+        .sp-title { flex: 1; text-align: center; font-size: 17px; font-weight: 600; line-height: 24px; color: #1D1D1D; }
+        .sp-more { width: 34px; height: 30px; flex-shrink: 0; display: flex; align-items: center; justify-content: flex-end; cursor: pointer; }
+        .sp-searchrow { flex-shrink: 0; display: flex; align-items: center; gap: 8px; padding: 4px 16px 10px; }
+        .sp-input { flex: 1; min-width: 0; height: 36px; border-radius: 18px; background: #F5F5F5; display: flex; align-items: center; gap: 6px; padding: 0 12px; }
+        .sp-input input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; font-size: 14px; line-height: 20px; color: #1D1D1D; font-family: inherit; }
+        .sp-input input::placeholder { color: #BDBDBD; }
+        .sp-search-btn { flex-shrink: 0; height: 32px; padding: 0 18px; border: 0; border-radius: 16px; background: #1D1D1D; color: #FFFFFF; font-size: 14px; font-weight: 500; font-family: inherit; cursor: pointer; }
+        .sp-search-btn:active { opacity: .85; }
+        .sp-body { flex: 1 1 auto; min-height: 0; overflow-y: auto; padding: 0 16px 76px; scrollbar-width: none; }
+        .sp-body::-webkit-scrollbar { display: none; }
+        /* 搜索历史 */
+        .sp-history-head { display: flex; align-items: center; justify-content: space-between; padding: 10px 0 0; }
+        .sp-history-title { font-size: 15px; font-weight: 600; line-height: 22px; color: #1D1D1D; }
+        .sp-history-clear { width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; color: #828282; cursor: pointer; }
+        .sp-tags { display: flex; flex-wrap: wrap; align-items: flex-start; align-content: flex-start; gap: 8px; padding: 10px 0 4px; }
+        .sp-tag { height: 28px; padding: 0 12px; border-radius: 14px; background: #F5F5F5; font-size: 12px; line-height: 28px; color: #4F4F4F; cursor: pointer; white-space: nowrap; }
+        .sp-tag:active { opacity: .75; }
+        .sp-toggle { width: 28px; height: 28px; flex-shrink: 0; border-radius: 50%; background: #F5F5F5; display: flex; align-items: center; justify-content: center; color: #828282; font-size: 13px; cursor: pointer; }
+        /* 搜索历史编辑态（删除交互） */
+        .sp-history-actions { display: flex; align-items: center; gap: 18px; }
+        .sp-history-action { font-size: 13px; line-height: 20px; color: #F5A623; cursor: pointer; }
+        .sp-history-action:active { opacity: .7; }
+        .sp-tag.is-edit { display: inline-flex; align-items: center; gap: 4px; padding: 0 9px 0 12px; cursor: default; }
+        .sp-tag.is-edit:active { opacity: 1; }
+        .sp-tag-x { display: flex; align-items: center; justify-content: center; width: 14px; height: 14px; color: #828282; cursor: pointer; }
+        .sp-tag-x:active { opacity: .6; }
+        /* 删除确认弹窗 */
+        .sp-modal-mask { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,.45); display: none; align-items: center; justify-content: center; z-index: 300; }
+        .sp-modal-mask.show { display: flex; }
+        .sp-modal { width: 280px; border-radius: 16px; background: #FFFFFF; overflow: hidden; }
+        .sp-modal-title { padding: 24px 24px 0; text-align: center; font-size: 16px; font-weight: 600; line-height: 22px; color: #1D1D1D; }
+        .sp-modal-msg { padding: 8px 24px 24px; text-align: center; font-size: 14px; line-height: 20px; color: #4F4F4F; }
+        .sp-modal-btns { display: flex; border-top: .5px solid #F5F5F5; }
+        .sp-modal-btn { flex: 1; height: 46px; border: 0; background: transparent; font-size: 15px; font-family: inherit; cursor: pointer; }
+        .sp-modal-btn.cancel { color: #4F4F4F; }
+        .sp-modal-btn.confirm { color: #F5A623; font-weight: 500; }
+        .sp-modal-btn + .sp-modal-btn { border-left: .5px solid #F5F5F5; }
+        .sp-empty { padding: 56px 0; text-align: center; font-size: 13px; line-height: 18px; color: #828282; }
+        /* 购物车悬浮钮（样式同首页） */
+        .sp-cart-fab { position: absolute; left: 16px; bottom: 24px; width: 48px; height: 48px; background: #353B3C; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 20; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18); }
+        .sp-cart-fab:active { opacity: .85; }
+        .sp-cart-badge { position: absolute; top: 0; right: 0; min-width: 16px; height: 17px; padding: 0 2px; background: #F24333; color: #FFFFFF; font-size: 11px; border-radius: 999px; display: flex; align-items: center; justify-content: center; line-height: 1; }
+        /* 猜你喜欢分隔 */
+        .sp-divider { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 16px 0 2px; }
+        .sp-divider .deco { width: 18px; height: 3px; border-radius: 2px; background: linear-gradient(90deg, rgba(245,166,35,0) 0%, #F5A623 100%); }
+        .sp-divider .deco.r { background: linear-gradient(270deg, rgba(245,166,35,0) 0%, #F5A623 100%); }
+        .sp-divider .txt { font-size: 15px; font-weight: 600; line-height: 22px; color: #F5A623; }
+        /* 猜你喜欢 2 列网格 */
+        .sp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px 10px; padding: 10px 0 24px; }
+        .sp-card { display: flex; flex-direction: column; }
+        .sp-card-img { width: 100%; aspect-ratio: 1 / 1; border-radius: 8px; background: #F9FAFB; object-fit: cover; }
+        .sp-card-name { margin-top: 6px; font-size: 13px; font-weight: 500; line-height: 18px; color: #1D1D1D; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 36px; }
+        .sp-card-tag, .sp-item-tag { align-self: flex-start; margin-top: 4px; padding: 0 2px; border: 0.5px solid #AE7033; border-radius: 4px; background: #F7EEDD; font-size: 10px; line-height: 15px; color: #AE7033; white-space: nowrap; }
+        .sp-card-bottom, .sp-item-bottom { display: flex; align-items: flex-end; justify-content: space-between; }
+        .sp-card-bottom { margin-top: 4px; }
+        .sp-price { display: flex; align-items: flex-end; gap: 3px; color: #F24233; flex-wrap: wrap; min-width: 0; }
+        .sp-price .cur { font-size: 12px; font-weight: 500; line-height: 16px; }
+        .sp-price .num { font-family: 'DIN Alternate', 'DIN', 'PingFang SC', sans-serif; font-size: 18px; font-weight: 700; line-height: 20px; }
+        .sp-price .orig { font-size: 10px; line-height: 14px; color: #BDBDBD; text-decoration: line-through; }
+        .sp-addwrap { position: relative; flex-shrink: 0; }
+        .sp-add { width: 24px; height: 24px; padding: 0; border: 0; border-radius: 50%; background: #1CB2D4; color: #FFFFFF; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+        .sp-add:active { opacity: .8; }
+        .sp-badge { position: absolute; top: -7px; right: -8px; min-width: 16px; height: 16px; padding: 0 3px; border-radius: 24px; background: #F24233; border: 1px solid #FFFFFF; color: #FFFFFF; font-size: 10px; line-height: 14px; text-align: center; box-sizing: border-box; }
+        /* 搜索结果单列列表 */
+        .sp-result-head { padding: 10px 0 2px; font-size: 12px; line-height: 18px; color: #828282; }
+        .sp-list { display: flex; flex-direction: column; padding: 4px 0 24px; }
+        .sp-item { display: flex; gap: 10px; padding: 12px 0; }
+        .sp-item + .sp-item { border-top: 1px solid #F5F5F5; }
+        .sp-item-img { width: 90px; height: 90px; flex-shrink: 0; border-radius: 8px; background: #F9FAFB; object-fit: cover; }
+        .sp-item-info { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+        .sp-item-name { font-size: 14px; font-weight: 500; line-height: 19px; color: #1D1D1D; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .sp-item-spec { margin-top: 3px; font-size: 11px; line-height: 16px; color: #828282; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .sp-item-bottom { margin-top: auto; padding-top: 4px; }
         @media (max-width: 1200px) {
             .description-panel {
                 width: 360px;
@@ -20946,10 +21023,93 @@
             'shop-search': {
                 title: '搜索商品',
                 mainNav: 'shop',
+                render: 'shopSearch',
                 placeholder: { icon: 'fa fa-search', title: '搜索商品页', desc: '支持关键词搜索、历史记录、热门搜索等功能' },
-                interactionNotes: [],
-                requirementDoc: null,
-                statusList: []
+                interactionNotes: [
+                    { id: 1, title: '顶部搜索栏', type: 'interaction', target: '.sp-input input', content: '输入关键字后点击右侧「搜索」按钮（或键盘回车）执行搜索：页面切换为单列结果列表，显示「找到「关键字」相关商品 N 件」；搜索关键字自动写入搜索历史（去重后置顶）。清空输入框再点搜索则回到默认态（搜索历史 + 猜你喜欢）' },
+                    { id: 2, title: '搜索历史-标签点击', type: 'interaction', target: '.sp-tag', content: '点击任一历史标签，直接以该关键字执行搜索（等效于输入后点搜索）' },
+                    { id: 3, title: '搜索历史-展开/收起', type: 'interaction', target: '.sp-toggle', content: '历史标签默认收起（约两行，超出两行的标签隐藏），「∨」下拉按钮紧跟最后一个可见标签、始终可见；点击展开显示全部标签，按钮变为「∧」，再次点击收起。历史标签数 ≤ 9 时不显示该按钮' },
+                    { id: 4, title: '搜索历史-删除（编辑态）', type: 'interaction', target: '.sp-history-actions', content: '点击标题行右侧垃圾桶图标进入编辑态：搜索历史自动展开显示全部标签，每个标签带「X」按钮（点击删除该单个标签，删完最后一个标签后退出编辑态并隐藏历史模块），图标位置变为「全部删除」「完成」两个橙色文字按钮。点击「完成」退出编辑态恢复默认展示。点击「全部删除」弹出确认弹窗「温馨提示-确定删除全部搜索历史？」（取消/确定），点「确定」清空全部历史并隐藏整个搜索历史模块（页面直接显示猜你喜欢）' },
+                    { id: 5, title: '猜你喜欢（已购优先 + 在售补足）', type: 'state', target: '.sp-grid', content: '数据源 = 用户已购商品 + 平台在售商品。排序：① 已购商品在前，按购买频次降序、最近购买时间降序，最多取 12 个；② 已购展示完后接在售商品，按销量降序，在售部分剔除已购商品避免重复；③ 已下架 / 已售罄 / 已全额退款的已购商品直接跳过，已售罄 / 已下架的在售商品跳过。无已购记录时直接展示在售商品按销量降序。已购仅出现在首屏，翻页后均为在售商品。已购与在售都为空时整个模块隐藏。2 列网格展示：商品图、两行名称、权益标签「赚N积分+X回馈金」、红色现价（有原价的显示灰色划线原价）、蓝色圆形加购按钮' },
+                    { id: 6, title: '加入购物车', type: 'interaction', target: '.sp-add', content: '点击圆形「+」按钮将商品加入购物车（写入商城购物车，与购物车页共用数据，加购商品默认勾选），按钮右上角显示红色数量角标（同一商品累加），不跳转页面' },
+                    { id: 7, title: '搜索结果列表', type: 'state', target: '.sp-item', content: '单列列表：左侧 90×90 商品图，右侧两行名称 + 灰色规格 + 权益标签 + 红色现价（有原价显示划线原价）+ 蓝色加购按钮；无匹配商品时显示「暂无XX相关商品」空态' },
+                    { id: 8, title: '返回', type: 'interaction', target: '.sp-back', content: '点击左上角返回箭头回到商城首页。搜索页为二级页面，隐藏底部主导航' },
+                    { id: 9, title: '购物车悬浮钮', type: 'interaction', target: '.sp-cart-fab', content: '页面左下角常驻购物车悬浮钮（样式与首页一致：深色圆形底 + 白色购物车图标），默认态（搜索历史 + 猜你喜欢）与搜索结果态均显示。右上角红色角标显示购物车内商品总件数，为 0 时不显示角标，加购后实时更新。点击跳转购物车页' }
+                ],
+                requirementDoc: {
+                    title: '搜索商品页需求文档',
+                    meta: 'v1.2 · 2026-11-20 · 电商/零售 · C端用户',
+                    sections: [
+                        { title: '1.0 页面结构与状态', paragraphs: [
+                            '页面为二级页，隐藏底部主导航；搜索历史与编辑态为页面会话级数据，切换页面不丢失。',
+                            '顶部导航：返回箭头 + 居中标题「搜索商品」+ 右侧胶囊按钮。',
+                            '搜索行：灰色圆角输入框（占位「输入关键字搜索」）+ 深色「搜索」按钮。',
+                            '默认态主体：搜索历史（标题 + 垃圾桶 + 标签流）+「猜你喜欢」橙色分隔 + 2 列商品网格。',
+                            '编辑态（默认态子状态）：历史标签全部展开且带「X」，标题行右侧为「全部删除」「完成」操作按钮。',
+                            '搜索态主体：单列结果列表 / 无结果空态。'
+                        ] },
+                        { title: '2.0 搜索与匹配', paragraphs: [
+                            '触发方式：点击「搜索」按钮或键盘回车执行；点击历史标签等效直接搜索。',
+                            '商品池：用户已购商品 + 商城在售商品（牛奶系列 + 分类页商品），按商品名称关键字包含匹配。',
+                            '有结果：显示「找到「关键字」相关商品 N 件」+ 单列列表（90×90 商品图、两行名称、灰色规格、权益标签「赚N积分+X回馈金」、红色现价可含划线原价、蓝色加购按钮）。',
+                            '无结果：空态「暂无XX相关商品，换个关键字试试吧」。',
+                            '搜索关键字写入历史（去重、置顶）；清空输入框再点搜索则回到默认态。'
+                        ] },
+                        { title: '3.0 搜索历史', paragraphs: [
+                            '展开收起：默认收起约两行（超出两行的标签整体隐藏、无半截裁切），「∨」按钮紧跟最后一个可见标签、始终可见；点击展开显示全部标签、按钮变「∧」，再次点击收起；标签 ≤ 9 个时不显示该按钮。',
+                            '进入编辑态：点击垃圾桶图标 → 自动展开全部标签，每个标签带「X」；垃圾桶位置变为橙色文字按钮「全部删除」「完成」；编辑态下点标签文字不触发搜索。',
+                            '单个删除：点击标签「X」删除该标签，其余保留、仍处编辑态；删完最后一个后自动退出编辑态并隐藏历史模块。',
+                            '全部删除：点击后弹出居中确认弹窗（标题「温馨提示」、文案「确定删除全部搜索历史？」、底部「取消 | 确定」）；点「取消」或遮罩关闭弹窗、历史不变；点「确定」清空全部历史并隐藏整个搜索历史模块。',
+                            '完成：退出编辑态，恢复默认收起展示。',
+                            '历史为空（删除后 / 无搜索记录）：整个搜索历史模块不显示，页面直接展示猜你喜欢。'
+                        ] },
+                        { title: '4.0 猜你喜欢', paragraphs: [
+                            '数据来源：用户已购商品 + 平台在售商品，两个池子拼接展示，保证列表始终有内容。',
+                            '排序规则：① 已购商品优先（仅含已支付且未全额退款的订单），按购买频次降序、最近购买时间降序排列，最多取 12 个；② 已购商品展示完毕后接在售商品，按销量降序；③ 在售部分必须剔除已购商品，同一商品不重复出现；④ 频次 / 时间 / 销量相同时，以商品 ID 升序兜底，保证排序稳定。',
+                            '筛除规则：已购商品中已下架 / 已售罄 / 已全额退款的直接跳过；在售商品中已售罄 / 已下架的跳过。',
+                            '分页边界：已购商品仅在首屏出现，翻页后均为在售商品，避免已购反复穿插打断浏览；分页游标以合并后的完整列表为准。',
+                            '空态处理：已购与在售都为空时，整个模块隐藏，不显示「暂无推荐」占位。',
+                            '加载策略：已购接口与在售接口并行请求，两者都返回后统一渲染，避免已购插到顶部造成页面跳动；已购接口失败时降级展示在售商品，不报错；两个接口都失败时显示「加载失败，点击重试」。',
+                            '2 列网格：商品图、两行名称、权益标签、红色现价（可含灰色划线原价）、蓝色圆形加购按钮。'
+                        ] },
+                        { title: '5.0 加入购物车', paragraphs: [
+                            '点击「+」写入商城购物车（与购物车页共用数据，加购商品默认勾选），按钮右上角红色数量角标随数量累加，不跳转页面；购物车页可见对应商品。'
+                        ] },
+                        { title: '6.0 购物车悬浮钮', paragraphs: [
+                            '位置与样式：页面左下角（距左 16px、距底 24px），48×48 圆形，深色底 #353B3C + 白色购物车图标，与商城首页悬浮钮一致。',
+                            '显示范围：默认态（搜索历史 + 猜你喜欢）与搜索结果态均常驻显示，不随滚动隐藏。',
+                            '角标：显示购物车内商品总件数；数量为 0 时不显示角标；加购后实时更新。',
+                            '点击：跳转购物车页。'
+                        ] }
+                    ]
+                },
+                statusList: [
+                    { block: '页面框架', state: '默认态', trigger: '左侧菜单「搜索商品页」', ui: '返回 + 标题 + 胶囊；搜索框占位；搜索历史（收起）+ 猜你喜欢网格；隐藏底部主导航；搜索历史/编辑态为会话级数据' },
+                    { block: '搜索历史', state: '收起（默认）', trigger: '进入页面', ui: '仅显示约两行标签（超出隐藏、无半截裁切），「∨」按钮紧跟最后一个可见标签；标签 ≤ 9 个时不显示按钮' },
+                    { block: '搜索历史', state: '展开', trigger: '点击「∨」', ui: '显示全部历史标签，按钮变为「∧」；再点「∧」收起' },
+                    { block: '搜索历史', state: '点击标签', trigger: '点击任一历史标签（非编辑态）', ui: '直接以该关键字搜索，进入结果列表' },
+                    { block: '搜索历史', state: '编辑态', trigger: '点击垃圾桶图标', ui: '自动展开全部标签，每个标签带「X」；标题行右侧变为橙色「全部删除」「完成」；点标签文字不触发搜索' },
+                    { block: '搜索历史', state: '单个删除', trigger: '编辑态点击标签「X」', ui: '删除该标签，其余保留、仍处编辑态；删完最后一个后自动退出编辑态并隐藏历史模块' },
+                    { block: '搜索历史', state: '全部删除-确认弹窗', trigger: '编辑态点击「全部删除」', ui: '居中弹窗「温馨提示 / 确定删除全部搜索历史？」，底部「取消 | 确定」' },
+                    { block: '搜索历史', state: '全部删除-取消', trigger: '弹窗点「取消」或遮罩', ui: '弹窗关闭，历史保持不变，仍在编辑态' },
+                    { block: '搜索历史', state: '全部删除-确定', trigger: '弹窗点「确定」', ui: '清空全部历史并隐藏整个搜索历史模块，页面直接显示猜你喜欢' },
+                    { block: '搜索历史', state: '完成', trigger: '编辑态点击「完成」', ui: '退出编辑态，恢复默认收起展示' },
+                    { block: '搜索历史', state: '无历史', trigger: '删除全部后 / 无搜索记录', ui: '整个搜索历史模块不显示，页面直接显示猜你喜欢' },
+                    { block: '猜你喜欢', state: '已购 + 在售（默认）', trigger: '进入页面（默认态）', ui: '已购商品在前（购买频次、最近购买时间降序，最多 12 个），之后接在售商品按销量降序，在售部分剔除已购；2 列网格：图 + 两行名称 + 权益标签 + 现价（可含划线原价）+ 加购按钮' },
+                    { block: '猜你喜欢', state: '无已购记录', trigger: '新用户 / 无历史订单', ui: '直接展示在售商品按销量降序' },
+                    { block: '猜你喜欢', state: '已购商品状态异常', trigger: '已购商品已下架 / 已售罄 / 已全额退款', ui: '该商品直接跳过，由后续商品补足位置' },
+                    { block: '猜你喜欢', state: '在售也为空', trigger: '已购与在售都无可用商品', ui: '整个猜你喜欢模块隐藏' },
+                    { block: '猜你喜欢', state: '接口失败', trigger: '已购 / 在售接口超时或报错', ui: '已购失败 → 降级仅展示在售；两个都失败 → 显示「加载失败，点击重试」' },
+                    { block: '猜你喜欢', state: '翻页加载', trigger: '上拉加载更多', ui: '已购商品仅在首屏出现，后续分页全部为在售商品（按销量降序）' },
+                    { block: '搜索结果', state: '有结果', trigger: '输入关键字点「搜索」/ 回车 / 点历史标签', ui: '单列列表（图 + 名称 + 规格 + 权益标签 + 价格 + 加购）+ 「找到XX相关商品 N 件」；关键字写入历史（去重置顶）' },
+                    { block: '搜索结果', state: '无结果', trigger: '关键字无匹配', ui: '空态「暂无XX相关商品，换个关键字试试吧」' },
+                    { block: '搜索结果', state: '返回默认态', trigger: '清空输入框后点「搜索」', ui: '回到搜索历史 + 猜你喜欢（历史含此前搜索过的关键字）' },
+                    { block: '加购', state: '点击「+」', trigger: '点击商品卡/结果项加购按钮', ui: '按钮右上角红色数量角标累加；写入商城购物车（默认勾选），购物车页可见' },
+                    { block: '购物车悬浮钮', state: '常规显示', trigger: '进入页面 / 搜索后', ui: '左下角常驻深色圆形购物车钮（样式同首页），默认态与搜索结果态均显示' },
+                    { block: '购物车悬浮钮', state: '角标', trigger: '购物车内有商品', ui: '右上角红色角标显示购物车商品总件数；无商品时不显示角标；加购后实时更新' },
+                    { block: '购物车悬浮钮', state: '点击', trigger: '点击悬浮钮', ui: '跳转购物车页' },
+                    { block: '返回', state: '回到首页', trigger: '点击左上角返回箭头', ui: '返回商城首页' }
+                ]
             },
             'shop-category': {
                 title: '全部分类',
@@ -20968,9 +21128,36 @@
                     { id: 9, title: '底部购物车操作栏（始终显示）', type: 'state', target: '.cat-cartbar', content: '操作栏常驻显示：左侧购物袋图标 + 右侧「去购物车」按钮，中间为合计金额。三种状态：① 购物车内有选中商品——合计显示已选中商品的金额合计；② 购物车内有商品但均未选中——购物袋显示红色数量角标（全车商品总件数），合计显示 ¥0；③ 购物车内无商品——购物袋无角标，合计显示 ¥0。点击购物袋图标或「去购物车」按钮均跳转购物车页' },
                     { id: 10, title: '返回', type: 'interaction', target: '.cat-back', content: '点击左上角返回箭头回到商城首页。分类页为二级页面，隐藏底部主导航' }
                 ],
-                requirementDoc: '<b>分类页（全部分类）</b><br>依据 Figma 设计稿 node 14-3164 实现，商品数据为模拟真实数据（以新鲜零食为主），一级 / 二级分类与商品图、商品名一一对应。<br><br><b>1. 页面结构</b><br>① 顶部：返回箭头 + 搜索框 + 右侧胶囊按钮；② 一级分类横向滑动条（含「展开」入口，展开为「全部分类」面板）；③ 主体左右分栏：左侧二级分类导航（80px，灰底）、右侧商品区（白底，含排序栏 + 多个二级分类区块）；④ 底部购物车操作栏（浮层，始终显示）；⑤「全部分类」半屏浮层（从顶部滑下 + 灰色遮罩，仅展开态显示）。<br><br><b>2. 分类层级</b><br>一级分类 9 个：新鲜零食、现烤烘焙、卤味熟食、果干蜜饯、坚果炒货、饮品乳品（默认展示 6 个）+ 酒类、休闲膨化、糖果巧克力（点击「展开」在「全部分类」面板中查看）。<br>以「新鲜零食」为例，二级分类 8 个：现烤肉脯、坚果炒货、果干蜜饯、烘焙糕点、卤味熟食、膨化零食、糖果巧克力、乳品饮料。<br><br><b>3. 关键交互</b><br>• 同一一级分类下的所有二级分类商品展示在同一页内，通过连续滚动浏览；<br>• 右侧滚动时，左侧二级导航自动高亮对应分类（滚动联动）；<br>• 点击左侧二级分类，右侧平滑滚动到对应区块；<br>• 点击一级分类右侧「展开」，从顶部滑下半屏「全部分类」浮层（底部圆角 + 灰色遮罩；标题 + 胶囊按钮、5 列宫格、底部「收起 ︿」），面板内选中项图标蓝描边 + 名称蓝色标签；点击分类即切换并收起面板；点击「收起」或遮罩仅关闭面板，商品列表滚动位置保持不变；<br>• 顶部搜索按商品名称即时筛选；排序支持综合 / 销量 / 价格（升降序）；<br>• 底部购物车操作栏始终显示：左侧购物袋（有商品时显示红色数量角标=全车商品总件数）+ 中间合计金额 + 右侧「去购物车」按钮；合计仅统计已选中商品（有选中商品时显示其金额合计，有商品但未选中、或无商品时均显示 ¥0）；点击购物袋或「去购物车」均跳转购物车页。<br><br><b>4. 演示说明</b><br>加购写入商城购物车，与购物车页共用同一份数据；点击购物袋图标或「去购物车」按钮跳到购物车页，可在购物车页勾选 / 取消勾选后返回查看合计变化。',
+                requirementDoc: {
+                    title: '分类页需求文档',
+                    meta: 'v1.0 · 2026-11-16 · 电商/零售 · C端用户',
+                    sections: [
+                        { title: '1.0 页面结构', paragraphs: [
+                            '依据 Figma 设计稿 node 14-3164 实现，商品数据为模拟真实数据（以新鲜零食为主），一级 / 二级分类与商品图、商品名一一对应。',
+                            '顶部：返回箭头 + 搜索框 + 右侧胶囊按钮。',
+                            '一级分类横向滑动条（含「展开」入口，展开为「全部分类」面板）。',
+                            '主体左右分栏：左侧二级分类导航（80px，灰底）、右侧商品区（白底，含排序栏 + 多个二级分类区块）。',
+                            '底部购物车操作栏（浮层，始终显示）。',
+                            '「全部分类」半屏浮层（从顶部滑下 + 灰色遮罩，仅展开态显示）。'
+                        ] },
+                        { title: '2.0 分类层级', paragraphs: [
+                            '一级分类 9 个：新鲜零食、现烤烘焙、卤味熟食、果干蜜饯、坚果炒货、饮品乳品（默认展示 6 个）+ 酒类、休闲膨化、糖果巧克力（点击「展开」在「全部分类」面板中查看）。',
+                            '以「新鲜零食」为例，二级分类 8 个：现烤肉脯、坚果炒货、果干蜜饯、烘焙糕点、卤味熟食、膨化零食、糖果巧克力、乳品饮料。'
+                        ] },
+                        { title: '3.0 关键交互', paragraphs: [
+                            '同一一级分类下的所有二级分类商品展示在同一页内，通过连续滚动浏览。',
+                            '右侧滚动时，左侧二级导航自动高亮对应分类（滚动联动）；点击左侧二级分类，右侧平滑滚动到对应区块。',
+                            '点击一级分类右侧「展开」，从顶部滑下半屏「全部分类」浮层（底部圆角 + 灰色遮罩；标题 + 胶囊按钮、5 列宫格、底部「收起 ︿」），面板内选中项图标蓝描边 + 名称蓝色标签；点击分类即切换并收起面板；点击「收起」或遮罩仅关闭面板，商品列表滚动位置保持不变。',
+                            '顶部搜索按商品名称即时筛选；排序支持综合 / 销量 / 价格（升降序）。',
+                            '底部购物车操作栏始终显示：左侧购物袋（有商品时显示红色数量角标 = 全车商品总件数）+ 中间合计金额 + 右侧「去购物车」按钮；合计仅统计已选中商品（有选中商品时显示其金额合计，有商品但未选中、或无商品时均显示 ¥0）；点击购物袋或「去购物车」均跳转购物车页。'
+                        ] },
+                        { title: '4.0 演示说明', paragraphs: [
+                            '加购写入商城购物车，与购物车页共用同一份数据；点击购物袋图标或「去购物车」按钮跳到购物车页，可在购物车页勾选 / 取消勾选后返回查看合计变化。'
+                        ] }
+                    ]
+                },
                 statusList: [
-                    { block: '页面框架', state: '一级页面入口', trigger: '商城首页分类入口 / 左侧菜单「分类页」', ui: '顶部返回 + 搜索 + 右侧胶囊按钮；隐藏底部主导航' },
+                    { block: '页面框架', state: '页面入口', trigger: '左侧菜单「分类页」', ui: '顶部返回 + 搜索 + 右侧胶囊按钮；隐藏底部主导航' },
                     { block: '一级分类', state: '默认（前6个）', trigger: '首次进入', ui: '横向滑动：新鲜零食、现烤烘焙、卤味熟食、果干蜜饯、坚果炒货、饮品乳品' },
                     { block: '一级分类', state: '选中', trigger: '点击某一级分类', ui: '图标深色渐变 + 蓝描边；名称标签品牌蓝底白字' },
                     { block: '一级分类', state: '展开', trigger: '点击右侧「展开」', ui: '顶部滑下半屏白色浮层（底部圆角 + 灰色遮罩）：标题 + 胶囊按钮、9 个分类 5 列宫格、底部「收起 ︿」；选中项图标蓝描边 + 名称蓝色标签' },
@@ -25338,9 +25525,286 @@
             });
         }
 
+        // ====== 搜索商品页 ======
+        // 搜索历史（会话级）
+        const SP_HISTORY_SEED = ['牛奶', '柠檬水', '虾片', '草莓干', '菠萝', '蛋挞', '烤肠', '椰蓉包', '豆腐干', '全麦吐司', '气泡水', '手撕肉干'];
+        // 用户已购商品（「猜你喜欢」数据源；boughtAt 为购买时间戳，越大越近，展示时最近购买的在前）
+        const SP_PURCHASED_SEED = [
+            { id: 'sp-buy-1', name: '云南昆明 有机水果胡萝卜 1.5kg/份', spec: '1.5kg/份', price: 39.9, originalPrice: 43.9, boughtAt: 20261113, img: catImg('fresh organic carrots with green tops') },
+            { id: 'sp-buy-2', name: '云南香格里拉 野生山核桃 原味150g*6', spec: '150g*6', price: 39.9, boughtAt: 20261112, img: catImg('wild hickory nuts in shell with shelled kernels') },
+            { id: 'sp-buy-3', name: '四川爱媛38号可吸果冻橙 1kg/份', spec: '1kg/份', price: 39.9, boughtAt: 20261111, img: catImg('Aiyuan jelly oranges with cut slices showing flesh') },
+            { id: 'sp-buy-4', name: '彩虹有机鲜菠菜 新鲜的 1kg/份', spec: '1kg/份', price: 39.9, boughtAt: 20261110, img: catImg('fresh green spinach leaves tied in a bunch') },
+            { id: 'sp-buy-5', name: '巴氏鲜牛奶 乳香浓郁顺滑入口 250g/瓶', spec: '250g/瓶', price: 3.5, originalPrice: 4, boughtAt: 20261109, img: catImg('glass bottle of fresh milk with blueberries and strawberry') },
+            { id: 'sp-buy-6', name: '蜜汁手撕肉干 香甜耐嚼 100g/袋', spec: '100g/袋', price: 19.9, boughtAt: 20261108, img: catImg('honey shredded pork jerky strips') },
+            { id: 'sp-buy-7', name: '无添加草莓干 酸甜果肉 120g/袋', spec: '120g/袋', price: 15.8, boughtAt: 20261107, img: catImg('dried strawberry slices') },
+            { id: 'sp-buy-8', name: '卤香豆腐干 弹韧入味 150g/袋', spec: '150g/袋', price: 9.9, boughtAt: 20261106, img: catImg('braised dried tofu slices') }
+        ];
+        // 牛奶系列商品（商城在售，供搜索演示）
+        const SP_MILK_SEED = [
+            { id: 'sp-milk-1', name: '巴氏鲜牛奶 当日鲜奶 250g/瓶', spec: '250g/瓶', price: 3.5, originalPrice: 4, img: catImg('glass bottle of pasteurized fresh milk') },
+            { id: 'sp-milk-2', name: '牛奶黑米燕窝粥 即食滋养甜粥 252g/碗', spec: '252g/碗', price: 8.9, originalPrice: 10, img: catImg('black rice bird nest porridge in a bowl with spoon') },
+            { id: 'sp-milk-3', name: '巴氏鲜牛奶 低温锁鲜保留原生乳香 6瓶装', spec: '250g×6瓶', price: 19.9, originalPrice: 22.9, img: catImg('six small glass milk bottles with strawberries') },
+            { id: 'sp-milk-4', name: '牛奶芋泥脆顶包 外皮松脆馅润回甘 80g/袋', spec: '80g/袋', price: 12.9, img: catImg('golden baked milk taro pastry bun') }
+        ];
+        // 搜索商品池：已购 + 牛奶系列 + 分类页全部商品（按 id 去重）
+        const spSearchPool = (() => {
+            const pool = [], seen = {};
+            SP_PURCHASED_SEED.concat(SP_MILK_SEED).forEach(p => { if (!seen[p.id]) { seen[p.id] = true; pool.push(p); } });
+            Object.keys(catProductIndex).forEach(id => { if (!seen[id]) { seen[id] = true; pool.push(catProductIndex[id]); } });
+            return pool;
+        })();
+        const spFindProduct = (id) => spSearchPool.find(p => p.id === id);
+
+        // 「猜你喜欢」：取用户已购商品，最近购买的在前
+        function spPurchasedProducts() {
+            return SP_PURCHASED_SEED.slice().sort((a, b) => b.boughtAt - a.boughtAt);
+        }
+
+        function spCardHTML(p, qty) {
+            const orig = p.originalPrice ? '<span class="orig">¥' + p.originalPrice + '</span>' : '';
+            return '<div class="sp-card">' +
+                '<img class="sp-card-img" src="' + p.img + '" alt="' + p.name + '" loading="lazy">' +
+                '<div class="sp-card-name">' + p.name + '</div>' +
+                '<div class="sp-card-tag">' + catTagText(p.price) + '</div>' +
+                '<div class="sp-card-bottom">' +
+                    '<div class="sp-price"><span class="cur">¥</span><span class="num">' + catFmtPrice(p.price) + '</span>' + orig + '</div>' +
+                    '<div class="sp-addwrap"><button class="sp-add" data-sp-add="' + p.id + '" aria-label="加入购物车"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></button>' + (qty ? '<span class="sp-badge">' + qty + '</span>' : '') + '</div>' +
+                '</div>' +
+            '</div>';
+        }
+
+        function spItemHTML(p, qty) {
+            const orig = p.originalPrice ? '<span class="orig">¥' + p.originalPrice + '</span>' : '';
+            const spec = p.spec ? '<div class="sp-item-spec">' + p.spec + '</div>' : '';
+            return '<div class="sp-item">' +
+                '<img class="sp-item-img" src="' + p.img + '" alt="' + p.name + '" loading="lazy">' +
+                '<div class="sp-item-info">' +
+                    '<div class="sp-item-name">' + p.name + '</div>' + spec +
+                    '<div class="sp-item-tag">' + catTagText(p.price) + '</div>' +
+                    '<div class="sp-item-bottom">' +
+                        '<div class="sp-price"><span class="cur">¥</span><span class="num">' + catFmtPrice(p.price) + '</span>' + orig + '</div>' +
+                        '<div class="sp-addwrap"><button class="sp-add" data-sp-add="' + p.id + '" aria-label="加入购物车"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></button>' + (qty ? '<span class="sp-badge">' + qty + '</span>' : '') + '</div>' +
+                    '</div>' +
+                '</div>' +
+            '</div>';
+        }
+
+        function renderShopSearch() {
+            const st = window.__spState = window.__spState || { keyword: '', expanded: false, history: SP_HISTORY_SEED.slice() };
+            const kw = (st.keyword || '').trim();
+            const cartState = catCartState();
+            const qtyById = cartState.qtyById;
+            let mainHTML;
+            if (kw) {
+                // 搜索结果态：单列列表
+                const items = spSearchPool.filter(p => p.name.indexOf(kw) >= 0);
+                mainHTML = items.length
+                    ? '<div class="sp-result-head">找到「' + kw + '」相关商品 ' + items.length + ' 件</div>' +
+                      '<div class="sp-list">' + items.map(p => spItemHTML(p, qtyById[p.id] || 0)).join('') + '</div>'
+                    : '<div class="sp-empty">暂无「' + kw + '」相关商品<br>换个关键字试试吧</div>';
+            } else {
+                // 默认态：搜索历史（默认收起，约两行；编辑态可删除）+ 猜你喜欢（已购商品，最近购买在前）
+                const hist = st.history || [];
+                const showToggle = hist.length > 9;
+                const editing = !!st.editing && hist.length > 0;
+                const clearIcon = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2.5 4.2h11M6.4 4.2V3c0-.5.4-.9.9-.9h1.4c.5 0 .9.4.9.9v1.2M13 4.2l-.6 9.1a1.2 1.2 0 0 1-1.2 1.1H4.8a1.2 1.2 0 0 1-1.2-1.1L3 4.2" stroke="#828282" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.5 7v4.6M9.5 7v4.6" stroke="#828282" stroke-width="1.2" stroke-linecap="round"/></svg>';
+                const xIcon = '<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1 1l8 8M9 1L1 9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>';
+                const headRight = editing
+                    ? '<div class="sp-history-actions"><span class="sp-history-action" data-sp-delete-all="1">全部删除</span><span class="sp-history-action" data-sp-done="1">完成</span></div>'
+                    : '<span class="sp-history-clear" data-sp-clear="1">' + clearIcon + '</span>';
+                // 历史为空时隐藏整个搜索历史模块
+                const historyHTML = hist.length
+                    ? '<div class="sp-history-head"><span class="sp-history-title">搜索历史</span>' + headRight + '</div>' +
+                      '<div class="sp-tags">' +
+                          hist.map(h => editing
+                              ? '<span class="sp-tag is-edit"><span>' + h + '</span><span class="sp-tag-x" data-sp-remove="' + h + '">' + xIcon + '</span></span>'
+                              : '<span class="sp-tag" data-sp-tag="' + h + '">' + h + '</span>').join('') +
+                          (!editing && showToggle ? '<span class="sp-toggle" data-sp-toggle="1"><i class="fa ' + (st.expanded ? 'fa-angle-up' : 'fa-angle-down') + '"></i></span>' : '') +
+                      '</div>'
+                    : '';
+                const recs = spPurchasedProducts();
+                mainHTML = historyHTML +
+                    '<div class="sp-divider"><span class="deco"></span><span class="txt">猜你喜欢</span><span class="deco r"></span></div>' +
+                    '<div class="sp-grid">' + recs.map(p => spCardHTML(p, qtyById[p.id] || 0)).join('') + '</div>';
+            }
+            return '<div class="sp-page">' +
+                '<div class="sp-nav">' +
+                    '<div class="sp-back" data-sp-back="1"><svg width="9" height="16" viewBox="0 0 9 16" fill="none"><path d="M8 1L1 8l7 7" stroke="#1D1D1D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>' +
+                    '<div class="sp-title">搜索商品</div>' +
+                    '<div class="sp-more"><svg width="34" height="10" viewBox="0 0 34 10" fill="none"><circle cx="4" cy="5" r="1.6" fill="#1D1D1D"/><circle cx="12" cy="5" r="1.6" fill="#1D1D1D"/><circle cx="20" cy="5" r="1.6" fill="#1D1D1D"/><circle cx="29" cy="5" r="3.6" stroke="#1D1D1D" stroke-width="1.2"/></svg></div>' +
+                '</div>' +
+                '<div class="sp-searchrow">' +
+                    '<div class="sp-input">' +
+                        '<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5.2" stroke="#828282" stroke-width="1.4"/><path d="M11 11l3.2 3.2" stroke="#828282" stroke-width="1.4" stroke-linecap="round"/></svg>' +
+                        '<input id="sp-input" type="text" placeholder="输入关键字搜索" value="' + kw.replace(/"/g, '&quot;') + '">' +
+                    '</div>' +
+                    '<button class="sp-search-btn" data-sp-search="1">搜索</button>' +
+                '</div>' +
+                '<div class="sp-body" id="sp-body">' + mainHTML + '</div>' +
+                '<div class="sp-cart-fab" data-sp-goto-cart="1">' +
+                    '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 4h2.2l.7 2H21l-1.9 7.4a1 1 0 0 1-1 .6H8.6a1 1 0 0 1-1-.7L5 6m3.2 13a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4zm8.4 0a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4z" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+                    (cartState.qty ? '<span class="sp-cart-badge">' + cartState.qty + '</span>' : '') +
+                '</div>' +
+                '<div class="sp-modal-mask">' +
+                    '<div class="sp-modal">' +
+                        '<div class="sp-modal-title">温馨提示</div>' +
+                        '<div class="sp-modal-msg">确定删除全部搜索历史？</div>' +
+                        '<div class="sp-modal-btns">' +
+                            '<button class="sp-modal-btn cancel" data-sp-modal-cancel="1">取消</button>' +
+                            '<button class="sp-modal-btn confirm" data-sp-modal-confirm="1">确定</button>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>' +
+            '</div>';
+        }
+
+        function spRerender() {
+            const content = document.getElementById('mobile-content');
+            content.innerHTML = renderShopSearch();
+            spBindEvents();
+        }
+
+        // 折叠搜索历史标签：超出两行的标签隐藏，「∨」按钮紧跟最后一个可见标签（按钮不参与裁切、始终可见）
+        function spApplyTagsFold() {
+            const wrap = document.querySelector('#mobile-content .sp-tags');
+            if (!wrap) return;
+            const st = window.__spState;
+            const toggle = wrap.querySelector('.sp-toggle');
+            const tags = Array.from(wrap.querySelectorAll('.sp-tag'));
+            if (!toggle || !tags.length) { tags.forEach(t => t.style.display = ''); return; }
+            if (st.expanded) {
+                tags.forEach(t => t.style.display = '');
+                wrap.appendChild(toggle); // 展开态：「∧」在全部标签末尾
+                return;
+            }
+            // 收起态：先全部显示以测量行位置，再从尾部隐藏，保证「可见标签 + 按钮」都落在前两行
+            tags.forEach(t => t.style.display = '');
+            const baseTop = tags[0].offsetTop;
+            const rowStep = 36; // 标签高 28 + 行距 8
+            const inFold = (el) => el.offsetTop - baseTop < rowStep * 2 - 2;
+            let k = tags.length;
+            while (k > 0) {
+                tags.forEach((t, i) => { t.style.display = i < k ? '' : 'none'; });
+                wrap.insertBefore(toggle, tags[k - 1].nextSibling);
+                if (inFold(tags[k - 1]) && inFold(toggle)) break;
+                k--;
+            }
+        }
+
+        function spBindEvents() {
+            const root = document.querySelector('#mobile-content .sp-page');
+            if (!root) return;
+            const st = window.__spState;
+            const input = root.querySelector('#sp-input');
+            // 搜索：关键字写入历史（去重、置顶）
+            const spCommitSearch = (kw) => {
+                st.keyword = kw;
+                if (kw) {
+                    st.history = (st.history || []).filter(h => h !== kw);
+                    st.history.unshift(kw);
+                }
+                spRerender();
+            };
+            root.querySelector('[data-sp-search]').addEventListener('click', () => spCommitSearch((input.value || '').trim()));
+            input.addEventListener('keydown', (e) => { if (e.key === 'Enter') spCommitSearch((input.value || '').trim()); });
+            // 返回
+            root.querySelector('[data-sp-back]').addEventListener('click', () => switchPage('shop-home'));
+            // 购物车悬浮钮：跳转购物车页
+            const cartFab = root.querySelector('[data-sp-goto-cart]');
+            if (cartFab) cartFab.addEventListener('click', () => switchPage('shop-cart'));
+            // 历史标签：直接搜索
+            root.querySelectorAll('[data-sp-tag]').forEach(el => {
+                el.addEventListener('click', () => spCommitSearch(el.dataset.spTag));
+            });
+            // 展开/收起历史标签
+            const toggle = root.querySelector('[data-sp-toggle]');
+            if (toggle) toggle.addEventListener('click', () => { st.expanded = !st.expanded; spRerender(); });
+            // 垃圾桶：进入编辑态（自动展开全部标签，可单个删除 / 全部删除）
+            const clear = root.querySelector('[data-sp-clear]');
+            if (clear) clear.addEventListener('click', () => { st.editing = true; spRerender(); });
+            // 完成：退出编辑态
+            const done = root.querySelector('[data-sp-done]');
+            if (done) done.addEventListener('click', () => { st.editing = false; spRerender(); });
+            // 单个删除：点击标签「X」
+            root.querySelectorAll('[data-sp-remove]').forEach(el => {
+                el.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const kw = el.dataset.spRemove;
+                    st.history = (st.history || []).filter(h => h !== kw);
+                    if (!st.history.length) st.editing = false; // 删完最后一个标签：退出编辑态并隐藏历史模块
+                    spRerender();
+                });
+            });
+            // 全部删除：显示确认弹窗；确定后清空并隐藏整个搜索历史模块
+            const delAll = root.querySelector('[data-sp-delete-all]');
+            const modalMask = root.querySelector('.sp-modal-mask');
+            if (delAll && modalMask) {
+                delAll.addEventListener('click', () => modalMask.classList.add('show'));
+                modalMask.addEventListener('click', (e) => { if (e.target === modalMask) modalMask.classList.remove('show'); });
+                modalMask.querySelector('[data-sp-modal-cancel]').addEventListener('click', () => modalMask.classList.remove('show'));
+                modalMask.querySelector('[data-sp-modal-confirm]').addEventListener('click', () => {
+                    st.history = [];
+                    st.editing = false;
+                    spRerender();
+                });
+            }
+            // 加购（事件委托）：写入商城购物车（与购物车页共用数据）
+            root.querySelector('#sp-body').addEventListener('click', (e) => {
+                const btn = e.target.closest('[data-sp-add]');
+                if (!btn) return;
+                const id = btn.dataset.spAdd;
+                const p = spFindProduct(id);
+                if (!p) return;
+                const cart = window.__couponV2ScopeCart = window.__couponV2ScopeCart || [];
+                const row = cart.find(it => it.productId === id);
+                if (row) row.quantity += 1;
+                else cart.push({ productId: id, quantity: 1, source: 'mall' });
+                try {
+                    if (typeof couponV2AllProducts !== 'undefined' && !couponV2AllProducts.some(x => x.id === id)) {
+                        couponV2AllProducts.push({ id: p.id, name: p.name, price: p.price, img: p.img, originalPrice: p.originalPrice || null, tag: '' });
+                    }
+                } catch (err) {}
+                window.__cartSelected = window.__cartSelected || {};
+                window.__cartKnownIds = window.__cartKnownIds || {};
+                window.__cartSelected[id] = true;
+                window.__cartKnownIds[id] = true;
+                const qty = catCartState().qtyById[id] || 0;
+                const wrap = btn.parentNode;
+                let badge = wrap.querySelector('.sp-badge');
+                if (qty) {
+                    if (!badge) {
+                        badge = document.createElement('span');
+                        badge.className = 'sp-badge';
+                        wrap.appendChild(badge);
+                    }
+                    badge.textContent = qty;
+                } else if (badge) {
+                    badge.remove();
+                }
+                // 同步购物车悬浮钮角标（全车件数；为 0 时不显示）
+                if (cartFab) {
+                    const total = catCartState().qty;
+                    let fabBadge = cartFab.querySelector('.sp-cart-badge');
+                    if (total) {
+                        if (!fabBadge) {
+                            fabBadge = document.createElement('span');
+                            fabBadge.className = 'sp-cart-badge';
+                            cartFab.appendChild(fabBadge);
+                        }
+                        fabBadge.textContent = total;
+                    } else if (fabBadge) {
+                        fabBadge.remove();
+                    }
+                }
+            });
+            // 应用搜索历史折叠/展开（测量行位置，按钮始终可见）
+            spApplyTagsFold();
+        }
+
         // ====== 页面渲染器（具体页面内容）======
         const pageRenderers = {
             shopCategory: function() { return renderShopCategory(); },
+            shopSearch: function() { return renderShopSearch(); },
             shopHome: function() {
                 // 商城首页：三种登录状态（guest=未登录 / member=已登录 / scan=线下扫码登录）
                 // 布局依据 Figma 设计稿（node 602:3037）：搜索行 → Banner → 状态卡 → 分类入口 → 功能入口
@@ -27960,6 +28424,7 @@
         // ====== 渲染后事件绑定 ======
         function bindPageEvents(pageId) {
             if (pageId === 'shop-category') { catBindEvents(); }
+            if (pageId === 'shop-search') { spBindEvents(); }
             if (pageId === 'shop-home') {
                 // 商城首页：三种登录状态切换 + 登录引导弹窗
                 const stateArea = document.querySelector('#mobile-content #mh-state-area');
@@ -32158,15 +32623,15 @@
             }
             document.getElementById('panel-title').textContent = page.title;
             // 个人中心无标准导航栏（顶部直接是背景图）；确认订单页自带导航栏也需隐藏默认 header
-            document.querySelector('.mobile-header').style.display = (pageId === 'profile-home' || pageId === 'shop-cart' || pageId === 'shop-checkout' || pageId === 'shop-checkout-v2' || pageId === 'shop-address-add' || pageId === 'shop-address-map' || pageId === 'shop-address-station' || pageId === 'shop-city-select' || pageId === 'shop-category') ? 'none' : 'flex';
+            document.querySelector('.mobile-header').style.display = (pageId === 'profile-home' || pageId === 'shop-cart' || pageId === 'shop-checkout' || pageId === 'shop-checkout-v2' || pageId === 'shop-address-add' || pageId === 'shop-address-map' || pageId === 'shop-address-station' || pageId === 'shop-city-select' || pageId === 'shop-category' || pageId === 'shop-search') ? 'none' : 'flex';
             // 商城首页为一级页面：隐藏导航栏左侧返回按钮（设计稿仅保留右侧胶囊按钮）；登录页同理
             document.querySelector('.mobile-header-back').style.visibility = (pageId === 'shop-home' || pageId === 'shop-login') ? 'hidden' : 'visible';
             // 个人中心：状态栏叠加在背景图上（透明背景、白色文字）
             document.querySelector('.mobile-status-bar').classList.toggle('profile', pageId === 'profile-home');
             // 子页面（物业缴费列表、物业缴费详情、设置、订单相关页面等）隐藏底部Tab导航
             const _orderSubPages = ['shop-orders', 'shop-orders-v2', 'shop-order-detail-home-pay', 'shop-order-detail-home-ship', 'shop-order-detail-home-receive', 'shop-order-detail-home-done', 'shop-order-detail-home-coupon', 'shop-order-detail-pickup-pay', 'shop-order-detail-pickup-ship', 'shop-order-detail-pickup-receive', 'shop-order-detail-pickup-done', 'shop-order-detail-gift-done'];
-            const isSubPage = (pageId === 'profile-payment-list' || pageId === 'profile-payment' || pageId === 'profile-settings' || pageId === 'property-bill' || pageId === 'bill-month-detail' || pageId === 'payment-records' || pageId === 'record-bill-detail' || pageId === 'record-month-detail' || pageId === 'profile-rebate-all' || pageId === 'profile-rebate-earned' || pageId === 'profile-rebate-deducted' || pageId === 'profile-shopping-all' || pageId === 'profile-shopping-detail' || pageId === 'profile-shopping-recharge' || pageId === 'profile-shopping-consume' || pageId === 'profile-coupon-all' || pageId === 'profile-coupon-used' || pageId === 'profile-coupon-expired' || pageId === 'profile-coupon-qrcode' || pageId === 'profile-coupon-center' || pageId === 'profile-coupon-v2-all' || pageId === 'profile-coupon-v2-coupon' || pageId === 'profile-coupon-v2-gift' || pageId === 'profile-coupon-v2-qrcode' || pageId === 'profile-coupon-v2-center' || pageId === 'profile-coupon-v2-scope' || pageId === 'profile-coupon-v2-history-used' || pageId === 'profile-coupon-v2-history-expired' || pageId === 'profile-after-sale-list' || pageId === 'profile-after-sale-apply' || pageId === 'profile-after-sale-detail' || pageId === 'profile-messages' || pageId === 'shop-login' || pageId === 'shop-member-code' || pageId === 'shop-wecom' || pageId === 'shop-cart' || pageId === 'shop-checkout' || pageId === 'shop-checkout-v2' || pageId === 'shop-address-add' || pageId === 'shop-address-map' || pageId === 'shop-address-station' || pageId === 'shop-city-select' || _orderSubPages.indexOf(pageId) >= 0 || pageId === 'shop-category');
-            const needFixedLayout = (pageId === 'profile-payment' || pageId === 'property-bill' || pageId === 'bill-month-detail' || pageId === 'shop-checkout' || pageId === 'shop-checkout-v2' || pageId === 'profile-shopping-all' || pageId === 'shop-category');
+            const isSubPage = (pageId === 'profile-payment-list' || pageId === 'profile-payment' || pageId === 'profile-settings' || pageId === 'property-bill' || pageId === 'bill-month-detail' || pageId === 'payment-records' || pageId === 'record-bill-detail' || pageId === 'record-month-detail' || pageId === 'profile-rebate-all' || pageId === 'profile-rebate-earned' || pageId === 'profile-rebate-deducted' || pageId === 'profile-shopping-all' || pageId === 'profile-shopping-detail' || pageId === 'profile-shopping-recharge' || pageId === 'profile-shopping-consume' || pageId === 'profile-coupon-all' || pageId === 'profile-coupon-used' || pageId === 'profile-coupon-expired' || pageId === 'profile-coupon-qrcode' || pageId === 'profile-coupon-center' || pageId === 'profile-coupon-v2-all' || pageId === 'profile-coupon-v2-coupon' || pageId === 'profile-coupon-v2-gift' || pageId === 'profile-coupon-v2-qrcode' || pageId === 'profile-coupon-v2-center' || pageId === 'profile-coupon-v2-scope' || pageId === 'profile-coupon-v2-history-used' || pageId === 'profile-coupon-v2-history-expired' || pageId === 'profile-after-sale-list' || pageId === 'profile-after-sale-apply' || pageId === 'profile-after-sale-detail' || pageId === 'profile-messages' || pageId === 'shop-login' || pageId === 'shop-member-code' || pageId === 'shop-wecom' || pageId === 'shop-cart' || pageId === 'shop-checkout' || pageId === 'shop-checkout-v2' || pageId === 'shop-address-add' || pageId === 'shop-address-map' || pageId === 'shop-address-station' || pageId === 'shop-city-select' || _orderSubPages.indexOf(pageId) >= 0 || pageId === 'shop-category' || pageId === 'shop-search');
+            const needFixedLayout = (pageId === 'profile-payment' || pageId === 'property-bill' || pageId === 'bill-month-detail' || pageId === 'shop-checkout' || pageId === 'shop-checkout-v2' || pageId === 'profile-shopping-all' || pageId === 'shop-category' || pageId === 'shop-search');
             document.querySelector('.mobile-bottom-nav').style.display = isSubPage ? 'none' : 'block';
             // 离开确认订单页V1时移除场景控制器
             const _oldSceneCtrl = document.getElementById('scene-control-v1');
